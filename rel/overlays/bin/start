@@ -1,0 +1,118 @@
+#!/bin/sh
+# Ponto de entrada do container (CMD do Dockerfile).
+#
+#   1. Sem DATABASE_URL: sobe um PostgreSQL embutido, ouvindo só dentro do
+#      container (127.0.0.1), com os dados em $BRAINAGRAM_DATA/postgres — que
+#      precisa ser um volume persistente (no Coolify: Persistent Storage em
+#      /app/data), senão os dados somem a cada deploy.
+#   2. Roda as migrações pendentes.
+#   3. Sobe o servidor; no SIGTERM (deploy/parada), desliga o servidor e depois
+#      o Postgres, de forma limpa.
+#
+# TODO(external-db): o Postgres embutido é o ponto de partida (uma instância,
+# um container). Para usar um banco externo (Postgres do Coolify, RDS…), basta
+# definir DATABASE_URL — este script então não sobe o embutido. Quando o banco
+# externo for o padrão, remover este bloco e os pacotes `postgresql-*` do
+# Dockerfile, e migrar os dados com pg_dump/pg_restore.
+set -eu
+
+cd -P -- "$(dirname -- "$0")"
+BIN_DIR=$(pwd)
+
+DATA_DIR=${BRAINAGRAM_DATA:-/app/data}
+PGDATA="$DATA_DIR/postgres"
+PG_PASSWORD_FILE="$DATA_DIR/.postgres-password"
+PG_LOCK_FILE="$DATA_DIR/.postgres.lock"
+PG_PORT=5432
+PG_DB=brainagram
+PG_BIN=""
+
+log() { echo "[start] $*"; }
+
+start_embedded_postgres() {
+  PG_BIN=$(ls -d /usr/lib/postgresql/*/bin 2>/dev/null | sort -V | tail -n 1)
+  if [ -z "$PG_BIN" ]; then
+    log "DATABASE_URL não definida e o PostgreSQL embutido não está instalado." >&2
+    exit 1
+  fi
+
+  mkdir -p "$DATA_DIR"
+  if [ ! -w "$DATA_DIR" ]; then
+    log "sem permissão de escrita em $DATA_DIR (o volume precisa pertencer ao usuário do container)." >&2
+    exit 1
+  fi
+
+  # Trava entre containers: se outro container (ex.: o antigo, num deploy que
+  # sobrepõe os dois) ainda usa esta pasta de dados, não subir um segundo
+  # Postgres sobre ela — isso corromperia o banco. O lock dura enquanto este
+  # processo (PID 1 do container) existir.
+  exec 9>"$PG_LOCK_FILE"
+  if ! flock -n 9; then
+    log "outro container ainda usa $PGDATA; aguardando até 60s…"
+    if ! flock -w 60 9; then
+      log "a pasta de dados continua em uso. No Coolify, ative 'Consistent Container Names' para o deploy parar o container antigo antes de subir o novo." >&2
+      exit 1
+    fi
+  fi
+
+  if [ ! -s "$PGDATA/PG_VERSION" ]; then
+    log "primeira execução: inicializando o PostgreSQL em $PGDATA"
+    umask 077
+    head -c 32 /dev/urandom | od -An -tx1 | tr -d ' \n' > "$PG_PASSWORD_FILE"
+    "$PG_BIN/initdb" -D "$PGDATA" -U postgres --pwfile="$PG_PASSWORD_FILE" \
+      --auth-local=scram-sha-256 --auth-host=scram-sha-256 \
+      --encoding=UTF8 --locale=C.UTF-8 >/dev/null
+    umask 022
+    fresh=1
+  else
+    fresh=0
+  fi
+
+  PG_PASSWORD=$(cat "$PG_PASSWORD_FILE")
+
+  # só 127.0.0.1: o banco não fica acessível nem pela rede do Docker
+  "$PG_BIN/pg_ctl" -D "$PGDATA" -w -t 60 \
+    -o "-c listen_addresses=127.0.0.1 -c port=$PG_PORT -k /tmp" start
+
+  if [ "$fresh" = 1 ]; then
+    PGPASSWORD="$PG_PASSWORD" "$PG_BIN/createdb" -h 127.0.0.1 -p "$PG_PORT" -U postgres "$PG_DB"
+  fi
+
+  export DATABASE_URL="ecto://postgres:$PG_PASSWORD@127.0.0.1:$PG_PORT/$PG_DB"
+  log "usando o PostgreSQL embutido"
+}
+
+stop_embedded_postgres() {
+  if [ -n "$PG_BIN" ]; then
+    "$PG_BIN/pg_ctl" -D "$PGDATA" -m fast -w stop || true
+  fi
+}
+
+if [ -z "${DATABASE_URL:-}" ]; then
+  start_embedded_postgres
+else
+  log "usando o banco externo de DATABASE_URL"
+fi
+
+if ! "$BIN_DIR/migrate"; then
+  stop_embedded_postgres
+  exit 1
+fi
+
+"$BIN_DIR/server" &
+server_pid=$!
+
+shutdown() {
+  log "desligando…"
+  kill -TERM "$server_pid" 2>/dev/null || true
+  wait "$server_pid" 2>/dev/null || true
+  stop_embedded_postgres
+  exit 0
+}
+trap shutdown TERM INT
+
+# se o servidor cair sozinho, derruba o container (o Coolify reinicia)
+status=0
+wait "$server_pid" || status=$?
+stop_embedded_postgres
+exit "$status"
