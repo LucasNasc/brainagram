@@ -35,6 +35,9 @@ defmodule BrainagramWeb.Endpoint do
     plug Phoenix.Ecto.CheckRepoStatus, otp_app: :brainagram
   end
 
+  # antes do log e da telemetria: a sonda do container bate a toda hora
+  plug BrainagramWeb.HealthCheck
+
   plug Phoenix.LiveDashboard.RequestLogger,
     param_key: "request_logger",
     cookie_key: "request_logger"
