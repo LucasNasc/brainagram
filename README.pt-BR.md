@@ -27,7 +27,7 @@ Escreva o fluxo em texto, dê play e veja as mensagens percorrerem as setas — 
 </div>
 
 <p align="center">
-  <img src="docs/images/checkout.pt-BR.svg" alt="Um diagrama de sequência desenhado pelo Brainagram: um checkout em três passos, com chips de payload sob as setas" width="760">
+  <img src="docs/images/checkout.pt-BR.gif" alt="Diagrama de sequência animado no modo escuro: um checkout tocando passo a passo, com o payload da requisição se abrindo enquanto a mensagem percorre a seta" width="760">
 </p>
 
 ---
@@ -74,7 +74,7 @@ revisões de design — onde alguém apontaria para uma imagem parada e diria
 - **Linha de comando** para renderizar e formatar `.brain` no CI — sem navegador.
 
 <p align="center">
-  <img src="docs/images/platform.pt-BR.svg" alt="Um diagrama de arquitetura: grupos Borda, Aplicação e Dados com setas ortogonais" width="460">
+  <img src="docs/images/platform.pt-BR.gif" alt="Diagrama de arquitetura animado no modo escuro: o tráfego passa pelos grupos Borda, Aplicação e Dados ao longo de setas ortogonais" width="460">
 </p>
 
 ## Começando

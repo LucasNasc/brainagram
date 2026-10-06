@@ -27,7 +27,7 @@ Write the flow as text, press play, and watch the messages travel along the arro
 </div>
 
 <p align="center">
-  <img src="docs/images/checkout.en.svg" alt="A sequence diagram rendered by Brainagram: a checkout flow in three steps, with payload chips under the arrows" width="760">
+  <img src="docs/images/checkout.en.gif" alt="Animated sequence diagram in dark mode: a checkout flow playing step by step, with the request payload expanding as the message travels along the arrow" width="760">
 </p>
 
 ---
@@ -72,7 +72,7 @@ static image and say "and then…".
 - **CLI** to render and format `.brain` files in CI — no browser needed.
 
 <p align="center">
-  <img src="docs/images/platform.en.svg" alt="An architecture diagram: Edge, Application and Data groups with orthogonal arrows" width="460">
+  <img src="docs/images/platform.en.gif" alt="Animated architecture diagram in dark mode: traffic flows through the Edge, Application and Data groups along orthogonal arrows" width="460">
 </p>
 
 ## Quick start
