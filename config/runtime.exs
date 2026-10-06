@@ -50,6 +50,15 @@ if config_env() == :prod do
       You can generate one by calling: mix phx.gen.secret
       """
 
+  # Uma chave curta só estouraria na primeira requisição com sessão (erro 500
+  # em toda página); melhor o container nem subir, com a causa no log.
+  if byte_size(secret_key_base) < 64 do
+    raise """
+    environment variable SECRET_KEY_BASE is too short (#{byte_size(secret_key_base)} bytes, needs at least 64).
+    Generate one with: mix phx.gen.secret  (or: openssl rand -base64 48)
+    """
+  end
+
   host = System.get_env("PHX_HOST") || "example.com"
   port = String.to_integer(System.get_env("PORT") || "4000")
 
