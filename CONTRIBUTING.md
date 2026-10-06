@@ -142,6 +142,10 @@ Common recipes:
 - **Layout change**: add a case to the layout tests. The quality tests
   (`layout/quality_test.exs`) count crossings and overlaps, so make sure the
   numbers don't get worse.
+- **Visual change?** Regenerate the README demo GIFs (dark mode, recorded by
+  the app's own GIF exporter) with the server running:
+  `node docs/tools/record_gifs.mjs` (`PORT=` and `BROWSER=` if needed; Node 22+
+  and Chrome or Edge).
 
 ## Project rules
 

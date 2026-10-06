@@ -144,6 +144,10 @@ Receitas comuns:
 - **Mudança de layout**: acrescente um caso aos testes de layout. Os testes de
   qualidade (`layout/quality_test.exs`) contam cruzamentos e sobreposições,
   então confira que os números não pioram.
+- **Mudou o visual?** Refaça os GIFs de demonstração do README (modo escuro,
+  gravados pelo próprio exportador de GIF do app) com o servidor rodando:
+  `node docs/tools/record_gifs.mjs` (`PORT=` e `BROWSER=` se precisar; Node 22+
+  e Chrome ou Edge).
 
 ## Regras do projeto
 
