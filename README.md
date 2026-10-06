@@ -77,7 +77,7 @@ static image and say "and then…".
 
 ## Quick start
 
-**Requirements:** Elixir 1.15+ and Erlang/OTP 25+ (CI runs Elixir 1.18 / OTP 27),
+**Requirements:** Elixir 1.15+ and Erlang/OTP 25+ (CI runs Elixir 1.18 / OTP 27 and 1.20 / OTP 29, the production image),
 and PostgreSQL (CI uses 16).
 
 ```bash
@@ -307,29 +307,61 @@ extraction, then runs the full suite against Postgres.
 
 ## Deployment
 
-Brainagram is a standard Phoenix application. For a release:
+Brainagram ships with a production **Dockerfile** (an Elixir release on Debian
+slim). By default the container also runs its own **PostgreSQL**, listening only
+inside the container, with the data in `/app/data` — mount a persistent volume
+there. On start it initializes the database (first run), applies pending
+migrations, starts the server on port `4000`, and answers `GET /health`.
 
 ```bash
-MIX_ENV=prod mix assets.deploy
-MIX_ENV=prod mix release
+docker build -t brainagram .
+docker run -p 4000:4000 -v brainagram-data:/app/data   -e SECRET_KEY_BASE="$(mix phx.gen.secret)"   -e PHX_HOST=localhost   brainagram
 ```
 
 | Variable | Required | Purpose |
 |---|---|---|
-| `DATABASE_URL` | yes | `ecto://USER:PASS@HOST/DATABASE` |
-| `SECRET_KEY_BASE` | yes | generate with `mix phx.gen.secret` |
-| `PHX_HOST` | recommended | public host name (defaults to `example.com`) |
-| `PHX_SERVER` | yes (releases) | `true` to start the web server |
+| `SECRET_KEY_BASE` | yes | at least 64 bytes — generate with `mix phx.gen.secret` |
+| `PHX_HOST` | yes | public host name, without `https://` (defaults to `example.com`) |
+| `DATABASE_URL` | no | an **external** PostgreSQL (`ecto://USER:PASS@HOST/DATABASE`); when set, the embedded one isn't started |
 | `PORT` | no | defaults to `4000` |
 | `POOL_SIZE` | no | database pool, defaults to `10` |
 | `ECTO_IPV6` | no | `true` to connect over IPv6 |
 
-Run the migrations before starting a new version (`mix ecto.migrate`, or generate
-a release helper with `mix phx.gen.release`).
+> **TODO — external database.** The embedded PostgreSQL is the starting point:
+> one instance, one container. Moving to an external database (a Coolify
+> PostgreSQL resource, a managed service…) only takes `DATABASE_URL` plus a
+> `pg_dump`/`pg_restore` of the data; look for `TODO(external-db)` in the
+> `Dockerfile` and in `rel/overlays/bin/start`.
+
+Without Docker: `MIX_ENV=prod mix assets.deploy && MIX_ENV=prod mix release`,
+then `_build/prod/rel/brainagram/bin/migrate` and `.../bin/server`.
+
+### Coolify
+
+1. **Application**: *+ New → Private Repository (GitHub App)*, branch `main`,
+   **Build Pack: Dockerfile**, **Ports Exposes: `4000`**, and your **Domain**
+   (`https://…`). The proxy handles HTTPS.
+2. **Persistent Storage** → *Volume Mount* with destination **`/app/data`**.
+   Without it the database is lost on every deploy.
+3. **Advanced → Consistent Container Names: on.** Coolify then stops the old
+   container before starting the new one. Two containers must never run the
+   embedded database at the same time — the start script refuses to (it waits
+   and then fails the deploy), but the setting avoids the failed deploy.
+4. **Environment variables**: `SECRET_KEY_BASE` and `PHX_HOST` (the domain
+   without `https://`).
+5. **Auto Deploy** (on by default with the GitHub App): every push to `main`
+   builds the image and replaces the container. GitHub Actions only runs the
+   tests (it doesn't gate the deploy), so keep `main` green.
+
+The image has a `HEALTHCHECK` on `/health`, so a deploy whose migrations fail
+never receives traffic. Back up the `/app/data` volume (or run `pg_dump`
+inside the container) regularly.
 
 > **Heads-up:** there are no user accounts yet — every diagram is visible to
-> anyone who can reach the instance. Run it on a private network or behind your
-> own authentication.
+> anyone who can reach the instance. On Coolify, enable **HTTP Basic
+> Authentication** in the application settings, or keep it on a private
+> network. Accounts and a browser-only mode are specified in
+> [`docs/specs/002-contas-e-modo-local.md`](docs/specs/002-contas-e-modo-local.md).
 
 ## Contributing
 

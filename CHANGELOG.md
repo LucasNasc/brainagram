@@ -31,6 +31,14 @@ one of the sections *Added*, *Changed*, *Deprecated*, *Removed*, *Fixed* or
   Russian, Italian, Japanese and Hindi, with a flag menu in the top bar.
 - Light and dark themes, built on design tokens and hand-written CSS.
 - `mix brainagram.render` to render diagrams from the command line.
+- Production **Dockerfile** (Elixir release) with an embedded PostgreSQL
+  (data in the `/app/data` volume; an external one via `DATABASE_URL`), which
+  runs migrations on start, plus a `GET /health` endpoint and a container
+  `HEALTHCHECK`.
+- The app refuses to start with a `SECRET_KEY_BASE` shorter than 64 bytes.
+- Spec 002: browser-only mode and optional accounts (not implemented yet).
+- Deployment guide for Coolify (auto deploy on push to `main`); CI also tests
+  the Elixir/OTP version used by the production image.
 - Community files: contributing guide, code of conduct, security policy,
   support guide, issue forms, pull request template and Dependabot.
 

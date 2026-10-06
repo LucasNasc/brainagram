@@ -79,7 +79,7 @@ revisões de design — onde alguém apontaria para uma imagem parada e diria
 
 ## Começando
 
-**Requisitos:** Elixir 1.15+ e Erlang/OTP 25+ (o CI usa Elixir 1.18 / OTP 27) e
+**Requisitos:** Elixir 1.15+ e Erlang/OTP 25+ (o CI usa Elixir 1.18 / OTP 27 e 1.20 / OTP 29, a da imagem de produção) e
 PostgreSQL (o CI usa o 16).
 
 ```bash
@@ -309,29 +309,61 @@ gettext está em dia, e depois roda a suíte inteira contra o Postgres.
 
 ## Deploy
 
-O Brainagram é uma aplicação Phoenix padrão. Para um release:
+O Brainagram traz um **Dockerfile** de produção (um release Elixir sobre Debian
+slim). Por padrão o container também roda o próprio **PostgreSQL**, ouvindo só
+dentro do container, com os dados em `/app/data` — monte um volume persistente
+aí. Ao subir, ele inicializa o banco (na primeira vez), aplica as migrações
+pendentes, sobe o servidor na porta `4000` e responde `GET /health`.
 
 ```bash
-MIX_ENV=prod mix assets.deploy
-MIX_ENV=prod mix release
+docker build -t brainagram .
+docker run -p 4000:4000 -v brainagram-data:/app/data   -e SECRET_KEY_BASE="$(mix phx.gen.secret)"   -e PHX_HOST=localhost   brainagram
 ```
 
 | Variável | Obrigatória | Para quê |
 |---|---|---|
-| `DATABASE_URL` | sim | `ecto://USUARIO:SENHA@HOST/BANCO` |
-| `SECRET_KEY_BASE` | sim | gere com `mix phx.gen.secret` |
-| `PHX_HOST` | recomendada | o host público (padrão `example.com`) |
-| `PHX_SERVER` | sim (releases) | `true` para subir o servidor web |
+| `SECRET_KEY_BASE` | sim | no mínimo 64 bytes — gere com `mix phx.gen.secret` |
+| `PHX_HOST` | sim | o host público, sem `https://` (padrão `example.com`) |
+| `DATABASE_URL` | não | um PostgreSQL **externo** (`ecto://USUARIO:SENHA@HOST/BANCO`); definida, o embutido não sobe |
 | `PORT` | não | padrão `4000` |
 | `POOL_SIZE` | não | conexões com o banco, padrão `10` |
 | `ECTO_IPV6` | não | `true` para conectar por IPv6 |
 
-Rode as migrações antes de subir uma versão nova (`mix ecto.migrate`, ou gere um
-módulo de release com `mix phx.gen.release`).
+> **TODO — banco externo.** O PostgreSQL embutido é o ponto de partida: uma
+> instância, um container. Passar para um banco externo (um PostgreSQL do
+> Coolify, um serviço gerenciado…) é só definir `DATABASE_URL` e levar os dados
+> com `pg_dump`/`pg_restore`; procure `TODO(external-db)` no `Dockerfile` e em
+> `rel/overlays/bin/start`.
+
+Sem Docker: `MIX_ENV=prod mix assets.deploy && MIX_ENV=prod mix release`, e
+depois `_build/prod/rel/brainagram/bin/migrate` e `.../bin/server`.
+
+### Coolify
+
+1. **Aplicação**: *+ New → Private Repository (GitHub App)*, branch `main`,
+   **Build Pack: Dockerfile**, **Ports Exposes: `4000`** e o seu **Domain**
+   (`https://…`). O proxy cuida do HTTPS.
+2. **Persistent Storage** → *Volume Mount* com destino **`/app/data`**. Sem
+   isso o banco se perde a cada deploy.
+3. **Advanced → Consistent Container Names: ligado.** Assim o Coolify para o
+   container antigo antes de subir o novo. Dois containers nunca podem rodar o
+   banco embutido ao mesmo tempo — o script de início se recusa (espera e
+   depois falha o deploy), mas a opção evita o deploy falho.
+4. **Variáveis de ambiente**: `SECRET_KEY_BASE` e `PHX_HOST` (o domínio sem
+   `https://`).
+5. **Auto Deploy** (já vem ligado com o GitHub App): cada push na `main`
+   constrói a imagem e troca o container. O GitHub Actions só roda os testes
+   (não segura o deploy), então mantenha a `main` verde.
+
+A imagem tem `HEALTHCHECK` em `/health`, então um deploy cujas migrações
+falhem nunca recebe tráfego. Faça backup do volume `/app/data` (ou rode
+`pg_dump` dentro do container) com frequência.
 
 > **Atenção:** ainda não há contas de usuário — todo diagrama é visível para
-> quem acessar a instância. Rode numa rede privada ou atrás da sua própria
-> autenticação.
+> quem acessar a instância. No Coolify, ative a **HTTP Basic Authentication**
+> nas configurações da aplicação, ou mantenha-a numa rede privada. Contas e um
+> modo só no navegador estão especificados em
+> [`docs/specs/002-contas-e-modo-local.md`](docs/specs/002-contas-e-modo-local.md).
 
 ## Contribuindo
 
