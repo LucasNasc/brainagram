@@ -1,0 +1,32 @@
+diagram sequence "Checkout with async payment"
+
+actor       user   "Customer"
+participant api    "API Gateway"
+service     orders "Order Service"
+database    db     "PostgreSQL"
+queue       mq     "RabbitMQ"
+
+step "Customer places the order" {
+  user -> api : POST /orders
+    payload """
+    {
+      "items": [{"sku": "A-1", "qty": 2}],
+      "coupon": "BLACK10"
+    }
+    """
+  api -> orders : CreateOrder
+}
+
+step "Order is stored" {
+  orders -> orders : check stock
+  orders -> db : INSERT order
+    payload: INSERT INTO orders (id, total) VALUES ($1, $2)
+  db --> orders : order_id
+}
+
+step "Fast response" {
+  orders ->> mq : OrderCreated
+  orders --> api : 201 Created
+  api --> user : "Order received!"
+  note over user, api : the UI answers here — the rest is async
+}

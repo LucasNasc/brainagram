@@ -1,0 +1,289 @@
+/* ══════════════════════════════════════════════════════════════════════════
+   Brainagram — canvas do diagrama (SVG desenhado por assets/js/brainagram).
+   Só tokens do design system: o export SVG "assa" os valores do tema atual
+   (ver EXPORT_VARS em export.js). Toda regra aqui começa com .bg- para o
+   export encontrá-la.
+
+   Estados de seta: pendente = trilho fino em edge-pending (legível, 3:1);
+   ativa = traço brand com o impulso; concluída = cor e padrão do tipo.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+.bg-stage {
+  background-color: var(--bg-canvas);
+  background-image: radial-gradient(circle, var(--grid-dot) 1px, transparent 1.3px);
+  background-size: 16px 16px;
+}
+
+.bg-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  cursor: grab;
+  touch-action: none;
+  font-family: var(--font-sans);
+}
+.bg-canvas.is-panning { cursor: grabbing; }
+
+.bg-layer { pointer-events: none; }
+.bg-layer-edges { pointer-events: auto; }
+
+/* ── nós ────────────────────────────────────────────────────────────────── */
+
+.bg-node { --k: var(--node-neutral); }
+.bg-node.is-actor { --k: var(--node-actor); }
+.bg-node.is-service { --k: var(--node-service); }
+.bg-node.is-database { --k: var(--node-database); }
+.bg-node.is-queue { --k: var(--node-queue); }
+.bg-node.is-external { --k: var(--node-external); }
+
+.bg-node-box {
+  fill: var(--surface);
+  stroke: var(--node-stroke);
+  stroke-width: 1;
+  transition: stroke var(--dur-base) var(--ease-ui), stroke-width var(--dur-base) var(--ease-ui);
+}
+.bg-node.is-actor .bg-node-box,
+.bg-node.is-queue .bg-node-box { rx: 999px; }
+.bg-node.is-external .bg-node-box { stroke-dasharray: 5 4; }
+.bg-node.is-boundary .bg-node-box { stroke-dasharray: 2 3; fill: var(--group-bg); }
+
+.bg-node-label {
+  fill: var(--text);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.bg-glyph {
+  fill: none;
+  stroke: var(--k);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.bg-node.is-active .bg-node-box { stroke: var(--brand); stroke-width: 2; }
+.bg-node.is-hot .bg-node-box { animation: bg-pulse var(--dur-pulse) var(--ease-pulso); }
+
+@keyframes bg-pulse {
+  0%   { filter: drop-shadow(0 0 0 var(--impulse-glow)); }
+  40%  { filter: drop-shadow(0 0 8px var(--impulse-glow)); }
+  100% { filter: drop-shadow(0 0 0 transparent); }
+}
+
+.bg-lifeline {
+  stroke: var(--edge-pending);
+  stroke-width: 1;
+  stroke-dasharray: 2 4;
+  stroke-linecap: round;
+}
+
+.bg-activation {
+  fill: var(--surface-3);
+  stroke: var(--node-stroke);
+  stroke-width: 1;
+}
+
+/* ── setas ──────────────────────────────────────────────────────────────── */
+
+.bg-edge, .bg-payload-full { --e: var(--edge-sync); }
+.bg-edge.is-return, .bg-payload-full.is-return { --e: var(--edge-return); }
+.bg-edge.is-async, .bg-payload-full.is-async { --e: var(--edge-async); }
+.bg-edge.is-fail, .bg-payload-full.is-fail { --e: var(--edge-fail); }
+
+.bg-edge-hit {
+  fill: none;
+  stroke: transparent;
+  stroke-width: 16;
+  pointer-events: stroke;
+}
+
+/* O trilho carrega o padrão do tipo (tracejado, pontilhado). */
+.bg-edge-track {
+  fill: none;
+  stroke: var(--edge-pending);
+  stroke-width: 1;
+}
+.bg-edge.is-return .bg-edge-track,
+.bg-edge.is-fail .bg-edge-track { stroke-dasharray: 6 4; }
+.bg-edge.is-async .bg-edge-track { stroke-dasharray: 0.01 4.5; stroke-linecap: round; stroke-width: 1.5; }
+
+/* A linha é o traço que se desenha (dashoffset controlado pela timeline). */
+.bg-edge-line {
+  fill: none;
+  stroke: var(--e);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+}
+
+/* pendente: só o trilho; a linha (e a ponta) somem */
+.bg-edge.is-pending .bg-edge-line { opacity: 0; }
+
+/* ativa: o impulso acende o traço */
+.bg-edge.is-active .bg-edge-line { stroke: var(--edge-active); stroke-width: 2.25; }
+.bg-edge.is-active .bg-edge-track { opacity: 0.6; }
+
+/* concluída: a cor do tipo; nos tipos com padrão, o trilho mostra o padrão
+   e a linha fica só com a ponta (stroke-opacity não esconde o marker) */
+.bg-edge.is-done .bg-edge-track { stroke: var(--e); stroke-width: 1.5; }
+.bg-edge.is-done.is-async .bg-edge-track { stroke-width: 2; }
+.bg-edge.is-done.is-return .bg-edge-line,
+.bg-edge.is-done.is-async .bg-edge-line,
+.bg-edge.is-done.is-fail .bg-edge-line { stroke-opacity: 0; }
+
+.bg-edge:hover .bg-edge-line { stroke-width: 2.5; }
+
+.bg-edge-label {
+  fill: var(--text-muted);
+  font-size: 12px;
+  font-weight: 500;
+}
+.bg-edge.is-done .bg-edge-label { fill: var(--text); }
+.bg-edge.is-active .bg-edge-label { fill: var(--brand-text); font-weight: 600; }
+.bg-edge-label-bg { fill: var(--bg-canvas); }
+.bg-edge.is-active .bg-edge-label-bg { fill: var(--brand-soft); }
+
+/* ── payload ─────────────────────────────────────────────────────────────
+   Chip minimizado sob a seta (clicável) e o balão inteiro, que abre por cima
+   do que vem abaixo: com a mensagem da vez (`is-open`, posto pela timeline)
+   ou fixado pelo clique (`is-pinned`). */
+.bg-payload-chip { cursor: pointer; }
+.bg-payload-chip-box {
+  fill: var(--surface);
+  stroke: var(--e);
+  stroke-opacity: 0.55;
+  stroke-width: 1;
+  stroke-linejoin: round;
+  transition: stroke-opacity var(--dur-fast) var(--ease-ui), fill var(--dur-fast) var(--ease-ui);
+}
+.bg-payload-chip-text {
+  fill: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  white-space: pre;
+}
+.bg-payload-chip-more { fill: var(--text-muted); opacity: 0.8; }
+.bg-payload-chevron {
+  fill: var(--text-muted);
+  font-size: 10px;
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform var(--dur-base) var(--ease-ui);
+}
+.bg-payload-chip:hover .bg-payload-chip-box { stroke-opacity: 1; fill: var(--surface-2); }
+.bg-payload-chip:hover .bg-payload-chip-text { fill: var(--text); }
+.bg-payload-chip.is-pinned .bg-payload-chevron { transform: rotate(180deg); }
+.bg-edge.is-pending .bg-payload-chip { opacity: 0.75; }
+.bg-edge.is-pending .bg-payload-chip-box { stroke: var(--edge-pending); stroke-opacity: 1; stroke-dasharray: 3 3; }
+.bg-edge.is-active .bg-payload-chip-box { stroke: var(--edge-active); stroke-opacity: 1; }
+
+.bg-payload-full {
+  opacity: 0;
+  pointer-events: none;
+  cursor: pointer;
+  transform-box: fill-box;
+  transform-origin: 50% 0;
+  transform: translateY(-3px) scale(0.96);
+  transition: opacity var(--dur-reveal) var(--ease-revelar), transform var(--dur-reveal) var(--ease-revelar);
+}
+.bg-payload-full.is-open,
+.bg-payload-full.is-pinned { opacity: 1; transform: none; pointer-events: auto; }
+.bg-payload-box {
+  fill: var(--surface);
+  stroke: var(--e);
+  stroke-opacity: 0.7;
+  stroke-width: 1;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 6px 14px color-mix(in srgb, var(--text) 22%, transparent));
+}
+.bg-payload-full.is-live .bg-payload-box { stroke: var(--edge-active); stroke-opacity: 1; stroke-width: 1.5; }
+.bg-payload-full.is-pinned .bg-payload-box { stroke-opacity: 1; stroke-width: 1.5; }
+.bg-payload-text {
+  fill: var(--text);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  white-space: pre;
+}
+.bg-payload-close { fill: var(--text-muted); font-size: 14px; font-weight: 600; opacity: 0; transition: opacity var(--dur-fast) var(--ease-ui); }
+.bg-payload-full.is-pinned .bg-payload-close { opacity: 1; }
+.bg-payload-full:hover .bg-payload-close { fill: var(--text); }
+
+.bg-packet-core { fill: var(--impulse); }
+.bg-packet-halo { fill: var(--impulse-glow); }
+.bg-packet { transition: opacity var(--dur-fast) linear; }
+
+/* ── faixas de passo, grupos e notas ────────────────────────────────────── */
+
+.bg-band { cursor: pointer; pointer-events: auto; }
+.bg-band-strip { fill: transparent; transition: fill var(--dur-base) var(--ease-ui); }
+.bg-band:hover .bg-band-strip { fill: var(--group-bg); }
+.bg-band.is-current .bg-band-strip { fill: var(--brand-soft); }
+.bg-band-dot { fill: var(--surface); stroke: var(--border-strong); stroke-width: 1; transition: fill var(--dur-base) var(--ease-ui); }
+.bg-band.is-current .bg-band-dot { fill: var(--brand); stroke: var(--brand); }
+.bg-band-num {
+  fill: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  text-anchor: middle;
+}
+.bg-band.is-current .bg-band-num { fill: var(--on-brand); }
+.bg-band-label {
+  fill: var(--text-muted);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.bg-band.is-current .bg-band-label { fill: var(--brand-text); }
+
+.bg-group-box {
+  fill: var(--group-bg);
+  stroke: var(--group-border);
+  stroke-width: 1;
+  stroke-dasharray: 4 4;
+}
+.bg-group-label {
+  fill: var(--text-muted);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.bg-note { transition: opacity var(--dur-reveal) var(--ease-revelar); }
+.bg-note.is-pending { opacity: 0; }
+.bg-note-box {
+  fill: var(--note-bg);
+  stroke: var(--note-border);
+  stroke-width: 1;
+}
+.bg-note-text { fill: var(--note-text); font-size: 12px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .bg-node.is-hot .bg-node-box { animation: none; }
+  .bg-edge, .bg-node, .bg-note, .bg-band-strip, .bg-node-box, .bg-payload-full, .bg-payload-chevron { transition: none; }
+}
+
+/* ── modo de edição (spec 001) ──────────────────────────────────────────── */
+
+.bg-canvas.is-editing .bg-layer-nodes { pointer-events: auto; }
+.bg-canvas.is-editing .bg-node { cursor: grab; }
+.bg-canvas.is-editing .bg-edge { cursor: pointer; }
+.bg-canvas.is-connecting,
+.bg-canvas.is-connecting .bg-node { cursor: crosshair; }
+.bg-node.is-dragging { cursor: grabbing; opacity: .92; }
+.bg-node.is-dragging .bg-node-box { stroke: var(--brand); stroke-width: 2; }
+
+.bg-node.is-selected .bg-node-box { stroke: var(--focus-ring); stroke-width: 2.5; }
+.bg-node.is-target .bg-node-box { stroke: var(--brand); stroke-width: 2; stroke-dasharray: 4 3; }
+.bg-edge.is-selected .bg-edge-line { stroke: var(--brand); stroke-width: 2.5; stroke-opacity: 1; opacity: 1; }
+.bg-edge.is-selected .bg-edge-track { stroke: var(--brand); }
+.bg-group.is-drop-target .bg-group-box { stroke: var(--brand); stroke-dasharray: none; fill: var(--brand-soft); }
+
+.bg-edit-layer { pointer-events: none; }
+.bg-handle { fill: var(--surface); stroke: var(--brand); stroke-width: 2; cursor: crosshair; pointer-events: auto; }
+.bg-handle:hover { fill: var(--brand); }
+.bg-temp-edge { fill: none; stroke: var(--brand); stroke-width: 2; stroke-dasharray: 5 4; }
+.bg-ghost { fill: var(--brand-soft); stroke: var(--brand); stroke-width: 1.5; stroke-dasharray: 5 4; }
+.bg-guide { stroke: var(--brand); stroke-width: 1; stroke-dasharray: 3 3; vector-effect: non-scaling-stroke; }
+.bg-canvas.is-editing { cursor: default; }

@@ -1,0 +1,21 @@
+# Nomes dos exemplos do catálogo (Infrastructure.Catalog.StaticExampleCatalog).
+# Mantido à mão: os nomes vêm de dados, não de chamadas gettext no código.
+msgid ""
+msgstr ""
+"Language: hi\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Sequência — Checkout"
+msgstr "सीक्वेंस — चेकआउट"
+
+msgid "Arquitetura — Plataforma"
+msgstr "आर्किटेक्चर — प्लेटफ़ॉर्म"
+
+msgid "Sequência — Um comando nas camadas"
+msgstr "सीक्वेंस — परतों से गुज़रता एक कमांड"
+
+msgid "Mínimo — Login"
+msgstr "न्यूनतम — लॉगिन"
+
+msgid "Sequência — Checkout com payloads"
+msgstr "सीक्वेंस — पेलोड के साथ चेकआउट"

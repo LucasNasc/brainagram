@@ -1,0 +1,47 @@
+diagram architecture "Platform — high-level view"
+
+group "Edge" {
+  node cdn "Cloudflare CDN"
+  node lb  "Load Balancer"
+}
+
+group "Application" {
+  service api    "API (Phoenix)"
+  service worker "Worker (Oban)"
+}
+
+group "Data" {
+  database pg    "PostgreSQL"
+  database redis "Redis"
+  queue    mq    "RabbitMQ"
+}
+
+external s3 "Object Storage"
+
+step "Incoming traffic" {
+  cdn -> lb  : HTTPS
+  lb  -> api : round-robin
+}
+
+step "Reads and cache" {
+  api -> redis : GET session
+  api -> pg    : SELECT
+}
+
+step "Async work" {
+  api    ->> mq    : publish event
+  mq     -> worker : consume
+  worker -> pg     : UPDATE
+  worker -> s3     : upload report
+}
+
+layout {
+  cdn at (78, 92)
+  lb at (80, 288)
+  api at (80, 484)
+  worker at (80, 876)
+  pg at (352, 1072)
+  redis at (548, 680)
+  mq at (352, 680)
+  s3 at (78, 1072)
+}

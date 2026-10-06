@@ -1,0 +1,23 @@
+# Nomes dos exemplos do catálogo (Infrastructure.Catalog.StaticExampleCatalog).
+# Mantido à mão: os nomes vêm de dados, não de chamadas gettext no código,
+# então `mix gettext.extract` não os encontra. Exemplo novo no catálogo →
+# nova entrada aqui.
+msgid ""
+msgstr ""
+"Language: en\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Sequência — Checkout"
+msgstr "Sequence — Checkout"
+
+msgid "Arquitetura — Plataforma"
+msgstr "Architecture — Platform"
+
+msgid "Sequência — Um comando nas camadas"
+msgstr "Sequence — A command through the layers"
+
+msgid "Mínimo — Login"
+msgstr "Minimal — Login"
+
+msgid "Sequência — Checkout com payloads"
+msgstr "Sequence — Checkout with payloads"

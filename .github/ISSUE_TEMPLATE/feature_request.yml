@@ -1,0 +1,62 @@
+name: ✨ Feature request
+description: Suggest an idea or improvement · Sugira uma ideia ou melhoria
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Describe the **problem** first, since the solution is easier to agree on afterwards.
+        For big changes (a new diagram type, DSL changes, new dependencies), please wait for a maintainer's go-ahead before writing code.
+
+        Descreva primeiro o **problema**, porque fica mais fácil chegar à solução depois.
+        Para mudanças grandes (tipo novo de diagrama, mudança na DSL, dependência nova), espere o aval de quem mantém o projeto antes de programar.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: The problem · O problema
+      description: What are you trying to show or do, and what gets in the way today? · O que você quer mostrar ou fazer, e o que atrapalha hoje?
+      placeholder: I can't show that a call is retried with backoff…
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution · Solução proposta
+      description: How could Brainagram solve it? If it touches the DSL, show the text you'd like to write. · Como o Brainagram poderia resolver? Se mexer na DSL, mostre o texto que gostaria de escrever.
+      placeholder: |
+        api -> psp : charge
+          retry 3x backoff 2s
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered · Alternativas consideradas
+      description: Workarounds you use today, or how other tools handle it. · Contornos que você usa hoje, ou como outras ferramentas resolvem.
+    validations:
+      required: false
+
+  - type: dropdown
+    id: contribute
+    attributes:
+      label: Would you like to work on it? · Quer implementar?
+      options:
+        - Yes, I'd like to send a PR · Sim, quero mandar um PR
+        - Maybe, with some guidance · Talvez, com alguma orientação
+        - No, just suggesting · Não, só sugerindo
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checklist
+      options:
+        - label: I searched the existing issues and discussions · Procurei nas issues e discussões existentes
+          required: true
+        - label: I agree to follow the project's Code of Conduct · Concordo em seguir o Código de Conduta
+          required: true

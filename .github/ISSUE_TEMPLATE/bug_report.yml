@@ -1,0 +1,133 @@
+name: 🐞 Bug report
+description: Something doesn't work or a diagram renders wrong · Algo não funciona ou um diagrama sai errado
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report this! Please search the existing issues first.
+        **Security problems must not be reported here.** See `SECURITY.md`.
+
+        Obrigado por relatar! Procure antes nas issues existentes. Pode escrever em inglês ou português.
+        **Falhas de segurança não devem ser relatadas aqui.** Veja o `SECURITY.md`.
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened? · O que aconteceu?
+      description: A clear description of the bug, and what you expected instead. · Descreva o bug e o que você esperava que acontecesse.
+      placeholder: When I drag a node in a sequence diagram, the payload chip stays behind…
+    validations:
+      required: true
+
+  - type: textarea
+    id: source
+    attributes:
+      label: Minimal diagram source · Fonte mínimo do diagrama
+      description: |
+        The smallest DSL (or Mermaid/PlantUML) text that reproduces the problem. In the editor: *Export → .brain file*, or copy the code panel.
+        O menor texto da DSL (ou Mermaid/PlantUML) que reproduz o problema. No editor: *Exportar → Arquivo .brain*, ou copie o painel de código.
+      render: text
+      placeholder: |
+        diagram sequence "Repro"
+
+        actor user "User"
+        service api "API"
+
+        user -> api : request
+    validations:
+      required: false
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce · Passos para reproduzir
+      placeholder: |
+        1. Open /new
+        2. Paste the source above
+        3. Press play
+        4. See the arrow skip step 2
+    validations:
+      required: true
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area · Área
+      multiple: true
+      options:
+        - Editor / DSL
+        - Canvas (drag, connect, layout)
+        - Playback / timeline
+        - Sequence diagrams
+        - Architecture diagrams / tidy arrows
+        - Import (Mermaid, PlantUML, .brain, .json)
+        - Export (SVG, PNG, GIF, .brain, bundle)
+        - Dashboard / projects
+        - Translations / UI text
+        - Command line (mix brainagram.render)
+        - Other
+    validations:
+      required: true
+
+  - type: dropdown
+    id: locale
+    attributes:
+      label: UI language · Idioma da interface
+      options:
+        - Português (Brasil)
+        - English
+        - 简体中文
+        - Русский
+        - Italiano
+        - 日本語
+        - हिन्दी
+    validations:
+      required: false
+
+  - type: input
+    id: browser
+    attributes:
+      label: Browser and OS · Navegador e sistema
+      placeholder: Firefox 131 on Ubuntu 24.04
+    validations:
+      required: false
+
+  - type: input
+    id: version
+    attributes:
+      label: Commit or version · Commit ou versão
+      description: Output of `git rev-parse --short HEAD`, or the date you pulled. · Saída de `git rev-parse --short HEAD`, ou a data do seu pull.
+      placeholder: a1b2c3d
+    validations:
+      required: false
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs and screenshots · Logs e capturas
+      description: Errors from the browser console or the server log. · Erros do console do navegador ou do log do servidor.
+      render: shell
+    validations:
+      required: false
+
+  - type: textarea
+    id: media
+    attributes:
+      label: Screenshots or GIF · Capturas ou GIF
+      description: Drag images here. The editor can export a GIF of the animation. · Arraste imagens aqui. O editor exporta um GIF da animação.
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checklist
+      options:
+        - label: I searched the existing issues and this hasn't been reported yet · Procurei nas issues e isto ainda não foi relatado
+          required: true
+        - label: I can reproduce it on the latest `main` · Consigo reproduzir na `main` mais recente
+          required: false
+        - label: I agree to follow the project's Code of Conduct · Concordo em seguir o Código de Conduta
+          required: true

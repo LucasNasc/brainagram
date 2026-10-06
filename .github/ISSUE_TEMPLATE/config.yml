@@ -1,0 +1,10 @@
+# Sem issue em branco: todo relato passa por um dos formulários.
+# Dúvidas e falhas de segurança têm caminhos próprios, listados no seletor.
+blank_issues_enabled: false
+contact_links:
+  - name: ❓ Question · Dúvida
+    url: https://github.com/LucasNasc/brainagram/blob/main/SUPPORT.md
+    about: Where to ask questions and get help · Onde tirar dúvidas e pedir ajuda
+  - name: 🔒 Security vulnerability · Falha de segurança
+    url: https://github.com/LucasNasc/brainagram/security/policy
+    about: Report it privately, never in a public issue · Relate em particular, nunca numa issue pública

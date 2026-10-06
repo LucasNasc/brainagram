@@ -1,0 +1,21 @@
+# Nomes dos exemplos do catálogo (Infrastructure.Catalog.StaticExampleCatalog).
+# Mantido à mão: os nomes vêm de dados, não de chamadas gettext no código.
+msgid ""
+msgstr ""
+"Language: ja\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "Sequência — Checkout"
+msgstr "シーケンス — チェックアウト"
+
+msgid "Arquitetura — Plataforma"
+msgstr "アーキテクチャ — プラットフォーム"
+
+msgid "Sequência — Um comando nas camadas"
+msgstr "シーケンス — レイヤーを通るコマンド"
+
+msgid "Mínimo — Login"
+msgstr "最小構成 — ログイン"
+
+msgid "Sequência — Checkout com payloads"
+msgstr "シーケンス — ペイロード付きチェックアウト"

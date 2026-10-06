@@ -1,0 +1,14 @@
+/* Brainagram — folha de estilos do app. CSS puro, sem framework: o esbuild
+   junta os @import abaixo em priv/static/assets/css/app.css.
+
+   tokens.css      tokens do design system (claro/escuro), gerados do tokens.json
+   base.css        reset, tipografia, foco, ícones e transições do JS.show/hide
+   components.css  componentes de interface (.ba-*)
+   layout.css      layout do app e do editor, controles nativos estilizados
+   diagram.css     canvas SVG do diagrama (.bg-*), inclusive o que vai no export */
+
+@import "./tokens.css";
+@import "./base.css";
+@import "./components.css";
+@import "./layout.css";
+@import "./diagram.css";

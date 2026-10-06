@@ -1,0 +1,57 @@
+name: 🌐 Translation
+description: A wrong, awkward or missing translation · Uma tradução errada, estranha ou faltando
+title: "[i18n]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        The UI speaks pt-BR (the source language), en, zh, ru, it, ja and hi. The non-English translations started as machine translations, so reviews from native speakers are very welcome!
+        Translations live in `priv/gettext/<locale>/LC_MESSAGES/*.po` and `assets/js/brainagram/locales/<locale>.js`. A PR that touches only those files makes a great first contribution.
+
+        A interface fala pt-BR (o idioma de origem), en, zh, ru, it, ja e hi. As traduções que não são o inglês começaram como tradução automática, então revisões de falantes nativos são muito bem-vindas!
+
+  - type: dropdown
+    id: locale
+    attributes:
+      label: Language · Idioma
+      options:
+        - English (en)
+        - 简体中文 (zh)
+        - Русский (ru)
+        - Italiano (it)
+        - 日本語 (ja)
+        - हिन्दी (hi)
+        - Português (pt-BR)
+        - A new language · Um idioma novo
+    validations:
+      required: true
+
+  - type: textarea
+    id: strings
+    attributes:
+      label: Strings · Textos
+      description: Where it appears, the current text and your suggestion. · Onde aparece, o texto atual e a sua sugestão.
+      value: |
+        | Where · Onde | Current · Atual | Suggested · Sugerido |
+        |---|---|---|
+        |   |   |   |
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Context · Contexto
+      description: Why the current text is wrong or unnatural (terminology, tone, plural form…). Screenshots help. · Por que o texto atual está errado ou estranho (terminologia, tom, plural…). Capturas ajudam.
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checklist
+      options:
+        - label: I'm a native or fluent speaker of this language · Falo este idioma fluentemente ou como língua materna
+          required: false
+        - label: I'd like to send the fix as a PR · Quero mandar a correção num PR
+          required: false

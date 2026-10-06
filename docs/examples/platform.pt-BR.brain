@@ -1,0 +1,47 @@
+diagram architecture "Plataforma — visão de alto nível"
+
+group "Borda" {
+  node cdn "Cloudflare CDN"
+  node lb  "Load Balancer"
+}
+
+group "Aplicação" {
+  service api    "API (Phoenix)"
+  service worker "Worker (Oban)"
+}
+
+group "Dados" {
+  database pg    "PostgreSQL"
+  database redis "Redis"
+  queue    mq    "RabbitMQ"
+}
+
+external s3 "Object Storage"
+
+step "Tráfego de entrada" {
+  cdn -> lb  : HTTPS
+  lb  -> api : round-robin
+}
+
+step "Leitura e cache" {
+  api -> redis : GET sessão
+  api -> pg    : SELECT
+}
+
+step "Trabalho assíncrono" {
+  api    ->> mq    : publica evento
+  mq     -> worker : consome
+  worker -> pg     : UPDATE
+  worker -> s3     : upload de relatório
+}
+
+layout {
+  cdn at (78, 92)
+  lb at (80, 288)
+  api at (80, 484)
+  worker at (80, 876)
+  pg at (352, 1072)
+  redis at (548, 680)
+  mq at (352, 680)
+  s3 at (78, 1072)
+}

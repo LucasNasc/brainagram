@@ -1,0 +1,276 @@
+/* Brainagram — tokens do design system (claro + escuro).
+   Fonte: design system "Brainagram" (tokens.json). Mesmos nomes nos dois temas;
+   componentes nunca usam cor literal. O tema segue [data-theme] (escolha
+   explícita) e, sem ele, prefers-color-scheme. */
+
+:root {
+  color-scheme: light;
+  --bg-app: #f6f6f3;
+  --bg-canvas: #fbfbf9;
+  --surface: #ffffff;
+  --surface-2: #f0f0ec;
+  --surface-3: #e7e7e1;
+  --border: #e3e3de;
+  --border-strong: #84848e;
+  --grid-dot: #d6d6d0;
+  --text: #16161b;
+  --text-muted: #5f5f69;
+  --brand: #5b3fe6;
+  --brand-hover: #4b30d2;
+  --brand-soft: #ece8ff;
+  --brand-text: #4a2fd4;
+  --on-brand: #ffffff;
+  --focus-ring: var(--brand);
+  --impulse: var(--brand);
+  --impulse-glow: #5b3fe638;
+  --edge-sync: #3a3a48;
+  --edge-return: #7e7e8a;
+  --edge-async: #0c8577;
+  --edge-fail: #cc3a31;
+  --edge-pending: #898993;
+  --edge-active: var(--brand);
+  --node-stroke: var(--border-strong);
+  --node-actor: #0068a3;
+  --node-actor-soft: #e3f0f8;
+  --node-service: #2f86bf;
+  --node-service-soft: #e6f3fb;
+  --node-database: #00805d;
+  --node-database-soft: #e1f4ec;
+  --node-queue: #a86f00;
+  --node-queue-soft: #fbf0da;
+  --node-external: #b0508a;
+  --node-external-soft: #f8e7f1;
+  --node-neutral: #5f5f69;
+  --group-bg: #f3f3ef;
+  --group-border: var(--border-strong);
+  --note-bg: #fff3bf;
+  --note-border: #c9a52a;
+  --note-text: #4a3b00;
+  /* cores dos projetos: tom médio, legível como ponto e faixa nos dois temas */
+  --project-violet: #7c5cff;
+  --project-blue: #2f86bf;
+  --project-teal: #0c9b8c;
+  --project-green: #2f9e4f;
+  --project-amber: #d49a00;
+  --project-orange: #e0702c;
+  --project-rose: #d6457a;
+  --project-slate: #6b7280;
+  /* bandeiras do seletor de idioma: cores oficiais, iguais nos dois temas */
+  --flag-br-green: #009c3b;
+  --flag-br-yellow: #ffdf00;
+  --flag-br-blue: #002776;
+  --flag-us-red: #b22234;
+  --flag-us-navy: #3c3b6e;
+  --flag-cn-red: #ee1c25;
+  --flag-cn-yellow: #ffde00;
+  --flag-ru-blue: #0039a6;
+  --flag-ru-red: #d52b1e;
+  --flag-it-green: #009246;
+  --flag-it-red: #ce2b37;
+  --flag-jp-red: #bc002d;
+  --flag-in-saffron: #ff9933;
+  --flag-in-green: #138808;
+  --flag-in-navy: #000080;
+  --flag-white: #ffffff;
+  --success: #0b7a5a;
+  --success-soft: #e0f3eb;
+  --warning: #945a00;
+  --warning-soft: #fbf0d9;
+  --danger: #c2372e;
+  --danger-soft: #fbe7e5;
+  --info: #2563c9;
+  --info-soft: #e6eefb;
+  --syn-keyword: #5b3fe6;
+  --syn-type: #0068a3;
+  --syn-string: #0b7a5a;
+  --syn-arrow: #b0508a;
+  --syn-comment: #6e6e78;
+  --scrim: #16161b59;
+  --link: var(--brand-text);
+  --shadow-sm: 0 1px 2px #16161b14;
+  --shadow-md: 0 1px 2px #16161b0f, 0 4px 12px #16161b14;
+  --shadow-lg: 0 2px 4px #16161b0f, 0 16px 40px #16161b24;
+  --shadow-halo: 0 0 0 4px #ece8ff;
+
+  /* Tipografia */
+  --font-sans: "Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, "SF Mono", "Cascadia Code", Menlo, monospace;
+
+  /* Espaço (base 4px) */
+  --space-0-5: 2px;
+  --space-1: 4px;
+  --space-1-5: 6px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+  /* Raios */
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-full: 999px;
+  /* Durações */
+  --dur-instant: 80ms;
+  --dur-fast: 120ms;
+  --dur-base: 180ms;
+  --dur-slow: 280ms;
+  --dur-reveal: 240ms;
+  --dur-pulse: 420ms;
+  --dur-draw-min: 500ms;
+  --dur-draw-max: 800ms;
+  --dur-step-gap: 240ms;
+  --dur-logo: 1600ms;
+  /* Curvas */
+  --ease-ui: cubic-bezier(0.2, 0, 0, 1);
+  --ease-exit: cubic-bezier(0.4, 0, 1, 1);
+  --ease-impulso: cubic-bezier(0.55, 0, 0.25, 1);
+  --ease-pulso: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-revelar: cubic-bezier(0.2, 0.7, 0.2, 1);
+  /* Traços do canvas */
+  --stroke-node: 1px;
+  --stroke-node-active: 2px;
+  --stroke-pending: 1px;
+  --stroke-edge: 1.5px;
+  --stroke-active: 2.25px;
+  /* Alturas fixas */
+  --size-control-sm: 28px;
+  --size-control: 32px;
+  --size-control-lg: 40px;
+  --size-play: 44px;
+  --size-topbar: 48px;
+  --size-player: 64px;
+  --size-node-arch: 68px;
+  --size-node-seq: 44px;
+  --size-panel-code: 360px;
+  --size-panel-steps: 280px;
+  /* Camadas */
+  --z-canvas-ui: 10;
+  --z-panel: 20;
+  --z-menu: 40;
+  --z-modal: 50;
+  --z-toast: 60;
+  --z-tooltip: 70;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg-app: #111115;
+    --bg-canvas: #15151a;
+    --surface: #1c1c22;
+    --surface-2: #24242b;
+    --surface-3: #2d2d35;
+    --border: #2e2e37;
+    --border-strong: #73737f;
+    --grid-dot: #2c2c35;
+    --text: #ededf2;
+    --text-muted: #a0a0ae;
+    --brand: #8e7cff;
+    --brand-hover: #a294ff;
+    --brand-soft: #2a2450;
+    --brand-text: #b3a8ff;
+    --on-brand: #111115;
+    --impulse-glow: #8e7cff4d;
+    --edge-sync: #c9c9d6;
+    --edge-return: #8a8a98;
+    --edge-async: #3ccbb6;
+    --edge-fail: #ff6a5f;
+    --edge-pending: #666674;
+    --node-actor: #4fa8e8;
+    --node-actor-soft: #152636;
+    --node-service: #8ccdf2;
+    --node-service-soft: #172a36;
+    --node-database: #3dc495;
+    --node-database-soft: #132a22;
+    --node-queue: #f0b230;
+    --node-queue-soft: #2e2512;
+    --node-external: #e394c2;
+    --node-external-soft: #2e1a27;
+    --node-neutral: #a0a0ae;
+    --group-bg: #18181e;
+    --note-bg: #3a3218;
+    --note-border: #8a7430;
+    --note-text: #f3e3a6;
+    --success: #44cc9a;
+    --success-soft: #12291f;
+    --warning: #f2b84b;
+    --warning-soft: #2e2411;
+    --danger: #ff7a70;
+    --danger-soft: #361816;
+    --info: #7ea8ff;
+    --info-soft: #16213a;
+    --syn-keyword: #b3a8ff;
+    --syn-type: #7cc0f0;
+    --syn-string: #6ed7b0;
+    --syn-arrow: #e394c2;
+    --syn-comment: #8c8c9a;
+    --scrim: #000000a6;
+    --shadow-sm: 0 1px 2px #00000066;
+    --shadow-md: 0 1px 2px #00000080, 0 6px 16px #00000066;
+    --shadow-lg: 0 2px 4px #00000080, 0 20px 48px #000000a6;
+    --shadow-halo: 0 0 0 4px #2a2450;
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg-app: #111115;
+  --bg-canvas: #15151a;
+  --surface: #1c1c22;
+  --surface-2: #24242b;
+  --surface-3: #2d2d35;
+  --border: #2e2e37;
+  --border-strong: #73737f;
+  --grid-dot: #2c2c35;
+  --text: #ededf2;
+  --text-muted: #a0a0ae;
+  --brand: #8e7cff;
+  --brand-hover: #a294ff;
+  --brand-soft: #2a2450;
+  --brand-text: #b3a8ff;
+  --on-brand: #111115;
+  --impulse-glow: #8e7cff4d;
+  --edge-sync: #c9c9d6;
+  --edge-return: #8a8a98;
+  --edge-async: #3ccbb6;
+  --edge-fail: #ff6a5f;
+  --edge-pending: #666674;
+  --node-actor: #4fa8e8;
+  --node-actor-soft: #152636;
+  --node-service: #8ccdf2;
+  --node-service-soft: #172a36;
+  --node-database: #3dc495;
+  --node-database-soft: #132a22;
+  --node-queue: #f0b230;
+  --node-queue-soft: #2e2512;
+  --node-external: #e394c2;
+  --node-external-soft: #2e1a27;
+  --node-neutral: #a0a0ae;
+  --group-bg: #18181e;
+  --note-bg: #3a3218;
+  --note-border: #8a7430;
+  --note-text: #f3e3a6;
+  --success: #44cc9a;
+  --success-soft: #12291f;
+  --warning: #f2b84b;
+  --warning-soft: #2e2411;
+  --danger: #ff7a70;
+  --danger-soft: #361816;
+  --info: #7ea8ff;
+  --info-soft: #16213a;
+  --syn-keyword: #b3a8ff;
+  --syn-type: #7cc0f0;
+  --syn-string: #6ed7b0;
+  --syn-arrow: #e394c2;
+  --syn-comment: #8c8c9a;
+  --scrim: #000000a6;
+  --shadow-sm: 0 1px 2px #00000066;
+  --shadow-md: 0 1px 2px #00000080, 0 6px 16px #00000066;
+  --shadow-lg: 0 2px 4px #00000080, 0 20px 48px #000000a6;
+  --shadow-halo: 0 0 0 4px #2a2450;
+}

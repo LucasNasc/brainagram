@@ -1,0 +1,6 @@
+# Quebras de linha LF no repositório e na cópia de trabalho, em qualquer sistema.
+* text=auto eol=lf
+
+*.png binary
+*.gif binary
+*.ico binary

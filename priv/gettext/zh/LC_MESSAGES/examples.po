@@ -1,0 +1,21 @@
+# Nomes dos exemplos do catálogo (Infrastructure.Catalog.StaticExampleCatalog).
+# Mantido à mão: os nomes vêm de dados, não de chamadas gettext no código.
+msgid ""
+msgstr ""
+"Language: zh\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "Sequência — Checkout"
+msgstr "时序图 — 结账"
+
+msgid "Arquitetura — Plataforma"
+msgstr "架构图 — 平台"
+
+msgid "Sequência — Um comando nas camadas"
+msgstr "时序图 — 一条命令穿过各层"
+
+msgid "Mínimo — Login"
+msgstr "最简 — 登录"
+
+msgid "Sequência — Checkout com payloads"
+msgstr "时序图 — 带 payload 的结账"

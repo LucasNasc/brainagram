@@ -1,0 +1,32 @@
+diagram sequence "Checkout com pagamento assíncrono"
+
+actor       user   "Cliente"
+participant api    "API Gateway"
+service     orders "Order Service"
+database    db     "PostgreSQL"
+queue       mq     "RabbitMQ"
+
+step "Cliente confirma o pedido" {
+  user -> api : POST /orders
+    payload """
+    {
+      "items": [{"sku": "A-1", "qty": 2}],
+      "coupon": "BLACK10"
+    }
+    """
+  api -> orders : CreateOrder
+}
+
+step "Pedido gravado" {
+  orders -> orders : valida estoque
+  orders -> db : INSERT order
+    payload: INSERT INTO orders (id, total) VALUES ($1, $2)
+  db --> orders : order_id
+}
+
+step "Resposta rápida" {
+  orders ->> mq : OrderCreated
+  orders --> api : 201 Created
+  api --> user : "Pedido recebido!"
+  note over user, api : a UI já responde aqui — o resto é assíncrono
+}

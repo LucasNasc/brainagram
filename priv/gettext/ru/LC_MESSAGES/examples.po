@@ -1,0 +1,21 @@
+# Nomes dos exemplos do catálogo (Infrastructure.Catalog.StaticExampleCatalog).
+# Mantido à mão: os nomes vêm de dados, não de chamadas gettext no código.
+msgid ""
+msgstr ""
+"Language: ru\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100 != 11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10||n%100>=20) ? 1 : 2);\n"
+
+msgid "Sequência — Checkout"
+msgstr "Последовательность — Оформление заказа"
+
+msgid "Arquitetura — Plataforma"
+msgstr "Архитектура — Платформа"
+
+msgid "Sequência — Um comando nas camadas"
+msgstr "Последовательность — Команда через слои"
+
+msgid "Mínimo — Login"
+msgstr "Минимальный — Вход"
+
+msgid "Sequência — Checkout com payloads"
+msgstr "Последовательность — Оформление заказа с payload"

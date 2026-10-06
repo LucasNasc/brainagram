@@ -1,0 +1,57 @@
+/* Brainagram — base: reset mínimo, tipografia, foco e utilitários. */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body { height: 100%; }
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 20px;
+  background: var(--bg-app);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, p { margin: 0; }
+button, input, select, textarea { font: inherit; color: inherit; }
+a { color: var(--link); }
+code, kbd, pre { font-family: var(--font-mono); }
+
+:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
+
+[hidden] { display: none !important; }
+
+/* Os wrappers do LiveView não participam do layout. */
+[data-phx-session], [data-phx-teleported-src] { display: contents; }
+
+/* Ícones (Heroicons inline, ver CoreComponents.icon/1) */
+.ba-ico { width: 20px; height: 20px; flex: none; display: block; }
+.ba-ico--12 { width: 12px; height: 12px; }
+.ba-ico--16 { width: 16px; height: 16px; }
+.ba-ico--24 { width: 24px; height: 24px; }
+
+.ba-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.ba-spacer { flex: 1; }
+
+/* Transições usadas por CoreComponents.show/2 e hide/2 (JS.show/JS.hide). */
+.ba-tr-in { transition: opacity var(--dur-slow) var(--ease-revelar), transform var(--dur-slow) var(--ease-revelar); }
+.ba-tr-out { transition: opacity var(--dur-base) var(--ease-exit), transform var(--dur-base) var(--ease-exit); }
+.ba-tr-hidden { opacity: 0; transform: translateY(4px); }
+.ba-tr-shown { opacity: 1; transform: none; }
+
+/* Estado de carregamento do LiveView em botões. */
+.phx-click-loading.ba-btn, .phx-submit-loading .ba-btn[type="submit"] { opacity: .7; cursor: progress; }
+/* botão cuja ação demora um pouco (ex.: Organizar setas): o ícone gira enquanto espera */
+.phx-click-loading.ba-btn[data-busy="spin"] > svg:first-of-type { animation: ba-spin 900ms linear infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition-duration: var(--dur-fast) !important;
+    animation-duration: var(--dur-fast) !important;
+    animation-iteration-count: 1 !important;
+  }
+  .ba-tr-hidden { transform: none; }
+}
