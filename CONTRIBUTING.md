@@ -84,7 +84,7 @@ the issue. Unfinished pull requests are welcome too; open them as **drafts**.
 
 ## Development setup
 
-**Requirements:** Elixir 1.15+ and Erlang/OTP 25+ (CI runs Elixir 1.18 / OTP 27),
+**Requirements:** Elixir 1.15+ and Erlang/OTP 25+ (CI runs Elixir 1.18 / OTP 27 and 1.20 / OTP 29, the production image),
 and PostgreSQL (CI uses 16).
 
 ```bash

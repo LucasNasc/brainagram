@@ -6,7 +6,16 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    name: test (Elixir ${{ matrix.elixir }} / OTP ${{ matrix.otp }})
+    runs-on: ubuntu-24.04
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # a versão mínima suportada e a mesma da imagem de produção (Dockerfile)
+          - { elixir: "1.18", otp: "27" }
+          - { elixir: "1.20.4", otp: "29.1.1" }
 
     services:
       postgres:
@@ -23,16 +32,16 @@ jobs:
 
       - uses: erlef/setup-beam@v1
         with:
-          elixir-version: "1.18"
-          otp-version: "27"
+          elixir-version: ${{ matrix.elixir }}
+          otp-version: ${{ matrix.otp }}
 
       - uses: actions/cache@v6
         with:
           path: |
             deps
             _build
-          key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
-          restore-keys: ${{ runner.os }}-mix-
+          key: ${{ runner.os }}-mix-${{ matrix.elixir }}-${{ matrix.otp }}-${{ hashFiles('**/mix.lock') }}
+          restore-keys: ${{ runner.os }}-mix-${{ matrix.elixir }}-${{ matrix.otp }}-
 
       - run: mix deps.get
       - run: mix deps.unlock --check-unused
