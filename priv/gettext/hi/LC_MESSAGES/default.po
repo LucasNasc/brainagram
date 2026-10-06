@@ -11,1400 +11,1363 @@ msgstr ""
 "Language: hi\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: lib/brainagram_web/live/editor_live.ex:304
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "%{base}. Ctrl+Z desfaz."
 msgstr "%{base}। Ctrl+Z से पूर्ववत करें।"
 
-#: lib/brainagram_web/live/editor_live.ex:301
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "%{base}; setas organizadas. Ctrl+Z desfaz."
 msgstr "%{base}; तीर व्यवस्थित किए गए। Ctrl+Z से पूर्ववत करें।"
 
-#: lib/brainagram_web/live/editor_live.ex:292
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "%{base}; setas organizadas: %{before} → 1 cruzamento. Ctrl+Z desfaz."
 msgid_plural "%{base}; setas organizadas: %{before} → %{count} cruzamentos. Ctrl+Z desfaz."
 msgstr[0] "%{base}; तीर व्यवस्थित किए गए: %{before} → 1 क्रॉसिंग। Ctrl+Z से पूर्ववत करें।"
 msgstr[1] "%{base}; तीर व्यवस्थित किए गए: %{before} → %{count} क्रॉसिंग। Ctrl+Z से पूर्ववत करें।"
 
-#: lib/brainagram_web/live/editor_live.ex:1039
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "0,5×"
 msgstr "0.5×"
 
-#: lib/brainagram_web/live/editor_live.ex:1111
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "1 erro"
 msgid_plural "%{count} erros"
 msgstr[0] "1 त्रुटि"
 msgstr[1] "%{count} त्रुटियाँ"
 
-#: lib/brainagram_web/live/editor_live.ex:1113
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "1 mensagem"
 msgid_plural "%{count} mensagens"
 msgstr[0] "1 संदेश"
 msgstr[1] "%{count} संदेश"
 
-#: lib/brainagram_web/live/editor_live.ex:1041
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "1,5×"
 msgstr "1.5×"
 
-#: lib/brainagram_web/live/editor_live.ex:858
-#: lib/brainagram_web/live/editor_live.ex:859
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Afastar"
 msgstr "ज़ूम आउट"
 
-#: lib/brainagram_web/live/dashboard_live.ex:315
-#: lib/brainagram_web/live/editor_live.ex:186
+#: lib/brainagram_web/live/dashboard_live.ex
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Agora é privado."
 msgstr "अब निजी है।"
 
-#: lib/brainagram_web/live/dashboard_live.ex:314
-#: lib/brainagram_web/live/editor_live.ex:186
+#: lib/brainagram_web/live/dashboard_live.ex
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Agora é público."
 msgstr "अब सार्वजनिक है।"
 
-#: lib/brainagram_web/live/editor_live.ex:712
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Alguém salvou uma versão mais nova deste diagrama."
 msgstr "किसी ने इस डायग्राम का नया संस्करण सहेजा है।"
 
-#: lib/brainagram_web/live/editor_live.ex:169
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Alterações salvas."
 msgstr "बदलाव सहेजे गए।"
 
-#: lib/brainagram_web/live/editor_live.ex:610
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Animação"
 msgstr "एनिमेशन"
 
-#: lib/brainagram_web/live/editor_live.ex:844
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Apaga as posições fixadas e volta ao layout automático"
 msgstr "पिन की गई स्थितियाँ हटाकर स्वचालित लेआउट पर लौटता है"
 
-#: lib/brainagram_web/live/editor_live.ex:1107
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Aparece na galeria pública. Clique para tornar privado."
 msgstr "सार्वजनिक गैलरी में दिखता है। निजी बनाने के लिए क्लिक करें।"
 
-#: lib/brainagram_web/live/editor_live.ex:868
-#: lib/brainagram_web/live/editor_live.ex:869
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Aproximar"
 msgstr "ज़ूम इन"
 
-#: lib/brainagram_web/live/dashboard_live.ex:701
-#: lib/brainagram_web/live/dashboard_live.ex:1298
-#: lib/brainagram_web/live/editor_live.ex:1093
+#: lib/brainagram_web/live/dashboard_live.ex
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Arquitetura"
 msgstr "आर्किटेक्चर"
 
-#: lib/brainagram_web/live/editor_live.ex:383
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "As setas já estão organizadas — nada a mudar."
 msgstr "तीर पहले से व्यवस्थित हैं — बदलने को कुछ नहीं।"
 
-#: lib/brainagram_web/components/layouts.ex:40
-#: lib/brainagram_web/live/dashboard_live.ex:465
+#: lib/brainagram_web/components/layouts.ex
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Brainagram, início"
 msgstr "Brainagram, होम"
 
-#: lib/brainagram_web/live/dashboard_live.ex:991
-#: lib/brainagram_web/live/dashboard_live.ex:1048
-#: lib/brainagram_web/live/dashboard_live.ex:1080
-#: lib/brainagram_web/live/dashboard_live.ex:1169
-#: lib/brainagram_web/live/dashboard_live.ex:1221
-#: lib/brainagram_web/live/dashboard_live.ex:1243
-#: lib/brainagram_web/live/editor_live.ex:972
+#: lib/brainagram_web/live/dashboard_live.ex
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Cancelar"
 msgstr "रद्द करें"
 
-#: lib/brainagram_web/live/editor_live.ex:555
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Carregar exemplo"
 msgstr "उदाहरण लोड करें"
 
-#: lib/brainagram_web/components/layouts.ex:124
+#: lib/brainagram_web/components/layouts.ex
 #, elixir-autogen, elixir-format
 msgid "Claro"
 msgstr "लाइट"
 
-#: lib/brainagram_web/live/editor_live.ex:819
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Clique na origem e depois no destino (ou arraste da alça de um nó)"
 msgstr "पहले स्रोत पर, फिर लक्ष्य पर क्लिक करें (या किसी नोड के हैंडल से खींचें)"
 
-#: lib/brainagram_web/live/editor_live.ex:147
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Cole o texto do diagrama para importar."
 msgstr "इम्पोर्ट करने के लिए डायग्राम का टेक्स्ट पेस्ट करें।"
 
-#: lib/brainagram_web/live/editor_live.ex:821
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Conectar"
 msgstr "कनेक्ट करें"
 
-#: lib/brainagram_web/live/editor_live.ex:1116
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Contexto inicial"
 msgstr "प्रारंभिक संदर्भ"
 
-#: lib/brainagram_web/live/editor_live.ex:343
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Corrija o erro de sintaxe no código antes de editar pelo canvas."
 msgstr "कैनवस पर संपादन से पहले कोड की सिंटैक्स त्रुटि ठीक करें।"
 
-#: lib/brainagram_web/live/editor_live.ex:674
-#: lib/brainagram_web/live/editor_live.ex:676
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Código"
 msgstr "कोड"
 
-#: lib/brainagram_web/live/editor_live.ex:727
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Código do diagrama"
 msgstr "डायग्राम का कोड"
 
-#: lib/brainagram_web/live/editor_live.ex:377
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Código formatado."
 msgstr "कोड फ़ॉर्मैट किया गया।"
 
-#: lib/brainagram_web/live/editor_live.ex:374
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Código formatado. Os comentários foram removidos — Ctrl+Z desfaz."
 msgstr "कोड फ़ॉर्मैट किया गया। टिप्पणियाँ हटा दी गईं — Ctrl+Z से पूर्ववत करें।"
 
-#: lib/brainagram_web/live/editor_live.ex:195
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Cópia criada."
 msgstr "कॉपी बनाई गई।"
 
-#: lib/brainagram_web/live/editor_live.ex:692
-#: lib/brainagram_web/live/editor_live.ex:693
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Desfazer (Ctrl+Z)"
 msgstr "पूर्ववत करें (Ctrl+Z)"
 
-#: lib/brainagram_web/live/editor_live.ex:924
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Detectar automaticamente"
 msgstr "स्वचालित रूप से पहचानें"
 
-#: lib/brainagram_web/live/editor_live.ex:280
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Diagrama importado"
 msgstr "डायग्राम इम्पोर्ट किया गया"
 
-#: lib/brainagram_web/error_messages.ex:26
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "Diagrama não encontrado."
 msgstr "डायग्राम नहीं मिला।"
 
-#: lib/brainagram_web/live/dashboard_live.ex:904
-#: lib/brainagram_web/live/editor_live.ex:653
+#: lib/brainagram_web/live/dashboard_live.ex
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Duplicar"
 msgstr "डुप्लिकेट करें"
 
-#: lib/brainagram_web/live/editor_live.ex:792
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Editar"
 msgstr "संपादित करें"
 
-#: lib/brainagram_web/live/editor_live.ex:790
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Editar: arraste nós, puxe setas, duplo clique renomeia (E)"
 msgstr "संपादन: नोड खिसकाएँ, तीर खींचें, डबल-क्लिक से नाम बदलें (E)"
 
-#: lib/brainagram_web/live/editor_live.ex:878
-#: lib/brainagram_web/live/editor_live.ex:879
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Enquadrar (F)"
 msgstr "स्क्रीन में फ़िट करें (F)"
 
-#: lib/brainagram_web/error_messages.ex:88
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "Erro de sintaxe na DSL."
 msgstr "DSL में सिंटैक्स त्रुटि।"
 
-#: lib/brainagram_web/error_messages.ex:72
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "Erro de sintaxe na linha %{line}: %{message}"
 msgstr "पंक्ति %{line} पर सिंटैक्स त्रुटि: %{message}"
 
-#: lib/brainagram_web/error_messages.ex:78
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "Erro de sintaxe na linha %{line}: %{message} (e mais 1)"
 msgid_plural "Erro de sintaxe na linha %{line}: %{message} (e mais %{count})"
 msgstr[0] "पंक्ति %{line} पर सिंटैक्स त्रुटि: %{message} (और 1)"
 msgstr[1] "पंक्ति %{line} पर सिंटैक्स त्रुटि: %{message} (और %{count})"
 
-#: lib/brainagram_web/components/layouts.ex:134
+#: lib/brainagram_web/components/layouts.ex
 #, elixir-autogen, elixir-format
 msgid "Escuro"
 msgstr "डार्क"
 
-#: lib/brainagram_web/error_messages.ex:58
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "Essa edição deixaria o código inválido, então nada foi aplicado."
 msgstr "यह बदलाव कोड को अमान्य बना देता, इसलिए कुछ भी लागू नहीं किया गया।"
 
-#: lib/brainagram_web/error_messages.ex:29
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "Essa seta não existe mais no código."
 msgstr "यह तीर अब कोड में मौजूद नहीं है।"
 
-#: lib/brainagram_web/error_messages.ex:30
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "Esse grupo não existe no código."
 msgstr "यह समूह कोड में मौजूद नहीं है।"
 
-#: lib/brainagram_web/error_messages.ex:28
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "Esse nó não existe mais no código."
 msgstr "यह नोड अब कोड में मौजूद नहीं है।"
 
-#: lib/brainagram_web/live/editor_live.ex:240
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Este diagrama foi removido."
 msgstr "यह डायग्राम हटा दिया गया है।"
 
-#: lib/brainagram_web/live/editor_live.ex:97
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Exemplo carregado. Ctrl+Z desfaz."
 msgstr "उदाहरण लोड हो गया। Ctrl+Z से पूर्ववत करें।"
 
-#: lib/brainagram_web/live/editor_live.ex:549
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Exemplos"
 msgstr "उदाहरण"
 
-#: lib/brainagram_web/live/dashboard_live.ex:738
-#: lib/brainagram_web/live/editor_live.ex:584
+#: lib/brainagram_web/live/dashboard_live.ex
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Exportar"
 msgstr "एक्सपोर्ट करें"
 
-#: lib/brainagram_web/live/editor_live.ex:683
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "F8 vai para o erro"
 msgstr "F8 से त्रुटि पर जाएँ"
 
-#: lib/brainagram_web/components/core_components.ex:62
-#: lib/brainagram_web/live/dashboard_live.ex:1169
-#: lib/brainagram_web/live/dashboard_live.ex:1273
-#: lib/brainagram_web/live/editor_live.ex:910
+#: lib/brainagram_web/components/core_components.ex
+#: lib/brainagram_web/live/dashboard_live.ex
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Fechar"
 msgstr "बंद करें"
 
-#: lib/brainagram_web/live/editor_live.ex:922
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Formato"
 msgstr "फ़ॉर्मैट"
 
-#: lib/brainagram_web/error_messages.ex:63
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "Formato de importação desconhecido (use Mermaid ou PlantUML)."
 msgstr "अज्ञात इम्पोर्ट फ़ॉर्मैट (Mermaid या PlantUML का उपयोग करें)।"
 
-#: lib/brainagram_web/components/layouts.ex:167
-#: lib/brainagram_web/components/layouts.ex:176
+#: lib/brainagram_web/components/layouts.ex
 #, elixir-autogen, elixir-format
 msgid "Idioma"
 msgstr "भाषा"
 
-#: lib/brainagram_web/live/editor_live.ex:590
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Imagem do estado final"
 msgstr "अंतिम स्थिति की इमेज"
 
-#: lib/brainagram_web/live/editor_live.ex:607
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Imagem para slides e docs"
 msgstr "स्लाइड और दस्तावेज़ों के लिए इमेज"
 
-#: lib/brainagram_web/live/editor_live.ex:283
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Importado com 1 aviso (veja o comentário no topo do código)"
 msgid_plural "Importado com %{count} avisos (veja o comentário no topo do código)"
 msgstr[0] "1 चेतावनी के साथ इम्पोर्ट किया गया (कोड के शीर्ष पर टिप्पणी देखें)"
 msgstr[1] "%{count} चेतावनियों के साथ इम्पोर्ट किया गया (कोड के शीर्ष पर टिप्पणी देखें)"
 
-#: lib/brainagram_web/live/dashboard_live.ex:729
-#: lib/brainagram_web/live/editor_live.ex:974
+#: lib/brainagram_web/live/dashboard_live.ex
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Importar"
 msgstr "इम्पोर्ट करें"
 
-#: lib/brainagram_web/live/editor_live.ex:905
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Importar diagrama"
 msgstr "डायग्राम इम्पोर्ट करें"
 
-#: lib/brainagram_web/error_messages.ex:27
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "Já existe um diagrama com esse slug."
 msgstr "इस स्लग वाला डायग्राम पहले से मौजूद है।"
 
-#: lib/brainagram_web/live/editor_live.ex:736
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Linha %{line}"
 msgstr "पंक्ति %{line}"
 
-#: lib/brainagram_web/live/editor_live.ex:783
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Modo do canvas"
 msgstr "कैनवस मोड"
 
-#: lib/brainagram_web/live/dashboard_live.ex:1222
-#: lib/brainagram_web/live/editor_live.ex:802
+#: lib/brainagram_web/live/dashboard_live.ex
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Mover"
 msgstr "मूव करें"
 
-#: lib/brainagram_web/live/editor_live.ex:800
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Mover a tela: arrastar desloca o canvas (E)"
 msgstr "स्क्रीन खिसकाएँ: खींचने पर कैनवस हिलता है (E)"
 
-#: lib/brainagram_web/live/editor_live.ex:811
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Novo nó no centro (ou duplo clique numa área vazia)"
 msgstr "बीच में नया नोड (या किसी खाली जगह पर डबल-क्लिक करें)"
 
-#: lib/brainagram_web/error_messages.ex:65
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "Não encontrei um diagrama para importar."
 msgstr "इम्पोर्ट करने के लिए कोई डायग्राम नहीं मिला।"
 
-#: lib/brainagram_web/error_messages.ex:91
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "Não foi possível concluir a operação (%{reason})."
 msgstr "कार्रवाई पूरी नहीं हो सकी (%{reason})।"
 
-#: lib/brainagram_web/live/editor_live.ex:813
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Nó"
 msgstr "नोड"
 
-#: lib/brainagram_web/error_messages.ex:22
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "O diagrama passou do tamanho máximo permitido."
 msgstr "डायग्राम अधिकतम अनुमत आकार से बड़ा है।"
 
-#: lib/brainagram_web/error_messages.ex:31
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "O nome não pode ficar vazio."
 msgstr "नाम खाली नहीं हो सकता।"
 
-#: lib/brainagram_web/error_messages.ex:34
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "O rótulo não pode ter # nem // (viram comentário na DSL)."
 msgstr "लेबल में # या // नहीं हो सकते (DSL में इनसे टिप्पणी शुरू होती है)।"
 
-#: lib/brainagram_web/components/layouts.ex:88
+#: lib/brainagram_web/components/layouts.ex
 #, elixir-autogen, elixir-format
 msgid "O servidor não respondeu."
 msgstr "सर्वर ने जवाब नहीं दिया।"
 
-#: lib/brainagram_web/live/editor_live.ex:512
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "O título vem da 1ª linha do código"
 msgstr "शीर्षक कोड की पहली पंक्ति से आता है"
 
-#: lib/brainagram_web/error_messages.ex:60
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "Operação de edição desconhecida."
 msgstr "अज्ञात संपादन कार्रवाई।"
 
-#: lib/brainagram_web/live/editor_live.ex:967
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Organizar as setas (diagramas de arquitetura)"
 msgstr "तीर व्यवस्थित करें (आर्किटेक्चर डायग्राम)"
 
-#: lib/brainagram_web/live/editor_live.ex:834
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Organizar setas"
 msgstr "तीर व्यवस्थित करें"
 
-#: lib/brainagram_web/error_messages.ex:53
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "Organizar setas vale para diagramas de arquitetura — na sequência as setas já não se cruzam."
 msgstr "तीर व्यवस्थित करना आर्किटेक्चर डायग्राम के लिए है — सीक्वेंस डायग्राम में तीर कभी नहीं कटते।"
 
-#: lib/brainagram_web/live/editor_live.ex:542
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Paleta de comandos"
 msgstr "कमांड पैलेट"
 
-#: lib/brainagram_web/live/editor_live.ex:541
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Paleta de comandos (Ctrl+K)"
 msgstr "कमांड पैलेट (Ctrl+K)"
 
-#: lib/brainagram_web/live/editor_live.ex:999
-#: lib/brainagram_web/live/editor_live.ex:1000
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Passo anterior (←)"
 msgstr "पिछला चरण (←)"
 
-#: lib/brainagram_web/live/editor_live.ex:1063
-#: lib/brainagram_web/live/editor_live.ex:1065
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Passos"
 msgstr "चरण"
 
-#: lib/brainagram_web/live/editor_live.ex:1032
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Posição da animação"
 msgstr "एनिमेशन की स्थिति"
 
-#: lib/brainagram_web/error_messages.ex:37
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "Posição inválida."
 msgstr "अमान्य स्थिति।"
 
-#: lib/brainagram_web/live/editor_live.ex:380
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Posições soltas: layout automático de novo."
 msgstr "स्थितियाँ मुक्त की गईं: फिर से स्वचालित लेआउट।"
 
-#: lib/brainagram_web/live/editor_live.ex:530
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Privado"
 msgstr "निजी"
 
-#: lib/brainagram_web/live/editor_live.ex:1018
-#: lib/brainagram_web/live/editor_live.ex:1019
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Próximo passo (→)"
 msgstr "अगला चरण (→)"
 
-#: lib/brainagram_web/live/editor_live.ex:528
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Público"
 msgstr "सार्वजनिक"
 
-#: lib/brainagram_web/live/editor_live.ex:714
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Recarregar"
 msgstr "फिर से लोड करें"
 
-#: lib/brainagram_web/live/editor_live.ex:702
-#: lib/brainagram_web/live/editor_live.ex:703
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Refazer (Ctrl+Shift+Z)"
 msgstr "फिर से करें (Ctrl+Shift+Z)"
 
-#: lib/brainagram_web/live/editor_live.ex:750
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Referência rápida"
 msgstr "त्वरित संदर्भ"
 
-#: lib/brainagram_web/live/editor_live.ex:990
-#: lib/brainagram_web/live/editor_live.ex:991
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Reiniciar (R)"
 msgstr "फिर से शुरू करें (R)"
 
-#: lib/brainagram_web/live/editor_live.ex:832
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Reorganiza os componentes para as setas não se cruzarem (Ctrl+Z desfaz)"
 msgstr "कंपोनेंट को इस तरह व्यवस्थित करता है कि तीर एक-दूसरे को न काटें (Ctrl+Z से पूर्ववत करें)"
 
-#: lib/brainagram_web/live/editor_live.ex:1050
-#: lib/brainagram_web/live/editor_live.ex:1051
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Repetir em loop"
 msgstr "लूप में चलाएँ"
 
-#: lib/brainagram_web/live/editor_live.ex:984
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Reprodução"
 msgstr "प्लेबैक"
 
-#: lib/brainagram_web/live/dashboard_live.ex:993
-#: lib/brainagram_web/live/editor_live.ex:657
+#: lib/brainagram_web/live/dashboard_live.ex
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Salvar"
 msgstr "सहेजें"
 
-#: lib/brainagram_web/live/editor_live.ex:191
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Salve o diagrama antes de duplicar."
 msgstr "डुप्लिकेट करने से पहले डायग्राम सहेजें।"
 
-#: lib/brainagram_web/live/editor_live.ex:175
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Salve o diagrama antes de publicar."
 msgstr "प्रकाशित करने से पहले डायग्राम सहेजें।"
 
-#: lib/brainagram_web/live/editor_live.ex:161
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Salvo. O link já é compartilhável."
 msgstr "सहेजा गया। लिंक अब शेयर किया जा सकता है।"
 
-#: lib/brainagram_web/components/layouts.ex:77
+#: lib/brainagram_web/components/layouts.ex
 #, elixir-autogen, elixir-format
 msgid "Sem conexão."
 msgstr "कोई कनेक्शन नहीं।"
 
-#: lib/brainagram_web/live/editor_live.ex:678
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Sem erros"
 msgstr "कोई त्रुटि नहीं"
 
-#: lib/brainagram_web/live/dashboard_live.ex:242
-#: lib/brainagram_web/live/editor_live.ex:409
-#: lib/brainagram_web/live/editor_live.ex:513
+#: lib/brainagram_web/live/dashboard_live.ex
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Sem título"
 msgstr "शीर्षकहीन"
 
-#: lib/brainagram_web/live/dashboard_live.ex:700
-#: lib/brainagram_web/live/dashboard_live.ex:1299
-#: lib/brainagram_web/live/editor_live.ex:1092
+#: lib/brainagram_web/live/dashboard_live.ex
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Sequência"
 msgstr "सीक्वेंस"
 
-#: lib/brainagram_web/live/editor_live.ex:392
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Setas organizadas: %{before} → 1 cruzamento. Ctrl+Z desfaz."
 msgid_plural "Setas organizadas: %{before} → %{count} cruzamentos. Ctrl+Z desfaz."
 msgstr[0] "तीर व्यवस्थित किए गए: %{before} → 1 क्रॉसिंग। Ctrl+Z से पूर्ववत करें।"
 msgstr[1] "तीर व्यवस्थित किए गए: %{before} → %{count} क्रॉसिंग। Ctrl+Z से पूर्ववत करें।"
 
-#: lib/brainagram_web/live/editor_live.ex:400
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Setas organizadas: caminhos mais curtos e sem atravessar caixas. Ctrl+Z desfaz."
 msgstr "तीर व्यवस्थित किए गए: छोटे रास्ते, जो बॉक्स के आर-पार नहीं जाते। Ctrl+Z से पूर्ववत करें।"
 
-#: lib/brainagram_web/components/layouts.ex:114
+#: lib/brainagram_web/components/layouts.ex
 #, elixir-autogen, elixir-format
 msgid "Sistema"
 msgstr "सिस्टम"
 
-#: lib/brainagram_web/error_messages.ex:17
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "Slug inválido: use de 3 a 64 letras minúsculas, números, - ou _."
 msgstr "अमान्य स्लग: 3 से 64 छोटे अक्षर (a–z), अंक, - या _ का उपयोग करें।"
 
-#: lib/brainagram_web/live/editor_live.ex:846
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Soltar posições"
 msgstr "स्थितियाँ मुक्त करें"
 
-#: lib/brainagram_web/live/editor_live.ex:1109
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Só abre quem tem o link. Clique para tornar público."
 msgstr "सिर्फ़ लिंक वाले लोग इसे खोल सकते हैं। सार्वजनिक बनाने के लिए क्लिक करें।"
 
-#: lib/brainagram_web/components/layouts.ex:107
+#: lib/brainagram_web/components/layouts.ex
 #, elixir-autogen, elixir-format
 msgid "Tema"
 msgstr "थीम"
 
-#: lib/brainagram_web/components/layouts.ex:123
+#: lib/brainagram_web/components/layouts.ex
 #, elixir-autogen, elixir-format
 msgid "Tema claro"
 msgstr "लाइट थीम"
 
-#: lib/brainagram_web/components/layouts.ex:113
+#: lib/brainagram_web/components/layouts.ex
 #, elixir-autogen, elixir-format
 msgid "Tema do sistema"
 msgstr "सिस्टम थीम"
 
-#: lib/brainagram_web/components/layouts.ex:133
+#: lib/brainagram_web/components/layouts.ex
 #, elixir-autogen, elixir-format
 msgid "Tema escuro"
 msgstr "डार्क थीम"
 
-#: lib/brainagram_web/components/layouts.ex:82
-#: lib/brainagram_web/components/layouts.ex:93
+#: lib/brainagram_web/components/layouts.ex
 #, elixir-autogen, elixir-format
 msgid "Tentando reconectar…"
 msgstr "फिर से कनेक्ट करने की कोशिश हो रही है…"
 
-#: lib/brainagram_web/live/editor_live.ex:946
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Texto do diagrama"
 msgstr "डायग्राम का टेक्स्ट"
 
-#: lib/brainagram_web/error_messages.ex:24
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "Tipo de diagrama desconhecido."
 msgstr "अज्ञात डायग्राम प्रकार।"
 
-#: lib/brainagram_web/error_messages.ex:36
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "Tipo de seta desconhecido."
 msgstr "अज्ञात तीर प्रकार।"
 
-#: lib/brainagram_web/live/editor_live.ex:1008
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Tocar (Espaço)"
 msgstr "चलाएँ (Space)"
 
-#: lib/brainagram_web/live/editor_live.ex:1009
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Tocar / pausar (Espaço)"
 msgstr "चलाएँ / रोकें (Space)"
 
-#: lib/brainagram_web/error_messages.ex:19
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "Título longo demais."
 msgstr "शीर्षक बहुत लंबा है।"
 
-#: lib/brainagram_web/live/editor_live.ex:1038
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Velocidade"
 msgstr "गति"
 
-#: lib/brainagram_web/live/editor_live.ex:598
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Vetor com as cores do tema"
 msgstr "थीम के रंगों वाला वेक्टर"
 
-#: lib/brainagram_web/error_messages.ex:25
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "Visibilidade desconhecida."
 msgstr "अज्ञात दृश्यता।"
 
-#: lib/brainagram_web/error_messages.ex:118
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "`}` sem bloco aberto correspondente"
 msgstr "`}` का कोई मेल खाता खुला ब्लॉक नहीं है"
 
-#: lib/brainagram_web/live/editor_live.ex:763
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "agrupamento"
 msgstr "समूहन"
 
-#: lib/brainagram_web/live/editor_live.ex:760
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "assíncrona"
 msgstr "एसिंक्रोनस"
 
-#: lib/brainagram_web/live/editor_live.ex:755
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "banco de dados, fila"
 msgstr "डेटाबेस, क्यू"
 
-#: lib/brainagram_web/error_messages.ex:121
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "bloco `%{block}` aberto aqui nunca foi fechado com `}`"
 msgstr "यहाँ खोला गया `%{block}` ब्लॉक कभी `}` से बंद नहीं हुआ"
 
-#: lib/brainagram_web/error_messages.ex:112
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "blocos aninhados não são suportados (feche o bloco anterior com `}`)"
 msgstr "नेस्टेड ब्लॉक समर्थित नहीं हैं (पिछले ब्लॉक को `}` से बंद करें)"
 
-#: lib/brainagram_web/live/editor_live.ex:758
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "chamada síncrona"
 msgstr "सिंक्रोनस कॉल"
 
-#: lib/brainagram_web/error_messages.ex:109
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "dentro de `layout` só cabem linhas `id at (x, y)`: %{text}"
 msgstr "`layout` के अंदर सिर्फ़ `id at (x, y)` पंक्तियाँ आ सकती हैं: %{text}"
 
-#: lib/brainagram_web/live/editor_live.ex:761
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "falha / timeout"
 msgstr "विफलता / टाइमआउट"
 
-#: lib/brainagram_web/error_messages.ex:133
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "fonte inválido"
 msgstr "अमान्य स्रोत"
 
-#: lib/brainagram_web/error_messages.ex:124
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "mensagens não podem ficar dentro de um `group` — use um `step`"
 msgstr "संदेश `group` के अंदर नहीं हो सकते — `step` का उपयोग करें"
 
-#: lib/brainagram_web/live/editor_live.ex:764
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "nota"
 msgstr "नोट"
 
-#: lib/brainagram_web/error_messages.ex:103
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "não entendi esta linha: %{text}"
 msgstr "यह पंक्ति समझ नहीं आई: %{text}"
 
-#: lib/brainagram_web/live/editor_live.ex:757
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "nó de implantação, fronteira"
 msgstr "डिप्लॉयमेंट नोड, सीमा"
 
-#: lib/brainagram_web/error_messages.ex:100
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "posição fora de um bloco `layout { }`: %{text}"
 msgstr "`layout { }` ब्लॉक के बाहर स्थिति: %{text}"
 
-#: lib/brainagram_web/live/editor_live.ex:753
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "quem inicia, quem participa"
 msgstr "कौन शुरू करता है, कौन भाग लेता है"
 
-#: lib/brainagram_web/live/editor_live.ex:759
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "retorno"
 msgstr "रिटर्न"
 
-#: lib/brainagram_web/live/editor_live.ex:953
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "sequenceDiagram\n    Cliente->>API: POST /pedido\n    API-->>Cliente: 201"
 msgstr "sequenceDiagram\n    Client->>API: POST /order\n    API-->>Client: 201"
 
-#: lib/brainagram_web/live/editor_live.ex:754
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "serviço, componente"
 msgstr "सर्विस, कंपोनेंट"
 
-#: lib/brainagram_web/live/editor_live.ex:756
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "sistema externo, sistema"
 msgstr "बाहरी सिस्टम, सिस्टम"
 
-#: lib/brainagram_web/error_messages.ex:115
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "só pode haver um bloco `layout` por diagrama"
 msgstr "हर डायग्राम में सिर्फ़ एक `layout` ब्लॉक हो सकता है"
 
-#: lib/brainagram_web/error_messages.ex:106
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "tipo de diagrama desconhecido: %{kind} (use sequence ou architecture)"
 msgstr "अज्ञात डायग्राम प्रकार: %{kind} (sequence या architecture का उपयोग करें)"
 
-#: lib/brainagram_web/live/editor_live.ex:762
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "um passo da animação"
 msgstr "एनिमेशन का एक चरण"
 
-#: lib/brainagram_web/live/dashboard_live.ex:662
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "1 diagrama"
 msgid_plural "%{count} diagramas"
 msgstr[0] "1 डायग्राम"
 msgstr[1] "%{count} डायग्राम"
 
-#: lib/brainagram_web/live/dashboard_live.ex:875
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Abrir"
 msgstr "खोलें"
 
-#: lib/brainagram_web/live/dashboard_live.ex:1307
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Azul"
 msgstr "नीला"
 
-#: lib/brainagram_web/live/dashboard_live.ex:869
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Ações de %{title}"
 msgstr "%{title} के लिए कार्रवाइयाँ"
 
-#: lib/brainagram_web/live/editor_live.ex:486
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Brainagram, meus diagramas"
 msgstr "Brainagram, मेरे डायग्राम"
 
-#: lib/brainagram_web/live/dashboard_live.ex:482
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Buscar diagramas"
 msgstr "डायग्राम खोजें"
 
-#: lib/brainagram_web/live/dashboard_live.ex:481
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Buscar diagramas…"
 msgstr "डायग्राम खोजें…"
 
-#: lib/brainagram_web/live/dashboard_live.ex:1302
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Componentes, grupos e setas entre eles — a visão do sistema."
 msgstr "कंपोनेंट, समूह और उनके बीच के तीर — सिस्टम का पूरा दृश्य।"
 
-#: lib/brainagram_web/live/dashboard_live.ex:974
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Cor"
 msgstr "रंग"
 
-#: lib/brainagram_web/error_messages.ex:43
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "Cor de projeto desconhecida."
 msgstr "अज्ञात प्रोजेक्ट रंग।"
 
-#: lib/brainagram_web/live/dashboard_live.ex:720
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Criados recentemente"
 msgstr "हाल ही में बनाए गए"
 
-#: lib/brainagram_web/live/dashboard_live.ex:1050
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Criar e abrir"
 msgstr "बनाएँ और खोलें"
 
-#: lib/brainagram_web/live/dashboard_live.ex:993
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Criar projeto"
 msgstr "प्रोजेक्ट बनाएँ"
 
-#: lib/brainagram_web/live/dashboard_live.ex:788
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Crie um diagrama neste projeto ou mova um que já existe para cá."
 msgstr "इस प्रोजेक्ट में डायग्राम बनाएँ या किसी मौजूदा डायग्राम को यहाँ ले आएँ।"
 
-#: lib/brainagram_web/live/dashboard_live.ex:633
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Crie um projeto para separar seus diagramas"
 msgstr "अपने डायग्राम व्यवस्थित करने के लिए प्रोजेक्ट बनाएँ"
 
-#: lib/brainagram_web/live/dashboard_live.ex:307
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Cópia criada (privada)."
 msgstr "कॉपी बनाई गई (निजी)।"
 
-#: lib/brainagram_web/live/dashboard_live.ex:329
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Diagrama excluído."
 msgstr "डायग्राम हटाया गया।"
 
-#: lib/brainagram_web/live/dashboard_live.ex:296
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Diagrama movido."
 msgstr "डायग्राम ले जाया गया।"
 
-#: lib/brainagram_web/live/dashboard_live.ex:275
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Diagrama renomeado."
 msgstr "डायग्राम का नाम बदला गया।"
 
-#: lib/brainagram_web/live/dashboard_live.ex:46
-#: lib/brainagram_web/live/editor_live.ex:507
+#: lib/brainagram_web/live/dashboard_live.ex
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Diagramas"
 msgstr "डायग्राम"
 
-#: lib/brainagram_web/error_messages.ex:38
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "Dê um nome ao projeto."
 msgstr "प्रोजेक्ट को एक नाम दें।"
 
-#: lib/brainagram_web/live/dashboard_live.ex:717
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Editados recentemente"
 msgstr "हाल ही में संपादित"
 
-#: lib/brainagram_web/live/dashboard_live.ex:674
-#: lib/brainagram_web/live/dashboard_live.ex:955
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Editar projeto"
 msgstr "प्रोजेक्ट संपादित करें"
 
-#: lib/brainagram_web/live/dashboard_live.ex:489
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Editor livre"
 msgstr "स्क्रैच एडिटर"
 
-#: lib/brainagram_web/live/dashboard_live.ex:776
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Escolha um tipo para começar. O diagrama já nasce com um exemplo curto — é só dar play e trocar os nomes."
 msgstr "शुरू करने के लिए एक प्रकार चुनें। डायग्राम एक छोटे उदाहरण के साथ आता है — बस प्ले दबाएँ और नाम बदलें।"
 
-#: lib/brainagram_web/error_messages.ex:45
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "Esse projeto não existe mais."
 msgstr "यह प्रोजेक्ट अब मौजूद नहीं है।"
 
-#: lib/brainagram_web/live/dashboard_live.ex:1018
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Ex.: Checkout com pagamento assíncrono"
 msgstr "उदा.: एसिंक्रोनस भुगतान के साथ चेकआउट"
 
-#: lib/brainagram_web/live/dashboard_live.ex:968
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Ex.: Pagamentos, Onboarding, RFCs"
 msgstr "उदा.: भुगतान, ऑनबोर्डिंग, RFCs"
 
-#: lib/brainagram_web/live/dashboard_live.ex:683
-#: lib/brainagram_web/live/dashboard_live.ex:937
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Excluir"
 msgstr "हटाएँ"
 
-#: lib/brainagram_web/live/dashboard_live.ex:555
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Excluir diagrama"
 msgstr "डायग्राम हटाएँ"
 
-#: lib/brainagram_web/live/dashboard_live.ex:553
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Excluir diagrama?"
 msgstr "डायग्राम हटाएँ?"
 
-#: lib/brainagram_web/live/dashboard_live.ex:542
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Excluir projeto"
 msgstr "प्रोजेक्ट हटाएँ"
 
-#: lib/brainagram_web/live/dashboard_live.ex:540
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Excluir projeto?"
 msgstr "प्रोजेक्ट हटाएँ?"
 
-#: lib/brainagram_web/live/dashboard_live.ex:1313
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Grafite"
 msgstr "ग्रेफ़ाइट"
 
-#: lib/brainagram_web/live/dashboard_live.ex:1311
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Laranja"
 msgstr "नारंगी"
 
-#: lib/brainagram_web/live/dashboard_live.ex:771
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Limpar filtros"
 msgstr "फ़िल्टर हटाएँ"
 
-#: lib/brainagram_web/live/dashboard_live.ex:1304
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Mensagens entre participantes, passo a passo, no tempo."
 msgstr "प्रतिभागियों के बीच संदेश, समय के साथ, चरण दर चरण।"
 
-#: lib/brainagram_web/live/editor_live.ex:487
-#: lib/brainagram_web/live/editor_live.ex:499
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Meus diagramas"
 msgstr "मेरे डायग्राम"
 
-#: lib/brainagram_web/live/dashboard_live.ex:1209
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Mover para projeto"
 msgstr "प्रोजेक्ट में ले जाएँ"
 
-#: lib/brainagram_web/live/dashboard_live.ex:895
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Mover para projeto…"
 msgstr "प्रोजेक्ट में ले जाएँ…"
 
-#: lib/brainagram_web/live/dashboard_live.ex:786
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Nada aqui ainda"
 msgstr "यहाँ अभी कुछ नहीं है"
 
-#: lib/brainagram_web/live/dashboard_live.ex:769
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Nenhum diagrama encontrado"
 msgstr "कोई डायग्राम नहीं मिला"
 
-#: lib/brainagram_web/live/dashboard_live.ex:967
-#: lib/brainagram_web/live/dashboard_live.ex:1017
-#: lib/brainagram_web/live/dashboard_live.ex:1068
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Nome"
 msgstr "नाम"
 
-#: lib/brainagram_web/live/dashboard_live.ex:722
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Nome (A–Z)"
 msgstr "नाम (A–Z)"
 
-#: lib/brainagram_web/error_messages.ex:41
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "Nome de projeto longo demais (até 60 caracteres)."
 msgstr "प्रोजेक्ट का नाम बहुत लंबा है (अधिकतम 60 अक्षर)।"
 
-#: lib/brainagram_web/live/dashboard_live.ex:741
-#: lib/brainagram_web/live/dashboard_live.ex:791
-#: lib/brainagram_web/live/dashboard_live.ex:1006
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Novo diagrama"
 msgstr "नया डायग्राम"
 
-#: lib/brainagram_web/live/dashboard_live.ex:605
-#: lib/brainagram_web/live/dashboard_live.ex:606
-#: lib/brainagram_web/live/dashboard_live.ex:955
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Novo projeto"
 msgstr "नया प्रोजेक्ट"
 
-#: lib/brainagram_web/live/dashboard_live.ex:1075
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "O nome fica no código do diagrama, na linha “diagram … \"nome\"”."
 msgstr "नाम डायग्राम के कोड में, “diagram … \"नाम\"” वाली पंक्ति में रहता है।"
 
-#: lib/brainagram_web/live/dashboard_live.ex:544
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "O projeto “%{name}” será excluído. Os %{count} diagramas dele não são apagados: vão para “Sem projeto”."
 msgstr "प्रोजेक्ट “%{name}” हटा दिया जाएगा। इसके %{count} डायग्राम नहीं हटेंगे: वे “कोई प्रोजेक्ट नहीं” में चले जाएँगे।"
 
-#: lib/brainagram_web/live/dashboard_live.ex:714
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Ordenar"
 msgstr "क्रमबद्ध करें"
 
-#: lib/brainagram_web/live/dashboard_live.ex:445
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Preencha este campo."
 msgstr "यह फ़ील्ड भरें।"
 
-#: lib/brainagram_web/live/dashboard_live.ex:1042
-#: lib/brainagram_web/live/dashboard_live.ex:1215
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Projeto"
 msgstr "प्रोजेक्ट"
 
-#: lib/brainagram_web/live/dashboard_live.ex:165
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Projeto atualizado."
 msgstr "प्रोजेक्ट अपडेट किया गया।"
 
-#: lib/brainagram_web/live/dashboard_live.ex:162
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Projeto criado."
 msgstr "प्रोजेक्ट बनाया गया।"
 
-#: lib/brainagram_web/live/dashboard_live.ex:205
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Projeto excluído. Os diagramas dele estão em “Sem projeto”."
 msgstr "प्रोजेक्ट हटाया गया। इसके डायग्राम “कोई प्रोजेक्ट नहीं” में हैं।"
 
-#: lib/brainagram_web/error_messages.ex:44
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "Projeto inválido."
 msgstr "अमान्य प्रोजेक्ट।"
 
-#: lib/brainagram_web/live/dashboard_live.ex:575
-#: lib/brainagram_web/live/dashboard_live.ex:599
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Projetos"
 msgstr "प्रोजेक्ट"
 
-#: lib/brainagram_web/live/dashboard_live.ex:885
-#: lib/brainagram_web/live/dashboard_live.ex:1081
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Renomear"
 msgstr "नाम बदलें"
 
-#: lib/brainagram_web/live/dashboard_live.ex:1062
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Renomear diagrama"
 msgstr "डायग्राम का नाम बदलें"
 
-#: lib/brainagram_web/live/dashboard_live.ex:1312
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Rosa"
 msgstr "गुलाबी"
 
-#: lib/brainagram_web/live/dashboard_live.ex:594
-#: lib/brainagram_web/live/dashboard_live.ex:654
-#: lib/brainagram_web/live/dashboard_live.ex:1287
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Sem projeto"
 msgstr "कोई प्रोजेक्ट नहीं"
 
-#: lib/brainagram_web/live/dashboard_live.ex:774
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Seu primeiro diagrama"
 msgstr "आपका पहला डायग्राम"
 
-#: lib/brainagram_web/live/dashboard_live.ex:770
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Tente outro termo ou limpe os filtros."
 msgstr "कोई दूसरा शब्द आज़माएँ या फ़िल्टर हटाएँ।"
 
-#: lib/brainagram_web/live/dashboard_live.ex:1024
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Tipo"
 msgstr "प्रकार"
 
-#: lib/brainagram_web/live/dashboard_live.ex:695
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Tipo de diagrama"
 msgstr "डायग्राम प्रकार"
 
-#: lib/brainagram_web/live/dashboard_live.ex:699
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Todos"
 msgstr "सभी"
 
-#: lib/brainagram_web/live/dashboard_live.ex:584
-#: lib/brainagram_web/live/dashboard_live.ex:652
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Todos os diagramas"
 msgstr "सभी डायग्राम"
 
-#: lib/brainagram_web/live/dashboard_live.ex:923
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Tornar privado"
 msgstr "निजी बनाएँ"
 
-#: lib/brainagram_web/live/dashboard_live.ex:925
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Tornar público"
 msgstr "सार्वजनिक बनाएँ"
 
-#: lib/brainagram_web/live/dashboard_live.ex:1308
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Turquesa"
 msgstr "फ़िरोज़ी"
 
-#: lib/brainagram_web/live/dashboard_live.ex:1309
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Verde"
 msgstr "हरा"
 
-#: lib/brainagram_web/live/dashboard_live.ex:1306
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Violeta"
 msgstr "बैंगनी"
 
-#: lib/brainagram_web/time_ago.ex:21
+#: lib/brainagram_web/time_ago.ex
 #, elixir-autogen, elixir-format
 msgid "agora mesmo"
 msgstr "अभी-अभी"
 
-#: lib/brainagram_web/time_ago.ex:25
+#: lib/brainagram_web/time_ago.ex
 #, elixir-autogen, elixir-format
 msgid "há 1 dia"
 msgid_plural "há %{count} dias"
 msgstr[0] "1 दिन पहले"
 msgstr[1] "%{count} दिन पहले"
 
-#: lib/brainagram_web/time_ago.ex:23
+#: lib/brainagram_web/time_ago.ex
 #, elixir-autogen, elixir-format
 msgid "há 1 h"
 msgid_plural "há %{count} h"
 msgstr[0] "1 घंटा पहले"
 msgstr[1] "%{count} घंटे पहले"
 
-#: lib/brainagram_web/time_ago.ex:22
+#: lib/brainagram_web/time_ago.ex
 #, elixir-autogen, elixir-format
 msgid "há 1 min"
 msgid_plural "há %{count} min"
 msgstr[0] "1 मिनट पहले"
 msgstr[1] "%{count} मिनट पहले"
 
-#: lib/brainagram_web/time_ago.ex:24
+#: lib/brainagram_web/time_ago.ex
 #, elixir-autogen, elixir-format
 msgid "ontem"
 msgstr "कल"
 
-#: lib/brainagram_web/live/dashboard_live.ex:1310
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Âmbar"
 msgstr "एम्बर"
 
-#: lib/brainagram_web/live/dashboard_live.ex:557
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "“%{title}” será excluído para sempre. Isso não pode ser desfeito."
 msgstr "“%{title}” हमेशा के लिए हटा दिया जाएगा। इसे पूर्ववत नहीं किया जा सकता।"
 
-#: lib/brainagram_web/error_messages.ex:127
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "`payload` precisa vir logo abaixo de uma mensagem (`a -> b : …`)"
 msgstr "`payload` किसी संदेश (`a -> b : …`) के ठीक नीचे होना चाहिए"
 
-#: lib/brainagram_web/live/editor_live.ex:765
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "o que a mensagem carrega (logo abaixo dela)"
 msgstr "संदेश में क्या जाता है (उसके ठीक नीचे)"
 
-#: lib/brainagram_web/error_messages.ex:130
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "payload aberto aqui nunca foi fechado com \"\"\""
 msgstr "यहाँ खोला गया पेलोड कभी \"\"\" से बंद नहीं हुआ"
 
-#: lib/brainagram_web/live/editor_live.ex:766
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "payload em várias linhas, até outro \"\"\""
 msgstr "कई पंक्तियों वाला पेलोड, अगले \"\"\" तक"
 
-#: lib/brainagram_web/live/dashboard_live.ex:1111
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid ".brain e pacotes .json exportados do Brainagram, Mermaid (.mmd) ou PlantUML (.puml)"
 msgstr "Brainagram से एक्सपोर्ट की गई .brain फ़ाइलें और .json बंडल, Mermaid (.mmd) या PlantUML (.puml)"
 
-#: lib/brainagram_web/live/editor_live.ex:576
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid ".brain, Mermaid ou PlantUML"
 msgstr ".brain, Mermaid या PlantUML"
 
-#: lib/brainagram_web/live/dashboard_live.ex:415
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "1 diagrama importado"
 msgid_plural "%{count} diagramas importados"
 msgstr[0] "1 डायग्राम इम्पोर्ट किया गया"
 msgstr[1] "%{count} डायग्राम इम्पोर्ट किए गए"
 
-#: lib/brainagram_web/live/dashboard_live.ex:423
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "1 projeto criado."
 msgid_plural "%{count} projetos criados."
 msgstr[0] "1 प्रोजेक्ट बनाया गया।"
 msgstr[1] "%{count} प्रोजेक्ट बनाए गए।"
 
-#: lib/brainagram_web/live/editor_live.ex:931
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Arquivo"
 msgstr "फ़ाइल"
 
-#: lib/brainagram_web/live/editor_live.ex:646
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Arquivo .brain"
 msgstr ".brain फ़ाइल"
 
-#: lib/brainagram_web/live/dashboard_live.ex:1190
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Arquivo grande demais (até 2 MB)."
 msgstr "फ़ाइल बहुत बड़ी है (अधिकतम 2 MB)।"
 
-#: lib/brainagram_web/live/editor_live.ex:632
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Arquivo menor, para chats com limite de tamanho"
 msgstr "छोटी फ़ाइल, आकार-सीमा वाली चैट के लिए"
 
-#: lib/brainagram_web/live/dashboard_live.ex:1192
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Arquivos demais de uma vez (até 50)."
 msgstr "एक बार में बहुत ज़्यादा फ़ाइलें (अधिकतम 50)।"
 
-#: lib/brainagram_web/live/dashboard_live.ex:736
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Baixa os diagramas desta lista num pacote .json, que volta pelo Importar"
 msgstr "इस सूची के डायग्राम एक .json बंडल में डाउनलोड करता है, जिसे इम्पोर्ट से वापस लाया जा सकता है"
 
-#: lib/brainagram_web/live/dashboard_live.ex:912
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Baixar .brain"
 msgstr ".brain डाउनलोड करें"
 
-#: lib/brainagram_web/live/editor_live.ex:927
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Brainagram (.brain)"
 msgstr "Brainagram (.brain)"
 
-#: lib/brainagram_web/live/editor_live.ex:917
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Cole ou escolha um arquivo: um .brain exportado do Brainagram, um sequenceDiagram do Mermaid, ou um diagrama de sequência ou de componentes do PlantUML (este vira arquitetura). O que não converter vira comentário no topo do código."
 msgstr "टेक्स्ट पेस्ट करें या फ़ाइल चुनें: Brainagram से एक्सपोर्ट की गई .brain फ़ाइल, Mermaid का sequenceDiagram, या PlantUML का सीक्वेंस या कंपोनेंट डायग्राम (कंपोनेंट डायग्राम आर्किटेक्चर बन जाता है)। जो कन्वर्ट नहीं होता, वह कोड के शीर्ष पर टिप्पणी बन जाता है।"
 
-#: lib/brainagram_web/live/editor_live.ex:636
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Diagrama"
 msgstr "डायग्राम"
 
-#: lib/brainagram_web/live/dashboard_live.ex:120
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Escolha ao menos um arquivo."
 msgstr "कम से कम एक फ़ाइल चुनें।"
 
-#: lib/brainagram_web/live/editor_live.ex:934
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Escolher arquivo (.brain, .mmd, .puml)…"
 msgstr "फ़ाइल चुनें (.brain, .mmd, .puml)…"
 
-#: lib/brainagram_web/live/dashboard_live.ex:1191
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Formato não aceito."
 msgstr "यह फ़ॉर्मैट समर्थित नहीं है।"
 
-#: lib/brainagram_web/live/editor_live.ex:620
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "GIF animado (HD)"
 msgstr "एनिमेटेड GIF (HD)"
 
-#: lib/brainagram_web/live/editor_live.ex:632
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "GIF leve"
 msgstr "हल्का GIF"
 
-#: lib/brainagram_web/live/dashboard_live.ex:1178
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Importar 1 arquivo"
 msgid_plural "Importar %{count} arquivos"
 msgstr[0] "1 फ़ाइल इम्पोर्ट करें"
 msgstr[1] "%{count} फ़ाइलें इम्पोर्ट करें"
 
-#: lib/brainagram_web/live/dashboard_live.ex:1097
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Importar diagramas"
 msgstr "डायग्राम इम्पोर्ट करें"
 
-#: lib/brainagram_web/live/editor_live.ex:576
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Importar diagrama…"
 msgstr "डायग्राम इम्पोर्ट करें…"
 
-#: lib/brainagram_web/live/dashboard_live.ex:1193
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Não foi possível enviar o arquivo."
 msgstr "फ़ाइल अपलोड नहीं हो सकी।"
 
-#: lib/brainagram_web/live/dashboard_live.ex:1158
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Não importados"
 msgstr "इम्पोर्ट नहीं हुए"
 
-#: lib/brainagram_web/live/editor_live.ex:620
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Nítido em 2×, para slides, PRs e docs"
 msgstr "2× पर स्पष्ट, स्लाइड, PR और दस्तावेज़ों के लिए"
 
-#: lib/brainagram_web/error_messages.ex:46
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "O arquivo não é texto (UTF-8)."
 msgstr "फ़ाइल टेक्स्ट (UTF-8) नहीं है।"
 
-#: lib/brainagram_web/live/editor_live.ex:646
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "O código, para importar aqui de novo ou versionar"
 msgstr "कोड, यहाँ फिर से इम्पोर्ट करने या वर्शन कंट्रोल में रखने के लिए"
 
-#: lib/brainagram_web/error_messages.ex:49
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "O pacote .json não é um export do Brainagram."
 msgstr ".json बंडल Brainagram का एक्सपोर्ट नहीं है।"
 
-#: lib/brainagram_web/live/dashboard_live.ex:1149
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Pacotes .json recriam os projetos deles; o destino vale para os diagramas soltos."
 msgstr ".json बंडल अपने प्रोजेक्ट फिर से बनाते हैं; गंतव्य सिर्फ़ अलग-अलग डायग्रामों पर लागू होता है।"
 
-#: lib/brainagram_web/live/dashboard_live.ex:1145
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Projeto de destino"
 msgstr "गंतव्य प्रोजेक्ट"
 
-#: lib/brainagram_web/live/dashboard_live.ex:1135
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Remover %{name}"
 msgstr "%{name} हटाएँ"
 
-#: lib/brainagram_web/live/dashboard_live.ex:1108
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Solte os arquivos aqui ou clique para escolher"
 msgstr "फ़ाइलें यहाँ छोड़ें या चुनने के लिए क्लिक करें"
 
-#: lib/brainagram_web/components/layouts.ex:166
+#: lib/brainagram_web/components/layouts.ex
 #, elixir-autogen, elixir-format
 msgid "Idioma: %{name}"
 msgstr "भाषा: %{name}"

@@ -9,6 +9,9 @@ defmodule Brainagram.MixProject do
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
+      # referências do .pot sem número de linha: mover código de lugar não
+      # "desatualiza" as traduções (nem quebra o `--check-up-to-date` do CI)
+      gettext: [write_reference_line_numbers: false],
       deps: deps(),
       compilers: [:phoenix_live_view] ++ Mix.compilers(),
       listeners: [Phoenix.CodeReloader]

@@ -11,1400 +11,1363 @@ msgstr ""
 "Language: en\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: lib/brainagram_web/live/editor_live.ex:304
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "%{base}. Ctrl+Z desfaz."
 msgstr "%{base}. Ctrl+Z undoes it."
 
-#: lib/brainagram_web/live/editor_live.ex:301
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "%{base}; setas organizadas. Ctrl+Z desfaz."
 msgstr "%{base}; arrows tidied. Ctrl+Z undoes it."
 
-#: lib/brainagram_web/live/editor_live.ex:292
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "%{base}; setas organizadas: %{before} → 1 cruzamento. Ctrl+Z desfaz."
 msgid_plural "%{base}; setas organizadas: %{before} → %{count} cruzamentos. Ctrl+Z desfaz."
 msgstr[0] "%{base}; arrows tidied: %{before} → 1 crossing. Ctrl+Z undoes it."
 msgstr[1] "%{base}; arrows tidied: %{before} → %{count} crossings. Ctrl+Z undoes it."
 
-#: lib/brainagram_web/live/editor_live.ex:1039
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "0,5×"
 msgstr "0.5×"
 
-#: lib/brainagram_web/live/editor_live.ex:1111
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "1 erro"
 msgid_plural "%{count} erros"
 msgstr[0] "1 error"
 msgstr[1] "%{count} errors"
 
-#: lib/brainagram_web/live/editor_live.ex:1113
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "1 mensagem"
 msgid_plural "%{count} mensagens"
 msgstr[0] "1 message"
 msgstr[1] "%{count} messages"
 
-#: lib/brainagram_web/live/editor_live.ex:1041
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "1,5×"
 msgstr "1.5×"
 
-#: lib/brainagram_web/live/editor_live.ex:858
-#: lib/brainagram_web/live/editor_live.ex:859
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Afastar"
 msgstr "Zoom out"
 
-#: lib/brainagram_web/live/dashboard_live.ex:315
-#: lib/brainagram_web/live/editor_live.ex:186
+#: lib/brainagram_web/live/dashboard_live.ex
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Agora é privado."
 msgstr "Now private."
 
-#: lib/brainagram_web/live/dashboard_live.ex:314
-#: lib/brainagram_web/live/editor_live.ex:186
+#: lib/brainagram_web/live/dashboard_live.ex
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Agora é público."
 msgstr "Now public."
 
-#: lib/brainagram_web/live/editor_live.ex:712
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Alguém salvou uma versão mais nova deste diagrama."
 msgstr "Someone saved a newer version of this diagram."
 
-#: lib/brainagram_web/live/editor_live.ex:169
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Alterações salvas."
 msgstr "Changes saved."
 
-#: lib/brainagram_web/live/editor_live.ex:610
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Animação"
 msgstr "Animation"
 
-#: lib/brainagram_web/live/editor_live.ex:844
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Apaga as posições fixadas e volta ao layout automático"
 msgstr "Clears pinned positions and returns to the automatic layout"
 
-#: lib/brainagram_web/live/editor_live.ex:1107
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Aparece na galeria pública. Clique para tornar privado."
 msgstr "Shown in the public gallery. Click to make it private."
 
-#: lib/brainagram_web/live/editor_live.ex:868
-#: lib/brainagram_web/live/editor_live.ex:869
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Aproximar"
 msgstr "Zoom in"
 
-#: lib/brainagram_web/live/dashboard_live.ex:701
-#: lib/brainagram_web/live/dashboard_live.ex:1298
-#: lib/brainagram_web/live/editor_live.ex:1093
+#: lib/brainagram_web/live/dashboard_live.ex
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Arquitetura"
 msgstr "Architecture"
 
-#: lib/brainagram_web/live/editor_live.ex:383
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "As setas já estão organizadas — nada a mudar."
 msgstr "The arrows are already tidy — nothing to change."
 
-#: lib/brainagram_web/components/layouts.ex:40
-#: lib/brainagram_web/live/dashboard_live.ex:465
+#: lib/brainagram_web/components/layouts.ex
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Brainagram, início"
 msgstr "Brainagram, home"
 
-#: lib/brainagram_web/live/dashboard_live.ex:991
-#: lib/brainagram_web/live/dashboard_live.ex:1048
-#: lib/brainagram_web/live/dashboard_live.ex:1080
-#: lib/brainagram_web/live/dashboard_live.ex:1169
-#: lib/brainagram_web/live/dashboard_live.ex:1221
-#: lib/brainagram_web/live/dashboard_live.ex:1243
-#: lib/brainagram_web/live/editor_live.ex:972
+#: lib/brainagram_web/live/dashboard_live.ex
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Cancelar"
 msgstr "Cancel"
 
-#: lib/brainagram_web/live/editor_live.ex:555
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Carregar exemplo"
 msgstr "Load example"
 
-#: lib/brainagram_web/components/layouts.ex:124
+#: lib/brainagram_web/components/layouts.ex
 #, elixir-autogen, elixir-format
 msgid "Claro"
 msgstr "Light"
 
-#: lib/brainagram_web/live/editor_live.ex:819
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Clique na origem e depois no destino (ou arraste da alça de um nó)"
 msgstr "Click the source, then the target (or drag from a node's handle)"
 
-#: lib/brainagram_web/live/editor_live.ex:147
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Cole o texto do diagrama para importar."
 msgstr "Paste the diagram text to import."
 
-#: lib/brainagram_web/live/editor_live.ex:821
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Conectar"
 msgstr "Connect"
 
-#: lib/brainagram_web/live/editor_live.ex:1116
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Contexto inicial"
 msgstr "Initial context"
 
-#: lib/brainagram_web/live/editor_live.ex:343
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Corrija o erro de sintaxe no código antes de editar pelo canvas."
 msgstr "Fix the syntax error in the code before editing on the canvas."
 
-#: lib/brainagram_web/live/editor_live.ex:674
-#: lib/brainagram_web/live/editor_live.ex:676
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Código"
 msgstr "Code"
 
-#: lib/brainagram_web/live/editor_live.ex:727
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Código do diagrama"
 msgstr "Diagram code"
 
-#: lib/brainagram_web/live/editor_live.ex:377
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Código formatado."
 msgstr "Code formatted."
 
-#: lib/brainagram_web/live/editor_live.ex:374
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Código formatado. Os comentários foram removidos — Ctrl+Z desfaz."
 msgstr "Code formatted. Comments were removed — Ctrl+Z undoes it."
 
-#: lib/brainagram_web/live/editor_live.ex:195
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Cópia criada."
 msgstr "Copy created."
 
-#: lib/brainagram_web/live/editor_live.ex:692
-#: lib/brainagram_web/live/editor_live.ex:693
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Desfazer (Ctrl+Z)"
 msgstr "Undo (Ctrl+Z)"
 
-#: lib/brainagram_web/live/editor_live.ex:924
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Detectar automaticamente"
 msgstr "Detect automatically"
 
-#: lib/brainagram_web/live/editor_live.ex:280
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Diagrama importado"
 msgstr "Diagram imported"
 
-#: lib/brainagram_web/error_messages.ex:26
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "Diagrama não encontrado."
 msgstr "Diagram not found."
 
-#: lib/brainagram_web/live/dashboard_live.ex:904
-#: lib/brainagram_web/live/editor_live.ex:653
+#: lib/brainagram_web/live/dashboard_live.ex
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Duplicar"
 msgstr "Duplicate"
 
-#: lib/brainagram_web/live/editor_live.ex:792
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Editar"
 msgstr "Edit"
 
-#: lib/brainagram_web/live/editor_live.ex:790
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Editar: arraste nós, puxe setas, duplo clique renomeia (E)"
 msgstr "Edit: drag nodes, pull arrows, double-click to rename (E)"
 
-#: lib/brainagram_web/live/editor_live.ex:878
-#: lib/brainagram_web/live/editor_live.ex:879
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Enquadrar (F)"
 msgstr "Fit to screen (F)"
 
-#: lib/brainagram_web/error_messages.ex:88
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "Erro de sintaxe na DSL."
 msgstr "Syntax error in the DSL."
 
-#: lib/brainagram_web/error_messages.ex:72
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "Erro de sintaxe na linha %{line}: %{message}"
 msgstr "Syntax error on line %{line}: %{message}"
 
-#: lib/brainagram_web/error_messages.ex:78
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "Erro de sintaxe na linha %{line}: %{message} (e mais 1)"
 msgid_plural "Erro de sintaxe na linha %{line}: %{message} (e mais %{count})"
 msgstr[0] "Syntax error on line %{line}: %{message} (and 1 more)"
 msgstr[1] "Syntax error on line %{line}: %{message} (and %{count} more)"
 
-#: lib/brainagram_web/components/layouts.ex:134
+#: lib/brainagram_web/components/layouts.ex
 #, elixir-autogen, elixir-format
 msgid "Escuro"
 msgstr "Dark"
 
-#: lib/brainagram_web/error_messages.ex:58
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "Essa edição deixaria o código inválido, então nada foi aplicado."
 msgstr "That edit would leave the code invalid, so nothing was applied."
 
-#: lib/brainagram_web/error_messages.ex:29
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "Essa seta não existe mais no código."
 msgstr "That arrow no longer exists in the code."
 
-#: lib/brainagram_web/error_messages.ex:30
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "Esse grupo não existe no código."
 msgstr "That group doesn't exist in the code."
 
-#: lib/brainagram_web/error_messages.ex:28
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "Esse nó não existe mais no código."
 msgstr "That node no longer exists in the code."
 
-#: lib/brainagram_web/live/editor_live.ex:240
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Este diagrama foi removido."
 msgstr "This diagram was deleted."
 
-#: lib/brainagram_web/live/editor_live.ex:97
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Exemplo carregado. Ctrl+Z desfaz."
 msgstr "Example loaded. Ctrl+Z undoes it."
 
-#: lib/brainagram_web/live/editor_live.ex:549
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Exemplos"
 msgstr "Examples"
 
-#: lib/brainagram_web/live/dashboard_live.ex:738
-#: lib/brainagram_web/live/editor_live.ex:584
+#: lib/brainagram_web/live/dashboard_live.ex
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Exportar"
 msgstr "Export"
 
-#: lib/brainagram_web/live/editor_live.ex:683
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "F8 vai para o erro"
 msgstr "F8 jumps to the error"
 
-#: lib/brainagram_web/components/core_components.ex:62
-#: lib/brainagram_web/live/dashboard_live.ex:1169
-#: lib/brainagram_web/live/dashboard_live.ex:1273
-#: lib/brainagram_web/live/editor_live.ex:910
+#: lib/brainagram_web/components/core_components.ex
+#: lib/brainagram_web/live/dashboard_live.ex
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Fechar"
 msgstr "Close"
 
-#: lib/brainagram_web/live/editor_live.ex:922
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Formato"
 msgstr "Format"
 
-#: lib/brainagram_web/error_messages.ex:63
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "Formato de importação desconhecido (use Mermaid ou PlantUML)."
 msgstr "Unknown import format (use Mermaid or PlantUML)."
 
-#: lib/brainagram_web/components/layouts.ex:167
-#: lib/brainagram_web/components/layouts.ex:176
+#: lib/brainagram_web/components/layouts.ex
 #, elixir-autogen, elixir-format
 msgid "Idioma"
 msgstr "Language"
 
-#: lib/brainagram_web/live/editor_live.ex:590
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Imagem do estado final"
 msgstr "Image of the final state"
 
-#: lib/brainagram_web/live/editor_live.ex:607
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Imagem para slides e docs"
 msgstr "Image for slides and docs"
 
-#: lib/brainagram_web/live/editor_live.ex:283
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Importado com 1 aviso (veja o comentário no topo do código)"
 msgid_plural "Importado com %{count} avisos (veja o comentário no topo do código)"
 msgstr[0] "Imported with 1 warning (see the comment at the top of the code)"
 msgstr[1] "Imported with %{count} warnings (see the comment at the top of the code)"
 
-#: lib/brainagram_web/live/dashboard_live.ex:729
-#: lib/brainagram_web/live/editor_live.ex:974
+#: lib/brainagram_web/live/dashboard_live.ex
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Importar"
 msgstr "Import"
 
-#: lib/brainagram_web/live/editor_live.ex:905
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Importar diagrama"
 msgstr "Import diagram"
 
-#: lib/brainagram_web/error_messages.ex:27
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "Já existe um diagrama com esse slug."
 msgstr "A diagram with that slug already exists."
 
-#: lib/brainagram_web/live/editor_live.ex:736
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Linha %{line}"
 msgstr "Line %{line}"
 
-#: lib/brainagram_web/live/editor_live.ex:783
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Modo do canvas"
 msgstr "Canvas mode"
 
-#: lib/brainagram_web/live/dashboard_live.ex:1222
-#: lib/brainagram_web/live/editor_live.ex:802
+#: lib/brainagram_web/live/dashboard_live.ex
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Mover"
 msgstr "Move"
 
-#: lib/brainagram_web/live/editor_live.ex:800
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Mover a tela: arrastar desloca o canvas (E)"
 msgstr "Pan: dragging moves the canvas (E)"
 
-#: lib/brainagram_web/live/editor_live.ex:811
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Novo nó no centro (ou duplo clique numa área vazia)"
 msgstr "New node in the center (or double-click an empty area)"
 
-#: lib/brainagram_web/error_messages.ex:65
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "Não encontrei um diagrama para importar."
 msgstr "Couldn't find a diagram to import."
 
-#: lib/brainagram_web/error_messages.ex:91
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "Não foi possível concluir a operação (%{reason})."
 msgstr "Couldn't complete the operation (%{reason})."
 
-#: lib/brainagram_web/live/editor_live.ex:813
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Nó"
 msgstr "Node"
 
-#: lib/brainagram_web/error_messages.ex:22
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "O diagrama passou do tamanho máximo permitido."
 msgstr "The diagram exceeds the maximum allowed size."
 
-#: lib/brainagram_web/error_messages.ex:31
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "O nome não pode ficar vazio."
 msgstr "The name can't be empty."
 
-#: lib/brainagram_web/error_messages.ex:34
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "O rótulo não pode ter # nem // (viram comentário na DSL)."
 msgstr "The label can't contain # or // (they start a comment in the DSL)."
 
-#: lib/brainagram_web/components/layouts.ex:88
+#: lib/brainagram_web/components/layouts.ex
 #, elixir-autogen, elixir-format
 msgid "O servidor não respondeu."
 msgstr "The server didn't respond."
 
-#: lib/brainagram_web/live/editor_live.ex:512
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "O título vem da 1ª linha do código"
 msgstr "The title comes from the first line of the code"
 
-#: lib/brainagram_web/error_messages.ex:60
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "Operação de edição desconhecida."
 msgstr "Unknown edit operation."
 
-#: lib/brainagram_web/live/editor_live.ex:967
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Organizar as setas (diagramas de arquitetura)"
 msgstr "Tidy the arrows (architecture diagrams)"
 
-#: lib/brainagram_web/live/editor_live.ex:834
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Organizar setas"
 msgstr "Tidy arrows"
 
-#: lib/brainagram_web/error_messages.ex:53
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "Organizar setas vale para diagramas de arquitetura — na sequência as setas já não se cruzam."
 msgstr "Tidy arrows applies to architecture diagrams — in a sequence diagram the arrows never cross."
 
-#: lib/brainagram_web/live/editor_live.ex:542
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Paleta de comandos"
 msgstr "Command palette"
 
-#: lib/brainagram_web/live/editor_live.ex:541
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Paleta de comandos (Ctrl+K)"
 msgstr "Command palette (Ctrl+K)"
 
-#: lib/brainagram_web/live/editor_live.ex:999
-#: lib/brainagram_web/live/editor_live.ex:1000
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Passo anterior (←)"
 msgstr "Previous step (←)"
 
-#: lib/brainagram_web/live/editor_live.ex:1063
-#: lib/brainagram_web/live/editor_live.ex:1065
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Passos"
 msgstr "Steps"
 
-#: lib/brainagram_web/live/editor_live.ex:1032
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Posição da animação"
 msgstr "Animation position"
 
-#: lib/brainagram_web/error_messages.ex:37
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "Posição inválida."
 msgstr "Invalid position."
 
-#: lib/brainagram_web/live/editor_live.ex:380
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Posições soltas: layout automático de novo."
 msgstr "Positions released: automatic layout again."
 
-#: lib/brainagram_web/live/editor_live.ex:530
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Privado"
 msgstr "Private"
 
-#: lib/brainagram_web/live/editor_live.ex:1018
-#: lib/brainagram_web/live/editor_live.ex:1019
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Próximo passo (→)"
 msgstr "Next step (→)"
 
-#: lib/brainagram_web/live/editor_live.ex:528
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Público"
 msgstr "Public"
 
-#: lib/brainagram_web/live/editor_live.ex:714
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Recarregar"
 msgstr "Reload"
 
-#: lib/brainagram_web/live/editor_live.ex:702
-#: lib/brainagram_web/live/editor_live.ex:703
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Refazer (Ctrl+Shift+Z)"
 msgstr "Redo (Ctrl+Shift+Z)"
 
-#: lib/brainagram_web/live/editor_live.ex:750
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Referência rápida"
 msgstr "Quick reference"
 
-#: lib/brainagram_web/live/editor_live.ex:990
-#: lib/brainagram_web/live/editor_live.ex:991
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Reiniciar (R)"
 msgstr "Restart (R)"
 
-#: lib/brainagram_web/live/editor_live.ex:832
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Reorganiza os componentes para as setas não se cruzarem (Ctrl+Z desfaz)"
 msgstr "Rearranges the components so the arrows don't cross (Ctrl+Z undoes it)"
 
-#: lib/brainagram_web/live/editor_live.ex:1050
-#: lib/brainagram_web/live/editor_live.ex:1051
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Repetir em loop"
 msgstr "Loop"
 
-#: lib/brainagram_web/live/editor_live.ex:984
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Reprodução"
 msgstr "Playback"
 
-#: lib/brainagram_web/live/dashboard_live.ex:993
-#: lib/brainagram_web/live/editor_live.ex:657
+#: lib/brainagram_web/live/dashboard_live.ex
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Salvar"
 msgstr "Save"
 
-#: lib/brainagram_web/live/editor_live.ex:191
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Salve o diagrama antes de duplicar."
 msgstr "Save the diagram before duplicating it."
 
-#: lib/brainagram_web/live/editor_live.ex:175
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Salve o diagrama antes de publicar."
 msgstr "Save the diagram before publishing it."
 
-#: lib/brainagram_web/live/editor_live.ex:161
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Salvo. O link já é compartilhável."
 msgstr "Saved. The link is ready to share."
 
-#: lib/brainagram_web/components/layouts.ex:77
+#: lib/brainagram_web/components/layouts.ex
 #, elixir-autogen, elixir-format
 msgid "Sem conexão."
 msgstr "No connection."
 
-#: lib/brainagram_web/live/editor_live.ex:678
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Sem erros"
 msgstr "No errors"
 
-#: lib/brainagram_web/live/dashboard_live.ex:242
-#: lib/brainagram_web/live/editor_live.ex:409
-#: lib/brainagram_web/live/editor_live.ex:513
+#: lib/brainagram_web/live/dashboard_live.ex
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Sem título"
 msgstr "Untitled"
 
-#: lib/brainagram_web/live/dashboard_live.ex:700
-#: lib/brainagram_web/live/dashboard_live.ex:1299
-#: lib/brainagram_web/live/editor_live.ex:1092
+#: lib/brainagram_web/live/dashboard_live.ex
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Sequência"
 msgstr "Sequence"
 
-#: lib/brainagram_web/live/editor_live.ex:392
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Setas organizadas: %{before} → 1 cruzamento. Ctrl+Z desfaz."
 msgid_plural "Setas organizadas: %{before} → %{count} cruzamentos. Ctrl+Z desfaz."
 msgstr[0] "Arrows tidied: %{before} → 1 crossing. Ctrl+Z undoes it."
 msgstr[1] "Arrows tidied: %{before} → %{count} crossings. Ctrl+Z undoes it."
 
-#: lib/brainagram_web/live/editor_live.ex:400
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Setas organizadas: caminhos mais curtos e sem atravessar caixas. Ctrl+Z desfaz."
 msgstr "Arrows tidied: shorter paths that don't cross boxes. Ctrl+Z undoes it."
 
-#: lib/brainagram_web/components/layouts.ex:114
+#: lib/brainagram_web/components/layouts.ex
 #, elixir-autogen, elixir-format
 msgid "Sistema"
 msgstr "System"
 
-#: lib/brainagram_web/error_messages.ex:17
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "Slug inválido: use de 3 a 64 letras minúsculas, números, - ou _."
 msgstr "Invalid slug: use 3 to 64 lowercase letters, digits, - or _."
 
-#: lib/brainagram_web/live/editor_live.ex:846
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Soltar posições"
 msgstr "Release positions"
 
-#: lib/brainagram_web/live/editor_live.ex:1109
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Só abre quem tem o link. Clique para tornar público."
 msgstr "Only people with the link can open it. Click to make it public."
 
-#: lib/brainagram_web/components/layouts.ex:107
+#: lib/brainagram_web/components/layouts.ex
 #, elixir-autogen, elixir-format
 msgid "Tema"
 msgstr "Theme"
 
-#: lib/brainagram_web/components/layouts.ex:123
+#: lib/brainagram_web/components/layouts.ex
 #, elixir-autogen, elixir-format
 msgid "Tema claro"
 msgstr "Light theme"
 
-#: lib/brainagram_web/components/layouts.ex:113
+#: lib/brainagram_web/components/layouts.ex
 #, elixir-autogen, elixir-format
 msgid "Tema do sistema"
 msgstr "System theme"
 
-#: lib/brainagram_web/components/layouts.ex:133
+#: lib/brainagram_web/components/layouts.ex
 #, elixir-autogen, elixir-format
 msgid "Tema escuro"
 msgstr "Dark theme"
 
-#: lib/brainagram_web/components/layouts.ex:82
-#: lib/brainagram_web/components/layouts.ex:93
+#: lib/brainagram_web/components/layouts.ex
 #, elixir-autogen, elixir-format
 msgid "Tentando reconectar…"
 msgstr "Trying to reconnect…"
 
-#: lib/brainagram_web/live/editor_live.ex:946
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Texto do diagrama"
 msgstr "Diagram text"
 
-#: lib/brainagram_web/error_messages.ex:24
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "Tipo de diagrama desconhecido."
 msgstr "Unknown diagram type."
 
-#: lib/brainagram_web/error_messages.ex:36
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "Tipo de seta desconhecido."
 msgstr "Unknown arrow type."
 
-#: lib/brainagram_web/live/editor_live.ex:1008
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Tocar (Espaço)"
 msgstr "Play (Space)"
 
-#: lib/brainagram_web/live/editor_live.ex:1009
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Tocar / pausar (Espaço)"
 msgstr "Play / pause (Space)"
 
-#: lib/brainagram_web/error_messages.ex:19
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "Título longo demais."
 msgstr "Title too long."
 
-#: lib/brainagram_web/live/editor_live.ex:1038
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Velocidade"
 msgstr "Speed"
 
-#: lib/brainagram_web/live/editor_live.ex:598
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Vetor com as cores do tema"
 msgstr "Vector with the theme colors"
 
-#: lib/brainagram_web/error_messages.ex:25
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "Visibilidade desconhecida."
 msgstr "Unknown visibility."
 
-#: lib/brainagram_web/error_messages.ex:118
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "`}` sem bloco aberto correspondente"
 msgstr "`}` without a matching open block"
 
-#: lib/brainagram_web/live/editor_live.ex:763
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "agrupamento"
 msgstr "grouping"
 
-#: lib/brainagram_web/live/editor_live.ex:760
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "assíncrona"
 msgstr "async"
 
-#: lib/brainagram_web/live/editor_live.ex:755
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "banco de dados, fila"
 msgstr "database, queue"
 
-#: lib/brainagram_web/error_messages.ex:121
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "bloco `%{block}` aberto aqui nunca foi fechado com `}`"
 msgstr "`%{block}` block opened here was never closed with `}`"
 
-#: lib/brainagram_web/error_messages.ex:112
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "blocos aninhados não são suportados (feche o bloco anterior com `}`)"
 msgstr "nested blocks aren't supported (close the previous block with `}`)"
 
-#: lib/brainagram_web/live/editor_live.ex:758
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "chamada síncrona"
 msgstr "sync call"
 
-#: lib/brainagram_web/error_messages.ex:109
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "dentro de `layout` só cabem linhas `id at (x, y)`: %{text}"
 msgstr "only `id at (x, y)` lines are allowed inside `layout`: %{text}"
 
-#: lib/brainagram_web/live/editor_live.ex:761
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "falha / timeout"
 msgstr "failure / timeout"
 
-#: lib/brainagram_web/error_messages.ex:133
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "fonte inválido"
 msgstr "invalid source"
 
-#: lib/brainagram_web/error_messages.ex:124
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "mensagens não podem ficar dentro de um `group` — use um `step`"
 msgstr "messages can't go inside a `group` — use a `step`"
 
-#: lib/brainagram_web/live/editor_live.ex:764
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "nota"
 msgstr "note"
 
-#: lib/brainagram_web/error_messages.ex:103
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "não entendi esta linha: %{text}"
 msgstr "couldn't understand this line: %{text}"
 
-#: lib/brainagram_web/live/editor_live.ex:757
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "nó de implantação, fronteira"
 msgstr "deployment node, boundary"
 
-#: lib/brainagram_web/error_messages.ex:100
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "posição fora de um bloco `layout { }`: %{text}"
 msgstr "position outside a `layout { }` block: %{text}"
 
-#: lib/brainagram_web/live/editor_live.ex:753
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "quem inicia, quem participa"
 msgstr "who starts, who takes part"
 
-#: lib/brainagram_web/live/editor_live.ex:759
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "retorno"
 msgstr "return"
 
-#: lib/brainagram_web/live/editor_live.ex:953
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "sequenceDiagram\n    Cliente->>API: POST /pedido\n    API-->>Cliente: 201"
 msgstr "sequenceDiagram\n    Client->>API: POST /order\n    API-->>Client: 201"
 
-#: lib/brainagram_web/live/editor_live.ex:754
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "serviço, componente"
 msgstr "service, component"
 
-#: lib/brainagram_web/live/editor_live.ex:756
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "sistema externo, sistema"
 msgstr "external system, system"
 
-#: lib/brainagram_web/error_messages.ex:115
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "só pode haver um bloco `layout` por diagrama"
 msgstr "there can be only one `layout` block per diagram"
 
-#: lib/brainagram_web/error_messages.ex:106
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "tipo de diagrama desconhecido: %{kind} (use sequence ou architecture)"
 msgstr "unknown diagram type: %{kind} (use sequence or architecture)"
 
-#: lib/brainagram_web/live/editor_live.ex:762
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "um passo da animação"
 msgstr "an animation step"
 
-#: lib/brainagram_web/live/dashboard_live.ex:662
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "1 diagrama"
 msgid_plural "%{count} diagramas"
 msgstr[0] "1 diagram"
 msgstr[1] "%{count} diagrams"
 
-#: lib/brainagram_web/live/dashboard_live.ex:875
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Abrir"
 msgstr "Open"
 
-#: lib/brainagram_web/live/dashboard_live.ex:1307
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Azul"
 msgstr "Blue"
 
-#: lib/brainagram_web/live/dashboard_live.ex:869
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Ações de %{title}"
 msgstr "Actions for %{title}"
 
-#: lib/brainagram_web/live/editor_live.ex:486
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Brainagram, meus diagramas"
 msgstr "Brainagram, my diagrams"
 
-#: lib/brainagram_web/live/dashboard_live.ex:482
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Buscar diagramas"
 msgstr "Search diagrams"
 
-#: lib/brainagram_web/live/dashboard_live.ex:481
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Buscar diagramas…"
 msgstr "Search diagrams…"
 
-#: lib/brainagram_web/live/dashboard_live.ex:1302
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Componentes, grupos e setas entre eles — a visão do sistema."
 msgstr "Components, groups and the arrows between them — the system view."
 
-#: lib/brainagram_web/live/dashboard_live.ex:974
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Cor"
 msgstr "Color"
 
-#: lib/brainagram_web/error_messages.ex:43
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "Cor de projeto desconhecida."
 msgstr "Unknown project color."
 
-#: lib/brainagram_web/live/dashboard_live.ex:720
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Criados recentemente"
 msgstr "Recently created"
 
-#: lib/brainagram_web/live/dashboard_live.ex:1050
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Criar e abrir"
 msgstr "Create and open"
 
-#: lib/brainagram_web/live/dashboard_live.ex:993
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Criar projeto"
 msgstr "Create project"
 
-#: lib/brainagram_web/live/dashboard_live.ex:788
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Crie um diagrama neste projeto ou mova um que já existe para cá."
 msgstr "Create a diagram in this project or move an existing one here."
 
-#: lib/brainagram_web/live/dashboard_live.ex:633
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Crie um projeto para separar seus diagramas"
 msgstr "Create a project to organize your diagrams"
 
-#: lib/brainagram_web/live/dashboard_live.ex:307
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Cópia criada (privada)."
 msgstr "Copy created (private)."
 
-#: lib/brainagram_web/live/dashboard_live.ex:329
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Diagrama excluído."
 msgstr "Diagram deleted."
 
-#: lib/brainagram_web/live/dashboard_live.ex:296
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Diagrama movido."
 msgstr "Diagram moved."
 
-#: lib/brainagram_web/live/dashboard_live.ex:275
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Diagrama renomeado."
 msgstr "Diagram renamed."
 
-#: lib/brainagram_web/live/dashboard_live.ex:46
-#: lib/brainagram_web/live/editor_live.ex:507
+#: lib/brainagram_web/live/dashboard_live.ex
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Diagramas"
 msgstr "Diagrams"
 
-#: lib/brainagram_web/error_messages.ex:38
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "Dê um nome ao projeto."
 msgstr "Give the project a name."
 
-#: lib/brainagram_web/live/dashboard_live.ex:717
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Editados recentemente"
 msgstr "Recently edited"
 
-#: lib/brainagram_web/live/dashboard_live.ex:674
-#: lib/brainagram_web/live/dashboard_live.ex:955
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Editar projeto"
 msgstr "Edit project"
 
-#: lib/brainagram_web/live/dashboard_live.ex:489
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Editor livre"
 msgstr "Scratch editor"
 
-#: lib/brainagram_web/live/dashboard_live.ex:776
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Escolha um tipo para começar. O diagrama já nasce com um exemplo curto — é só dar play e trocar os nomes."
 msgstr "Pick a type to start. The diagram comes with a short example — just press play and rename things."
 
-#: lib/brainagram_web/error_messages.ex:45
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "Esse projeto não existe mais."
 msgstr "That project no longer exists."
 
-#: lib/brainagram_web/live/dashboard_live.ex:1018
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Ex.: Checkout com pagamento assíncrono"
 msgstr "E.g.: Checkout with async payment"
 
-#: lib/brainagram_web/live/dashboard_live.ex:968
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Ex.: Pagamentos, Onboarding, RFCs"
 msgstr "E.g.: Payments, Onboarding, RFCs"
 
-#: lib/brainagram_web/live/dashboard_live.ex:683
-#: lib/brainagram_web/live/dashboard_live.ex:937
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Excluir"
 msgstr "Delete"
 
-#: lib/brainagram_web/live/dashboard_live.ex:555
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Excluir diagrama"
 msgstr "Delete diagram"
 
-#: lib/brainagram_web/live/dashboard_live.ex:553
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Excluir diagrama?"
 msgstr "Delete diagram?"
 
-#: lib/brainagram_web/live/dashboard_live.ex:542
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Excluir projeto"
 msgstr "Delete project"
 
-#: lib/brainagram_web/live/dashboard_live.ex:540
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Excluir projeto?"
 msgstr "Delete project?"
 
-#: lib/brainagram_web/live/dashboard_live.ex:1313
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Grafite"
 msgstr "Graphite"
 
-#: lib/brainagram_web/live/dashboard_live.ex:1311
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Laranja"
 msgstr "Orange"
 
-#: lib/brainagram_web/live/dashboard_live.ex:771
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Limpar filtros"
 msgstr "Clear filters"
 
-#: lib/brainagram_web/live/dashboard_live.ex:1304
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Mensagens entre participantes, passo a passo, no tempo."
 msgstr "Messages between participants, step by step, over time."
 
-#: lib/brainagram_web/live/editor_live.ex:487
-#: lib/brainagram_web/live/editor_live.ex:499
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Meus diagramas"
 msgstr "My diagrams"
 
-#: lib/brainagram_web/live/dashboard_live.ex:1209
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Mover para projeto"
 msgstr "Move to project"
 
-#: lib/brainagram_web/live/dashboard_live.ex:895
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Mover para projeto…"
 msgstr "Move to project…"
 
-#: lib/brainagram_web/live/dashboard_live.ex:786
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Nada aqui ainda"
 msgstr "Nothing here yet"
 
-#: lib/brainagram_web/live/dashboard_live.ex:769
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Nenhum diagrama encontrado"
 msgstr "No diagrams found"
 
-#: lib/brainagram_web/live/dashboard_live.ex:967
-#: lib/brainagram_web/live/dashboard_live.ex:1017
-#: lib/brainagram_web/live/dashboard_live.ex:1068
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Nome"
 msgstr "Name"
 
-#: lib/brainagram_web/live/dashboard_live.ex:722
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Nome (A–Z)"
 msgstr "Name (A–Z)"
 
-#: lib/brainagram_web/error_messages.ex:41
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "Nome de projeto longo demais (até 60 caracteres)."
 msgstr "Project name too long (up to 60 characters)."
 
-#: lib/brainagram_web/live/dashboard_live.ex:741
-#: lib/brainagram_web/live/dashboard_live.ex:791
-#: lib/brainagram_web/live/dashboard_live.ex:1006
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Novo diagrama"
 msgstr "New diagram"
 
-#: lib/brainagram_web/live/dashboard_live.ex:605
-#: lib/brainagram_web/live/dashboard_live.ex:606
-#: lib/brainagram_web/live/dashboard_live.ex:955
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Novo projeto"
 msgstr "New project"
 
-#: lib/brainagram_web/live/dashboard_live.ex:1075
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "O nome fica no código do diagrama, na linha “diagram … \"nome\"”."
 msgstr "The name lives in the diagram's code, on the “diagram … \"name\"” line."
 
-#: lib/brainagram_web/live/dashboard_live.ex:544
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "O projeto “%{name}” será excluído. Os %{count} diagramas dele não são apagados: vão para “Sem projeto”."
 msgstr "The project “%{name}” will be deleted. Its %{count} diagrams are kept: they move to “No project”."
 
-#: lib/brainagram_web/live/dashboard_live.ex:714
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Ordenar"
 msgstr "Sort"
 
-#: lib/brainagram_web/live/dashboard_live.ex:445
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Preencha este campo."
 msgstr "Fill in this field."
 
-#: lib/brainagram_web/live/dashboard_live.ex:1042
-#: lib/brainagram_web/live/dashboard_live.ex:1215
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Projeto"
 msgstr "Project"
 
-#: lib/brainagram_web/live/dashboard_live.ex:165
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Projeto atualizado."
 msgstr "Project updated."
 
-#: lib/brainagram_web/live/dashboard_live.ex:162
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Projeto criado."
 msgstr "Project created."
 
-#: lib/brainagram_web/live/dashboard_live.ex:205
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Projeto excluído. Os diagramas dele estão em “Sem projeto”."
 msgstr "Project deleted. Its diagrams are in “No project”."
 
-#: lib/brainagram_web/error_messages.ex:44
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "Projeto inválido."
 msgstr "Invalid project."
 
-#: lib/brainagram_web/live/dashboard_live.ex:575
-#: lib/brainagram_web/live/dashboard_live.ex:599
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Projetos"
 msgstr "Projects"
 
-#: lib/brainagram_web/live/dashboard_live.ex:885
-#: lib/brainagram_web/live/dashboard_live.ex:1081
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Renomear"
 msgstr "Rename"
 
-#: lib/brainagram_web/live/dashboard_live.ex:1062
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Renomear diagrama"
 msgstr "Rename diagram"
 
-#: lib/brainagram_web/live/dashboard_live.ex:1312
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Rosa"
 msgstr "Pink"
 
-#: lib/brainagram_web/live/dashboard_live.ex:594
-#: lib/brainagram_web/live/dashboard_live.ex:654
-#: lib/brainagram_web/live/dashboard_live.ex:1287
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Sem projeto"
 msgstr "No project"
 
-#: lib/brainagram_web/live/dashboard_live.ex:774
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Seu primeiro diagrama"
 msgstr "Your first diagram"
 
-#: lib/brainagram_web/live/dashboard_live.ex:770
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Tente outro termo ou limpe os filtros."
 msgstr "Try another term or clear the filters."
 
-#: lib/brainagram_web/live/dashboard_live.ex:1024
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Tipo"
 msgstr "Type"
 
-#: lib/brainagram_web/live/dashboard_live.ex:695
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Tipo de diagrama"
 msgstr "Diagram type"
 
-#: lib/brainagram_web/live/dashboard_live.ex:699
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Todos"
 msgstr "All"
 
-#: lib/brainagram_web/live/dashboard_live.ex:584
-#: lib/brainagram_web/live/dashboard_live.ex:652
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Todos os diagramas"
 msgstr "All diagrams"
 
-#: lib/brainagram_web/live/dashboard_live.ex:923
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Tornar privado"
 msgstr "Make private"
 
-#: lib/brainagram_web/live/dashboard_live.ex:925
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Tornar público"
 msgstr "Make public"
 
-#: lib/brainagram_web/live/dashboard_live.ex:1308
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Turquesa"
 msgstr "Teal"
 
-#: lib/brainagram_web/live/dashboard_live.ex:1309
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Verde"
 msgstr "Green"
 
-#: lib/brainagram_web/live/dashboard_live.ex:1306
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Violeta"
 msgstr "Violet"
 
-#: lib/brainagram_web/time_ago.ex:21
+#: lib/brainagram_web/time_ago.ex
 #, elixir-autogen, elixir-format
 msgid "agora mesmo"
 msgstr "just now"
 
-#: lib/brainagram_web/time_ago.ex:25
+#: lib/brainagram_web/time_ago.ex
 #, elixir-autogen, elixir-format
 msgid "há 1 dia"
 msgid_plural "há %{count} dias"
 msgstr[0] "1 day ago"
 msgstr[1] "%{count} days ago"
 
-#: lib/brainagram_web/time_ago.ex:23
+#: lib/brainagram_web/time_ago.ex
 #, elixir-autogen, elixir-format
 msgid "há 1 h"
 msgid_plural "há %{count} h"
 msgstr[0] "1 h ago"
 msgstr[1] "%{count} h ago"
 
-#: lib/brainagram_web/time_ago.ex:22
+#: lib/brainagram_web/time_ago.ex
 #, elixir-autogen, elixir-format
 msgid "há 1 min"
 msgid_plural "há %{count} min"
 msgstr[0] "1 min ago"
 msgstr[1] "%{count} min ago"
 
-#: lib/brainagram_web/time_ago.ex:24
+#: lib/brainagram_web/time_ago.ex
 #, elixir-autogen, elixir-format
 msgid "ontem"
 msgstr "yesterday"
 
-#: lib/brainagram_web/live/dashboard_live.ex:1310
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Âmbar"
 msgstr "Amber"
 
-#: lib/brainagram_web/live/dashboard_live.ex:557
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "“%{title}” será excluído para sempre. Isso não pode ser desfeito."
 msgstr "“%{title}” will be deleted forever. This can't be undone."
 
-#: lib/brainagram_web/error_messages.ex:127
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "`payload` precisa vir logo abaixo de uma mensagem (`a -> b : …`)"
 msgstr "`payload` must come right below a message (`a -> b : …`)"
 
-#: lib/brainagram_web/live/editor_live.ex:765
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "o que a mensagem carrega (logo abaixo dela)"
 msgstr "what the message carries (right below it)"
 
-#: lib/brainagram_web/error_messages.ex:130
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "payload aberto aqui nunca foi fechado com \"\"\""
 msgstr "payload opened here was never closed with \"\"\""
 
-#: lib/brainagram_web/live/editor_live.ex:766
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "payload em várias linhas, até outro \"\"\""
 msgstr "multi-line payload, up to another \"\"\""
 
-#: lib/brainagram_web/live/dashboard_live.ex:1111
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid ".brain e pacotes .json exportados do Brainagram, Mermaid (.mmd) ou PlantUML (.puml)"
 msgstr ".brain files and .json bundles exported from Brainagram, Mermaid (.mmd) or PlantUML (.puml)"
 
-#: lib/brainagram_web/live/editor_live.ex:576
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid ".brain, Mermaid ou PlantUML"
 msgstr ".brain, Mermaid or PlantUML"
 
-#: lib/brainagram_web/live/dashboard_live.ex:415
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "1 diagrama importado"
 msgid_plural "%{count} diagramas importados"
 msgstr[0] "1 diagram imported"
 msgstr[1] "%{count} diagrams imported"
 
-#: lib/brainagram_web/live/dashboard_live.ex:423
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "1 projeto criado."
 msgid_plural "%{count} projetos criados."
 msgstr[0] "1 project created."
 msgstr[1] "%{count} projects created."
 
-#: lib/brainagram_web/live/editor_live.ex:931
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Arquivo"
 msgstr "File"
 
-#: lib/brainagram_web/live/editor_live.ex:646
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Arquivo .brain"
 msgstr ".brain file"
 
-#: lib/brainagram_web/live/dashboard_live.ex:1190
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Arquivo grande demais (até 2 MB)."
 msgstr "File too large (up to 2 MB)."
 
-#: lib/brainagram_web/live/editor_live.ex:632
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Arquivo menor, para chats com limite de tamanho"
 msgstr "Smaller file, for chats with size limits"
 
-#: lib/brainagram_web/live/dashboard_live.ex:1192
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Arquivos demais de uma vez (até 50)."
 msgstr "Too many files at once (up to 50)."
 
-#: lib/brainagram_web/live/dashboard_live.ex:736
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Baixa os diagramas desta lista num pacote .json, que volta pelo Importar"
 msgstr "Downloads the diagrams in this list as a .json bundle, which comes back through Import"
 
-#: lib/brainagram_web/live/dashboard_live.ex:912
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Baixar .brain"
 msgstr "Download .brain"
 
-#: lib/brainagram_web/live/editor_live.ex:927
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Brainagram (.brain)"
 msgstr "Brainagram (.brain)"
 
-#: lib/brainagram_web/live/editor_live.ex:917
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Cole ou escolha um arquivo: um .brain exportado do Brainagram, um sequenceDiagram do Mermaid, ou um diagrama de sequência ou de componentes do PlantUML (este vira arquitetura). O que não converter vira comentário no topo do código."
 msgstr "Paste or pick a file: a .brain exported from Brainagram, a Mermaid sequenceDiagram, or a PlantUML sequence or component diagram (the latter becomes architecture). Anything that doesn't convert becomes a comment at the top of the code."
 
-#: lib/brainagram_web/live/editor_live.ex:636
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Diagrama"
 msgstr "Diagram"
 
-#: lib/brainagram_web/live/dashboard_live.ex:120
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Escolha ao menos um arquivo."
 msgstr "Pick at least one file."
 
-#: lib/brainagram_web/live/editor_live.ex:934
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Escolher arquivo (.brain, .mmd, .puml)…"
 msgstr "Choose file (.brain, .mmd, .puml)…"
 
-#: lib/brainagram_web/live/dashboard_live.ex:1191
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Formato não aceito."
 msgstr "Format not accepted."
 
-#: lib/brainagram_web/live/editor_live.ex:620
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "GIF animado (HD)"
 msgstr "Animated GIF (HD)"
 
-#: lib/brainagram_web/live/editor_live.ex:632
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "GIF leve"
 msgstr "Light GIF"
 
-#: lib/brainagram_web/live/dashboard_live.ex:1178
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Importar 1 arquivo"
 msgid_plural "Importar %{count} arquivos"
 msgstr[0] "Import 1 file"
 msgstr[1] "Import %{count} files"
 
-#: lib/brainagram_web/live/dashboard_live.ex:1097
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Importar diagramas"
 msgstr "Import diagrams"
 
-#: lib/brainagram_web/live/editor_live.ex:576
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Importar diagrama…"
 msgstr "Import diagram…"
 
-#: lib/brainagram_web/live/dashboard_live.ex:1193
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Não foi possível enviar o arquivo."
 msgstr "Couldn't upload the file."
 
-#: lib/brainagram_web/live/dashboard_live.ex:1158
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Não importados"
 msgstr "Not imported"
 
-#: lib/brainagram_web/live/editor_live.ex:620
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Nítido em 2×, para slides, PRs e docs"
 msgstr "Sharp at 2×, for slides, PRs and docs"
 
-#: lib/brainagram_web/error_messages.ex:46
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "O arquivo não é texto (UTF-8)."
 msgstr "The file isn't text (UTF-8)."
 
-#: lib/brainagram_web/live/editor_live.ex:646
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "O código, para importar aqui de novo ou versionar"
 msgstr "The code, to import here again or keep under version control"
 
-#: lib/brainagram_web/error_messages.ex:49
+#: lib/brainagram_web/error_messages.ex
 #, elixir-autogen, elixir-format
 msgid "O pacote .json não é um export do Brainagram."
 msgstr "The .json bundle isn't a Brainagram export."
 
-#: lib/brainagram_web/live/dashboard_live.ex:1149
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Pacotes .json recriam os projetos deles; o destino vale para os diagramas soltos."
 msgstr ".json bundles recreate their own projects; the destination applies to standalone diagrams."
 
-#: lib/brainagram_web/live/dashboard_live.ex:1145
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Projeto de destino"
 msgstr "Destination project"
 
-#: lib/brainagram_web/live/dashboard_live.ex:1135
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Remover %{name}"
 msgstr "Remove %{name}"
 
-#: lib/brainagram_web/live/dashboard_live.ex:1108
+#: lib/brainagram_web/live/dashboard_live.ex
 #, elixir-autogen, elixir-format
 msgid "Solte os arquivos aqui ou clique para escolher"
 msgstr "Drop files here or click to choose"
 
-#: lib/brainagram_web/components/layouts.ex:166
+#: lib/brainagram_web/components/layouts.ex
 #, elixir-autogen, elixir-format
 msgid "Idioma: %{name}"
 msgstr "Language: %{name}"
