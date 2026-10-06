@@ -20,7 +20,7 @@ Write the flow as text, press play, and watch the messages travel along the arro
 <br>
 ![Elixir](https://img.shields.io/badge/Elixir-1.15%2B-4e2a8e.svg)
 ![Phoenix](https://img.shields.io/badge/Phoenix-1.8-f05423.svg)
-![Phoenix LiveView](https://img.shields.io/badge/LiveView-1.1-f05423.svg)
+![Phoenix LiveView](https://img.shields.io/badge/LiveView-1.2-f05423.svg)
 ![Languages](https://img.shields.io/badge/languages-7-0c9b8c.svg)
 [![PRs welcome](https://img.shields.io/badge/PRs-welcome-0c9b8c.svg)](CONTRIBUTING.md)
 
