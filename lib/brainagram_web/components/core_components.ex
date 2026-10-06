@@ -79,7 +79,7 @@ defmodule BrainagramWeb.CoreComponents do
       <.button phx-click="go" variant="primary">Salvar</.button>
       <.button navigate={~p"/"} variant="ghost">Início</.button>
   """
-  attr :rest, :global, include: ~w(href navigate patch method download name value disabled)
+  attr :rest, :global, include: ~w(href navigate patch method download name value disabled type form)
   attr :class, :any, default: nil
   attr :variant, :string, values: [nil | ~w(primary ghost danger)], default: nil
   attr :size, :string, values: [nil | ~w(sm lg)], default: nil
