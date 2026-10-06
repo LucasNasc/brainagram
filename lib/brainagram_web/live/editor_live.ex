@@ -629,7 +629,8 @@ defmodule BrainagramWeb.EditorLive do
             >
               <.icon name="hero-film" />
               <span>
-                {gettext("GIF leve")}<small>{gettext("Arquivo menor, para chats com limite de tamanho")}</small>
+                {gettext("GIF leve")}
+                <small>{gettext("Arquivo menor, para chats com limite de tamanho")}</small>
               </span>
             </button>
             <div class="ba-menu__sep" role="separator"></div>
@@ -643,7 +644,8 @@ defmodule BrainagramWeb.EditorLive do
             >
               <.icon name="hero-document-text" />
               <span>
-                {gettext("Arquivo .brain")}<small>{gettext("O código, para importar aqui de novo ou versionar")}</small>
+                {gettext("Arquivo .brain")}
+                <small>{gettext("O código, para importar aqui de novo ou versionar")}</small>
               </span>
             </button>
           </div>
