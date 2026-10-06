@@ -653,8 +653,7 @@ defmodule BrainagramWeb.DashboardLive do
             <% :none -> %>
               {gettext("Sem projeto")}
             <% project -> %>
-              <span class="ba-projdot ba-projdot--lg" data-color={project.color} aria-hidden="true">
-              </span>
+              <span class="ba-projdot ba-projdot--lg" data-color={project.color} aria-hidden="true"></span>
               {project.name}
           <% end %>
         </h1>
