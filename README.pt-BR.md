@@ -302,7 +302,7 @@ repositórios em memória. O CI (`.github/workflows/ci.yml`) confere
 dependências sem uso, formatação, warnings (como erro) e se a extração do
 gettext está em dia, e depois roda a suíte inteira contra o Postgres.
 
-**Convenções que valem saber** (a lista completa está no [`AGENTS.md`](AGENTS.md)):
+**Convenções que valem saber** (mais no [CONTRIBUTING.pt-BR.md](CONTRIBUTING.pt-BR.md)):
 
 - **CSS escrito à mão** — sem Tailwind. Use os tokens de
   `assets/css/tokens.css`; componentes em BEM com o prefixo `ba-`; regras do

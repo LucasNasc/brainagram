@@ -300,7 +300,7 @@ tested with in-memory repositories. CI (`.github/workflows/ci.yml`) checks for
 unused dependencies, formatting, warnings (as errors) and up-to-date gettext
 extraction, then runs the full suite against Postgres.
 
-**Conventions worth knowing** (the full list is in [`AGENTS.md`](AGENTS.md)):
+**Conventions worth knowing** (more in [CONTRIBUTING.md](CONTRIBUTING.md)):
 
 - **CSS is hand-written** — no Tailwind. Use the design tokens in
   `assets/css/tokens.css`; components are BEM with the `ba-` prefix; canvas

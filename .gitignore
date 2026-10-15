@@ -47,9 +47,17 @@ Thumbs.db
 .env.*
 !.env.example
 
-# Impeccable: working files (reviews, mocks, live sessions)
-/.impeccable/review/
-/.impeccable/mocks/
-/.impeccable/questions/
-/.impeccable/live/
-/.impeccable/hook.cache.json
+# Agent harness and AI tooling config: local only, never in the repository
+/AGENTS.md
+/CLAUDE.md
+/CLAUDE.local.md
+/PRODUCT.md
+/DESIGN.md
+/.impeccable/
+/.cursor/
+/.codex/
+/.windsurf/
+/.aider*
+/.mcp.json
+/.github/copilot-instructions.md
+/docs/design/

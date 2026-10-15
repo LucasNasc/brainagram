@@ -547,7 +547,7 @@ defmodule BrainagramWeb.EditorLive do
   attr :presenting, :boolean, default: false
   attr :dirty, :boolean, default: false
 
-  # Duas barras para dois públicos (PRODUCT.md): quem assiste vê o título, a
+  # Duas barras para dois públicos: quem assiste vê o título, a
   # exportação e um "Editar"; quem escreve vê abrir, apresentar, duplicar e
   # salvar. Em telas estreitas os botões ficam só com o ícone (o nome segue no
   # aria-label) e idioma/tema saem da barra — continuam na área de gestão.

@@ -151,8 +151,7 @@ Receitas comuns:
 
 ## Regras do projeto
 
-Elas são conferidas na revisão, e a maioria também por testes. A lista
-completa, para pessoas e agentes de código, está em [`AGENTS.md`](AGENTS.md).
+Elas são conferidas na revisão, e a maioria também por testes.
 
 - **Regra das camadas.** O domínio nunca referencia Ecto, Phoenix nem
   `Brainagram.Infrastructure`. Infraestrutura nova entra por uma porta e é
@@ -193,8 +192,10 @@ chinês simplificado, russo, italiano, japonês e hindi.
   modelo **Translation** ou mande um PR que mexa só nos arquivos `.po` e
   `locales/*.js` daquele idioma.
 
-Para adicionar um idioma novo, siga a lista em
-[`AGENTS.md`](AGENTS.md#internationalization-pt-br-en-zh-ru-it-ja-hi).
+Para adicionar um idioma novo, atualize: `BrainagramWeb.Locale` (`@languages`,
+`normalize`), a lista de idiomas de `BrainagramWeb.Gettext`, uma cláusula de
+`flag/1` e seus tokens `--flag-*`, `assets/js/brainagram/locales/<código>.js` e
+`LANGS` em `i18n.js`, `Templates.words/1` e `TimeAgo.date/1`.
 
 ## Mensagens de commit
 
@@ -241,8 +242,8 @@ Por favor, **não** abra issue pública. Siga o [SECURITY.md](SECURITY.md).
 
 ## Contribuições com ajuda de IA
 
-Usar ferramentas de IA tudo bem. O [`AGENTS.md`](AGENTS.md) existe justamente
-para que agentes de código sigam as convenções do projeto. Mas a autoria
+Usar ferramentas de IA tudo bem, desde que o resultado siga as regras do
+projeto acima. Mas a autoria
 continua sendo sua: leia e entenda cada linha que enviar, confira que os testes
 fazem sentido e esteja pronto para explicar as mudanças na revisão.
 

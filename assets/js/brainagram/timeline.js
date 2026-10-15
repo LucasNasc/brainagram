@@ -64,7 +64,7 @@ export class Timeline {
   }
 
   // No instante zero nada começou: nenhuma seta ativa, nenhum passo aceso.
-  // Violeta é "acontecendo agora" (DESIGN.md, One Live Signal) — antes do play,
+  // Violeta é "acontecendo agora" — antes do play,
   // não há nada acontecendo.
   get started() {
     return this.t > 0;

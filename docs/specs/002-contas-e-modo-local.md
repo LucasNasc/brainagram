@@ -173,7 +173,7 @@ diagrams.owner_id  bigint NULL REFERENCES users ON DELETE CASCADE   + INDEX (own
 projects.owner_id  bigint NULL REFERENCES users ON DELETE CASCADE   + INDEX (owner_id)
 ```
 
-- `owner_id` **nunca** entra em `cast` (regra do `AGENTS.md`): é definido pelo
+- `owner_id` **nunca** entra em `cast` (campos definidos pelo sistema não vêm do formulário): é definido pelo
   handler a partir do escopo autenticado.
 - A importação que hoje "reaproveita projeto com o mesmo nome" passa a
   procurar só entre os projetos **do mesmo dono**.
@@ -299,7 +299,7 @@ Todo comando e query de diagrama/projeto passa a receber `scope`:
   `owner_id = scope.user.id`; não existe função de repositório "sem dono"
   usada pela web (só `claim_legacy`, no release).
 - `<Layouts.app flash={@flash} current_scope={@current_scope}>` em todas as
-  telas, como manda o `AGENTS.md`.
+  telas.
 
 ### 7.2 Regras de acesso
 

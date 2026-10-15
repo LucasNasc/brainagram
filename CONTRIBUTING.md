@@ -149,8 +149,7 @@ Common recipes:
 
 ## Project rules
 
-These are checked in review, and most of them by tests as well. The complete
-list for humans and coding agents is in [`AGENTS.md`](AGENTS.md).
+These are checked in review, and most of them by tests as well.
 
 - **Layer rule.** The domain never references Ecto, Phoenix or
   `Brainagram.Infrastructure`. New infrastructure goes behind a port and is
@@ -191,7 +190,10 @@ English, Simplified Chinese, Russian, Italian, Japanese and Hindi.
   the **Translation** template, or send a PR that edits only the `.po` and
   `locales/*.js` files of that language.
 
-To add a new language, see the checklist in [`AGENTS.md`](AGENTS.md#internationalization-pt-br-en-zh-ru-it-ja-hi).
+To add a new language, update: `BrainagramWeb.Locale` (`@languages`,
+`normalize`), the `BrainagramWeb.Gettext` locales list, a `flag/1` clause and
+its `--flag-*` tokens, `assets/js/brainagram/locales/<code>.js` plus `LANGS` in
+`i18n.js`, `Templates.words/1` and `TimeAgo.date/1`.
 
 ## Commit messages
 
@@ -237,8 +239,8 @@ Please **don't** open a public issue. Follow [SECURITY.md](SECURITY.md).
 
 ## AI-assisted contributions
 
-Using AI tools is fine. [`AGENTS.md`](AGENTS.md) exists so that coding agents
-follow the project's conventions. You are still the author: read and understand
+Using AI tools is fine, as long as the result follows the project rules above.
+You are still the author: read and understand
 every line you submit, make sure the tests are meaningful, and be ready to
 explain your changes in review.
 
