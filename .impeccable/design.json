@@ -1,0 +1,890 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-13T21:27:53+00:00",
+  "title": "Design System: Brainagram",
+  "extensions": {
+    "colorMeta": {
+      "brand": {
+        "role": "primary",
+        "displayName": "Impulse Violet",
+        "canonical": "#5b3fe6",
+        "tonalRamp": [
+          "oklch(15% 0.200 281.7)",
+          "oklch(26% 0.200 281.7)",
+          "oklch(37% 0.200 281.7)",
+          "oklch(48% 0.200 281.7)",
+          "oklch(60% 0.200 281.7)",
+          "oklch(72% 0.200 281.7)",
+          "oklch(84% 0.200 281.7)",
+          "oklch(95% 0.200 281.7)"
+        ],
+        "dark": "#8e7cff"
+      },
+      "brand-hover": {
+        "role": "primary",
+        "displayName": "Impulse Violet, deep",
+        "canonical": "#4b30d2",
+        "tonalRamp": [
+          "oklch(15% 0.200 280.0)",
+          "oklch(26% 0.200 280.0)",
+          "oklch(37% 0.200 280.0)",
+          "oklch(48% 0.200 280.0)",
+          "oklch(60% 0.200 280.0)",
+          "oklch(72% 0.200 280.0)",
+          "oklch(84% 0.200 280.0)",
+          "oklch(95% 0.200 280.0)"
+        ],
+        "dark": "#a294ff"
+      },
+      "brand-soft": {
+        "role": "primary",
+        "displayName": "Violet Wash",
+        "canonical": "#ece8ff",
+        "tonalRamp": [
+          "oklch(15% 0.031 293.8)",
+          "oklch(26% 0.031 293.8)",
+          "oklch(37% 0.031 293.8)",
+          "oklch(48% 0.031 293.8)",
+          "oklch(60% 0.031 293.8)",
+          "oklch(72% 0.031 293.8)",
+          "oklch(84% 0.031 293.8)",
+          "oklch(95% 0.031 293.8)"
+        ],
+        "dark": "#2a2450"
+      },
+      "brand-text": {
+        "role": "primary",
+        "displayName": "Violet Ink",
+        "canonical": "#4a2fd4",
+        "tonalRamp": [
+          "oklch(15% 0.200 279.5)",
+          "oklch(26% 0.200 279.5)",
+          "oklch(37% 0.200 279.5)",
+          "oklch(48% 0.200 279.5)",
+          "oklch(60% 0.200 279.5)",
+          "oklch(72% 0.200 279.5)",
+          "oklch(84% 0.200 279.5)",
+          "oklch(95% 0.200 279.5)"
+        ],
+        "dark": "#b3a8ff"
+      },
+      "on-brand": {
+        "role": "primary",
+        "displayName": "On Impulse",
+        "canonical": "#ffffff",
+        "tonalRamp": [
+          "oklch(15% 0.000 89.9)",
+          "oklch(26% 0.000 89.9)",
+          "oklch(37% 0.000 89.9)",
+          "oklch(48% 0.000 89.9)",
+          "oklch(60% 0.000 89.9)",
+          "oklch(72% 0.000 89.9)",
+          "oklch(84% 0.000 89.9)",
+          "oklch(95% 0.000 89.9)"
+        ],
+        "dark": "#111115"
+      },
+      "bg-app": {
+        "role": "neutral",
+        "displayName": "Paper",
+        "canonical": "#f6f6f3",
+        "tonalRamp": [
+          "oklch(15% 0.004 106.5)",
+          "oklch(26% 0.004 106.5)",
+          "oklch(37% 0.004 106.5)",
+          "oklch(48% 0.004 106.5)",
+          "oklch(60% 0.004 106.5)",
+          "oklch(72% 0.004 106.5)",
+          "oklch(84% 0.004 106.5)",
+          "oklch(95% 0.004 106.5)"
+        ],
+        "dark": "#111115"
+      },
+      "bg-canvas": {
+        "role": "neutral",
+        "displayName": "Drafting Sheet",
+        "canonical": "#fbfbf9",
+        "tonalRamp": [
+          "oklch(15% 0.003 106.4)",
+          "oklch(26% 0.003 106.4)",
+          "oklch(37% 0.003 106.4)",
+          "oklch(48% 0.003 106.4)",
+          "oklch(60% 0.003 106.4)",
+          "oklch(72% 0.003 106.4)",
+          "oklch(84% 0.003 106.4)",
+          "oklch(95% 0.003 106.4)"
+        ],
+        "dark": "#15151a"
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "Card White",
+        "canonical": "#ffffff",
+        "tonalRamp": [
+          "oklch(15% 0.000 89.9)",
+          "oklch(26% 0.000 89.9)",
+          "oklch(37% 0.000 89.9)",
+          "oklch(48% 0.000 89.9)",
+          "oklch(60% 0.000 89.9)",
+          "oklch(72% 0.000 89.9)",
+          "oklch(84% 0.000 89.9)",
+          "oklch(95% 0.000 89.9)"
+        ],
+        "dark": "#1c1c22"
+      },
+      "surface-2": {
+        "role": "neutral",
+        "displayName": "Pencil Wash",
+        "canonical": "#f0f0ec",
+        "tonalRamp": [
+          "oklch(15% 0.005 106.5)",
+          "oklch(26% 0.005 106.5)",
+          "oklch(37% 0.005 106.5)",
+          "oklch(48% 0.005 106.5)",
+          "oklch(60% 0.005 106.5)",
+          "oklch(72% 0.005 106.5)",
+          "oklch(84% 0.005 106.5)",
+          "oklch(95% 0.005 106.5)"
+        ],
+        "dark": "#24242b"
+      },
+      "surface-3": {
+        "role": "neutral",
+        "displayName": "Pencil Wash, deep",
+        "canonical": "#e7e7e1",
+        "tonalRamp": [
+          "oklch(15% 0.008 106.6)",
+          "oklch(26% 0.008 106.6)",
+          "oklch(37% 0.008 106.6)",
+          "oklch(48% 0.008 106.6)",
+          "oklch(60% 0.008 106.6)",
+          "oklch(72% 0.008 106.6)",
+          "oklch(84% 0.008 106.6)",
+          "oklch(95% 0.008 106.6)"
+        ],
+        "dark": "#2d2d35"
+      },
+      "border": {
+        "role": "neutral",
+        "displayName": "Hairline",
+        "canonical": "#e3e3de",
+        "tonalRamp": [
+          "oklch(15% 0.007 106.5)",
+          "oklch(26% 0.007 106.5)",
+          "oklch(37% 0.007 106.5)",
+          "oklch(48% 0.007 106.5)",
+          "oklch(60% 0.007 106.5)",
+          "oklch(72% 0.007 106.5)",
+          "oklch(84% 0.007 106.5)",
+          "oklch(95% 0.007 106.5)"
+        ],
+        "dark": "#2e2e37"
+      },
+      "border-strong": {
+        "role": "neutral",
+        "displayName": "Control Edge",
+        "canonical": "#84848e",
+        "tonalRamp": [
+          "oklch(15% 0.015 286.0)",
+          "oklch(26% 0.015 286.0)",
+          "oklch(37% 0.015 286.0)",
+          "oklch(48% 0.015 286.0)",
+          "oklch(60% 0.015 286.0)",
+          "oklch(72% 0.015 286.0)",
+          "oklch(84% 0.015 286.0)",
+          "oklch(95% 0.015 286.0)"
+        ],
+        "dark": "#73737f"
+      },
+      "grid-dot": {
+        "role": "neutral",
+        "displayName": "Grid Dot",
+        "canonical": "#d6d6d0",
+        "tonalRamp": [
+          "oklch(15% 0.008 106.6)",
+          "oklch(26% 0.008 106.6)",
+          "oklch(37% 0.008 106.6)",
+          "oklch(48% 0.008 106.6)",
+          "oklch(60% 0.008 106.6)",
+          "oklch(72% 0.008 106.6)",
+          "oklch(84% 0.008 106.6)",
+          "oklch(95% 0.008 106.6)"
+        ],
+        "dark": "#2c2c35"
+      },
+      "text": {
+        "role": "neutral",
+        "displayName": "Graphite",
+        "canonical": "#16161b",
+        "tonalRamp": [
+          "oklch(15% 0.010 285.5)",
+          "oklch(26% 0.010 285.5)",
+          "oklch(37% 0.010 285.5)",
+          "oklch(48% 0.010 285.5)",
+          "oklch(60% 0.010 285.5)",
+          "oklch(72% 0.010 285.5)",
+          "oklch(84% 0.010 285.5)",
+          "oklch(95% 0.010 285.5)"
+        ],
+        "dark": "#ededf2"
+      },
+      "text-muted": {
+        "role": "neutral",
+        "displayName": "Lead",
+        "canonical": "#5f5f69",
+        "tonalRamp": [
+          "oklch(15% 0.016 285.8)",
+          "oklch(26% 0.016 285.8)",
+          "oklch(37% 0.016 285.8)",
+          "oklch(48% 0.016 285.8)",
+          "oklch(60% 0.016 285.8)",
+          "oklch(72% 0.016 285.8)",
+          "oklch(84% 0.016 285.8)",
+          "oklch(95% 0.016 285.8)"
+        ],
+        "dark": "#a0a0ae"
+      },
+      "edge-sync": {
+        "role": "secondary",
+        "displayName": "Call Line",
+        "canonical": "#3a3a48",
+        "tonalRamp": [
+          "oklch(15% 0.024 285.1)",
+          "oklch(26% 0.024 285.1)",
+          "oklch(37% 0.024 285.1)",
+          "oklch(48% 0.024 285.1)",
+          "oklch(60% 0.024 285.1)",
+          "oklch(72% 0.024 285.1)",
+          "oklch(84% 0.024 285.1)",
+          "oklch(95% 0.024 285.1)"
+        ],
+        "dark": "#c9c9d6"
+      },
+      "edge-return": {
+        "role": "secondary",
+        "displayName": "Return Line",
+        "canonical": "#7e7e8a",
+        "tonalRamp": [
+          "oklch(15% 0.018 285.8)",
+          "oklch(26% 0.018 285.8)",
+          "oklch(37% 0.018 285.8)",
+          "oklch(48% 0.018 285.8)",
+          "oklch(60% 0.018 285.8)",
+          "oklch(72% 0.018 285.8)",
+          "oklch(84% 0.018 285.8)",
+          "oklch(95% 0.018 285.8)"
+        ],
+        "dark": "#8a8a98"
+      },
+      "edge-async": {
+        "role": "secondary",
+        "displayName": "Async Teal",
+        "canonical": "#0c8577",
+        "tonalRamp": [
+          "oklch(15% 0.097 181.9)",
+          "oklch(26% 0.097 181.9)",
+          "oklch(37% 0.097 181.9)",
+          "oklch(48% 0.097 181.9)",
+          "oklch(60% 0.097 181.9)",
+          "oklch(72% 0.097 181.9)",
+          "oklch(84% 0.097 181.9)",
+          "oklch(95% 0.097 181.9)"
+        ],
+        "dark": "#3ccbb6"
+      },
+      "edge-fail": {
+        "role": "secondary",
+        "displayName": "Failure Red",
+        "canonical": "#cc3a31",
+        "tonalRamp": [
+          "oklch(15% 0.184 28.1)",
+          "oklch(26% 0.184 28.1)",
+          "oklch(37% 0.184 28.1)",
+          "oklch(48% 0.184 28.1)",
+          "oklch(60% 0.184 28.1)",
+          "oklch(72% 0.184 28.1)",
+          "oklch(84% 0.184 28.1)",
+          "oklch(95% 0.184 28.1)"
+        ],
+        "dark": "#ff6a5f"
+      },
+      "edge-pending": {
+        "role": "secondary",
+        "displayName": "Pending Line",
+        "canonical": "#898993",
+        "tonalRamp": [
+          "oklch(15% 0.015 286.0)",
+          "oklch(26% 0.015 286.0)",
+          "oklch(37% 0.015 286.0)",
+          "oklch(48% 0.015 286.0)",
+          "oklch(60% 0.015 286.0)",
+          "oklch(72% 0.015 286.0)",
+          "oklch(84% 0.015 286.0)",
+          "oklch(95% 0.015 286.0)"
+        ],
+        "dark": "#666674"
+      },
+      "node-actor": {
+        "role": "secondary",
+        "displayName": "Actor Blue",
+        "canonical": "#0068a3",
+        "tonalRamp": [
+          "oklch(15% 0.123 244.0)",
+          "oklch(26% 0.123 244.0)",
+          "oklch(37% 0.123 244.0)",
+          "oklch(48% 0.123 244.0)",
+          "oklch(60% 0.123 244.0)",
+          "oklch(72% 0.123 244.0)",
+          "oklch(84% 0.123 244.0)",
+          "oklch(95% 0.123 244.0)"
+        ],
+        "dark": "#4fa8e8"
+      },
+      "node-service": {
+        "role": "secondary",
+        "displayName": "Service Sky",
+        "canonical": "#2f86bf",
+        "tonalRamp": [
+          "oklch(15% 0.119 241.9)",
+          "oklch(26% 0.119 241.9)",
+          "oklch(37% 0.119 241.9)",
+          "oklch(48% 0.119 241.9)",
+          "oklch(60% 0.119 241.9)",
+          "oklch(72% 0.119 241.9)",
+          "oklch(84% 0.119 241.9)",
+          "oklch(95% 0.119 241.9)"
+        ],
+        "dark": "#8ccdf2"
+      },
+      "node-database": {
+        "role": "secondary",
+        "displayName": "Database Green",
+        "canonical": "#00805d",
+        "tonalRamp": [
+          "oklch(15% 0.111 165.8)",
+          "oklch(26% 0.111 165.8)",
+          "oklch(37% 0.111 165.8)",
+          "oklch(48% 0.111 165.8)",
+          "oklch(60% 0.111 165.8)",
+          "oklch(72% 0.111 165.8)",
+          "oklch(84% 0.111 165.8)",
+          "oklch(95% 0.111 165.8)"
+        ],
+        "dark": "#3dc495"
+      },
+      "node-queue": {
+        "role": "secondary",
+        "displayName": "Queue Amber",
+        "canonical": "#a86f00",
+        "tonalRamp": [
+          "oklch(15% 0.125 73.7)",
+          "oklch(26% 0.125 73.7)",
+          "oklch(37% 0.125 73.7)",
+          "oklch(48% 0.125 73.7)",
+          "oklch(60% 0.125 73.7)",
+          "oklch(72% 0.125 73.7)",
+          "oklch(84% 0.125 73.7)",
+          "oklch(95% 0.125 73.7)"
+        ],
+        "dark": "#f0b230"
+      },
+      "node-external": {
+        "role": "secondary",
+        "displayName": "External Orchid",
+        "canonical": "#b0508a",
+        "tonalRamp": [
+          "oklch(15% 0.142 345.3)",
+          "oklch(26% 0.142 345.3)",
+          "oklch(37% 0.142 345.3)",
+          "oklch(48% 0.142 345.3)",
+          "oklch(60% 0.142 345.3)",
+          "oklch(72% 0.142 345.3)",
+          "oklch(84% 0.142 345.3)",
+          "oklch(95% 0.142 345.3)"
+        ],
+        "dark": "#e394c2"
+      },
+      "node-neutral": {
+        "role": "secondary",
+        "displayName": "Neutral Kind",
+        "canonical": "#5f5f69",
+        "tonalRamp": [
+          "oklch(15% 0.016 285.8)",
+          "oklch(26% 0.016 285.8)",
+          "oklch(37% 0.016 285.8)",
+          "oklch(48% 0.016 285.8)",
+          "oklch(60% 0.016 285.8)",
+          "oklch(72% 0.016 285.8)",
+          "oklch(84% 0.016 285.8)",
+          "oklch(95% 0.016 285.8)"
+        ],
+        "dark": "#a0a0ae"
+      },
+      "group-bg": {
+        "role": "neutral",
+        "displayName": "Group Ground",
+        "canonical": "#f3f3ef",
+        "tonalRamp": [
+          "oklch(15% 0.005 106.5)",
+          "oklch(26% 0.005 106.5)",
+          "oklch(37% 0.005 106.5)",
+          "oklch(48% 0.005 106.5)",
+          "oklch(60% 0.005 106.5)",
+          "oklch(72% 0.005 106.5)",
+          "oklch(84% 0.005 106.5)",
+          "oklch(95% 0.005 106.5)"
+        ],
+        "dark": "#18181e"
+      },
+      "note-bg": {
+        "role": "neutral",
+        "displayName": "Sticky Note",
+        "canonical": "#fff3bf",
+        "tonalRamp": [
+          "oklch(15% 0.068 96.6)",
+          "oklch(26% 0.068 96.6)",
+          "oklch(37% 0.068 96.6)",
+          "oklch(48% 0.068 96.6)",
+          "oklch(60% 0.068 96.6)",
+          "oklch(72% 0.068 96.6)",
+          "oklch(84% 0.068 96.6)",
+          "oklch(95% 0.068 96.6)"
+        ],
+        "dark": "#3a3218"
+      },
+      "note-border": {
+        "role": "neutral",
+        "displayName": "Sticky Note Edge",
+        "canonical": "#c9a52a",
+        "tonalRamp": [
+          "oklch(15% 0.138 91.4)",
+          "oklch(26% 0.138 91.4)",
+          "oklch(37% 0.138 91.4)",
+          "oklch(48% 0.138 91.4)",
+          "oklch(60% 0.138 91.4)",
+          "oklch(72% 0.138 91.4)",
+          "oklch(84% 0.138 91.4)",
+          "oklch(95% 0.138 91.4)"
+        ],
+        "dark": "#8a7430"
+      },
+      "note-text": {
+        "role": "neutral",
+        "displayName": "Sticky Note Ink",
+        "canonical": "#4a3b00",
+        "tonalRamp": [
+          "oklch(15% 0.073 92.8)",
+          "oklch(26% 0.073 92.8)",
+          "oklch(37% 0.073 92.8)",
+          "oklch(48% 0.073 92.8)",
+          "oklch(60% 0.073 92.8)",
+          "oklch(72% 0.073 92.8)",
+          "oklch(84% 0.073 92.8)",
+          "oklch(95% 0.073 92.8)"
+        ],
+        "dark": "#f3e3a6"
+      },
+      "success": {
+        "role": "status",
+        "displayName": "Success",
+        "canonical": "#0b7a5a",
+        "tonalRamp": [
+          "oklch(15% 0.104 166.3)",
+          "oklch(26% 0.104 166.3)",
+          "oklch(37% 0.104 166.3)",
+          "oklch(48% 0.104 166.3)",
+          "oklch(60% 0.104 166.3)",
+          "oklch(72% 0.104 166.3)",
+          "oklch(84% 0.104 166.3)",
+          "oklch(95% 0.104 166.3)"
+        ],
+        "dark": "#44cc9a"
+      },
+      "warning": {
+        "role": "status",
+        "displayName": "Warning",
+        "canonical": "#945a00",
+        "tonalRamp": [
+          "oklch(15% 0.115 67.4)",
+          "oklch(26% 0.115 67.4)",
+          "oklch(37% 0.115 67.4)",
+          "oklch(48% 0.115 67.4)",
+          "oklch(60% 0.115 67.4)",
+          "oklch(72% 0.115 67.4)",
+          "oklch(84% 0.115 67.4)",
+          "oklch(95% 0.115 67.4)"
+        ],
+        "dark": "#f2b84b"
+      },
+      "danger": {
+        "role": "status",
+        "displayName": "Danger",
+        "canonical": "#c2372e",
+        "tonalRamp": [
+          "oklch(15% 0.177 28.2)",
+          "oklch(26% 0.177 28.2)",
+          "oklch(37% 0.177 28.2)",
+          "oklch(48% 0.177 28.2)",
+          "oklch(60% 0.177 28.2)",
+          "oklch(72% 0.177 28.2)",
+          "oklch(84% 0.177 28.2)",
+          "oklch(95% 0.177 28.2)"
+        ],
+        "dark": "#ff7a70"
+      },
+      "info": {
+        "role": "status",
+        "displayName": "Info",
+        "canonical": "#2563c9",
+        "tonalRamp": [
+          "oklch(15% 0.171 260.0)",
+          "oklch(26% 0.171 260.0)",
+          "oklch(37% 0.171 260.0)",
+          "oklch(48% 0.171 260.0)",
+          "oklch(60% 0.171 260.0)",
+          "oklch(72% 0.171 260.0)",
+          "oklch(84% 0.171 260.0)",
+          "oklch(95% 0.171 260.0)"
+        ],
+        "dark": "#7ea8ff"
+      }
+    },
+    "typographyMeta": {
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Management area page title."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Page headers."
+      },
+      "subtitle": {
+        "displayName": "Subtitle",
+        "purpose": "Modal titles."
+      },
+      "heading": {
+        "displayName": "Heading",
+        "purpose": "Editor diagram title, card titles."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Default reading text."
+      },
+      "control": {
+        "displayName": "Control",
+        "purpose": "Buttons, tabs, menu items."
+      },
+      "caption": {
+        "displayName": "Caption",
+        "purpose": "Hints, metadata, timestamps."
+      },
+      "overline": {
+        "displayName": "Overline",
+        "purpose": "Uppercase panel headers and group labels."
+      },
+      "code": {
+        "displayName": "Code",
+        "purpose": "DSL editor, payloads, time and numbers."
+      },
+      "node-label": {
+        "displayName": "Node label",
+        "purpose": "Diagram node names."
+      },
+      "edge-label": {
+        "displayName": "Edge label",
+        "purpose": "Diagram arrow labels."
+      },
+      "landing-display": {
+        "displayName": "Landing display",
+        "purpose": "Landing page (site/) only: the hero headline; the closing headline caps at clamp(2.25rem, 4.6vw, 4.25rem)."
+      },
+      "landing-title": {
+        "displayName": "Landing title",
+        "purpose": "Landing page (site/) only: the heading of every step after the hero, held to 22ch."
+      }
+    },
+    "shadows": [
+      {
+        "name": "shadow-sm",
+        "value": "0 1px 2px #16161b14",
+        "dark": "0 1px 2px #00000066",
+        "purpose": "Resting lift: pressed segmented options, scrubber knob."
+      },
+      {
+        "name": "shadow-md",
+        "value": "0 1px 2px #16161b0f, 0 4px 12px #16161b14",
+        "dark": "0 1px 2px #00000080, 0 6px 16px #00000066",
+        "purpose": "Floating: anything over the canvas (zoom and authoring bars, toasts, hovered cards)."
+      },
+      {
+        "name": "shadow-lg",
+        "value": "0 2px 4px #16161b0f, 0 16px 40px #16161b24",
+        "dark": "0 2px 4px #00000080, 0 20px 48px #000000a6",
+        "purpose": "Overlay: menus, modals, command palette, autocomplete."
+      },
+      {
+        "name": "shadow-halo",
+        "value": "0 0 0 4px #ece8ff",
+        "dark": "0 0 0 4px #2a2450",
+        "purpose": "Focus halo: 4px brand-soft ring on focused inputs and the chosen option."
+      }
+    ],
+    "motion": [
+      {
+        "name": "dur-instant",
+        "value": "80ms",
+        "purpose": "Button press."
+      },
+      {
+        "name": "dur-fast",
+        "value": "120ms",
+        "purpose": "Hover and color changes; reduced-motion ceiling."
+      },
+      {
+        "name": "dur-base",
+        "value": "180ms",
+        "purpose": "State changes."
+      },
+      {
+        "name": "dur-slow",
+        "value": "280ms",
+        "purpose": "Toasts and overlays entering."
+      },
+      {
+        "name": "dur-reveal",
+        "value": "240ms",
+        "purpose": "Notes appearing."
+      },
+      {
+        "name": "dur-pulse",
+        "value": "420ms",
+        "purpose": "Destination node pulse."
+      },
+      {
+        "name": "dur-draw-min",
+        "value": "500ms",
+        "purpose": "Shortest arrow draw."
+      },
+      {
+        "name": "dur-draw-max",
+        "value": "800ms",
+        "purpose": "Longest arrow draw."
+      },
+      {
+        "name": "dur-step-gap",
+        "value": "240ms",
+        "purpose": "Pause between messages of a step."
+      },
+      {
+        "name": "dur-logo",
+        "value": "1600ms",
+        "purpose": "Logo animation."
+      },
+      {
+        "name": "ease-ui",
+        "value": "cubic-bezier(0.2, 0, 0, 1)",
+        "purpose": "Default UI state transitions."
+      },
+      {
+        "name": "ease-exit",
+        "value": "cubic-bezier(0.4, 0, 1, 1)",
+        "purpose": "Elements leaving."
+      },
+      {
+        "name": "ease-impulso",
+        "value": "cubic-bezier(0.55, 0, 0.25, 1)",
+        "purpose": "The impulse traveling along an arrow: leaves slowly, accelerates, settles."
+      },
+      {
+        "name": "ease-pulso",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Arrival pulse: ring expands fast, fades slow."
+      },
+      {
+        "name": "ease-revelar",
+        "value": "cubic-bezier(0.2, 0.7, 0.2, 1)",
+        "purpose": "Reveals of notes and cards: fade plus 4px rise."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "steps-panel-hidden",
+        "value": "1080px"
+      },
+      {
+        "name": "dashboard-collapse",
+        "value": "860px"
+      },
+      {
+        "name": "editor-stacked",
+        "value": "760px"
+      },
+      {
+        "name": "landing-full",
+        "value": "1240px"
+      },
+      {
+        "name": "landing-compact",
+        "value": "820px"
+      }
+    ],
+    "siteTokens": [
+      {
+        "name": "step-wash",
+        "value": "#211d42",
+        "scope": "site/ (landing page), dark only",
+        "purpose": "Full-bleed band behind the heading of the current step; a step darker than the dark brand-soft."
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Button",
+      "kind": "button",
+      "description": "Default action: hairline-bordered and quiet.",
+      "html": "<button class=\"ds-btn\">Export</button>",
+      "css": ".ds-btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;height:32px;padding:0 12px;border-radius:var(--radius-sm);font:500 13px/1 var(--font-sans);white-space:nowrap;cursor:pointer;transition:background-color var(--dur-fast) var(--ease-ui),border-color var(--dur-fast) var(--ease-ui),color var(--dur-fast) var(--ease-ui),transform var(--dur-instant) var(--ease-ui);border:1px solid var(--border);background:var(--surface);color:var(--text);} .ds-btn:hover{background:var(--surface-2);} .ds-btn:active{transform:translateY(1px);background:var(--surface-3);} .ds-btn:focus-visible{outline:2px solid var(--focus-ring);outline-offset:2px;}",
+      "refersTo": "button"
+    },
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "description": "The one primary action of a view.",
+      "html": "<button class=\"ds-btn-primary\">Save</button>",
+      "css": ".ds-btn-primary{display:inline-flex;align-items:center;justify-content:center;gap:6px;height:32px;padding:0 12px;border-radius:var(--radius-sm);font:500 13px/1 var(--font-sans);white-space:nowrap;cursor:pointer;transition:background-color var(--dur-fast) var(--ease-ui),border-color var(--dur-fast) var(--ease-ui),color var(--dur-fast) var(--ease-ui),transform var(--dur-instant) var(--ease-ui);border:1px solid var(--brand);background:var(--brand);color:var(--on-brand);} .ds-btn-primary:hover{background:var(--brand-hover);border-color:var(--brand-hover);} .ds-btn-primary:active{transform:translateY(1px);} .ds-btn-primary:focus-visible{outline:2px solid var(--focus-ring);outline-offset:2px;}",
+      "refersTo": "button-primary"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "description": "Secondary toolbar action.",
+      "html": "<button class=\"ds-btn-ghost\">Cancel</button>",
+      "css": ".ds-btn-ghost{display:inline-flex;align-items:center;justify-content:center;gap:6px;height:32px;padding:0 12px;border-radius:var(--radius-sm);font:500 13px/1 var(--font-sans);white-space:nowrap;cursor:pointer;transition:background-color var(--dur-fast) var(--ease-ui),border-color var(--dur-fast) var(--ease-ui),color var(--dur-fast) var(--ease-ui),transform var(--dur-instant) var(--ease-ui);border:1px solid transparent;background:transparent;color:var(--text-muted);} .ds-btn-ghost:hover{background:var(--surface-2);color:var(--text);} .ds-btn-ghost:focus-visible{outline:2px solid var(--focus-ring);outline-offset:2px;}",
+      "refersTo": "button-ghost"
+    },
+    {
+      "name": "Text Input",
+      "kind": "input",
+      "description": "Single-line field with the brand focus halo.",
+      "html": "<input class=\"ds-input\" placeholder=\"Search diagrams\">",
+      "css": ".ds-input{height:32px;width:240px;padding:0 10px;border:1px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--surface);color:var(--text);font:400 13px/1 var(--font-sans);transition:border-color var(--dur-fast) var(--ease-ui),box-shadow var(--dur-fast) var(--ease-ui);} .ds-input::placeholder{color:var(--text-muted);} .ds-input:hover{border-color:var(--text-muted);} .ds-input:focus{outline:none;border-color:var(--brand);box-shadow:var(--shadow-halo);}",
+      "refersTo": "input"
+    },
+    {
+      "name": "Segmented Control",
+      "kind": "nav",
+      "description": "Theme and filter switches; the selected option lifts to surface.",
+      "html": "<div class=\"ds-seg\" role=\"group\"><button class=\"ds-seg-opt\" aria-pressed=\"true\">All</button><button class=\"ds-seg-opt\" aria-pressed=\"false\">Sequence</button><button class=\"ds-seg-opt\" aria-pressed=\"false\">Architecture</button></div>",
+      "css": ".ds-seg{display:inline-flex;gap:2px;padding:2px;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);} .ds-seg-opt{height:24px;padding:0 8px;border:0;border-radius:var(--radius-xs);background:transparent;color:var(--text-muted);font:500 12px/1 var(--font-sans);cursor:pointer;transition:background-color var(--dur-fast) var(--ease-ui),color var(--dur-fast) var(--ease-ui);} .ds-seg-opt:hover{color:var(--text);} .ds-seg-opt[aria-pressed=true]{background:var(--surface);color:var(--text);box-shadow:var(--shadow-sm);} .ds-seg-opt:focus-visible{outline:2px solid var(--focus-ring);outline-offset:2px;}"
+    },
+    {
+      "name": "Badge",
+      "kind": "chip",
+      "description": "Status pills; the brand variant marks the live or current state.",
+      "html": "<span class=\"ds-badge\">Private</span> <span class=\"ds-badge ds-badge-brand\">Public</span>",
+      "css": ".ds-badge{display:inline-flex;align-items:center;gap:4px;height:20px;padding:0 8px;border-radius:var(--radius-full);background:var(--surface-2);color:var(--text-muted);font:500 12px/1 var(--font-sans);} .ds-badge-brand{background:var(--brand-soft);color:var(--brand-text);}",
+      "refersTo": "badge-brand"
+    },
+    {
+      "name": "Step Card",
+      "kind": "card",
+      "description": "Steps panel item; the current step fills with brand-soft.",
+      "html": "<div class=\"ds-step\" aria-current=\"step\"><span class=\"ds-step-num\">2</span><span><b class=\"ds-step-title\">Order is stored</b><span class=\"ds-step-meta\">3 messages</span></span></div>",
+      "css": ".ds-step{display:grid;grid-template-columns:24px 1fr;gap:10px;width:260px;padding:10px 12px 10px 10px;border-radius:var(--radius-md);border:1px solid transparent;cursor:pointer;transition:background-color var(--dur-base) var(--ease-ui);} .ds-step:hover{background:var(--surface-2);} .ds-step-num{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font:600 12px/1 var(--font-mono);color:var(--text-muted);border:1px solid var(--border-strong);background:var(--surface);} .ds-step-title{display:block;font:600 13px/18px var(--font-sans);color:var(--text);margin:2px 0;} .ds-step-meta{display:block;font:400 12px/16px var(--font-sans);color:var(--text-muted);} .ds-step[aria-current=step]{background:var(--brand-soft);} .ds-step[aria-current=step] .ds-step-num{background:var(--brand);border-color:var(--brand);color:var(--on-brand);}",
+      "refersTo": "step-card-current"
+    },
+    {
+      "name": "Player",
+      "kind": "custom",
+      "description": "Round play button, step-segmented scrubber and tabular time.",
+      "html": "<div class=\"ds-player\"><button class=\"ds-play\" aria-label=\"Play (Space)\"><svg viewBox=\"0 0 20 20\" width=\"20\" height=\"20\" fill=\"currentColor\" aria-hidden=\"true\"><path d=\"M6.3 2.84A1.5 1.5 0 0 0 4 4.11v11.78a1.5 1.5 0 0 0 2.3 1.27l9.34-5.89a1.5 1.5 0 0 0 0-2.54L6.3 2.84Z\"/></svg></button><div class=\"ds-scrub\"><i class=\"ds-seg-done\"></i><i class=\"ds-seg-active\"></i><i></i></div><span class=\"ds-time\"><b>4.8 s</b> / 10.8 s</span></div>",
+      "css": ".ds-player{display:flex;align-items:center;gap:12px;height:64px;padding:0 16px;width:480px;background:var(--surface);border-top:1px solid var(--border);} .ds-play{width:44px;height:44px;border-radius:50%;border:0;display:grid;place-items:center;background:var(--brand);color:var(--on-brand);cursor:pointer;transition:background-color var(--dur-fast) var(--ease-ui),transform var(--dur-instant) var(--ease-ui);} .ds-play:hover{background:var(--brand-hover);} .ds-play:active{transform:scale(.96);} .ds-play:focus-visible{outline:2px solid var(--focus-ring);outline-offset:2px;} .ds-scrub{display:flex;gap:3px;flex:1;} .ds-scrub i{flex:1;height:6px;border-radius:3px;background:var(--surface-3);} .ds-scrub i.ds-seg-done{background:var(--edge-sync);} .ds-scrub i.ds-seg-active{background:linear-gradient(90deg,var(--brand) 45%,var(--surface-3) 45%);} .ds-time{font:500 12px/16px var(--font-mono);font-variant-numeric:tabular-nums;color:var(--text-muted);} .ds-time b{color:var(--text);font-weight:500;}",
+      "refersTo": "play-button"
+    },
+    {
+      "name": "Node Kind Chip",
+      "kind": "chip",
+      "description": "Kind tag with a tinted tile; only the glyph and tile carry the kind color.",
+      "html": "<span class=\"ds-kind\"><span class=\"ds-kind-tile\"></span>database</span>",
+      "css": ".ds-kind{display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 8px 0 3px;border-radius:var(--radius-sm);background:var(--surface);border:1px solid var(--border);font:500 12px/1 var(--font-sans);color:var(--text);} .ds-kind-tile{width:18px;height:18px;border-radius:4px;background:var(--node-database-soft);box-shadow:inset 0 0 0 5px var(--node-database-soft),inset 0 0 0 9px var(--node-database);}"
+    },
+    {
+      "name": "Landing Participant Row",
+      "kind": "nav",
+      "description": "Landing page (site/) only: the navigation is the diagram's participant row; the last participant is the demo action.",
+      "html": "<nav class=\"ds-lanes\"><a class=\"ds-lane\" href=\"#\" aria-current=\"true\">You</a><a class=\"ds-lane\" href=\"#\">Pains</a><a class=\"ds-lane\" href=\"#\">How it works</a><a class=\"ds-lane\" href=\"#\">How to use</a><a class=\"ds-lane ds-lane-primary\" href=\"#\">Demo</a></nav>",
+      "css": ".ds-lanes{display:flex;gap:24px;padding:22px 20px;background:var(--bg-app);} .ds-lane{display:inline-flex;align-items:center;justify-content:center;gap:6px;width:124px;height:44px;border:1.5px solid var(--border-strong);border-radius:var(--radius-md);background:var(--surface);color:var(--text);font:600 14px/1 var(--font-sans);letter-spacing:-0.01em;white-space:nowrap;text-decoration:none;transition:background-color 150ms cubic-bezier(0.16,1,0.3,1),border-color 150ms cubic-bezier(0.16,1,0.3,1),color 150ms cubic-bezier(0.16,1,0.3,1);} .ds-lane:hover{border-color:var(--text);} .ds-lane[aria-current]{border-color:var(--brand);background:var(--brand-soft);color:var(--brand-text);} .ds-lane-primary{border-color:var(--brand);background:var(--brand);color:var(--on-brand);} .ds-lane-primary:hover{border-color:var(--brand-hover);background:var(--brand-hover);} .ds-lane:focus-visible{outline:2px solid var(--brand);outline-offset:3px;}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The impulse is the brand",
+    "overview": "Brainagram is a technical drawing that keeps time. Everything at rest is calm and neutral — paper and graphite in the light theme, graphite and chalk in the dark — so that the one thing that matters stands out: the **impulse**, the violet dot that travels along the active arrow and lights up what is happening *now*. The past stays in quiet ink (done), the future in thin, legible grey (pending), and the present glows (active). Every visual decision serves that reading of time.\n\nThe interface is an instrument, not a stage: dense, precise and quiet, with short shadows, 1px hairlines and small, exact type. Personality lives in the details — named motion curves, node shapes that carry meaning, a scrubber segmented by step — rather than in decoration. There is no neon, no gradient, no \"dark hacker\" look; the dark theme is graphite tinted toward violet, not an inverted light theme.\n\nThe same tokens drive the application chrome and the SVG diagram, and the SVG export inlines the active theme's values, so a diagram looks the same in the app, in a PNG and in a GIF.",
+    "keyCharacteristics": [
+      "One saturated color, reserved for motion, the current step, the primary action and focus.",
+      "Technical-drawing neutrals: warm paper (light), violet-tinted graphite (dark).",
+      "Meaning carried by form first — line style, arrowhead, node shape — and color second.",
+      "Compact 4px rhythm, 32px controls, 1px borders, short shadows.",
+      "Named motion curves for the impulse, the arrival pulse and reveals; reduced motion fully supported.",
+      "Plain hand-written CSS on custom properties; both themes share every token name."
+    ],
+    "rules": [
+      {
+        "name": "The One Live Signal Rule",
+        "body": "Violet means \"moving or happening now\". If something violet neither moves nor responds to an action, it is wrong.",
+        "section": "colors"
+      },
+      {
+        "name": "The Form Before Color Rule",
+        "body": "Arrow kinds are read by line style and arrowhead, node kinds by shape and glyph; color only reinforces.",
+        "section": "colors"
+      },
+      {
+        "name": "The Token-Only Rule",
+        "body": "Components never use literal colors. Both themes swap the same names; anything drawn in the canvas uses a `--` token listed in the export (`EXPORT_VARS`).",
+        "section": "colors"
+      },
+      {
+        "name": "The Tabular Numbers Rule",
+        "body": "Time, zoom, counters and step numbers use Geist Mono with `tabular-nums`, so playing never makes digits jitter.",
+        "section": "typography"
+      },
+      {
+        "name": "The Sentence Case Rule",
+        "body": "Everything is sentence case except overlines, which are uppercase.",
+        "section": "typography"
+      },
+      {
+        "name": "The Float-Only Shadow Rule",
+        "body": "A shadow means \"this sits above the canvas or the page\". Cards and panels at rest are bordered, not lifted; a card may lift 2px on hover.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Participant Row Rule",
+        "body": "On the landing, navigation is the diagram's participant row: one header per section, each sitting on its own lifeline, the last one the filled demo action. Don't add a separate nav bar, menu or tab strip beside it.",
+        "section": "landing"
+      },
+      {
+        "name": "The Step Wash Rule",
+        "body": "`--step-wash` exists only in `site/` and only as the full-bleed band behind the current step's heading. Everywhere else the selection ground is `brand-soft`.",
+        "section": "landing"
+      }
+    ],
+    "dos": [
+      "**Do** reserve `brand` for what moves or is current: the impulse, the active arrow, the current step, one primary action, focus.",
+      "**Do** use tokens for every color, in the app and in the canvas, and add any new canvas token to `EXPORT_VARS`.",
+      "**Do** distinguish kinds and states by form (line style, arrowhead, node shape, icon + word) before color.",
+      "**Do** keep text at 4.5:1 and control edges, arrows, icons and focus at 3:1 in both themes.",
+      "**Do** dim inactive diagram elements by swapping tokens (e.g. `text-muted`, `border`), not by lowering opacity on text.",
+      "**Do** use Geist Mono with tabular numbers for time, zoom, counters and code.",
+      "**Do** keep controls at 32px on the 4px rhythm, with 1px hairlines and the shadow vocabulary above."
+    ],
+    "donts": [
+      "**Don't** paint anything violet that neither moves nor responds to an action.",
+      "**Don't** use neon, gradients or a \"dark hacker\" look; the dark theme is graphite, not black.",
+      "**Don't** fill whole nodes with their kind color — only the glyph and its tile.",
+      "**Don't** use Unicode glyphs or emoji as icons; use Heroicons through `<.icon>`, with an `aria-label` that names the shortcut on icon-only buttons.",
+      "**Don't** introduce a CSS framework, utility classes or literal hex values in components.",
+      "**Don't** lift cards and panels at rest with shadows; shadows are for what floats."
+    ]
+  }
+}

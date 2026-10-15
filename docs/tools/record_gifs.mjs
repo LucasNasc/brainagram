@@ -100,7 +100,7 @@ async function evaluate(page, expression) {
   return r.result.value;
 }
 
-async function waitFor(page, expression, timeout = 20000) {
+async function waitFor(page, expression, timeout = 45000) {
   const start = Date.now();
   while (Date.now() - start < timeout) {
     if (await evaluate(page, expression).catch(() => false)) return;

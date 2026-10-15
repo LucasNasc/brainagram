@@ -117,7 +117,13 @@ Seus diagramas, em cards com miniatura.
 O **Editor livre** (`/new`) abre o editor sem salvar nada até você apertar
 **Salvar**.
 
-### 2. O editor (`/d/:slug`)
+### 2. Apresentar e editar (`/d/:slug`)
+
+Um link compartilhado abre em **modo apresentação**: só o diagrama, o player e
+os passos — cada passo lista as suas mensagens ("quem → quem · o quê"), a
+câmera acompanha a seta que está tocando e, na sequência, os participantes
+ficam fixos no topo ao rolar. **Editar** (ou `P`) abre o editor; os links da
+área de gestão já abrem no editor (`/d/:slug?edit=1`).
 
 ```
 ┌──────────── código ────────────┬──────────── canvas ────────────┬─ passos ┐
@@ -127,9 +133,12 @@ O **Editor livre** (`/new`) abre o editor sem salvar nada até você apertar
 └────────────────────────────────┴───────── ▶ timeline ──────────┴─────────┘
 ```
 
-- **Código** à esquerda: o diagrama recompila enquanto você digita. O erro
-  aponta a linha, e o último diagrama válido continua na tela. O autocompletar
-  sugere tipos de nó, palavras-chave, setas e ids existentes.
+- **Código** à esquerda, com números de linha: o diagrama recompila enquanto
+  você digita. O erro aponta a linha e diz o que era esperado, e o último
+  diagrama válido continua na tela. O autocompletar sugere tipos de nó,
+  palavras-chave, setas e ids existentes.
+- **Alterações não salvas** ficam marcadas ao lado do título; sair com elas
+  pede confirmação, e `Ctrl/⌘ S` salva.
 - **Canvas** no meio, com dois modos (`E` alterna):
   - **Editar** — arraste nós, puxe da alça de um nó para conectar, duplo clique
     renomeia um nó ou o rótulo de uma seta, duplo clique numa área vazia cria um
@@ -148,13 +157,15 @@ O **Editor livre** (`/new`) abre o editor sem salvar nada até você apertar
 | `F` | enquadrar o diagrama |
 | `R` | reiniciar |
 | `E` | alternar Editar / Mover |
+| `P` | alternar apresentação / editor (sem nada selecionado) |
+| `Ctrl/⌘ S` | salvar |
 | `Ctrl/⌘ K` | paleta de comandos |
 | `Ctrl/⌘ Z`, `Ctrl/⌘ Shift Z` | desfazer / refazer (texto e canvas) |
 | `Shift Alt F` | formatar o código |
 | `F8` | ir para o próximo erro |
 | `Alt ↑` `Alt ↓` | mover o bloco `step` atual para cima / baixo |
 | `Enter` | renomear o nó / a seta selecionada |
-| `P` | editar o payload da seta selecionada |
+| `P` (seta selecionada) | editar o payload da seta selecionada |
 | `Delete` | apagar a seleção |
 | `Esc` | cancelar (também cancela a gravação de um GIF) |
 
@@ -213,7 +224,7 @@ Mais exemplos em [`docs/examples/`](docs/examples).
 
 | Formato | Exportar | Importar |
 |---|---|---|
-| `.brain` (um diagrama, o texto da DSL) | editor → *Exportar → Arquivo .brain*; card → *Baixar .brain* | área de gestão → *Importar*; editor → *Importar* |
+| `.brain` (um diagrama, o texto da DSL) | editor → *Exportar → Arquivo .brain*; card → *Baixar .brain* | área de gestão → *Importar*; editor → *Abrir → Importar* |
 | Pacote `.json` (diagramas + projetos) | área de gestão → *Exportar* (o projeto aberto, *Sem projeto* ou tudo) | área de gestão → *Importar* (os projetos são recriados; um de mesmo nome é reaproveitado) |
 | `sequenceDiagram` do Mermaid | — | nos dois diálogos de importar |
 | PlantUML (sequência → sequência, componentes → arquitetura) | — | nos dois diálogos de importar |
@@ -310,33 +321,54 @@ gettext está em dia, e depois roda a suíte inteira contra o Postgres.
 ## Deploy
 
 O Brainagram traz um **Dockerfile** de produção (um release Elixir sobre Debian
-slim). Por padrão o container também roda o próprio **PostgreSQL**, ouvindo só
-dentro do container, com os dados em `/app/data` — monte um volume persistente
-aí. Ao subir, ele inicializa o banco (na primeira vez), aplica as migrações
-pendentes, sobe o servidor na porta `4000` e responde `GET /health`.
+slim). Ao subir, o container aplica as migrações pendentes, inicia o servidor
+na porta `4000` e responde `GET /health`. Tudo se configura por variáveis de
+ambiente — copie o [`.env.example`](.env.example) para `.env` e preencha.
+
+```bash
+cp .env.example .env        # defina SECRET_KEY_BASE e PHX_HOST
+docker compose up -d        # http://localhost:4000
+```
+
+ou, sem Compose:
 
 ```bash
 docker build -t brainagram .
-docker run -p 4000:4000 -v brainagram-data:/app/data   -e SECRET_KEY_BASE="$(mix phx.gen.secret)"   -e PHX_HOST=localhost   brainagram
+docker run -p 4000:4000 -v brainagram-data:/app/data \
+  -e SECRET_KEY_BASE="$(openssl rand -base64 48)" \
+  -e PHX_HOST=localhost \
+  brainagram
 ```
+
+### Banco de dados
+
+| `DATABASE_URL` | O que acontece |
+|---|---|
+| **não definida** (padrão) | o container roda o **próprio PostgreSQL**, ouvindo só dentro dele, com os dados em `/app/data` — monte um volume persistente ali |
+| `ecto://USUARIO:SENHA@HOST:5432/BANCO` | conecta ao **seu PostgreSQL** (serviço gerenciado, Coolify, RDS, Neon, Supabase…) e não inicia banco nenhum; o volume não é usado |
+
+Com banco externo, o banco já precisa existir e o usuário precisa poder criar
+tabelas (as migrações rodam ao subir). URLs `postgres://…` também valem;
+caracteres especiais na senha vão codificados (`@` → `%40`).
 
 | Variável | Obrigatória | Para quê |
 |---|---|---|
-| `SECRET_KEY_BASE` | sim | no mínimo 64 bytes — gere com `mix phx.gen.secret` |
+| `SECRET_KEY_BASE` | sim | no mínimo 64 bytes — `openssl rand -base64 48` ou `mix phx.gen.secret` |
 | `PHX_HOST` | sim | o host público, sem `https://` (padrão `example.com`) |
-| `DATABASE_URL` | não | um PostgreSQL **externo** (`ecto://USUARIO:SENHA@HOST/BANCO`); definida, o embutido não sobe |
-| `PORT` | não | padrão `4000` |
+| `DATABASE_URL` | não | um PostgreSQL **externo**; definida, o embutido não sobe |
+| `DATABASE_SSL` | não | `false` (padrão), `true` (criptografa, sem conferir o certificado) ou `verify` (criptografa e confere) — a maioria dos serviços gerenciados exige um dos dois últimos |
+| `DATABASE_SSL_CA_FILE` | não | com `verify`: caminho, dentro do container, da CA que assinou o certificado do servidor (quando não é uma CA pública) |
 | `POOL_SIZE` | não | conexões com o banco, padrão `10` |
-| `ECTO_IPV6` | não | `true` para conectar por IPv6 |
+| `ECTO_IPV6` | não | `true` se o host do banco só tem IPv6 |
+| `PORT` | não | porta HTTP dentro do container, padrão `4000` |
 
-> **TODO — banco externo.** O PostgreSQL embutido é o ponto de partida: uma
-> instância, um container. Passar para um banco externo (um PostgreSQL do
-> Coolify, um serviço gerenciado…) é só definir `DATABASE_URL` e levar os dados
-> com `pg_dump`/`pg_restore`; procure `TODO(external-db)` no `Dockerfile` e em
-> `rel/overlays/bin/start`.
+Para sair do banco embutido para um externo: faça o `pg_dump` dentro do
+container (`docker exec <container> sh -c 'PGPASSWORD=$(cat /app/data/.postgres-password) pg_dump -h 127.0.0.1 -U postgres brainagram'`),
+restaure no banco novo e defina `DATABASE_URL`.
 
 Sem Docker: `MIX_ENV=prod mix assets.deploy && MIX_ENV=prod mix release`, e
-depois `_build/prod/rel/brainagram/bin/migrate` e `.../bin/server`.
+depois `_build/prod/rel/brainagram/bin/migrate` e `.../bin/server` (aqui a
+`DATABASE_URL` é sempre obrigatória).
 
 ### Coolify
 
@@ -350,7 +382,9 @@ depois `_build/prod/rel/brainagram/bin/migrate` e `.../bin/server`.
    banco embutido ao mesmo tempo — o script de início se recusa (espera e
    depois falha o deploy), mas a opção evita o deploy falho.
 4. **Variáveis de ambiente**: `SECRET_KEY_BASE` e `PHX_HOST` (o domínio sem
-   `https://`).
+   `https://`). Para usar um PostgreSQL do mesmo projeto no lugar do embutido,
+   defina também `DATABASE_URL` com a URL **interna** dele; os passos 2 e 3
+   (volume e nomes de container) deixam de ser necessários.
 5. **Auto Deploy** (já vem ligado com o GitHub App): cada push na `main`
    constrói a imagem e troca o container. O GitHub Actions só roda os testes
    (não segura o deploy), então mantenha a `main` verde.

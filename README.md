@@ -115,7 +115,13 @@ Your diagrams, as cards with a live thumbnail.
 The **Scratch editor** (`/new`) opens the editor without saving anything until
 you press **Save**.
 
-### 2. The editor (`/d/:slug`)
+### 2. Presenting and editing (`/d/:slug`)
+
+A shared link opens in **presentation mode**: just the diagram, the player and
+the steps — each step lists its messages ("who → whom · what"), the camera
+follows the arrow that is playing and, in sequence diagrams, the participants
+stay pinned at the top as you scroll. **Edit** (or `P`) opens the editor; the
+links in the management area open the editor directly (`/d/:slug?edit=1`).
 
 ```
 ┌───────────── code ─────────────┬──────────── canvas ────────────┬─ steps ─┐
@@ -125,9 +131,12 @@ you press **Save**.
 └────────────────────────────────┴──────── ▶ timeline ───────────┴─────────┘
 ```
 
-- **Code** on the left: the diagram recompiles as you type. Errors point to the
-  line and the last valid diagram stays on screen. Autocomplete suggests node
-  kinds, keywords, arrows and existing ids.
+- **Code** on the left, with line numbers: the diagram recompiles as you type.
+  Errors point to the line, say what was expected, and the last valid diagram
+  stays on screen. Autocomplete suggests node kinds, keywords, arrows and
+  existing ids.
+- **Unsaved changes** are marked next to the title; leaving with them asks
+  first, and `Ctrl/⌘ S` saves.
 - **Canvas** in the middle, with two modes (`E` toggles):
   - **Edit** — drag nodes, drag from a node's handle to connect, double-click
     to rename a node or an arrow label, double-click an empty area to add a
@@ -146,13 +155,15 @@ you press **Save**.
 | `F` | fit diagram to screen |
 | `R` | restart |
 | `E` | toggle Edit / Pan mode |
+| `P` | toggle presentation / editor (with nothing selected) |
+| `Ctrl/⌘ S` | save |
 | `Ctrl/⌘ K` | command palette |
 | `Ctrl/⌘ Z`, `Ctrl/⌘ Shift Z` | undo / redo (text and canvas) |
 | `Shift Alt F` | format code |
 | `F8` | go to next error |
 | `Alt ↑` `Alt ↓` | move the current `step` block up / down |
 | `Enter` | rename the selected node / arrow |
-| `P` | edit the selected arrow's payload |
+| `P` (arrow selected) | edit the selected arrow's payload |
 | `Delete` | remove the selection |
 | `Esc` | cancel (also cancels a GIF recording) |
 
@@ -211,7 +222,7 @@ More examples live in [`docs/examples/`](docs/examples).
 
 | Format | Export | Import |
 |---|---|---|
-| `.brain` (one diagram, the DSL text) | editor → *Export → .brain file*; card → *Download .brain* | management area → *Import*; editor → *Import* |
+| `.brain` (one diagram, the DSL text) | editor → *Export → .brain file*; card → *Download .brain* | management area → *Import*; editor → *Open → Import* |
 | `.json` bundle (diagrams + their projects) | management area → *Export* (the open project, *No project* or everything) | management area → *Import* (projects are recreated; one with the same name is reused) |
 | Mermaid `sequenceDiagram` | — | both import dialogs |
 | PlantUML (sequence → sequence, component → architecture) | — | both import dialogs |
@@ -308,33 +319,55 @@ extraction, then runs the full suite against Postgres.
 ## Deployment
 
 Brainagram ships with a production **Dockerfile** (an Elixir release on Debian
-slim). By default the container also runs its own **PostgreSQL**, listening only
-inside the container, with the data in `/app/data` — mount a persistent volume
-there. On start it initializes the database (first run), applies pending
-migrations, starts the server on port `4000`, and answers `GET /health`.
+slim). On start the container applies pending migrations, starts the server on
+port `4000` and answers `GET /health`. Everything is configured through
+environment variables — copy [`.env.example`](.env.example) to `.env` and
+fill it in.
+
+```bash
+cp .env.example .env        # set SECRET_KEY_BASE and PHX_HOST
+docker compose up -d        # http://localhost:4000
+```
+
+or, without Compose:
 
 ```bash
 docker build -t brainagram .
-docker run -p 4000:4000 -v brainagram-data:/app/data   -e SECRET_KEY_BASE="$(mix phx.gen.secret)"   -e PHX_HOST=localhost   brainagram
+docker run -p 4000:4000 -v brainagram-data:/app/data \
+  -e SECRET_KEY_BASE="$(openssl rand -base64 48)" \
+  -e PHX_HOST=localhost \
+  brainagram
 ```
+
+### Database
+
+| `DATABASE_URL` | What happens |
+|---|---|
+| **not set** (default) | the container runs its **own PostgreSQL**, listening only inside the container, with the data in `/app/data` — mount a persistent volume there |
+| `ecto://USER:PASS@HOST:5432/DB` | it connects to **your PostgreSQL** (a managed service, Coolify, RDS, Neon, Supabase…) and starts no database of its own; the volume is not used |
+
+With an external database, the database must already exist and the user must
+be able to create tables (migrations run on start). `postgres://…` URLs work
+too; special characters in the password must be percent-encoded (`@` → `%40`).
 
 | Variable | Required | Purpose |
 |---|---|---|
-| `SECRET_KEY_BASE` | yes | at least 64 bytes — generate with `mix phx.gen.secret` |
+| `SECRET_KEY_BASE` | yes | at least 64 bytes — `openssl rand -base64 48` or `mix phx.gen.secret` |
 | `PHX_HOST` | yes | public host name, without `https://` (defaults to `example.com`) |
-| `DATABASE_URL` | no | an **external** PostgreSQL (`ecto://USER:PASS@HOST/DATABASE`); when set, the embedded one isn't started |
-| `PORT` | no | defaults to `4000` |
-| `POOL_SIZE` | no | database pool, defaults to `10` |
-| `ECTO_IPV6` | no | `true` to connect over IPv6 |
+| `DATABASE_URL` | no | an **external** PostgreSQL; when set, the embedded one isn't started |
+| `DATABASE_SSL` | no | `false` (default), `true` (encrypt, don't check the certificate) or `verify` (encrypt and verify it) — most managed services require one of the last two |
+| `DATABASE_SSL_CA_FILE` | no | with `verify`: path, inside the container, of the CA that signed the server's certificate (when it isn't a public CA) |
+| `POOL_SIZE` | no | database connections, defaults to `10` |
+| `ECTO_IPV6` | no | `true` if the database host is IPv6-only |
+| `PORT` | no | HTTP port inside the container, defaults to `4000` |
 
-> **TODO — external database.** The embedded PostgreSQL is the starting point:
-> one instance, one container. Moving to an external database (a Coolify
-> PostgreSQL resource, a managed service…) only takes `DATABASE_URL` plus a
-> `pg_dump`/`pg_restore` of the data; look for `TODO(external-db)` in the
-> `Dockerfile` and in `rel/overlays/bin/start`.
+Moving from the embedded database to an external one: `pg_dump` from the
+container (`docker exec <container> sh -c 'PGPASSWORD=$(cat /app/data/.postgres-password) pg_dump -h 127.0.0.1 -U postgres brainagram'`),
+restore it into the new database, then set `DATABASE_URL`.
 
 Without Docker: `MIX_ENV=prod mix assets.deploy && MIX_ENV=prod mix release`,
-then `_build/prod/rel/brainagram/bin/migrate` and `.../bin/server`.
+then `_build/prod/rel/brainagram/bin/migrate` and `.../bin/server` (here
+`DATABASE_URL` is always required).
 
 ### Coolify
 
@@ -348,7 +381,9 @@ then `_build/prod/rel/brainagram/bin/migrate` and `.../bin/server`.
    embedded database at the same time — the start script refuses to (it waits
    and then fails the deploy), but the setting avoids the failed deploy.
 4. **Environment variables**: `SECRET_KEY_BASE` and `PHX_HOST` (the domain
-   without `https://`).
+   without `https://`). To use a PostgreSQL resource of the same project
+   instead of the embedded one, also set `DATABASE_URL` to its **internal** URL;
+   then steps 2 and 3 (volume, container names) aren't needed.
 5. **Auto Deploy** (on by default with the GitHub App): every push to `main`
    builds the image and replaces the container. GitHub Actions only runs the
    tests (it doesn't gate the deploy), so keep `main` green.

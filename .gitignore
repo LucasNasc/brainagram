@@ -46,3 +46,10 @@ Thumbs.db
 .env
 .env.*
 !.env.example
+
+# Impeccable: working files (reviews, mocks, live sessions)
+/.impeccable/review/
+/.impeccable/mocks/
+/.impeccable/questions/
+/.impeccable/live/
+/.impeccable/hook.cache.json
