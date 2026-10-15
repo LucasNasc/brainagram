@@ -1,0 +1,64 @@
+/* Tokens do Brainagram (tema escuro), os mesmos de assets/css/tokens.css. */
+:root {
+  color-scheme: dark;
+
+  --bg-app: #111115;
+  --bg-canvas: #15151a;
+  --surface: #1c1c22;
+  --surface-2: #24242b;
+  --surface-3: #2d2d35;
+  --border: #2e2e37;
+  --border-strong: #73737f;
+  --text: #ededf2;
+  --text-muted: #a0a0ae;
+
+  --brand: #8e7cff;
+  --brand-hover: #a294ff;
+  --brand-soft: #2a2450;
+  --brand-text: #b3a8ff;
+  --on-brand: #111115;
+  /* A faixa do passo atual (só desta página): o violeta suave do app sobre o grafite. */
+  --step-wash: #211d42;
+
+  --edge-async: #3ccbb6;
+  --edge-fail: #ff6a5f;
+  --node-actor: #4fa8e8;
+  --node-service: #8ccdf2;
+  --node-database: #3dc495;
+  --node-queue: #f0b230;
+  --node-neutral: #a0a0ae;
+
+  --syn-keyword: #b3a8ff;
+  --syn-string: #6ed7b0;
+  --syn-arrow: #e394c2;
+
+  --shadow-md: 0 1px 2px #00000080, 0 6px 16px #00000066;
+  --shadow-lg: 0 2px 4px #00000080, 0 20px 48px #000000a6;
+
+  --font-sans: "Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, "SF Mono", "Cascadia Code", Menlo, monospace;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-full: 999px;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --fast: 150ms;
+  --slow: 520ms;
+
+  --header-h: 88px;
+  --transport-h: 56px;
+  --gutter: 44px;
+
+  /* Posição das raias; o JavaScript (lib/lanes.ts) grava os valores reais. */
+  --lane-0: 216px;
+  --lane-1: 468px;
+  --lane-2: 720px;
+  --lane-3: 972px;
+  --lane-4: 1224px;
+}
+
+:root[data-compact] {
+  --header-h: 100px;
+}

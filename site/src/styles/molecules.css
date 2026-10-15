@@ -1,0 +1,413 @@
+/* Moléculas: mensagem, cabeçalho de raia, idioma, código, barra de tempo, dor. */
+
+/* A seta é desenhada pelo WebGL na metade da altura deste elemento. */
+.lp-msg {
+  position: relative;
+  z-index: 2;
+  height: 72px;
+  pointer-events: none;
+}
+
+.lp-msg__label {
+  position: absolute;
+  left: calc((var(--from) + var(--to)) / 2);
+  top: 50%;
+  transform: translate(-50%, calc(-100% - 9px));
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  background: var(--surface-2);
+  color: var(--text-muted);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.25rem;
+  white-space: nowrap;
+  text-decoration: none;
+  pointer-events: auto;
+  transition:
+    background-color var(--slow) var(--ease-out),
+    color var(--slow) var(--ease-out);
+}
+
+.lp-msg[data-state="active"] .lp-msg__label {
+  background: var(--brand-soft);
+  color: var(--brand-text);
+}
+
+.lp-msg[data-state="done"] .lp-msg__label {
+  color: var(--text);
+}
+
+.lp-msg[data-kind="fail"][data-state="done"] .lp-msg__label {
+  color: var(--edge-fail);
+}
+
+.lp-msg[data-kind="async"][data-state="done"] .lp-msg__label {
+  color: var(--edge-async);
+  font-family: var(--font-mono);
+}
+
+a.lp-msg__label:hover {
+  text-decoration: underline;
+}
+
+.lp-lane {
+  position: absolute;
+  top: 22px;
+  left: var(--lane);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 124px;
+  height: 44px;
+  transform: translateX(-50%);
+  border: 1.5px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  color: var(--text);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  text-decoration: none;
+  transition:
+    background-color var(--fast) var(--ease-out),
+    border-color var(--fast) var(--ease-out),
+    color var(--fast) var(--ease-out);
+}
+
+.lp-lane .lp-icon {
+  color: var(--node-actor);
+}
+
+.lp-lane:hover {
+  border-color: var(--text);
+}
+
+.lp-lane[aria-current] {
+  border-color: var(--brand);
+  background: var(--brand-soft);
+  color: var(--brand-text);
+}
+
+.lp-lane--primary {
+  border-color: var(--brand);
+  background: var(--brand);
+  color: var(--on-brand);
+}
+
+.lp-lane--primary .lp-icon {
+  color: inherit;
+  transition: transform var(--fast) var(--ease-out);
+}
+
+.lp-lane--primary:hover {
+  border-color: var(--brand-hover);
+  background: var(--brand-hover);
+}
+
+.lp-lane--primary:hover .lp-icon {
+  transform: translateX(3px);
+}
+
+:root[data-mid] .lp-lane {
+  width: 112px;
+  font-size: 0.8125rem;
+}
+
+/* Compacto: o participante "Você" cobre a linha da esquerda, e as seções
+   viram uma fila de links ao lado dele. */
+:root[data-compact] .lp-lane {
+  position: static;
+  width: auto;
+  height: 28px;
+  padding: 0 2px;
+  transform: none;
+  border: 0;
+  background: none;
+  color: var(--text-muted);
+  font-size: 0.8125rem;
+  font-weight: 500;
+}
+
+:root[data-compact] .lp-lane[aria-current] {
+  background: none;
+  color: var(--brand-text);
+}
+
+/* As duas pontas ficam centradas nas linhas de vida (x = 22px de cada borda);
+   o nome continua para leitores de tela. */
+:root[data-compact] .lp-lane:first-child {
+  flex: none;
+  width: 28px;
+  padding: 0;
+}
+
+:root[data-compact] .lp-lane:first-child .lp-lane__name {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+
+:root[data-compact] .lp-lane:first-child {
+  border: 1.5px solid var(--border-strong);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text);
+  font-weight: 600;
+}
+
+:root[data-compact] .lp-lane:first-child[aria-current] {
+  border-color: var(--brand);
+  background: var(--brand-soft);
+  color: var(--brand-text);
+}
+
+/* O participante da direita é o link da demo; a seta fica sobre a linha. */
+:root[data-compact] .lp-lane--primary {
+  flex: none;
+  gap: 4px;
+  margin-left: auto;
+  padding: 0 6px 0 9px;
+  border-radius: 8px;
+  background: var(--brand);
+  color: var(--on-brand);
+  font-weight: 600;
+}
+
+.lp-lang {
+  height: 36px;
+  min-width: 44px;
+  padding: 0 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition:
+    border-color var(--fast) var(--ease-out),
+    color var(--fast) var(--ease-out);
+}
+
+.lp-lang:hover {
+  border-color: var(--border-strong);
+  color: var(--text);
+}
+
+.lp-code {
+  min-width: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  overflow: hidden;
+}
+
+.lp-code__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 38px;
+  padding: 0 6px 0 16px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-muted);
+  font: 500 0.75rem/1 var(--font-mono);
+}
+
+.lp-code__copy {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 28px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-muted);
+  font: 500 0.75rem/1 var(--font-sans);
+  cursor: pointer;
+  transition:
+    background-color var(--fast) var(--ease-out),
+    color var(--fast) var(--ease-out);
+}
+
+.lp-code__copy:hover {
+  background: var(--surface-2);
+  color: var(--text);
+}
+
+.lp-code__body {
+  margin: 0;
+  padding: 12px 0;
+  overflow: auto;
+  font: 400 0.8125rem/1.25rem var(--font-mono);
+  tab-size: 2;
+  scrollbar-width: thin;
+}
+
+.lp-code__body:focus-visible {
+  outline-offset: -2px;
+}
+
+.lp-code__line {
+  display: block;
+  min-width: max-content;
+  padding: 0 16px;
+  transition: background-color var(--fast) var(--ease-out);
+}
+
+.lp-code__line[data-active] {
+  background: var(--brand-soft);
+  color: var(--brand-text);
+}
+
+.lp-code[data-language="shell"] .lp-code__line {
+  min-width: 0;
+  padding-left: calc(16px + 2ch);
+  text-indent: -2ch;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.lp-code[data-language="shell"] .lp-code__line::before {
+  content: "$ ";
+  color: var(--text-muted);
+  user-select: none;
+}
+
+.lp-syn-keyword {
+  color: var(--syn-keyword);
+}
+
+.lp-syn-string {
+  color: var(--syn-string);
+}
+
+.lp-syn-arrow {
+  color: var(--syn-arrow);
+}
+
+.lp-scrub {
+  position: relative;
+  flex: 1;
+  min-width: 80px;
+  height: 28px;
+}
+
+.lp-scrub__track {
+  position: absolute;
+  inset: 11px 0 auto;
+  display: flex;
+  gap: 4px;
+  height: 6px;
+}
+
+.lp-scrub__seg {
+  flex: 1 1 0;
+  border-radius: 3px;
+  background: var(--surface-3);
+  overflow: hidden;
+}
+
+.lp-scrub__seg i {
+  display: block;
+  height: 100%;
+  background: var(--brand);
+  transform-origin: left;
+}
+
+.lp-scrub__thumb {
+  position: absolute;
+  top: 50%;
+  left: calc(var(--at) * 100%);
+  width: 14px;
+  height: 14px;
+  margin: -7px 0 0 -7px;
+  border: 2px solid var(--bg-canvas);
+  border-radius: 50%;
+  background: var(--brand);
+  box-shadow: 0 1px 3px #00000080;
+}
+
+.lp-scrub__input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.lp-scrub:has(:focus-visible) .lp-scrub__thumb {
+  outline: 2px solid var(--brand);
+  outline-offset: 3px;
+}
+
+/* Uma dor: a seta que falha à esquerda, o que ela custa à direita. */
+.lp-pain {
+  position: relative;
+  padding-bottom: 56px;
+}
+
+.lp-pain > .lp-msg {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 44px;
+}
+
+.lp-pain__text {
+  position: relative;
+  z-index: 2;
+  width: fit-content;
+  max-width: min(38rem, calc(var(--lane-4) - var(--lane-1) - 2 * var(--gutter)));
+  margin-left: calc(var(--lane-1) + 40px);
+  padding: 6px 16px 6px 0;
+  background: var(--step-bg);
+  transition: background-color var(--slow) var(--ease-out);
+}
+
+.lp-pain__title {
+  margin-bottom: 8px;
+  font-size: clamp(1.25rem, 1.9vw, 1.625rem);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.lp-pain__text p {
+  color: var(--text-muted);
+}
+
+:root[data-compact] .lp-msg__label {
+  left: 50%;
+  max-width: calc(100% - 2 * var(--gutter));
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+:root[data-compact] .lp-pain > .lp-msg {
+  position: relative;
+  height: 68px;
+}
+
+:root[data-compact] .lp-pain__text {
+  max-width: none;
+  margin-inline: var(--gutter);
+  padding-right: 0;
+}
+
+@media (max-width: 380px) {
+  :root[data-compact] .lp-lane {
+    font-size: 0.75rem;
+  }
+
+  :root[data-compact] .lp-nav__lanes {
+    gap: 7px;
+  }
+}

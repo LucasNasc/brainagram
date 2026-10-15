@@ -1,0 +1,58 @@
+# Publica a landing page (site/) no GitHub Pages.
+#
+# Roda só quando algo em site/ muda (ou à mão, em Actions → Run workflow).
+# Para ligar: Settings → Pages → Source: "GitHub Actions".
+# URL da demo (opcional): Settings → Secrets and variables → Actions →
+# Variables → DEMO_URL. Sem ela, o botão principal leva ao README.
+name: Landing page
+
+on:
+  push:
+    branches: [main]
+    paths: ["site/**", ".github/workflows/pages.yml"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Um deploy por vez; um novo push não cancela o que já está publicando.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: site
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: site/package-lock.json
+
+      - run: npm ci
+      - run: npm run build
+        env:
+          VITE_DEMO_URL: ${{ vars.DEMO_URL }}
+
+      - uses: actions/configure-pages@v6
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: site/dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5
