@@ -95,4 +95,11 @@ export default {
   "nó": "ノード",
   "inserir": "挿入",
   "fechar": "閉じる",
+  // reprodução (paleta de comandos)
+  "Reprodução": "再生",
+  "Tocar / pausar": "再生 / 一時停止",
+  "Espaço": "Space",
+  "Reiniciar do começo": "最初から再生",
+  "Repetir em loop (liga/desliga)": "ループ再生（オン/オフ）",
+  "Apresentar / editar": "プレゼン / 編集",
 };

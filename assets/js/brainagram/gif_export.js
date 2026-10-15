@@ -5,7 +5,7 @@
 // um e entregar os quadros ao encoder. Nada de gravar a tela: o resultado é
 // igual em qualquer máquina e não depende de quanto tempo cada quadro levou.
 
-import { toSvgString, svgStyleText, triggerDownload } from "./export";
+import { exportFontFaces, toSvgString, svgStyleText, triggerDownload } from "./export";
 import { Palette, GifWriter } from "./gif";
 
 // Duas qualidades. HD grava em 2× (texto nítido em tela retina e em slide),
@@ -47,7 +47,7 @@ export async function recordGif({ svg, scene, timeline, quality = "hd", onProgre
   // o SVG é vetor: desenhado já no tamanho final, sai nítido (sem reamostrar)
   ctx.imageSmoothingQuality = "high";
   const background = getComputedStyle(document.documentElement).getPropertyValue("--bg-canvas").trim() || "#fbfbf9";
-  const style = svgStyleText();
+  const style = svgStyleText(await exportFontFaces());
 
   // Diagramas longos baixam a taxa de quadros em vez de virar um arquivo enorme.
   const total = timeline.total;

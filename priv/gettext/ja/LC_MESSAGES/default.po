@@ -119,11 +119,6 @@ msgstr "Brainagram — ホーム"
 msgid "Cancelar"
 msgstr "キャンセル"
 
-#: lib/brainagram_web/live/editor_live.ex
-#, elixir-autogen, elixir-format
-msgid "Carregar exemplo"
-msgstr "サンプルを読み込む"
-
 #: lib/brainagram_web/components/layouts.ex
 #, elixir-autogen, elixir-format
 msgid "Claro"
@@ -281,11 +276,6 @@ msgstr "サンプル"
 #, elixir-autogen, elixir-format
 msgid "Exportar"
 msgstr "エクスポート"
-
-#: lib/brainagram_web/live/editor_live.ex
-#, elixir-autogen, elixir-format
-msgid "F8 vai para o erro"
-msgstr "F8 でエラーへ移動"
 
 #: lib/brainagram_web/components/core_components.ex
 #: lib/brainagram_web/live/dashboard_live.ex
@@ -716,11 +706,6 @@ msgstr "メッセージは `group` の中に置けません — `step` を使っ
 msgid "nota"
 msgstr "注記"
 
-#: lib/brainagram_web/error_messages.ex
-#, elixir-autogen, elixir-format
-msgid "não entendi esta linha: %{text}"
-msgstr "この行を解釈できません: %{text}"
-
 #: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "nó de implantação, fronteira"
@@ -778,6 +763,7 @@ msgid_plural "%{count} diagramas"
 msgstr[0] "%{count} 件の図"
 
 #: lib/brainagram_web/live/dashboard_live.ex
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Abrir"
 msgstr "開く"
@@ -1358,3 +1344,83 @@ msgstr "ここにファイルをドロップするか、クリックして選択
 #, elixir-autogen, elixir-format
 msgid "Idioma: %{name}"
 msgstr "言語：%{name}"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Abrir o código e as ferramentas de edição (P)"
+msgstr "コードと編集ツールを開く (P)"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Alterações não salvas"
+msgstr "未保存の変更"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Apresentar"
+msgstr "プレゼン"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Apresentar (P)"
+msgstr "プレゼン (P)"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Editar (P)"
+msgstr "編集 (P)"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Fechar os passos"
+msgstr "ステップを閉じる"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Ferramentas do canvas"
+msgstr "キャンバスツール"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Há alterações não salvas. Sair mesmo assim?"
+msgstr "未保存の変更があります。このまま移動しますか？"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Ir para o erro (F8)"
+msgstr "エラーへ移動 (F8)"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Mostrar os passos"
+msgstr "ステップを表示"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Salvar (Ctrl+S)"
+msgstr "保存 (Ctrl+S)"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Substituir o código atual por este exemplo? Ctrl+Z desfaz."
+msgstr "現在のコードをこのサンプルに置き換えますか？Ctrl+Z で元に戻せます。"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Só o diagrama, o player e os passos (P)"
+msgstr "図・プレーヤー・ステップだけを表示 (P)"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Tornar público? O diagrama passa a aparecer na galeria pública."
+msgstr "公開しますか？この図は公開ギャラリーに表示されます。"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Zoom do diagrama"
+msgstr "図のズーム"
+
+#: lib/brainagram_web/error_messages.ex
+#, elixir-autogen, elixir-format
+msgid "não entendi esta linha: %{text}. Cada linha declara um nó (service api \"API\"), uma seta (a -> b : texto), um step, group, note ou payload."
+msgstr "この行を解釈できません: %{text}。各行ではノード（service api \"API\"）、矢印（a -> b : テキスト）、step、group、note、payload のいずれかを宣言します。"

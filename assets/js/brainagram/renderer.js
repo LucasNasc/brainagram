@@ -212,6 +212,15 @@ function drawActivations(layer, scene) {
 }
 
 function drawNodes(layer, scene, index) {
+  // Sequência: fundo e filete dos cabeçalhos, visíveis só quando eles ficam
+  // fixos no topo ao rolar (`.is-stuck`) — as linhas não passam por baixo.
+  if (scene.kind === "sequence" && scene.nodes.length) {
+    const top = Math.min(...scene.nodes.map((n) => n.y));
+    const bottom = Math.max(...scene.nodes.map((n) => n.y + n.h));
+    el("rect", { x: -2000, y: top - 12, width: scene.width + 4000, height: bottom - top + 20, class: "bg-header-backdrop" }, layer);
+    el("line", { x1: -2000, y1: bottom + 8, x2: scene.width + 2000, y2: bottom + 8, class: "bg-header-rule" }, layer);
+  }
+
   for (const node of scene.nodes) {
     const g = el("g", { class: `bg-node is-${node.kind}${node.pinned ? " is-pinned" : ""}`, "data-node": node.id }, layer);
 

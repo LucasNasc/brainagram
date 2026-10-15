@@ -63,6 +63,13 @@ export class Timeline {
     return this.schedule.total;
   }
 
+  // No instante zero nada começou: nenhuma seta ativa, nenhum passo aceso.
+  // Violeta é "acontecendo agora" (DESIGN.md, One Live Signal) — antes do play,
+  // não há nada acontecendo.
+  get started() {
+    return this.t > 0;
+  }
+
   get currentStep() {
     const steps = this.schedule.steps;
     let current = 0;
@@ -148,7 +155,7 @@ export class Timeline {
 
   paint() {
     const { entries } = this.schedule;
-    const current = this.currentStep;
+    const current = this.started ? this.currentStep : -1;
     const hot = new Set();
     const live = new Set();
 
@@ -157,7 +164,7 @@ export class Timeline {
       if (!item) continue;
 
       const p = entry.dur > 0 ? clamp((this.t - entry.start) / entry.dur, 0, 1) : 1;
-      const started = this.t >= entry.start;
+      const started = this.started && this.t >= entry.start;
 
       let state = "pending";
       if (started && p >= 1) state = "done";

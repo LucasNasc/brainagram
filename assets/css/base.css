@@ -1,5 +1,24 @@
 /* Brainagram — base: reset mínimo, tipografia, foco e utilitários. */
 
+/* Geist e Geist Mono (OFL, pacote npm `geist` da Vercel; licença em
+   priv/static/fonts/GEIST-OFL.txt). Servidas pelo próprio app, sem CDN:
+   uma fonte variável cobre todos os pesos (100–900). `swap` mostra o texto na
+   fonte do sistema até a Geist chegar, em vez de deixá-lo invisível. */
+@font-face {
+  font-family: "Geist";
+  src: url("/fonts/Geist-Variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Geist Mono";
+  src: url("/fonts/GeistMono-Variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 *, *::before, *::after { box-sizing: border-box; }
 
 html, body { height: 100%; }

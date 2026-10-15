@@ -19,6 +19,14 @@ import { downloadGif, GifCancelled } from "../brainagram/gif_export";
 import { t, decimal } from "../brainagram/i18n";
 
 const RECONCILE_MS = 150;
+// Faixa de cima ocupada pela barra flutuante do canvas (no editor) — na
+// apresentação a barra não existe e o diagrama sobe até perto da borda.
+const INSET_EDIT = 52;
+const INSET_PRESENT = 12;
+// Escala mínima do enquadramento: o rótulo de seta (12px) nunca fica menor que
+// isso na tela. Na apresentação é a escala de projetor (1:1); no editor, mais compacta.
+const MIN_EDIT = 0.66;
+const MIN_PRESENT = 1;
 
 export const DiagramCanvas = {
   mounted() {
@@ -28,7 +36,9 @@ export const DiagramCanvas = {
     this.viewport = null;
     this.editor = null;
     this.mode = readMode();
+    this.presenting = this.el.dataset.presenting === "true";
     this.selectedStep = null;
+    this.followedEdge = null;
     this.spaceDown = false;
     this.spacePanned = false;
     this.pendingDrop = null;
@@ -48,8 +58,19 @@ export const DiagramCanvas = {
     this._command = (e) => this.onCommand(e.detail || {});
     window.addEventListener("bg:command", this._command);
 
-    this._resize = () => this.viewport && this.viewport.fit();
-    window.addEventListener("resize", this._resize);
+    // qualquer mudança no tamanho do canvas — janela, painel de código que some
+    // na apresentação, gaveta — passa pelo `resize`, que só reenquadra se a
+    // pessoa não tiver escolhido um zoom
+    this._ro = new ResizeObserver(() => this.viewport && this.viewport.resize());
+    this._ro.observe(this.canvas);
+
+    // sair da página com alterações não salvas pede confirmação
+    this._unload = (e) => {
+      if (document.getElementById("editor")?.dataset.dirty !== "true") return;
+      e.preventDefault();
+      e.returnValue = "";
+    };
+    window.addEventListener("beforeunload", this._unload);
 
     this.syncMode();
 
@@ -64,10 +85,42 @@ export const DiagramCanvas = {
     document.removeEventListener("keydown", this._keys);
     document.removeEventListener("keyup", this._keysUp);
     window.removeEventListener("bg:command", this._command);
-    window.removeEventListener("resize", this._resize);
+    window.removeEventListener("beforeunload", this._unload);
+    this._ro && this._ro.disconnect();
     this.timeline && this.timeline.destroy();
     this.viewport && this.viewport.destroy();
     this.editor && this.editor.destroy();
+  },
+
+  // O servidor trocou o modo (Apresentar / Editar / tecla P).
+  updated() {
+    const presenting = this.el.dataset.presenting === "true";
+    if (presenting === this.presenting) return;
+    this.presenting = presenting;
+    this.applyPresenting();
+  },
+
+  // Apresentação: quem assiste não edita pelo canvas — arrastar move a tela,
+  // e os participantes da sequência ficam fixos no topo ao rolar.
+  applyPresenting() {
+    this.el.classList.toggle("is-presenting", this.presenting);
+    if (this.viewport) {
+      this.viewport.insetTop = this.presenting ? INSET_PRESENT : INSET_EDIT;
+      this.viewport.minReadable = this.presenting ? MIN_PRESENT : MIN_EDIT;
+    }
+    this.syncCaption();
+    if (this.editor) {
+      this.editor.clearSelection();
+      this.editor.setEnabled(this.editing());
+    }
+    this.setDrawer(false);
+    this.syncMode();
+    // os painéis entraram/saíram: reenquadra para o novo modo
+    requestAnimationFrame(() => this.viewport && this.viewport.fit());
+  },
+
+  editing() {
+    return this.mode === "edit" && !this.presenting;
   },
 
   setScene(scene) {
@@ -84,7 +137,10 @@ export const DiagramCanvas = {
     this.pendingDrop = null;
 
     if (prev) prev.destroy();
-    if (this.viewport) this.viewport.destroy();
+    if (this.viewport) {
+      this._userView = this.viewport.userView;
+      this.viewport.destroy();
+    }
     if (this.editor) this.editor.destroy();
 
     this.scene = scene;
@@ -96,14 +152,20 @@ export const DiagramCanvas = {
       onTick: (tl) => this.syncControls(tl),
     });
 
+    this.headerTop = scene.kind === "sequence" && scene.nodes.length ? Math.min(...scene.nodes.map((n) => n.y)) : null;
+    this.buildScrubber();
+
     this.viewport = new Viewport(this.index.svg, scene, {
-      insetTop: 52,
-      onChange: (s) => {
+      insetTop: this.presenting ? INSET_PRESENT : INSET_EDIT,
+      minReadable: this.presenting ? MIN_PRESENT : MIN_EDIT,
+      onChange: (s, view) => {
         this.setText("zoom", `${Math.round(s * 100)}%`);
+        this.syncSticky(view);
+        this.syncEdgeCue(view);
         this.editor && this.editor.selection && this.editor.placeBar();
       },
       canPan: () => {
-        if (this.mode !== "edit") return true;
+        if (!this.editing()) return true;
         if (this.spaceDown) this.spacePanned = true;
         return this.spaceDown;
       },
@@ -111,6 +173,7 @@ export const DiagramCanvas = {
 
     if (savedView) {
       this.viewport.view = savedView;
+      this.viewport.userView = this._userView ?? false;
       this.viewport.apply();
     }
 
@@ -125,7 +188,8 @@ export const DiagramCanvas = {
       onDrop: (drop) => (this.pendingDrop = drop),
       hint: (text) => this.setHint(text),
     });
-    this.editor.setEnabled(this.mode === "edit");
+    this.editor.setEnabled(this.editing());
+    this.el.classList.toggle("is-presenting", this.presenting);
 
     this.index.svg.addEventListener("click", (e) => {
       const payload = e.target.closest("[data-payload]");
@@ -195,6 +259,133 @@ export const DiagramCanvas = {
     this.focusCurrent();
   },
 
+  // Cabeçalhos da sequência fixos no topo: ao rolar para baixo, a camada dos
+  // participantes acompanha a borda de cima. Fora do modo de edição — lá os
+  // nós são arrastados e precisam ficar onde a cena diz.
+  syncSticky(view) {
+    const layer = this.index && this.index.svg.querySelector(".bg-layer-nodes");
+    if (!layer || this.headerTop === null || !view) return;
+    let dy = 0;
+    if (!this.editing()) {
+      const rect = this.index.svg.getBoundingClientRect();
+      const k = rect.width > 0 ? view.w / rect.width : 1;
+      const top = view.y + ((this.presenting ? INSET_PRESENT : INSET_EDIT) + 4) * k;
+      dy = Math.max(0, top - this.headerTop);
+    }
+    if (dy > 0) layer.setAttribute("transform", `translate(0 ${dy.toFixed(1)})`);
+    else layer.removeAttribute("transform");
+    if (layer.classList.contains("is-stuck") !== dy > 0) {
+      layer.classList.toggle("is-stuck", dy > 0);
+      // fixos, os cabeçalhos ficam por cima das setas que passam por baixo
+      // deles; soltos, voltam para trás das setas, como o renderizador desenha
+      const svg = this.index.svg;
+      if (dy > 0) svg.appendChild(layer);
+      else svg.insertBefore(layer, svg.querySelector(".bg-layer-edges"));
+    }
+  },
+
+  // Quantos participantes ficam fora da tela, à direita: "+2 →". Só na
+  // apresentação — no editor a barra de zoom e o arrastar já mostram o resto.
+  syncEdgeCue(view) {
+    const cue = this.overlayEl("ba-edgecue");
+    if (!cue) return;
+    let hidden = 0;
+    if (this.presenting && view && this.scene.kind === "sequence") {
+      hidden = this.scene.nodes.filter((n) => n.x > view.x + view.w - 8).length;
+    }
+    cue.hidden = hidden === 0;
+    cue.textContent = hidden ? `+${hidden} →` : "";
+  },
+
+  // Legenda do passo atual sobre o canvas (apresentação): "3/5 · título".
+  syncCaption() {
+    const cap = this.overlayEl("ba-stepcaption");
+    if (!cap) return;
+    const tl = this.timeline;
+    const step = tl && tl.started ? this.scene.steps.find((s) => s.index === tl.currentStep) : null;
+    cap.hidden = !(this.presenting && step);
+    cap.textContent = step ? `${step.index + 1}/${this.scene.steps.length} · ${t(step.label)}` : "";
+  },
+
+  overlayEl(cls) {
+    const layer = this.el.querySelector("#canvas-overlay");
+    if (!layer) return null;
+    let el = layer.querySelector(`.${cls}`);
+    if (!el) {
+      el = document.createElement("p");
+      el.className = cls;
+      el.hidden = true;
+      el.setAttribute("aria-hidden", "true");
+      layer.appendChild(el);
+    }
+    return el;
+  },
+
+  // Faixa da barra de tempo, um segmento por passo, do tamanho da duração dele.
+  buildScrubber() {
+    const box = document.querySelector("[data-bg-scrub-segs]");
+    if (!box || !this.schedule) return;
+    box.replaceChildren(
+      ...this.schedule.steps.map((step) => {
+        const seg = document.createElement("span");
+        seg.className = "ba-scrubber__seg";
+        seg.style.flexGrow = String(Math.max(step.end - step.start, 1));
+        seg.dataset.step = String(step.index);
+        seg.appendChild(document.createElement("i"));
+        return seg;
+      }),
+    );
+  },
+
+  // Área das setas do passo (coordenadas da cena), para a câmera.
+  stepBox(index) {
+    const step = this.scene.steps.find((s) => s.index === index);
+    if (!step) return null;
+    const boxes = [];
+    for (const id of step.edge_ids) {
+      const item = this.index.edges.get(id);
+      if (item) boxes.push(item.group.getBBox());
+    }
+    const box = unionBox(boxes);
+    // a faixa do passo (sequência) atravessa o diagrama inteiro: conta só na
+    // vertical, para o título do passo aparecer junto — senão a área iria até
+    // a borda esquerda e a câmera nunca andaria para a direita
+    const band = this.index.steps.get(index)?.band;
+    if (band && box) {
+      const b = band.getBBox();
+      const top = Math.min(box.y, b.y);
+      box.h = Math.max(box.y + box.h, b.y + b.height) - top;
+      box.y = top;
+    }
+    return box;
+  },
+
+  // Durante o play, a câmera acompanha a seta que está tocando — sem mudar o
+  // zoom, e só quando ela sai da tela.
+  followActive(tl) {
+    if (!tl.playing || !tl.started) {
+      this.followedEdge = null;
+      return;
+    }
+    let active = null;
+    for (const [id, entry] of this.schedule.entries) {
+      if (!entry.note && tl.t >= entry.start && tl.t < entry.start + entry.dur) active = id;
+    }
+    if (!active || active === this.followedEdge) return;
+    this.followedEdge = active;
+    const item = this.index.edges.get(active);
+    if (item) this.viewport.ensureVisible(toBox(item.group.getBBox()));
+  },
+
+  setDrawer(open) {
+    const pane = document.getElementById("steps-pane");
+    if (!pane) return;
+    if (open) pane.setAttribute("data-open", "");
+    else pane.removeAttribute("data-open");
+    document.querySelectorAll('[data-bg-control="steps-drawer"]').forEach((b) => b.setAttribute("aria-expanded", String(open)));
+    if (open) (pane.querySelector('[aria-current="step"]') || pane.querySelector(".ba-step"))?.focus();
+  },
+
   onControl(e) {
     const target = e.target.closest("[data-bg-control], [data-bg-step]");
     if (!target || !this.timeline) return;
@@ -258,6 +449,10 @@ export const DiagramCanvas = {
         break;
       case "fit":
         this.viewport.fit();
+        break;
+      case "steps-drawer":
+        if (e && e.type !== "click") break;
+        this.setDrawer(!document.getElementById("steps-pane")?.hasAttribute("data-open"));
         break;
       case "mode-edit":
       case "mode-view":
@@ -362,15 +557,18 @@ export const DiagramCanvas = {
       localStorage.setItem("bg:canvas-mode", mode);
     } catch (_e) {}
     this.syncMode();
-    this.editor && this.editor.setEnabled(mode === "edit");
+    this.editor && this.editor.setEnabled(this.editing());
+    if (this.viewport) this.syncSticky(this.viewport.view);
   },
 
+  // Rádio de verdade: só a opção marcada entra na ordem do Tab; as setas trocam.
   syncMode() {
     document.querySelectorAll('[data-bg-control="mode-edit"], [data-bg-control="mode-view"]').forEach((b) => {
       const on = (b.dataset.bgControl === "mode-edit") === (this.mode === "edit");
       b.setAttribute("aria-checked", String(on));
+      b.setAttribute("tabindex", on ? "0" : "-1");
     });
-    this.el.classList.toggle("is-edit-mode", this.mode === "edit");
+    this.el.classList.toggle("is-edit-mode", this.editing());
   },
 
   syncLayoutButton() {
@@ -394,8 +592,31 @@ export const DiagramCanvas = {
       e.preventDefault();
       return;
     }
+    // Ctrl/⌘+S salva de qualquer lugar do editor — inclusive digitando no código
+    if ((e.ctrlKey || e.metaKey) && !e.altKey && e.key.toLowerCase() === "s") {
+      e.preventDefault();
+      const save = document.getElementById("save-button");
+      if (save) {
+        window.dispatchEvent(new CustomEvent("bg:flush-source"));
+        save.click();
+      }
+      return;
+    }
+    if (e.key === "Escape" && document.getElementById("steps-pane")?.hasAttribute("data-open")) {
+      e.preventDefault();
+      this.setDrawer(false);
+      return;
+    }
     if (isTyping(e.target)) return;
     if (e.metaKey || e.ctrlKey || e.altKey) return;
+
+    const radio = e.target.closest && e.target.closest('[role="radiogroup"] [role="radio"]');
+    if (radio && ["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"].includes(e.key)) {
+      e.preventDefault();
+      this.setMode(this.mode === "edit" ? "view" : "edit");
+      document.querySelector(`[data-bg-control="mode-${this.mode}"]`)?.focus();
+      return;
+    }
 
     if (this.editor && this.editor.onKey(e)) {
       e.preventDefault();
@@ -418,7 +639,8 @@ export const DiagramCanvas = {
       ArrowLeft: () => this.runAction("prev"),
       f: () => this.viewport.fit(),
       r: () => this.timeline.restart(),
-      e: () => this.setMode(this.mode === "edit" ? "view" : "edit"),
+      e: () => !this.presenting && this.setMode(this.mode === "edit" ? "view" : "edit"),
+      p: () => this.pushEvent("present:toggle", {}),
     };
 
     const fn = map[e.key];
@@ -435,14 +657,16 @@ export const DiagramCanvas = {
     if (!this.spacePanned && !isTyping(e.target)) this.timeline.toggle();
   },
 
+  // Ao trocar de passo (←/→, clique), o passo inteiro vem para a tela.
   focusCurrent() {
-    if (this.scene.kind !== "sequence") return;
-    const step = this.scene.steps.find((s) => s.index === this.timeline.currentStep);
-    if (step) this.viewport.focusY(step.y + 120);
+    const box = this.stepBox(this.timeline.currentStep);
+    if (box) this.viewport.ensureVisible(box);
   },
 
   syncControls(tl) {
-    const step = this.scene.steps.find((s) => s.index === tl.currentStep);
+    const started = tl.started;
+    const current = tl.currentStep;
+    const step = started ? this.scene.steps.find((s) => s.index === current) : null;
     const total = this.scene.steps.length;
     const label = step ? t("Passo {n} de {total} · {label}", { n: step.index + 1, total, label: t(step.label) }) : "—";
     // o anúncio (aria-live) só muda quando o passo muda, não a cada frame
@@ -450,15 +674,41 @@ export const DiagramCanvas = {
       this._announced = label;
       this.setText("step", label);
       this.setText("step-count", step ? `${step.index + 1} / ${total}` : `— / ${total}`);
+      this.syncCaption();
     }
-    this.setText("time", `${decimal(tl.t / 1000)} s / ${decimal(tl.total / 1000)} s`);
+    const time = `${decimal(tl.t / 1000)} s / ${decimal(tl.total / 1000)} s`;
+    this.setText("time", time);
 
     const scrub = document.querySelector('[data-bg-control="scrub"]');
     const ratio = tl.total > 0 ? tl.t / tl.total : 0;
     if (scrub) {
       if (document.activeElement !== scrub) scrub.value = String(Math.round(ratio * 1000));
-      scrub.style.setProperty("--fill", `${(Number(scrub.value) / 10).toFixed(1)}%`);
+      // o leitor de tela ouve o passo e o tempo, não "450 de 1000"
+      scrub.setAttribute("aria-valuetext", step ? `${label} · ${time}` : time);
     }
+
+    // segmentos da barra de tempo e barras de progresso dos cartões
+    for (const s of this.schedule.steps) {
+      const span = Math.max(s.end - s.start, 1);
+      const fill = started ? Math.max(0, Math.min((tl.t - s.start) / span, 1)) : 0;
+      const state = !started ? "" : s.index < current ? "done" : s.index === current ? "active" : "";
+      const seg = document.querySelector(`.ba-scrubber__seg[data-step="${s.index}"]`);
+      if (seg) {
+        seg.dataset.state = state;
+        seg.firstChild.style.width = `${(fill * 100).toFixed(1)}%`;
+      }
+      const bar = document.querySelector(`[data-bg-step-bar="${s.index}"]`);
+      if (bar) bar.style.width = `${(fill * 100).toFixed(1)}%`;
+    }
+
+    // cada mensagem do painel de passos segue o estado da seta no diagrama
+    document.querySelectorAll("[data-bg-msg]").forEach((li) => {
+      const item = this.index.edges.get(li.dataset.bgMsg);
+      const state = started && item ? item.group.dataset.state || "" : "";
+      if (li.dataset.state !== state) li.dataset.state = state;
+    });
+
+    this.followActive(tl);
 
     document.querySelectorAll("[data-bg-play-icon]").forEach((node) => {
       node.hidden = (node.dataset.bgPlayIcon === "pause") !== tl.playing;
@@ -468,8 +718,11 @@ export const DiagramCanvas = {
     });
 
     document.querySelectorAll("[data-bg-step]").forEach((node) => {
-      if (Number(node.dataset.bgStep) === tl.currentStep) node.setAttribute("aria-current", "step");
+      const index = Number(node.dataset.bgStep);
+      if (started && index === current) node.setAttribute("aria-current", "step");
       else node.removeAttribute("aria-current");
+      const done = started && index < current;
+      if ((node.dataset.state === "done") !== done) node.dataset.state = done ? "done" : "";
     });
   },
 
@@ -503,6 +756,19 @@ function reconcile(svg, before, scene) {
       g.style.transform = "";
     });
   }
+}
+
+function toBox(b) {
+  return { x: b.x, y: b.y, w: b.width, h: b.height };
+}
+
+function unionBox(boxes) {
+  if (boxes.length === 0) return null;
+  const x1 = Math.min(...boxes.map((b) => b.x));
+  const y1 = Math.min(...boxes.map((b) => b.y));
+  const x2 = Math.max(...boxes.map((b) => b.x + b.width));
+  const y2 = Math.max(...boxes.map((b) => b.y + b.height));
+  return { x: x1, y: y1, w: x2 - x1, h: y2 - y1 };
 }
 
 function formatBytes(n) {

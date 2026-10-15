@@ -100,7 +100,10 @@ defmodule BrainagramWeb.ErrorMessages do
         gettext("posição fora de um bloco `layout { }`: %{text}", b)
 
       :unknown_line ->
-        gettext("não entendi esta linha: %{text}", b)
+        gettext(
+          "não entendi esta linha: %{text}. Cada linha declara um nó (service api \"API\"), uma seta (a -> b : texto), um step, group, note ou payload.",
+          b
+        )
 
       :unknown_kind ->
         gettext("tipo de diagrama desconhecido: %{kind} (use sequence ou architecture)", b)

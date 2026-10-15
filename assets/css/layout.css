@@ -28,14 +28,40 @@
 .ba-logo__mark .ink-s { stroke: var(--text); fill: none; }
 .ba-logo__mark .imp { fill: var(--brand); }
 
+/* botão "Passos" do player e o fechar da gaveta: só quando o painel é gaveta */
+.ba-player__steps, .ba-editor__stepsclose { display: none; }
+
 @media (max-width: 1080px) {
-  .ba-editor__steps { display: none; }
+  .ba-editor__steps {
+    position: fixed; top: var(--size-topbar); right: 0; bottom: 0; z-index: var(--z-panel);
+    width: min(340px, 92vw); border-left: 1px solid var(--border); box-shadow: var(--shadow-lg);
+    transform: translateX(100%); visibility: hidden;
+    transition: transform var(--dur-slow) var(--ease-revelar), visibility 0s linear var(--dur-slow);
+  }
+  .ba-editor__steps[data-open] { transform: none; visibility: visible; transition: transform var(--dur-slow) var(--ease-revelar), visibility 0s; }
+  .ba-player__steps { display: inline-flex; }
+  .ba-editor__stepsclose { display: inline-flex; }
 }
 @media (max-width: 760px) {
   .ba-editor__main { flex-direction: column; }
-  .ba-editor__code { width: auto; min-width: 0; max-height: 40vh; border-right: 0; border-bottom: 1px solid var(--border); }
-  .ba-topbar__hide-sm { display: none; }
+  .ba-editor__code { width: auto; min-width: 0; height: 38vh; flex: none; border-right: 0; border-bottom: 1px solid var(--border); }
+  .ba-topbar__hide-sm, .ba-topbar .ba-topbar__hide-sm { display: none; }
+  .ba-topbar { gap: var(--space-2); padding: 0 var(--space-2) 0 var(--space-3); }
+  .ba-topbar__title { min-width: 0; flex: 1 1 auto; }
+  .ba-topbar__actions { gap: var(--space-1); }
+  /* botões da barra só com o ícone; o nome continua no aria-label */
+  .ba-topbar .ba-btn__label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .ba-topbar .ba-dropdown > summary .ba-ico--16 { display: none; }
+  .ba-topbar .ba-btn { padding: 0 var(--space-2); }
+  /* player em duas linhas: controles em cima, a barra de tempo inteira embaixo */
+  .ba-player { flex-wrap: wrap; height: auto; padding: var(--space-2) var(--space-3); row-gap: var(--space-1); }
+  .ba-player .ba-scrubber { order: 10; flex-basis: 100%; }
+  .ba-player__sep { display: none; }
 }
+
+/* ---------- Apresentação: só o diagrama, o player e os passos ---------- */
+.ba-editor[data-presenting="true"] .ba-editor__code,
+.ba-editor[data-presenting="true"] .ba-canvas-tools { display: none; }
 
 /* ---------- Área de gestão (DashboardLive) ---------- */
 .ba-dash { display: flex; flex-direction: column; height: 100vh; height: 100dvh; background: var(--bg-app); }
@@ -197,9 +223,14 @@ label.ba-choice__opt { position: relative; }
 .ba-filepick__input { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
 
 /* ---------- Código (textarea) ---------- */
-.ba-source { flex: 1; min-height: 0; width: 100%; resize: none; border: 0; outline: none; margin: 0; padding: var(--space-3) var(--space-4); background: var(--surface); color: var(--text); font: 400 13px/20px var(--font-mono); font-variant-ligatures: none; tab-size: 2; }
+.ba-source { flex: 1; min-width: 0; min-height: 0; width: 100%; resize: none; border: 0; outline: none; margin: 0; padding: var(--space-3) var(--space-4) var(--space-3) var(--space-3); background: var(--surface); color: var(--text); font: 400 13px/20px var(--font-mono); font-variant-ligatures: none; tab-size: 2; white-space: pre; overflow: auto; }
 .ba-source:focus-visible { box-shadow: inset 0 0 0 2px var(--brand-soft); }
-.ba-source-form { display: flex; flex: 1; min-height: 0; flex-direction: column; }
+.ba-source::selection { background: var(--brand-soft); color: var(--text); }
+.ba-source-form { display: flex; flex: 1; min-height: 0; flex-direction: row; }
+/* números de linha: mesma altura de linha do código, sem rolagem própria */
+.ba-source__gutter { flex: none; width: 44px; overflow: hidden; padding: var(--space-3) var(--space-2) var(--space-3) 0; border-right: 1px solid var(--border); background: var(--surface); color: var(--text-muted); font: 400 12px/20px var(--font-mono); font-variant-numeric: tabular-nums; text-align: right; user-select: none; }
+.ba-source__gutter span { display: block; }
+.ba-source__gutter .is-error { color: var(--danger); font-weight: 600; }
 
 .ba-errors { max-height: 160px; overflow: auto; display: flex; flex-direction: column; gap: 4px; padding: var(--space-2) var(--space-4); border-top: 1px solid var(--danger); background: var(--danger-soft); font-size: 12px; line-height: 16px; }
 .ba-errors__item { display: flex; gap: var(--space-2); }
@@ -223,10 +254,21 @@ label.ba-choice__opt { position: relative; }
 .ba-dropdown__menu { position: absolute; right: 0; top: calc(100% + 6px); z-index: var(--z-menu); animation: ba-rise var(--dur-base) var(--ease-ui) both; }
 
 /* ---------- Range (scrubber) ---------- */
-.ba-range { --fill: 0%; flex: 1; min-width: 80px; height: 28px; margin: 0; background: transparent; appearance: none; -webkit-appearance: none; cursor: pointer; }
-.ba-range::-webkit-slider-runnable-track { height: 6px; border-radius: 3px; background: linear-gradient(var(--brand), var(--brand)) 0 0 / var(--fill) 100% no-repeat, var(--surface-3); }
-.ba-range::-moz-range-track { height: 6px; border-radius: 3px; background: var(--surface-3); }
-.ba-range::-moz-range-progress { height: 6px; border-radius: 3px; background: var(--brand); }
+/* A faixa visível é a segmentada (um trecho por passo, o atual em brand, os
+   já tocados em grafite); o range nativo fica por cima, transparente, e
+   continua sendo o controle de teclado e de leitor de tela. */
+.ba-scrubber { position: relative; display: flex; align-items: center; flex: 1; min-width: 80px; height: 28px; }
+.ba-scrubber__segs { position: absolute; left: 0; right: 0; top: 50%; height: 6px; margin-top: -3px; display: flex; gap: 3px; pointer-events: none; }
+.ba-scrubber__seg { position: relative; flex: 1 1 0; min-width: 4px; border-radius: 3px; background: var(--surface-3); overflow: hidden; transition: height var(--dur-fast) var(--ease-ui); }
+.ba-scrubber__seg > i { position: absolute; inset: 0 auto 0 0; width: 0; background: var(--edge-sync); }
+.ba-scrubber__seg[data-state="active"] > i { background: var(--brand); }
+.ba-range { position: relative; width: 100%; height: 28px; margin: 0; background: transparent; appearance: none; -webkit-appearance: none; cursor: pointer; }
+.ba-range::-webkit-slider-runnable-track { height: 6px; background: transparent; }
+.ba-range::-moz-range-track { height: 6px; background: transparent; }
+.ba-range::-moz-range-progress { background: transparent; }
+.ba-range:focus-visible { outline: none; }
+.ba-range:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 1px var(--brand), 0 0 0 4px var(--brand-soft); }
+.ba-range:focus-visible::-moz-range-thumb { box-shadow: 0 0 0 1px var(--brand), 0 0 0 4px var(--brand-soft); }
 .ba-range::-webkit-slider-thumb { -webkit-appearance: none; width: 14px; height: 14px; margin-top: -4px; border-radius: 50%; background: var(--brand); border: 3px solid var(--surface); box-shadow: 0 0 0 1px var(--brand); }
 .ba-range::-moz-range-thumb { width: 8px; height: 8px; border-radius: 50%; background: var(--brand); border: 3px solid var(--surface); box-shadow: 0 0 0 1px var(--brand); }
 
@@ -304,14 +346,19 @@ label.ba-choice__opt { position: relative; }
 .ba-badge--toggle:hover { filter: brightness(.96); }
 .ba-badge--outline.ba-badge--toggle { border: 1px solid var(--border); }
 .ba-editor__stepcount { padding-right: var(--space-2); }
+.ba-topbar__title .ba-save { flex: none; }
+.ba-topbar__prefs { display: inline-flex; align-items: center; gap: var(--space-1-5); }
 .ba-play [data-bg-play-icon] { display: grid; place-items: center; }
 
 /* ---------- Canvas: barra de autoria ---------- */
 .ba-canvas-tools { position: absolute; top: var(--space-3); left: var(--space-3); right: var(--space-3); z-index: var(--z-canvas-ui); display: flex; flex-wrap: wrap; gap: var(--space-2); align-items: center; pointer-events: none; }
 .ba-canvas-tools > * { pointer-events: auto; }
-.ba-canvas-tools .ba-seg { background: var(--surface); box-shadow: var(--shadow-sm); }
+.ba-canvas-tools .ba-seg { box-shadow: var(--shadow-sm); }
 .ba-canvas-tools .ba-float .ba-btn { color: var(--text); }
 .ba-canvas-tools .ba-btn:disabled { opacity: .45; }
+/* legenda do passo e sinal de borda (apresentação) */
+.ba-stepcaption { position: absolute; left: var(--space-3); bottom: var(--space-3); max-width: calc(100% - 160px); margin: 0; padding: 6px 14px; border-radius: var(--radius-full); background: var(--brand-soft); color: var(--brand-text); font: 600 13px/18px var(--font-sans); box-shadow: var(--shadow-sm); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; pointer-events: none; }
+.ba-edgecue { position: absolute; right: var(--space-3); top: 50%; margin: 0; padding: 4px 10px; border-radius: var(--radius-full); background: var(--surface); border: 1px solid var(--border-strong); color: var(--text); font: 500 12px/16px var(--font-mono); box-shadow: var(--shadow-sm); pointer-events: none; }
 .ba-canvas-hint { position: absolute; left: 50%; bottom: var(--space-4); transform: translateX(-50%); z-index: var(--z-canvas-ui); margin: 0; padding: 6px 12px; border-radius: var(--radius-full); background: var(--text); color: var(--bg-app); font: 500 12px/16px var(--font-sans); box-shadow: var(--shadow-md); }
 .ba-editor__stage.is-space .bg-canvas { cursor: grab; }
 

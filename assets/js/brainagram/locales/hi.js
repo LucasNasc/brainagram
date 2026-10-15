@@ -95,4 +95,11 @@ export default {
   "nó": "नोड",
   "inserir": "डालें",
   "fechar": "बंद करें",
+  // reprodução (paleta de comandos)
+  "Reprodução": "प्लेबैक",
+  "Tocar / pausar": "चलाएँ / रोकें",
+  "Espaço": "Space",
+  "Reiniciar do começo": "शुरू से चलाएँ",
+  "Repetir em loop (liga/desliga)": "लूप में चलाएँ (चालू/बंद)",
+  "Apresentar / editar": "प्रस्तुत करें / संपादित करें",
 };

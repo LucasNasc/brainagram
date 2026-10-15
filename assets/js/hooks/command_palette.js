@@ -13,6 +13,10 @@ const MOD = isMac ? "⌘" : "Ctrl";
 
 function staticCommands() {
   return [
+    { id: "toggle", group: t("Reprodução"), label: t("Tocar / pausar"), icon: "play", keys: [t("Espaço")], run: (h) => h.command({ action: "toggle" }) },
+    { id: "restart", group: t("Reprodução"), label: t("Reiniciar do começo"), icon: "arrow-path", keys: ["R"], run: (h) => h.command({ action: "restart" }) },
+    { id: "loop", group: t("Reprodução"), label: t("Repetir em loop (liga/desliga)"), icon: "arrow-path-rounded-square", run: (h) => h.command({ action: "loop" }) },
+    { id: "present", group: t("Reprodução"), label: t("Apresentar / editar"), icon: "presentation-chart-bar", keys: ["P"], run: (h) => h.pushEvent("present:toggle", {}) },
     { id: "add-node", group: t("Canvas"), label: t("Adicionar nó"), icon: "plus", run: (h) => h.command({ action: "add-node" }) },
     { id: "connect", group: t("Canvas"), label: t("Conectar dois nós"), icon: "link", run: (h) => h.command({ action: "connect" }) },
     { id: "untangle", group: t("Canvas"), label: t("Organizar setas (menos cruzamentos)"), icon: "sparkles", run: (h) => h.edit("untangle") },

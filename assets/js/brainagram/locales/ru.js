@@ -95,4 +95,11 @@ export default {
   "nó": "узел",
   "inserir": "вставить",
   "fechar": "закрыть",
+  // reprodução (paleta de comandos)
+  "Reprodução": "Воспроизведение",
+  "Tocar / pausar": "Воспроизвести / пауза",
+  "Espaço": "Пробел",
+  "Reiniciar do começo": "Начать сначала",
+  "Repetir em loop (liga/desliga)": "Повторять по кругу (вкл/выкл)",
+  "Apresentar / editar": "Презентация / редактирование",
 };

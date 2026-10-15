@@ -158,10 +158,15 @@ a.ba-btn { text-decoration: none; }
 .ba-step__title { display: block; font: 600 13px/18px var(--font-sans); color: var(--text); margin: 2px 0 2px; }
 .ba-step__meta { display: block; font: 400 12px/16px var(--font-sans); color: var(--text-muted); }
 .ba-step__msgs { list-style: none; margin: 6px 0 0; padding: 0; display: flex; flex-direction: column; gap: 2px; font: 400 12px/16px var(--font-mono); color: var(--text-muted); }
+.ba-step__msgs li { overflow-wrap: anywhere; }
+.ba-step__route { color: var(--text); }
 .ba-step__msgs li[data-state="active"] { color: var(--brand-text); font-weight: 500; }
+.ba-step__msgs li[data-state="active"] .ba-step__route { color: var(--brand-text); }
 .ba-step__msgs li[data-state="done"] { color: var(--text); }
-.ba-step__bar { height: 2px; border-radius: 2px; background: var(--surface-3); margin-top: 8px; overflow: hidden; }
-.ba-step__bar i { display: block; height: 100%; background: var(--brand); border-radius: 2px; }
+/* progresso só no passo que está tocando — violeta é "acontecendo agora" */
+.ba-step__bar { display: none; height: 2px; border-radius: 2px; background: var(--surface-3); margin-top: 8px; overflow: hidden; }
+.ba-step[aria-current="step"] .ba-step__bar { display: block; background: var(--surface); }
+.ba-step__bar i { display: block; width: 0; height: 100%; background: var(--brand); border-radius: 2px; }
 .ba-step[data-state="done"] .ba-step__num { background: var(--surface-2); border-color: transparent; color: var(--text); }
 .ba-step[aria-current="step"] { background: var(--brand-soft); border-color: transparent; }
 .ba-step[aria-current="step"] .ba-step__num { background: var(--brand); border-color: var(--brand); color: var(--on-brand); }

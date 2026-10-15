@@ -64,19 +64,33 @@ defmodule BrainagramWeb.EditorLiveTest do
     assert_patch(view, ~p"/d/#{summary.slug}")
   end
 
-  test "abrir um diagrama salvo pelo slug", %{conn: conn} do
+  test "abrir um diagrama salvo pelo slug mostra a apresentação", %{conn: conn} do
     {:ok, slug} =
       Bus.dispatch(CreateDiagram, %{source: ~s(diagram sequence "Persistido"\nx -> y)})
 
-    {:ok, _view, html} = live(conn, ~p"/d/#{slug}")
+    {:ok, view, html} = live(conn, ~p"/d/#{slug}")
 
     assert html =~ "Persistido"
-    assert html =~ "Público"
+    assert has_element?(view, "#editor[data-presenting=true]")
+    assert has_element?(view, "#edit-diagram")
+    refute has_element?(view, "#save-button")
+    refute has_element?(view, "#visibility-toggle")
+  end
+
+  test "?edit=1 abre direto no editor, com a visibilidade", %{conn: conn} do
+    {:ok, slug} =
+      Bus.dispatch(CreateDiagram, %{source: ~s(diagram sequence "Persistido"\nx -> y)})
+
+    {:ok, view, _html} = live(conn, ~p"/d/#{slug}?edit=1")
+
+    assert has_element?(view, "#editor[data-presenting=false]")
+    assert has_element?(view, "#save-button")
+    assert has_element?(view, "#visibility-toggle", "Público")
   end
 
   test "alternar visibilidade despacha o comando", %{conn: conn} do
     {:ok, slug} = Bus.dispatch(CreateDiagram, %{source: ~s(diagram sequence "Visível"\nx -> y)})
-    {:ok, view, _html} = live(conn, ~p"/d/#{slug}")
+    {:ok, view, _html} = live(conn, ~p"/d/#{slug}?edit=1")
 
     view |> element("button[phx-click=toggle-visibility]") |> render_click()
 
@@ -86,7 +100,7 @@ defmodule BrainagramWeb.EditorLiveTest do
 
   test "duplicar cria uma cópia e leva o usuário para ela", %{conn: conn} do
     {:ok, slug} = Bus.dispatch(CreateDiagram, %{source: ~s(diagram sequence "Original"\nx -> y)})
-    {:ok, view, _html} = live(conn, ~p"/d/#{slug}")
+    {:ok, view, _html} = live(conn, ~p"/d/#{slug}?edit=1")
 
     view |> element("button[phx-click=fork]") |> render_click()
 
@@ -97,7 +111,7 @@ defmodule BrainagramWeb.EditorLiveTest do
 
   test "salvar sem alteração não quebra nada", %{conn: conn} do
     {:ok, slug} = Bus.dispatch(CreateDiagram, %{source: ~s(diagram sequence "Estável"\nx -> y)})
-    {:ok, view, _html} = live(conn, ~p"/d/#{slug}")
+    {:ok, view, _html} = live(conn, ~p"/d/#{slug}?edit=1")
 
     html = view |> element("button[phx-click=save]") |> render_click()
 

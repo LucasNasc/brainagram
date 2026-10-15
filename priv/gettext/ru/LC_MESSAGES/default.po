@@ -125,11 +125,6 @@ msgstr "Brainagram, главная"
 msgid "Cancelar"
 msgstr "Отмена"
 
-#: lib/brainagram_web/live/editor_live.ex
-#, elixir-autogen, elixir-format
-msgid "Carregar exemplo"
-msgstr "Загрузить пример"
-
 #: lib/brainagram_web/components/layouts.ex
 #, elixir-autogen, elixir-format
 msgid "Claro"
@@ -289,11 +284,6 @@ msgstr "Примеры"
 #, elixir-autogen, elixir-format
 msgid "Exportar"
 msgstr "Экспорт"
-
-#: lib/brainagram_web/live/editor_live.ex
-#, elixir-autogen, elixir-format
-msgid "F8 vai para o erro"
-msgstr "F8 — перейти к ошибке"
 
 #: lib/brainagram_web/components/core_components.ex
 #: lib/brainagram_web/live/dashboard_live.ex
@@ -728,11 +718,6 @@ msgstr "сообщения не могут находиться внутри `gr
 msgid "nota"
 msgstr "заметка"
 
-#: lib/brainagram_web/error_messages.ex
-#, elixir-autogen, elixir-format
-msgid "não entendi esta linha: %{text}"
-msgstr "непонятная строка: %{text}"
-
 #: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "nó de implantação, fronteira"
@@ -792,6 +777,7 @@ msgstr[1] "%{count} диаграммы"
 msgstr[2] "%{count} диаграмм"
 
 #: lib/brainagram_web/live/dashboard_live.ex
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Abrir"
 msgstr "Открыть"
@@ -1384,3 +1370,83 @@ msgstr "Перетащите файлы сюда или нажмите, чтоб
 #, elixir-autogen, elixir-format
 msgid "Idioma: %{name}"
 msgstr "Язык: %{name}"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Abrir o código e as ferramentas de edição (P)"
+msgstr "Открыть код и инструменты редактирования (P)"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Alterações não salvas"
+msgstr "Несохранённые изменения"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Apresentar"
+msgstr "Презентация"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Apresentar (P)"
+msgstr "Презентация (P)"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Editar (P)"
+msgstr "Редактировать (P)"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Fechar os passos"
+msgstr "Закрыть шаги"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Ferramentas do canvas"
+msgstr "Инструменты холста"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Há alterações não salvas. Sair mesmo assim?"
+msgstr "Есть несохранённые изменения. Всё равно выйти?"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Ir para o erro (F8)"
+msgstr "Перейти к ошибке (F8)"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Mostrar os passos"
+msgstr "Показать шаги"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Salvar (Ctrl+S)"
+msgstr "Сохранить (Ctrl+S)"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Substituir o código atual por este exemplo? Ctrl+Z desfaz."
+msgstr "Заменить текущий код этим примером? Ctrl+Z — отменить."
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Só o diagrama, o player e os passos (P)"
+msgstr "Только диаграмма, плеер и шаги (P)"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Tornar público? O diagrama passa a aparecer na galeria pública."
+msgstr "Сделать публичной? Диаграмма появится в публичной галерее."
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Zoom do diagrama"
+msgstr "Масштаб диаграммы"
+
+#: lib/brainagram_web/error_messages.ex
+#, elixir-autogen, elixir-format
+msgid "não entendi esta linha: %{text}. Cada linha declara um nó (service api \"API\"), uma seta (a -> b : texto), um step, group, note ou payload."
+msgstr "не удалось разобрать строку: %{text}. Каждая строка объявляет узел (service api \"API\"), стрелку (a -> b : текст), step, group, note или payload."

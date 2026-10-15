@@ -46,14 +46,22 @@ defmodule BrainagramWeb.EditorLive do
      |> assign(diagram: nil, examples: examples, errors: [], remote_change: false)
      |> assign(new_project: nil)
      |> assign(import_open: false, import_error: nil)
+     # `saved_source`: o texto como está salvo (ou como o diagrama novo nasceu);
+     # o que difere dele é "alteração não salva".
+     |> assign(presenting: false, keep_mode: false, saved_source: source)
      |> compile(source)}
   end
 
   @impl true
-  def handle_params(%{"slug" => slug}, _uri, socket) do
+  def handle_params(%{"slug" => slug} = params, _uri, socket) do
     case Bus.ask(GetDiagramBySlug, %{slug: slug}) do
       {:ok, detail} ->
-        socket = socket |> watch(detail.slug) |> assign(diagram: detail, remote_change: false)
+        socket =
+          socket
+          |> assign(presenting: presenting?(socket, detail.slug, params))
+          |> watch(detail.slug)
+          |> assign(diagram: detail, remote_change: false, keep_mode: false)
+          |> assign(saved_source: detail.source)
 
         socket =
           if detail.scene do
@@ -74,7 +82,23 @@ defmodule BrainagramWeb.EditorLive do
 
   # `/new?project=abc`: o diagrama novo, ao salvar, já nasce nesse projeto.
   def handle_params(params, _uri, socket) do
-    {:noreply, socket |> assign(new_project: blank_to_nil(params["project"])) |> push_scene()}
+    {:noreply,
+     socket
+     |> assign(new_project: blank_to_nil(params["project"]), presenting: false)
+     |> push_scene()}
+  end
+
+  # Quem abre um link `/d/:slug` assiste: o padrão é a apresentação (diagrama,
+  # player e passos). `?edit=1` abre no editor — é o link da área de gestão,
+  # onde quem clica é o autor. Salvar, duplicar ou recarregar o mesmo diagrama
+  # não troca o modo em que a pessoa já estava.
+  defp presenting?(socket, slug, params) do
+    cond do
+      params["edit"] in ["1", "true"] -> false
+      socket.assigns.keep_mode -> socket.assigns.presenting
+      match?(%{slug: ^slug}, socket.assigns.diagram) -> socket.assigns.presenting
+      true -> true
+    end
   end
 
   # ── comandos e queries ────────────────────────────────────────────────────
@@ -89,6 +113,13 @@ defmodule BrainagramWeb.EditorLive do
   def handle_event("example", %{"slug" => slug}, socket) do
     case Bus.ask(GetExample, %{slug: slug}) do
       {:ok, example} ->
+        # num diagrama ainda não salvo, o exemplo é o novo ponto de partida, não
+        # uma alteração; num diagrama salvo, substituir o texto é sim alteração
+        socket =
+          if socket.assigns.diagram,
+            do: socket,
+            else: assign(socket, saved_source: example.source)
+
         {:noreply,
          socket
          |> compile(example.source)
@@ -114,6 +145,16 @@ defmodule BrainagramWeb.EditorLive do
   def handle_event("canvas_op", %{"op" => op}, socket) do
     {:noreply, edit_source(socket, op, %{})}
   end
+
+  # Apresentar ↔ editar: só a interface muda; o texto (e o que não foi salvo)
+  # continua onde estava.
+  def handle_event("present", _params, socket), do: {:noreply, assign(socket, presenting: true)}
+
+  def handle_event("edit_mode", _params, socket),
+    do: {:noreply, assign(socket, presenting: false)}
+
+  def handle_event("present:toggle", _params, socket),
+    do: {:noreply, assign(socket, presenting: !socket.assigns.presenting)}
 
   def handle_event("import:open", _params, socket) do
     {:noreply, assign(socket, import_open: true, import_error: nil)}
@@ -196,7 +237,8 @@ defmodule BrainagramWeb.EditorLive do
   end
 
   def handle_event("reload", _params, socket) do
-    {:noreply, push_patch(socket, to: ~p"/d/#{socket.assigns.diagram.slug}")}
+    {:noreply,
+     socket |> assign(keep_mode: true) |> push_patch(to: ~p"/d/#{socket.assigns.diagram.slug}")}
   end
 
   # ── eventos de domínio ────────────────────────────────────────────────────
@@ -260,7 +302,11 @@ defmodule BrainagramWeb.EditorLive do
   defp run(socket, command, attrs, message) do
     case Bus.dispatch(command, attrs) do
       {:ok, slug} when is_binary(slug) ->
-        {:noreply, socket |> put_flash(:info, message) |> push_patch(to: ~p"/d/#{slug}")}
+        {:noreply,
+         socket
+         |> assign(keep_mode: true)
+         |> put_flash(:info, message)
+         |> push_patch(to: ~p"/d/#{slug}")}
 
       {:ok, _other} ->
         {:noreply, put_flash(socket, :info, message)}
@@ -424,9 +470,23 @@ defmodule BrainagramWeb.EditorLive do
 
   @impl true
   def render(assigns) do
+    assigns = assign(assigns, dirty: assigns.source != assigns.saved_source)
+
     ~H"""
-    <div class="ba-editor">
-      <.topbar diagram={@diagram} examples={@examples} scene={@scene} locale={@locale} />
+    <div
+      class="ba-editor"
+      id="editor"
+      data-presenting={to_string(@presenting)}
+      data-dirty={to_string(@dirty)}
+    >
+      <.topbar
+        diagram={@diagram}
+        examples={@examples}
+        scene={@scene}
+        locale={@locale}
+        presenting={@presenting}
+        dirty={@dirty}
+      />
 
       <div class="ba-editor__main">
         <.source_pane
@@ -437,7 +497,12 @@ defmodule BrainagramWeb.EditorLive do
         />
 
         <main class="ba-editor__center">
-          <div id="stage" phx-hook="DiagramCanvas" class="ba-editor__stage">
+          <div
+            id="stage"
+            phx-hook="DiagramCanvas"
+            class="ba-editor__stage"
+            data-presenting={to_string(@presenting)}
+          >
             <div
               id="canvas"
               data-bg-canvas
@@ -454,6 +519,10 @@ defmodule BrainagramWeb.EditorLive do
 
         <.steps_pane scene={@scene} />
       </div>
+
+      <%!-- o anúncio do passo para leitores de tela fica fora do painel de
+           passos, que vira gaveta (e some da tela) em telas estreitas --%>
+      <p class="ba-sr" data-bg-display="step" aria-live="polite">—</p>
 
       <div
         id="command-palette"
@@ -475,7 +544,13 @@ defmodule BrainagramWeb.EditorLive do
   attr :examples, :list, required: true
   attr :scene, :map, required: true
   attr :locale, :string, required: true
+  attr :presenting, :boolean, default: false
+  attr :dirty, :boolean, default: false
 
+  # Duas barras para dois públicos (PRODUCT.md): quem assiste vê o título, a
+  # exportação e um "Editar"; quem escreve vê abrir, apresentar, duplicar e
+  # salvar. Em telas estreitas os botões ficam só com o ícone (o nome segue no
+  # aria-label) e idioma/tema saem da barra — continuam na área de gestão.
   defp topbar(assigns) do
     ~H"""
     <header class="ba-topbar">
@@ -485,6 +560,7 @@ defmodule BrainagramWeb.EditorLive do
         id="back-to-dashboard"
         aria-label={gettext("Brainagram, meus diagramas")}
         title={gettext("Meus diagramas")}
+        data-confirm={@dirty && leave_warning()}
       >
         <.logo />
       </.link>
@@ -493,6 +569,7 @@ defmodule BrainagramWeb.EditorLive do
         navigate={crumb_path(@diagram)}
         class="ba-crumb ba-topbar__hide-sm"
         id="breadcrumb-project"
+        data-confirm={@dirty && leave_warning()}
         title={
           if(@diagram && @diagram.project,
             do: @diagram.project_name,
@@ -512,17 +589,31 @@ defmodule BrainagramWeb.EditorLive do
         <h1 title={gettext("O título vem da 1ª linha do código")}>
           {@scene.title || gettext("Sem título")}
         </h1>
+        <span
+          :if={@dirty and not @presenting}
+          class="ba-save ba-save--dirty"
+          id="unsaved-marker"
+          role="status"
+        >
+          <span class="ba-badge__dot" aria-hidden="true"></span>
+          <span class="ba-btn__label">{gettext("Alterações não salvas")}</span>
+        </span>
       </div>
 
       <button
-        :if={@diagram}
+        :if={@diagram && not @presenting}
         type="button"
+        id="visibility-toggle"
         class={[
-          "ba-badge ba-badge--toggle",
+          "ba-badge ba-badge--toggle ba-topbar__hide-sm",
           if(@diagram.visibility == "public", do: "ba-badge--success", else: "ba-badge--outline")
         ]}
         phx-click="toggle-visibility"
         title={visibility_hint(@diagram.visibility)}
+        data-confirm={
+          @diagram.visibility != "public" &&
+            gettext("Tornar público? O diagrama passa a aparecer na galeria pública.")
+        }
       >
         <%= if @diagram.visibility == "public" do %>
           <.icon name="hero-globe-alt" />{gettext("Público")}
@@ -534,137 +625,180 @@ defmodule BrainagramWeb.EditorLive do
       <span class="ba-topbar__spacer"></span>
 
       <div class="ba-topbar__actions">
-        <button
-          type="button"
-          class="ba-btn ba-btn--ghost ba-btn--sm ba-topbar__hide-sm"
-          phx-click={JS.dispatch("bg:palette")}
-          aria-label={gettext("Paleta de comandos (Ctrl+K)")}
-          title={gettext("Paleta de comandos")}
-        >
-          <.icon name="hero-magnifying-glass" /><span class="ba-kbd">Ctrl K</span>
-        </button>
+        <%= if @presenting do %>
+          <.export_menu />
+          <.button
+            id="edit-diagram"
+            phx-click="edit_mode"
+            aria-label={gettext("Editar (P)")}
+            title={gettext("Abrir o código e as ferramentas de edição (P)")}
+          >
+            <.icon name="hero-pencil-square" /><span class="ba-btn__label">{gettext("Editar")}</span>
+          </.button>
+        <% else %>
+          <button
+            type="button"
+            class="ba-btn ba-btn--ghost ba-btn--sm ba-topbar__hide-sm"
+            phx-click={JS.dispatch("bg:palette")}
+            aria-label={gettext("Paleta de comandos (Ctrl+K)")}
+            title={gettext("Paleta de comandos")}
+          >
+            <.icon name="hero-magnifying-glass" /><span class="ba-kbd">Ctrl K</span>
+          </button>
 
-        <details class="ba-dropdown" id="examples-menu">
-          <summary class="ba-btn ba-btn--ghost">
-            <.icon name="hero-document-plus" />{gettext("Exemplos")}<.icon
-              name="hero-chevron-down"
-              class="ba-ico--16"
-            />
-          </summary>
-          <div class="ba-menu ba-dropdown__menu" role="menu">
-            <div class="ba-menu__label">{gettext("Carregar exemplo")}</div>
-            <button
-              :for={ex <- @examples}
-              type="button"
-              class="ba-menu__item"
-              role="menuitem"
-              phx-click="example"
-              phx-value-slug={ex.slug}
-            >
-              <span>{example_name(ex.name)}</span>
-            </button>
-            <div class="ba-menu__sep" role="separator"></div>
-            <button
-              type="button"
-              class="ba-menu__item"
-              role="menuitem"
-              id="open-import"
-              phx-click="import:open"
-            >
-              <.icon name="hero-arrow-down-tray" />
-              <span>
-                {gettext("Importar diagrama…")}<small>{gettext(".brain, Mermaid ou PlantUML")}</small>
-              </span>
-            </button>
-          </div>
-        </details>
+          <details class="ba-dropdown" id="examples-menu">
+            <summary class="ba-btn ba-btn--ghost" aria-label={gettext("Abrir")}>
+              <.icon name="hero-folder-open" /><span class="ba-btn__label">{gettext("Abrir")}</span><.icon
+                name="hero-chevron-down"
+                class="ba-ico--16"
+              />
+            </summary>
+            <div class="ba-menu ba-dropdown__menu" role="menu">
+              <div class="ba-menu__label">{gettext("Exemplos")}</div>
+              <button
+                :for={ex <- @examples}
+                type="button"
+                class="ba-menu__item"
+                role="menuitem"
+                phx-click="example"
+                phx-value-slug={ex.slug}
+                data-confirm={
+                  (@diagram || @dirty) &&
+                    gettext("Substituir o código atual por este exemplo? Ctrl+Z desfaz.")
+                }
+              >
+                <.icon name="hero-document-text" />
+                <span>{example_name(ex.name)}</span>
+              </button>
+              <div class="ba-menu__sep" role="separator"></div>
+              <div class="ba-menu__label">{gettext("Importar")}</div>
+              <button
+                type="button"
+                class="ba-menu__item"
+                role="menuitem"
+                id="open-import"
+                phx-click="import:open"
+              >
+                <.icon name="hero-arrow-down-tray" />
+                <span>
+                  {gettext("Importar diagrama…")}<small>{gettext(".brain, Mermaid ou PlantUML")}</small>
+                </span>
+              </button>
+            </div>
+          </details>
 
-        <details class="ba-dropdown ba-topbar__hide-sm" id="export-menu">
-          <summary class="ba-btn">
-            <.icon name="hero-arrow-down-tray" />{gettext("Exportar")}<.icon
-              name="hero-chevron-down"
-              class="ba-ico--16"
-            />
-          </summary>
-          <div class="ba-menu ba-dropdown__menu" role="menu">
-            <div class="ba-menu__label">{gettext("Imagem do estado final")}</div>
-            <button
-              type="button"
-              class="ba-menu__item"
-              role="menuitem"
-              data-bg-control="export-svg"
-            >
-              <.icon name="hero-code-bracket-square" />
-              <span>SVG<small>{gettext("Vetor com as cores do tema")}</small></span>
-            </button>
-            <button
-              type="button"
-              class="ba-menu__item"
-              role="menuitem"
-              data-bg-control="export-png"
-            >
-              <.icon name="hero-photo" />
-              <span>PNG 2×<small>{gettext("Imagem para slides e docs")}</small></span>
-            </button>
-            <div class="ba-menu__sep" role="separator"></div>
-            <div class="ba-menu__label">{gettext("Animação")}</div>
-            <button
-              type="button"
-              class="ba-menu__item"
-              role="menuitem"
-              id="export-gif"
-              data-bg-control="export-gif"
-            >
-              <.icon name="hero-film" />
-              <span>
-                {gettext("GIF animado (HD)")}<small>{gettext("Nítido em 2×, para slides, PRs e docs")}</small>
-              </span>
-            </button>
-            <button
-              type="button"
-              class="ba-menu__item"
-              role="menuitem"
-              id="export-gif-light"
-              data-bg-control="export-gif-light"
-            >
-              <.icon name="hero-film" />
-              <span>
-                {gettext("GIF leve")}
-                <small>{gettext("Arquivo menor, para chats com limite de tamanho")}</small>
-              </span>
-            </button>
-            <div class="ba-menu__sep" role="separator"></div>
-            <div class="ba-menu__label">{gettext("Diagrama")}</div>
-            <button
-              type="button"
-              class="ba-menu__item"
-              role="menuitem"
-              id="export-brain"
-              data-bg-control="export-brain"
-            >
-              <.icon name="hero-document-text" />
-              <span>
-                {gettext("Arquivo .brain")}
-                <small>{gettext("O código, para importar aqui de novo ou versionar")}</small>
-              </span>
-            </button>
-          </div>
-        </details>
+          <.export_menu />
 
-        <.button :if={@diagram} variant="ghost" phx-click="fork">
-          <.icon name="hero-document-duplicate" />{gettext("Duplicar")}
-        </.button>
+          <.button
+            id="present-diagram"
+            variant="ghost"
+            phx-click="present"
+            aria-label={gettext("Apresentar (P)")}
+            title={gettext("Só o diagrama, o player e os passos (P)")}
+          >
+            <.icon name="hero-presentation-chart-bar" /><span class="ba-btn__label">{gettext(
+              "Apresentar"
+            )}</span>
+          </.button>
 
-        <.button variant="primary" phx-click="save">
-          <.icon name="hero-cloud-arrow-up" />{gettext("Salvar")}
-        </.button>
+          <.button
+            :if={@diagram}
+            variant="ghost"
+            phx-click="fork"
+            class="ba-topbar__hide-sm"
+            aria-label={gettext("Duplicar")}
+          >
+            <.icon name="hero-document-duplicate" /><span class="ba-btn__label">{gettext("Duplicar")}</span>
+          </.button>
 
-        <Layouts.locale_toggle locale={@locale} />
-        <Layouts.theme_toggle />
+          <.button
+            id="save-button"
+            variant={if(@dirty or is_nil(@diagram), do: "primary")}
+            phx-click="save"
+            aria-label={gettext("Salvar (Ctrl+S)")}
+            title={gettext("Salvar (Ctrl+S)")}
+          >
+            <.icon name="hero-cloud-arrow-up" /><span class="ba-btn__label">{gettext("Salvar")}</span>
+          </.button>
+        <% end %>
+
+        <span class="ba-topbar__prefs ba-topbar__hide-sm">
+          <Layouts.locale_toggle locale={@locale} />
+          <Layouts.theme_toggle />
+        </span>
       </div>
     </header>
     """
   end
+
+  # Exportar vale nos dois modos: quem assiste também leva o diagrama embora.
+  defp export_menu(assigns) do
+    ~H"""
+    <details class="ba-dropdown" id="export-menu">
+      <summary class="ba-btn" aria-label={gettext("Exportar")}>
+        <.icon name="hero-arrow-down-tray" /><span class="ba-btn__label">{gettext("Exportar")}</span><.icon
+          name="hero-chevron-down"
+          class="ba-ico--16"
+        />
+      </summary>
+      <div class="ba-menu ba-dropdown__menu" role="menu">
+        <div class="ba-menu__label">{gettext("Imagem do estado final")}</div>
+        <button type="button" class="ba-menu__item" role="menuitem" data-bg-control="export-svg">
+          <.icon name="hero-code-bracket-square" />
+          <span>SVG<small>{gettext("Vetor com as cores do tema")}</small></span>
+        </button>
+        <button type="button" class="ba-menu__item" role="menuitem" data-bg-control="export-png">
+          <.icon name="hero-photo" />
+          <span>PNG 2×<small>{gettext("Imagem para slides e docs")}</small></span>
+        </button>
+        <div class="ba-menu__sep" role="separator"></div>
+        <div class="ba-menu__label">{gettext("Animação")}</div>
+        <button
+          type="button"
+          class="ba-menu__item"
+          role="menuitem"
+          id="export-gif"
+          data-bg-control="export-gif"
+        >
+          <.icon name="hero-film" />
+          <span>
+            {gettext("GIF animado (HD)")}<small>{gettext("Nítido em 2×, para slides, PRs e docs")}</small>
+          </span>
+        </button>
+        <button
+          type="button"
+          class="ba-menu__item"
+          role="menuitem"
+          id="export-gif-light"
+          data-bg-control="export-gif-light"
+        >
+          <.icon name="hero-film" />
+          <span>
+            {gettext("GIF leve")}
+            <small>{gettext("Arquivo menor, para chats com limite de tamanho")}</small>
+          </span>
+        </button>
+        <div class="ba-menu__sep" role="separator"></div>
+        <div class="ba-menu__label">{gettext("Diagrama")}</div>
+        <button
+          type="button"
+          class="ba-menu__item"
+          role="menuitem"
+          id="export-brain"
+          data-bg-control="export-brain"
+        >
+          <.icon name="hero-document-text" />
+          <span>
+            {gettext("Arquivo .brain")}
+            <small>{gettext("O código, para importar aqui de novo ou versionar")}</small>
+          </span>
+        </button>
+      </div>
+    </details>
+    """
+  end
+
+  defp leave_warning, do: gettext("Há alterações não salvas. Sair mesmo assim?")
 
   attr :source, :string, required: true
   attr :errors, :list, required: true
@@ -679,13 +813,16 @@ defmodule BrainagramWeb.EditorLive do
         <span :if={@errors == []} class="ba-validity ba-validity--ok">
           <.icon name="hero-check-circle" />{gettext("Sem erros")}
         </span>
-        <span
+        <button
           :if={@errors != []}
+          type="button"
+          id="goto-error"
           class="ba-validity ba-validity--err"
-          title={gettext("F8 vai para o erro")}
+          phx-click={JS.dispatch("bg:command", detail: %{action: "next-error"})}
+          title={gettext("Ir para o erro (F8)")}
         >
           <.icon name="hero-x-circle" />{error_count(@errors)}
-        </span>
+        </button>
         <button
           type="button"
           class="ba-btn ba-btn--icon ba-btn--sm ba-btn--ghost"
@@ -718,7 +855,11 @@ defmodule BrainagramWeb.EditorLive do
 
       <div id="complete-layer" phx-update="ignore" class="ba-overlay-layer"></div>
 
-      <form phx-change="edit" class="ba-source-form">
+      <form id="source-form" phx-change="edit" class="ba-source-form">
+        <%!-- números de linha: os erros citam "Linha N", então elas precisam
+             estar à vista; as linhas não quebram para cada uma ter o seu número --%>
+        <div id="source-gutter" class="ba-source__gutter" phx-update="ignore" aria-hidden="true">
+        </div>
         <textarea
           id="source"
           name="source"
@@ -726,14 +867,17 @@ defmodule BrainagramWeb.EditorLive do
           phx-hook="SourceEditor"
           spellcheck="false"
           autocomplete="off"
+          wrap="off"
           aria-label={gettext("Código do diagrama")}
+          aria-invalid={to_string(@errors != [])}
+          aria-describedby={@errors != [] && "source-errors"}
           data-ids={Jason.encode!(@ids)}
           data-error-lines={Jason.encode!(Enum.map(@errors, & &1.line))}
           class="ba-source"
         >{@source}</textarea>
       </form>
 
-      <div :if={@errors != []} class="ba-errors" role="alert">
+      <div :if={@errors != []} id="source-errors" class="ba-errors" role="alert">
         <div :for={err <- @errors} class="ba-errors__item">
           <span class="ba-errors__line">{gettext("Linha %{line}", line: err.line)}</span>
           <span>{ErrorMessages.parse_error(err)}</span>
@@ -777,18 +921,22 @@ defmodule BrainagramWeb.EditorLive do
   # autoria — criar nó, conectar, organizar setas e soltar as posições fixadas.
   defp canvas_tools(assigns) do
     ~H"""
-    <div class="ba-canvas-tools" role="toolbar" aria-label="Canvas">
+    <div class="ba-canvas-tools" role="toolbar" aria-label={gettext("Ferramentas do canvas")}>
       <span class="ba-badge ba-badge--outline ba-editor__kindbadge">
         <.icon name={kind_icon(@scene.kind)} />{kind_label(@scene.kind)}
       </span>
 
       <div class="ba-seg" role="radiogroup" aria-label={gettext("Modo do canvas")}>
+        <%!-- o estado é do JS (modo guardado no navegador): o redesenho da barra
+             a cada edição do código não pode desmarcar a opção escolhida --%>
         <button
           type="button"
           class="ba-seg__opt"
           role="radio"
           aria-checked="true"
+          tabindex="0"
           data-bg-control="mode-edit"
+          phx-mounted={JS.ignore_attributes(["aria-checked", "tabindex"])}
           title={gettext("Editar: arraste nós, puxe setas, duplo clique renomeia (E)")}
         >
           <.icon name="hero-cursor-arrow-rays" />{gettext("Editar")}
@@ -798,7 +946,9 @@ defmodule BrainagramWeb.EditorLive do
           class="ba-seg__opt"
           role="radio"
           aria-checked="false"
+          tabindex="-1"
           data-bg-control="mode-view"
+          phx-mounted={JS.ignore_attributes(["aria-checked", "tabindex"])}
           title={gettext("Mover a tela: arrastar desloca o canvas (E)")}
         >
           <.icon name="hero-hand-raised" />{gettext("Mover")}
@@ -852,7 +1002,7 @@ defmodule BrainagramWeb.EditorLive do
 
     <p class="ba-canvas-hint" data-bg-hint role="status" hidden></p>
 
-    <div class="ba-editor__zoom ba-float" role="toolbar" aria-label="Zoom">
+    <div class="ba-editor__zoom ba-float" role="toolbar" aria-label={gettext("Zoom do diagrama")}>
       <button
         type="button"
         class="ba-btn ba-btn--icon ba-btn--sm"
@@ -1024,15 +1174,20 @@ defmodule BrainagramWeb.EditorLive do
         </button>
       </div>
 
-      <input
-        type="range"
-        min="0"
-        max="1000"
-        value="0"
-        data-bg-control="scrub"
-        class="ba-range"
-        aria-label={gettext("Posição da animação")}
-      />
+      <%!-- o controle nativo (teclado, leitor de tela) fica por cima da faixa
+           segmentada por passo, que o JS monta a cada cena --%>
+      <div class="ba-scrubber">
+        <div class="ba-scrubber__segs" data-bg-scrub-segs aria-hidden="true"></div>
+        <input
+          type="range"
+          min="0"
+          max="1000"
+          value="0"
+          data-bg-control="scrub"
+          class="ba-range"
+          aria-label={gettext("Posição da animação")}
+        />
+      </div>
 
       <span class="ba-time" data-bg-display="time">0.0 s</span>
       <span class="ba-player__sep"></span>
@@ -1054,20 +1209,52 @@ defmodule BrainagramWeb.EditorLive do
       >
         <.icon name="hero-arrow-path-rounded-square" />
       </button>
+
+      <%!-- só aparece quando o painel de passos vira gaveta (telas estreitas) --%>
+      <button
+        type="button"
+        class="ba-btn ba-btn--sm ba-player__steps"
+        data-bg-control="steps-drawer"
+        aria-expanded="false"
+        aria-controls="steps-pane"
+        title={gettext("Mostrar os passos")}
+      >
+        <.icon name="hero-queue-list" /><span>{gettext("Passos")}</span>
+      </button>
     </footer>
     """
   end
 
   attr :scene, :map, required: true
 
+  # Visualmente, só os tópicos (número, título, quantidade). As mensagens de
+  # cada passo ("quem → quem · o quê") ficam só para leitor de tela, que não
+  # alcança o conteúdo do SVG — a alternativa textual do diagrama.
   defp steps_pane(assigns) do
+    labels = Map.new(assigns.scene.nodes, &{&1.id, &1.label || &1.id})
+    edges = Map.new(assigns.scene.edges, &{&1.id, &1})
+    assigns = assign(assigns, labels: labels, edges: edges)
+
     ~H"""
-    <aside class="ba-panel ba-editor__steps" aria-label={gettext("Passos")}>
+    <aside
+      id="steps-pane"
+      class="ba-panel ba-editor__steps"
+      aria-label={gettext("Passos")}
+      phx-mounted={JS.ignore_attributes(["data-open"])}
+    >
       <div class="ba-panel__head">
         <h2 class="ba-panel__title">{gettext("Passos")}</h2>
         <span class="ba-time ba-editor__stepcount" data-bg-display="step-count">
           — / {length(@scene.steps)}
         </span>
+        <button
+          type="button"
+          class="ba-btn ba-btn--icon ba-btn--sm ba-btn--ghost ba-editor__stepsclose"
+          data-bg-control="steps-drawer"
+          aria-label={gettext("Fechar os passos")}
+        >
+          <.icon name="hero-x-mark" class="ba-ico--16" />
+        </button>
       </div>
 
       <ol class="ba-steps">
@@ -1077,13 +1264,20 @@ defmodule BrainagramWeb.EditorLive do
             <span>
               <span class="ba-step__title">{step_label(step.label)}</span>
               <span class="ba-step__meta">{message_count(step.edge_ids)}</span>
+              <span class="ba-step__bar" aria-hidden="true"><i data-bg-step-bar={step.index}></i></span>
             </span>
           </button>
+          <%!-- as mensagens do passo, só para leitor de tela (fora do botão) --%>
+          <ol :if={step.edge_ids != []} class="ba-sr">
+            <li :for={id <- step.edge_ids} :if={edge = @edges[id]} data-bg-msg={id}>
+              {@labels[edge.from]} → {@labels[edge.to]}<span :if={edge.label not in [nil, ""]}> · {edge.label}</span>
+            </li>
+          </ol>
         </li>
       </ol>
 
       <div class="ba-panel__foot">
-        <p class="ba-editor__stepnow" data-bg-display="step" aria-live="polite">—</p>
+        <p class="ba-editor__stepnow" data-bg-display="step">—</p>
       </div>
     </aside>
     """

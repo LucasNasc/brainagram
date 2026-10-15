@@ -122,11 +122,6 @@ msgstr "Brainagram, होम"
 msgid "Cancelar"
 msgstr "रद्द करें"
 
-#: lib/brainagram_web/live/editor_live.ex
-#, elixir-autogen, elixir-format
-msgid "Carregar exemplo"
-msgstr "उदाहरण लोड करें"
-
 #: lib/brainagram_web/components/layouts.ex
 #, elixir-autogen, elixir-format
 msgid "Claro"
@@ -285,11 +280,6 @@ msgstr "उदाहरण"
 #, elixir-autogen, elixir-format
 msgid "Exportar"
 msgstr "एक्सपोर्ट करें"
-
-#: lib/brainagram_web/live/editor_live.ex
-#, elixir-autogen, elixir-format
-msgid "F8 vai para o erro"
-msgstr "F8 से त्रुटि पर जाएँ"
 
 #: lib/brainagram_web/components/core_components.ex
 #: lib/brainagram_web/live/dashboard_live.ex
@@ -722,11 +712,6 @@ msgstr "संदेश `group` के अंदर नहीं हो सक�
 msgid "nota"
 msgstr "नोट"
 
-#: lib/brainagram_web/error_messages.ex
-#, elixir-autogen, elixir-format
-msgid "não entendi esta linha: %{text}"
-msgstr "यह पंक्ति समझ नहीं आई: %{text}"
-
 #: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "nó de implantação, fronteira"
@@ -785,6 +770,7 @@ msgstr[0] "1 डायग्राम"
 msgstr[1] "%{count} डायग्राम"
 
 #: lib/brainagram_web/live/dashboard_live.ex
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Abrir"
 msgstr "खोलें"
@@ -1371,3 +1357,83 @@ msgstr "फ़ाइलें यहाँ छोड़ें या चुन�
 #, elixir-autogen, elixir-format
 msgid "Idioma: %{name}"
 msgstr "भाषा: %{name}"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Abrir o código e as ferramentas de edição (P)"
+msgstr "कोड और एडिटिंग टूल खोलें (P)"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Alterações não salvas"
+msgstr "बिना सहेजे बदलाव"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Apresentar"
+msgstr "प्रस्तुत करें"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Apresentar (P)"
+msgstr "प्रस्तुत करें (P)"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Editar (P)"
+msgstr "संपादित करें (P)"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Fechar os passos"
+msgstr "चरण बंद करें"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Ferramentas do canvas"
+msgstr "कैनवस टूल"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Há alterações não salvas. Sair mesmo assim?"
+msgstr "बिना सहेजे बदलाव हैं। फिर भी बाहर जाएँ?"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Ir para o erro (F8)"
+msgstr "त्रुटि पर जाएँ (F8)"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Mostrar os passos"
+msgstr "चरण दिखाएँ"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Salvar (Ctrl+S)"
+msgstr "सहेजें (Ctrl+S)"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Substituir o código atual por este exemplo? Ctrl+Z desfaz."
+msgstr "मौजूदा कोड को इस उदाहरण से बदलें? Ctrl+Z से पूर्ववत करें।"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Só o diagrama, o player e os passos (P)"
+msgstr "सिर्फ़ डायग्राम, प्लेयर और चरण (P)"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Tornar público? O diagrama passa a aparecer na galeria pública."
+msgstr "सार्वजनिक करें? डायग्राम सार्वजनिक गैलरी में दिखेगा।"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Zoom do diagrama"
+msgstr "डायग्राम ज़ूम"
+
+#: lib/brainagram_web/error_messages.ex
+#, elixir-autogen, elixir-format
+msgid "não entendi esta linha: %{text}. Cada linha declara um nó (service api \"API\"), uma seta (a -> b : texto), um step, group, note ou payload."
+msgstr "यह पंक्ति समझ नहीं आई: %{text}। हर पंक्ति एक नोड (service api \"API\"), एक तीर (a -> b : टेक्स्ट), या step, group, note या payload घोषित करती है।"

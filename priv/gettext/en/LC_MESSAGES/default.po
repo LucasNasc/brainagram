@@ -122,11 +122,6 @@ msgstr "Brainagram, home"
 msgid "Cancelar"
 msgstr "Cancel"
 
-#: lib/brainagram_web/live/editor_live.ex
-#, elixir-autogen, elixir-format
-msgid "Carregar exemplo"
-msgstr "Load example"
-
 #: lib/brainagram_web/components/layouts.ex
 #, elixir-autogen, elixir-format
 msgid "Claro"
@@ -285,11 +280,6 @@ msgstr "Examples"
 #, elixir-autogen, elixir-format
 msgid "Exportar"
 msgstr "Export"
-
-#: lib/brainagram_web/live/editor_live.ex
-#, elixir-autogen, elixir-format
-msgid "F8 vai para o erro"
-msgstr "F8 jumps to the error"
 
 #: lib/brainagram_web/components/core_components.ex
 #: lib/brainagram_web/live/dashboard_live.ex
@@ -722,11 +712,6 @@ msgstr "messages can't go inside a `group` — use a `step`"
 msgid "nota"
 msgstr "note"
 
-#: lib/brainagram_web/error_messages.ex
-#, elixir-autogen, elixir-format
-msgid "não entendi esta linha: %{text}"
-msgstr "couldn't understand this line: %{text}"
-
 #: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "nó de implantação, fronteira"
@@ -785,6 +770,7 @@ msgstr[0] "1 diagram"
 msgstr[1] "%{count} diagrams"
 
 #: lib/brainagram_web/live/dashboard_live.ex
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Abrir"
 msgstr "Open"
@@ -1371,3 +1357,83 @@ msgstr "Drop files here or click to choose"
 #, elixir-autogen, elixir-format
 msgid "Idioma: %{name}"
 msgstr "Language: %{name}"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Abrir o código e as ferramentas de edição (P)"
+msgstr "Open the code and the editing tools (P)"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Alterações não salvas"
+msgstr "Unsaved changes"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Apresentar"
+msgstr "Present"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Apresentar (P)"
+msgstr "Present (P)"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Editar (P)"
+msgstr "Edit (P)"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Fechar os passos"
+msgstr "Close steps"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Ferramentas do canvas"
+msgstr "Canvas tools"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Há alterações não salvas. Sair mesmo assim?"
+msgstr "You have unsaved changes. Leave anyway?"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Ir para o erro (F8)"
+msgstr "Go to the error (F8)"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Mostrar os passos"
+msgstr "Show steps"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Salvar (Ctrl+S)"
+msgstr "Save (Ctrl+S)"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Substituir o código atual por este exemplo? Ctrl+Z desfaz."
+msgstr "Replace the current code with this example? Ctrl+Z undoes it."
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Só o diagrama, o player e os passos (P)"
+msgstr "Just the diagram, the player and the steps (P)"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Tornar público? O diagrama passa a aparecer na galeria pública."
+msgstr "Make it public? The diagram will appear in the public gallery."
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Zoom do diagrama"
+msgstr "Diagram zoom"
+
+#: lib/brainagram_web/error_messages.ex
+#, elixir-autogen, elixir-format
+msgid "não entendi esta linha: %{text}. Cada linha declara um nó (service api \"API\"), uma seta (a -> b : texto), um step, group, note ou payload."
+msgstr "couldn't understand this line: %{text}. Each line declares a node (service api \"API\"), an arrow (a -> b : text), a step, group, note or payload."

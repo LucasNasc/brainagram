@@ -287,3 +287,9 @@
 .bg-ghost { fill: var(--brand-soft); stroke: var(--brand); stroke-width: 1.5; stroke-dasharray: 5 4; }
 .bg-guide { stroke: var(--brand); stroke-width: 1; stroke-dasharray: 3 3; vector-effect: non-scaling-stroke; }
 .bg-canvas.is-editing { cursor: default; }
+
+/* ── cabeçalhos fixos (sequência, fora do modo de edição) ───────────────── */
+.bg-header-backdrop { fill: var(--bg-canvas); opacity: 0; pointer-events: none; transition: opacity var(--dur-fast) var(--ease-ui); }
+.bg-header-rule { stroke: var(--border); stroke-width: 1; opacity: 0; pointer-events: none; }
+.bg-layer-nodes.is-stuck .bg-header-backdrop { opacity: 0.94; }
+.bg-layer-nodes.is-stuck .bg-header-rule { opacity: 1; }

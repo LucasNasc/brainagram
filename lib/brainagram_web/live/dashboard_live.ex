@@ -252,7 +252,7 @@ defmodule BrainagramWeb.DashboardLive do
 
     case Bus.dispatch(StartDiagram, attrs) do
       {:ok, slug} ->
-        {:noreply, push_navigate(socket, to: ~p"/d/#{slug}")}
+        {:noreply, push_navigate(socket, to: ~p"/d/#{slug}?edit=1")}
 
       {:error, reason} ->
         {:noreply, assign(socket, form: form_error(params, :diagram, :title, reason))}
@@ -823,7 +823,7 @@ defmodule BrainagramWeb.DashboardLive do
     ~H"""
     <article class="ba-dcard" id={@id}>
       <.link
-        navigate={~p"/d/#{@diagram.slug}"}
+        navigate={~p"/d/#{@diagram.slug}?edit=1"}
         class="ba-dcard__thumb"
         tabindex="-1"
         aria-hidden="true"
@@ -837,7 +837,7 @@ defmodule BrainagramWeb.DashboardLive do
       </.link>
 
       <div class="ba-dcard__body">
-        <.link navigate={~p"/d/#{@diagram.slug}"} class="ba-dcard__title">{@diagram.title}</.link>
+        <.link navigate={~p"/d/#{@diagram.slug}?edit=1"} class="ba-dcard__title">{@diagram.title}</.link>
         <div class="ba-dcard__meta">
           <span class="ba-dcard__kind" data-kind={@diagram.kind}>
             <.icon name={kind_icon(@diagram.kind)} class="ba-ico--16" />{kind_label(@diagram.kind)}
@@ -870,7 +870,7 @@ defmodule BrainagramWeb.DashboardLive do
           <.icon name="hero-ellipsis-horizontal" />
         </summary>
         <div class="ba-menu ba-dropdown__menu" role="menu">
-          <.link navigate={~p"/d/#{@diagram.slug}"} class="ba-menu__item" role="menuitem">
+          <.link navigate={~p"/d/#{@diagram.slug}?edit=1"} class="ba-menu__item" role="menuitem">
             <.icon name="hero-arrow-top-right-on-square" /><span>{gettext("Abrir")}</span>
           </.link>
           <button

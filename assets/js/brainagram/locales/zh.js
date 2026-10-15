@@ -95,4 +95,11 @@ export default {
   "nó": "节点",
   "inserir": "插入",
   "fechar": "关闭",
+  // reprodução (paleta de comandos)
+  "Reprodução": "播放",
+  "Tocar / pausar": "播放 / 暂停",
+  "Espaço": "空格",
+  "Reiniciar do começo": "从头开始",
+  "Repetir em loop (liga/desliga)": "循环播放（开/关）",
+  "Apresentar / editar": "演示 / 编辑",
 };

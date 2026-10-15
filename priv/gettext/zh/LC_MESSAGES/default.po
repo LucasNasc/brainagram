@@ -119,11 +119,6 @@ msgstr "Brainagram，首页"
 msgid "Cancelar"
 msgstr "取消"
 
-#: lib/brainagram_web/live/editor_live.ex
-#, elixir-autogen, elixir-format
-msgid "Carregar exemplo"
-msgstr "加载示例"
-
 #: lib/brainagram_web/components/layouts.ex
 #, elixir-autogen, elixir-format
 msgid "Claro"
@@ -281,11 +276,6 @@ msgstr "示例"
 #, elixir-autogen, elixir-format
 msgid "Exportar"
 msgstr "导出"
-
-#: lib/brainagram_web/live/editor_live.ex
-#, elixir-autogen, elixir-format
-msgid "F8 vai para o erro"
-msgstr "F8 跳转到错误"
 
 #: lib/brainagram_web/components/core_components.ex
 #: lib/brainagram_web/live/dashboard_live.ex
@@ -716,11 +706,6 @@ msgstr "消息不能放在 `group` 内 — 请使用 `step`"
 msgid "nota"
 msgstr "备注"
 
-#: lib/brainagram_web/error_messages.ex
-#, elixir-autogen, elixir-format
-msgid "não entendi esta linha: %{text}"
-msgstr "无法理解此行：%{text}"
-
 #: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "nó de implantação, fronteira"
@@ -778,6 +763,7 @@ msgid_plural "%{count} diagramas"
 msgstr[0] "%{count} 个图表"
 
 #: lib/brainagram_web/live/dashboard_live.ex
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Abrir"
 msgstr "打开"
@@ -1358,3 +1344,83 @@ msgstr "将文件拖放到此处，或点击选择"
 #, elixir-autogen, elixir-format
 msgid "Idioma: %{name}"
 msgstr "语言：%{name}"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Abrir o código e as ferramentas de edição (P)"
+msgstr "打开代码和编辑工具 (P)"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Alterações não salvas"
+msgstr "未保存的更改"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Apresentar"
+msgstr "演示"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Apresentar (P)"
+msgstr "演示 (P)"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Editar (P)"
+msgstr "编辑 (P)"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Fechar os passos"
+msgstr "关闭步骤"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Ferramentas do canvas"
+msgstr "画布工具"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Há alterações não salvas. Sair mesmo assim?"
+msgstr "有未保存的更改。仍要离开吗？"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Ir para o erro (F8)"
+msgstr "跳到错误 (F8)"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Mostrar os passos"
+msgstr "显示步骤"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Salvar (Ctrl+S)"
+msgstr "保存 (Ctrl+S)"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Substituir o código atual por este exemplo? Ctrl+Z desfaz."
+msgstr "用此示例替换当前代码？可按 Ctrl+Z 撤销。"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Só o diagrama, o player e os passos (P)"
+msgstr "只显示图表、播放器和步骤 (P)"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Tornar público? O diagrama passa a aparecer na galeria pública."
+msgstr "设为公开？该图表将出现在公开图库中。"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Zoom do diagrama"
+msgstr "图表缩放"
+
+#: lib/brainagram_web/error_messages.ex
+#, elixir-autogen, elixir-format
+msgid "não entendi esta linha: %{text}. Cada linha declara um nó (service api \"API\"), uma seta (a -> b : texto), um step, group, note ou payload."
+msgstr "无法理解这一行：%{text}。每一行应声明一个节点（service api \"API\"）、一条箭头（a -> b : 文本）、step、group、note 或 payload。"

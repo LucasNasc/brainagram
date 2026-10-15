@@ -95,4 +95,11 @@ export default {
   "nó": "node",
   "inserir": "insert",
   "fechar": "close",
+  // reprodução (paleta de comandos)
+  "Reprodução": "Playback",
+  "Tocar / pausar": "Play / pause",
+  "Espaço": "Space",
+  "Reiniciar do começo": "Restart from the beginning",
+  "Repetir em loop (liga/desliga)": "Loop playback (on/off)",
+  "Apresentar / editar": "Present / edit",
 };

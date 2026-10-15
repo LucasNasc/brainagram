@@ -66,13 +66,39 @@ export const SourceEditor = {
     this._command = (e) => this.onCommand(e.detail || {});
     this._blur = () => setTimeout(() => this.closePopup(), 120);
 
+    // números de linha: a calha acompanha a rolagem do texto
+    this.gutter = document.getElementById("source-gutter");
+    this._scroll = () => this.gutter && (this.gutter.scrollTop = this.ta.scrollTop);
+
     this.ta.addEventListener("input", this._input);
     this.ta.addEventListener("keydown", this._keydown);
     this.ta.addEventListener("blur", this._blur);
+    this.ta.addEventListener("scroll", this._scroll);
+    this.renderGutter();
     document.addEventListener("keydown", this._globalKeys);
     window.addEventListener("bg:flush-source", this._flush);
     window.addEventListener("bg:command", this._command);
     this.syncUndoButtons();
+  },
+
+  // o servidor mudou as linhas com erro (data-error-lines)
+  updated() {
+    this.renderGutter();
+  },
+
+  renderGutter() {
+    if (!this.gutter) return;
+    const count = this.ta.value.split("\n").length;
+    const errors = this.ta.dataset.errorLines || "[]";
+    const key = `${count}|${errors}`;
+    if (this._gutterKey !== key) {
+      this._gutterKey = key;
+      const bad = new Set(JSON.parse(errors));
+      let html = "";
+      for (let n = 1; n <= count; n++) html += bad.has(n) ? `<span class="is-error">${n}</span>` : `<span>${n}</span>`;
+      this.gutter.innerHTML = html;
+    }
+    this._scroll();
   },
 
   destroyed() {
@@ -90,6 +116,7 @@ export const SourceEditor = {
       const caret = this.caretLineCol();
       this.ta.value = source;
       this.placeCaret(line || caret.line, caret.col);
+      this.renderGutter();
     }
     this.lastSent = source;
     if (record) this.record(source);
@@ -131,6 +158,7 @@ export const SourceEditor = {
     const caret = this.caretLineCol();
     this.ta.value = source;
     this.placeCaret(caret.line, caret.col);
+    this.renderGutter();
     this.send(source);
     this.syncUndoButtons();
   },
@@ -152,6 +180,7 @@ export const SourceEditor = {
   },
 
   onInput() {
+    this.renderGutter();
     clearTimeout(this.typingTimer);
     this.typingTimer = setTimeout(() => this.commitTyping(), TYPING_PAUSE);
     // o `phx-change` do formulário leva o texto ao servidor (com debounce);
@@ -402,14 +431,13 @@ function caretCoordinates(ta) {
   }
   div.style.position = "absolute";
   div.style.visibility = "hidden";
-  div.style.whiteSpace = "pre-wrap";
-  div.style.wordWrap = "break-word";
+  div.style.whiteSpace = "pre";
   div.textContent = ta.value.slice(0, ta.selectionStart);
   const mark = document.createElement("span");
   mark.textContent = "​";
   div.appendChild(mark);
   document.body.appendChild(div);
-  const coords = { left: mark.offsetLeft, top: mark.offsetTop - ta.scrollTop };
+  const coords = { left: mark.offsetLeft - ta.scrollLeft, top: mark.offsetTop - ta.scrollTop };
   div.remove();
   return coords;
 }

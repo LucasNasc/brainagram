@@ -158,13 +158,15 @@ defmodule BrainagramWeb.DashboardLiveTest do
                "#new-diagram-form select option[value='#{ctx.project}'][selected]"
              )
 
-      assert {:error, {:live_redirect, %{to: "/d/" <> slug}}} =
+      # quem cria pela área de gestão é o autor: o diagrama novo abre no editor
+      assert {:error, {:live_redirect, %{to: "/d/" <> rest}}} =
                view
                |> form("#new-diagram-form",
                  diagram: %{title: "Estorno", kind: "sequence", project: ctx.project}
                )
                |> render_submit()
 
+      assert [slug, "edit=1"] = String.split(rest, "?")
       assert %{title: "Estorno", project: project} = detail(slug)
       assert project == ctx.project
     end
