@@ -41,3 +41,8 @@ npm-debug.log
 /Claude outputs/
 .DS_Store
 Thumbs.db
+
+# Local environment (copy .env.example to .env)
+.env
+.env.*
+!.env.example

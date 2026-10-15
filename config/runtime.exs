@@ -30,13 +30,42 @@ if config_env() == :prod do
 
   maybe_ipv6 = if System.get_env("ECTO_IPV6") in ~w(true 1), do: [:inet6], else: []
 
-  config :brainagram, Brainagram.Infrastructure.Persistence.Repo,
-    # ssl: true,
-    url: database_url,
-    pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
-    # For machines with several cores, consider starting multiple pools of `pool_size`
-    # pool_count: 4,
-    socket_options: maybe_ipv6
+  # TLS com o banco (a maioria dos serviços gerenciados exige):
+  #   DATABASE_SSL=false   (padrão) sem TLS — banco na mesma rede/container
+  #   DATABASE_SSL=true    criptografa, sem conferir o certificado do servidor
+  #   DATABASE_SSL=verify  criptografa e confere o certificado (CAs do sistema;
+  #                        ou o arquivo de DATABASE_SSL_CA_FILE, para CA própria)
+  database_ssl =
+    case System.get_env("DATABASE_SSL", "false") |> String.downcase() do
+      value when value in ~w(false 0 off no) ->
+        []
+
+      value when value in ~w(true 1 on yes require) ->
+        [ssl: [verify: :verify_none]]
+
+      "verify" ->
+        ca = System.get_env("DATABASE_SSL_CA_FILE")
+
+        [
+          ssl:
+            [
+              verify: :verify_peer,
+              server_name_indication: URI.parse(database_url).host |> to_charlist()
+            ] ++
+              if(ca, do: [cacertfile: ca], else: [cacerts: :public_key.cacerts_get()])
+        ]
+
+      other ->
+        raise "DATABASE_SSL must be false, true or verify (got #{inspect(other)})"
+    end
+
+  config :brainagram,
+         Brainagram.Infrastructure.Persistence.Repo,
+         [
+           url: database_url,
+           pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
+           socket_options: maybe_ipv6
+         ] ++ database_ssl
 
   # The secret key base is used to sign/encrypt cookies and other secrets.
   # A default value is used in config/dev.exs and config/test.exs but you

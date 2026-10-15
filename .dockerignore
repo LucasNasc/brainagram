@@ -51,3 +51,8 @@ erl_crash.dump
 /.claude/
 /Claude outputs/
 *.md
+
+# Segredos locais nunca entram na imagem
+.env
+.env.*
+!.env.example

@@ -9,11 +9,11 @@
 #   3. Sobe o servidor; no SIGTERM (deploy/parada), desliga o servidor e depois
 #      o Postgres, de forma limpa.
 #
-# TODO(external-db): o Postgres embutido é o ponto de partida (uma instância,
-# um container). Para usar um banco externo (Postgres do Coolify, RDS…), basta
-# definir DATABASE_URL — este script então não sobe o embutido. Quando o banco
-# externo for o padrão, remover este bloco e os pacotes `postgresql-*` do
-# Dockerfile, e migrar os dados com pg_dump/pg_restore.
+# O Postgres embutido é o padrão para quem só quer subir o container. Para um
+# banco externo (Postgres do Coolify, RDS, Neon…), basta definir DATABASE_URL
+# (e DATABASE_SSL, se o serviço exigir TLS) — este script então não sobe o
+# embutido. Para tirá-lo de vez da imagem, remover este bloco e o pacote
+# `postgresql` do Dockerfile, e migrar os dados com pg_dump/pg_restore.
 set -eu
 
 cd -P -- "$(dirname -- "$0")"

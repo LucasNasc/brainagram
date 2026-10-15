@@ -1,0 +1,22 @@
+# Brainagram com Docker Compose.
+#
+#   cp .env.example .env     # preencha SECRET_KEY_BASE e PHX_HOST
+#   docker compose up -d     # http://localhost:4000
+#
+# Por padrão o container traz o próprio PostgreSQL (dados no volume
+# `brainagram-data`). Para um banco externo, defina DATABASE_URL no `.env`
+# (veja o .env.example): o PostgreSQL embutido não é iniciado, e o volume deixa
+# de ser usado.
+services:
+  brainagram:
+    build: .
+    image: brainagram
+    restart: unless-stopped
+    ports:
+      - "${PORT_PUBLISHED:-4000}:4000"
+    env_file: .env
+    volumes:
+      - brainagram-data:/app/data
+
+volumes:
+  brainagram-data:

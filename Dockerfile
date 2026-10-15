@@ -83,7 +83,7 @@ RUN apt-get update \
 # PostgreSQL embutido: usado quando DATABASE_URL não é definida (ver
 # rel/overlays/bin/start). O cluster padrão do pacote não é criado — o start
 # inicializa o banco no volume /app/data na primeira execução.
-# TODO(external-db): com um banco externo como padrão, remover este bloco.
+# Quem só usa banco externo pode remover este bloco (a imagem encolhe ~400 MB).
 RUN mkdir -p /etc/postgresql-common/createcluster.d \
   && echo "create_main_cluster = false" > /etc/postgresql-common/createcluster.d/no-main-cluster.conf \
   && apt-get update \
@@ -127,5 +127,6 @@ HEALTHCHECK --interval=15s --timeout=5s --start-period=40s --retries=3 \
 # bin/start: sobe o PostgreSQL embutido (se não houver DATABASE_URL), roda as
 # migrações pendentes e só então o servidor. Se a migração falhar, o container
 # não fica saudável e o Coolify mantém a versão anterior no ar.
-# TODO(external-db): definir DATABASE_URL já faz o start usar o banco externo.
+# Banco externo: definir DATABASE_URL (e DATABASE_SSL, se o serviço exigir TLS)
+# faz o start usar esse banco e não subir o embutido.
 CMD ["/app/bin/start"]
