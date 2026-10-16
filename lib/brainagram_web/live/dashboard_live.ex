@@ -1017,6 +1017,7 @@ defmodule BrainagramWeb.DashboardLive do
             placeholder={gettext("Ex.: Checkout com pagamento assíncrono")}
             maxlength="160"
             autocomplete="off"
+            phx-debounce="250"
             phx-mounted={JS.focus()}
           />
           <fieldset class="ba-field">

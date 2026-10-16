@@ -88,6 +88,8 @@ one of the sections *Added*, *Changed*, *Deprecated*, *Removed*, *Fixed* or
 - Behind an HTTPS proxy (Coolify's Caddy or Traefik) the LiveView connection was
   refused with 403: the app now applies `X-Forwarded-Proto`, `-Port` and `-Host`
   before the socket's origin check.
+- The new diagram dialog sends the name after a short pause instead of on every
+  keystroke, so a slow or fallback connection no longer makes it churn.
 - Menus support arrow keys; the Edit/Pan switch is a real radio group with a
   visible selection; the error badge is a button; untranslated toolbar labels.
 
