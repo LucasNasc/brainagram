@@ -136,7 +136,7 @@ a.ba-btn { text-decoration: none; }
 .ba-callout .ba-ico { width: 16px; height: 16px; flex: none; margin-top: 0; }
 
 /* ---------- Toast ---------- */
-.ba-toast { display: flex; align-items: center; gap: var(--space-3); min-width: 320px; max-width: 420px; padding: 10px 10px 10px 14px; border-radius: var(--radius-md); background: var(--surface); border: 1px solid var(--border); box-shadow: var(--shadow-md); font: 400 13px/18px var(--font-sans); animation: ba-rise var(--dur-slow) var(--ease-revelar) both; }
+.ba-toast { display: flex; align-items: center; gap: var(--space-3); min-width: 320px; max-width: 420px; padding: 10px 10px 10px 14px; border-radius: var(--radius-md); background: var(--surface); border: 1px solid var(--border); box-shadow: var(--shadow-md); font: 400 13px/18px var(--font-sans); animation: ba-rise var(--dur-slow) var(--ease-revelar) backwards; }
 .ba-toast > .ba-ico { width: 18px; height: 18px; }
 .ba-toast__msg { flex: 1; }
 .ba-toast__msg b { font-weight: 600; }

@@ -90,6 +90,9 @@ one of the sections *Added*, *Changed*, *Deprecated*, *Removed*, *Fixed* or
   before the socket's origin check.
 - The new diagram dialog sends the name after a short pause instead of on every
   keystroke, so a slow or fallback connection no longer makes it churn.
+- Dialogs flickered on every keystroke in Chromium: entrance animations kept
+  `fill-mode: both`, so the overlay and the empty state stayed as composited
+  layers and were recomposited on each update. They now use `backwards`.
 - Menus support arrow keys; the Edit/Pan switch is a real radio group with a
   visible selection; the error badge is a button; untranslated toolbar labels.
 
