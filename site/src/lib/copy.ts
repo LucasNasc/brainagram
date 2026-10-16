@@ -6,7 +6,10 @@ export interface Pain {
   body: string;
 }
 
+export type RoadmapStage = "specified" | "planned" | "exploring";
+
 export interface RoadmapEntry {
+  stage: RoadmapStage;
   status: string;
   title: string;
   body: string;
@@ -167,30 +170,35 @@ const pt: Copy = {
   roadmap: {
     message: "e depois?",
     title: "O que vem por aí.",
-    lede: "Uma direção, não uma promessa: estas setas ainda não tocaram. A ordem pode mudar conforme o que a comunidade pedir.",
+    lede: "Uma direção, não uma promessa: cada seta anda até onde a ideia já chegou (em estudo, planejado, especificado) e espera ali. A ordem pode mudar conforme o que a comunidade pedir.",
     discuss: "Sugerir ou discutir no GitHub",
     items: [
       {
+        stage: "planned",
         status: "planejado",
         title: "Servidor MCP",
         body: "Agentes como Claude, Cursor e Copilot leem, criam e editam diagramas pelo Model Context Protocol, e devolvem um link pronto para dar play.",
       },
       {
+        stage: "planned",
         status: "planejado",
         title: "Integração com LLMs",
         body: "Descreva um fluxo em palavras, ou cole código, logs ou um trace, e receba um rascunho em .brain para revisar. A IA escreve o texto; você confere o que toca.",
       },
       {
+        stage: "planned",
         status: "planejado",
         title: "Bibliotecas e player embutível",
         body: "Um player para incorporar em documentação e sites, e bibliotecas para gerar, validar e renderizar .brain a partir do seu código e da CI.",
       },
       {
+        stage: "specified",
         status: "especificado",
         title: "Modo só no navegador e contas opcionais",
         body: "Usar sem servidor, com os diagramas guardados no próprio navegador, e criar uma conta só para sincronizar entre aparelhos.",
       },
       {
+        stage: "exploring",
         status: "em estudo",
         title: "Colaboração em tempo real e página pública",
         body: "Editar a várias mãos e publicar um diagrama só para leitura, para incorporar ou apresentar.",
@@ -321,30 +329,35 @@ const en: Copy = {
   roadmap: {
     message: "and then?",
     title: "What's next.",
-    lede: "A direction, not a promise: these arrows haven't played yet. The order may change with what the community asks for.",
+    lede: "A direction, not a promise: each arrow travels as far as the idea has come (exploring, planned, specified) and waits there. The order may change with what the community asks for.",
     discuss: "Suggest or discuss on GitHub",
     items: [
       {
+        stage: "planned",
         status: "planned",
         title: "MCP server",
         body: "Agents such as Claude, Cursor and Copilot read, create and edit diagrams through the Model Context Protocol, and hand back a link ready to play.",
       },
       {
+        stage: "planned",
         status: "planned",
         title: "LLM integration",
         body: "Describe a flow in words, or paste code, logs or a trace, and get a .brain draft to review. The AI writes the text; you check what plays.",
       },
       {
+        stage: "planned",
         status: "planned",
         title: "Libraries and an embeddable player",
         body: "A player to embed in docs and websites, and libraries to generate, validate and render .brain from your code and your CI.",
       },
       {
+        stage: "specified",
         status: "specified",
         title: "Browser-only mode and optional accounts",
         body: "Use it without a server, with diagrams stored in the browser, and create an account only to sync between devices.",
       },
       {
+        stage: "exploring",
         status: "exploring",
         title: "Real-time collaboration and a public page",
         body: "Edit together and publish a read-only diagram, to embed or to present.",

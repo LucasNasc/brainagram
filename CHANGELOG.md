@@ -40,6 +40,9 @@ one of the sections *Added*, *Changed*, *Deprecated*, *Removed*, *Fixed* or
   `true`, `verify`) and `DATABASE_SSL_CA_FILE`; `.env.example` and a
   `docker-compose.yml` document every variable.
 - Spec 002: browser-only mode and optional accounts (not implemented yet).
+- **Demo mode** (`BRAINAGRAM_DEMO=true`): a public playground with no database,
+  diagrams in a temporary in-memory cache (24 h, 500 diagrams) and a notice on
+  every screen.
 - `examples/`: sequence and architecture diagrams with and without payloads,
   plus Mermaid and PlantUML sources next to their converted `.brain`; the
   READMEs link the examples and the landing page.
@@ -47,6 +50,8 @@ one of the sections *Added*, *Changed*, *Deprecated*, *Removed*, *Fixed* or
   the page itself is a sequence diagram that plays as you scroll.
   English by default, with a flagged language switch, and a roadmap section
   (MCP server, LLM integration, libraries and an embeddable player).
+  Roadmap arrows travel as far as each idea has come and wait there; the
+  READMEs list the same roadmap.
 - **Presentation mode**: shared links (`/d/:slug`) open with just the diagram,
   the player and the steps; *Edit* or `P` switches to the editor
   (`?edit=1` opens it directly, as the management area does).
@@ -77,6 +82,9 @@ one of the sections *Added*, *Changed*, *Deprecated*, *Removed*, *Fixed* or
 
 ### Fixed
 
+- "No connection" / "The server didn't respond" when the instance is reached
+  on a domain other than `PHX_HOST`: the LiveView WebSocket now accepts the
+  request's own host by default (`PHX_CHECK_ORIGIN` pins a list).
 - Menus support arrow keys; the Edit/Pan switch is a real radio group with a
   visible selection; the error badge is a button; untranslated toolbar labels.
 

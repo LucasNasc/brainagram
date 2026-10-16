@@ -9,7 +9,8 @@ import type { EdgeKind } from "./tokens";
  * transporte leem daqui; nada disso passa pelo estado do React, porque muda a
  * cada quadro.
  */
-export type MsgState = "pending" | "active" | "done";
+/** "waiting": a seta parou no meio do caminho (um item do roadmap). */
+export type MsgState = "pending" | "active" | "waiting" | "done";
 
 export interface Msg {
   el: HTMLElement;
@@ -20,8 +21,8 @@ export interface Msg {
   y: number;
   /** Metade da faixa de rolagem em que esta seta toca. */
   win: number;
-  /** Uma seta do futuro: fica pendente, nunca toca. */
-  hold: boolean;
+  /** Até onde a seta pode tocar (0..1). Menor que 1: uma ideia a caminho. */
+  cap: number;
   state: MsgState;
 }
 
@@ -49,8 +50,8 @@ class Timeline {
   private introDone = false;
   private frame = 0;
 
-  addMessage(el: HTMLElement, from: number, to: number, kind: EdgeKind, hold = false) {
-    this.msgs.push({ el, from, to, kind, y: 0, win: WINDOW, hold, state: "pending" });
+  addMessage(el: HTMLElement, from: number, to: number, kind: EdgeKind, cap = 1) {
+    this.msgs.push({ el, from, to, kind, y: 0, win: WINDOW, cap, state: "pending" });
     this.schedule();
     return () => {
       this.msgs = this.msgs.filter((m) => m.el !== el);
@@ -134,8 +135,7 @@ class Timeline {
 
   /** Progresso (0..1) de uma seta para uma dada linha de leitura. */
   progressOf(m: Msg, playhead: number): number {
-    if (m.hold) return 0;
-    return clamp01((playhead - (m.y - m.win)) / (2 * m.win));
+    return Math.min(m.cap, clamp01((playhead - (m.y - m.win)) / (2 * m.win)));
   }
 
   /** Índice do passo atual e o quanto dele já passou. */

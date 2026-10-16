@@ -24,11 +24,11 @@ function Scene() {
     const root = new THREE.Group();
     const dots = new DotField();
     const lifelines = Array.from({ length: 5 }, () => new Seg(1));
-    const impulse = new Impulse();
+    const impulses = Array.from({ length: 8 }, () => new Impulse());
     const pulses = Array.from({ length: 3 }, () => new Halo("ring", 5));
     const arrows = new THREE.Group();
-    root.add(dots.points, ...lifelines.map((l) => l.mesh), arrows, ...pulses.map((p) => p.mesh), impulse.group);
-    return { root, dots, lifelines, impulse, pulses, arrows, pool: [] as Arrow[] };
+    root.add(dots.points, ...lifelines.map((l) => l.mesh), arrows, ...pulses.map((p) => p.mesh), ...impulses.map((i) => i.group));
+    return { root, dots, lifelines, impulses, pulses, arrows, pool: [] as Arrow[] };
   }, []);
 
   const pointer = useRef<[number, number] | null>(null);
@@ -84,6 +84,7 @@ function Scene() {
     }
 
     let impulseAt: [number, number] | null = null;
+    const marks: { x: number; y: number; waiting: boolean }[] = [];
     gfx.pool.forEach((arrow, i) => {
       const m = timeline.msgs[i];
       if (!m) {
@@ -92,7 +93,8 @@ function Scene() {
       }
       const y = m.y - sy;
       const p = timeline.progressOf(m, playhead);
-      const state: MsgState = p <= 0 ? "pending" : p >= 1 ? "done" : "active";
+      const state: MsgState =
+        p <= 0 ? "pending" : p >= 1 ? "done" : m.cap < 1 && p >= m.cap ? "waiting" : "active";
       if (state !== m.state) {
         if (state === "done" && m.state === "active" && !reduced) {
           live.current = [...live.current.slice(-2), { msg: m, start: now }];
@@ -106,10 +108,22 @@ function Scene() {
       const [ax, bx] = arrowEnds(w, m.from, m.to);
       const x = arrow.update(m.kind, ax, bx, y, p, compact ? 0.9 : 1);
       if (state === "active") impulseAt = [x, y];
+      if (state === "active" || state === "waiting") marks.push({ x, y, waiting: state === "waiting" });
     });
 
-    gfx.impulse.visible = impulseAt !== null;
-    if (impulseAt) gfx.impulse.set(impulseAt[0], impulseAt[1]);
+    // Quem espera respira devagar: o impulso parado no meio da seta é o
+    // trabalho que ainda está a caminho.
+    const breath = reduced ? 0 : Math.sin(now / 520);
+    gfx.impulses.forEach((impulse, i) => {
+      const mark = marks[i];
+      impulse.visible = Boolean(mark);
+      if (mark) impulse.set(mark.x, mark.y, mark.waiting ? 4.5 + breath * 1.1 : 5.5);
+    });
+    const waiting = marks.some((m) => m.waiting);
+    if (!impulseAt && waiting) {
+      const first = marks.find((m) => m.waiting)!;
+      impulseAt = [first.x, first.y];
+    }
 
     live.current = live.current.filter((p) => now - p.start < PULSE_MS);
     gfx.pulses.forEach((ring, i) => {
@@ -132,7 +146,7 @@ function Scene() {
     }
     gfx.dots.update(sy, impulseAt, pointer.current);
 
-    if (timeline.introRunning || live.current.length > 0) invalidate();
+    if (timeline.introRunning || live.current.length > 0 || (waiting && !reduced)) invalidate();
   });
 
   return <primitive object={gfx.root} />;

@@ -365,6 +365,8 @@ caracteres especiais na senha vão codificados (`@` → `%40`).
 | `POOL_SIZE` | não | conexões com o banco, padrão `10` |
 | `ECTO_IPV6` | não | `true` se o host do banco só tem IPv6 |
 | `PORT` | não | porta HTTP dentro do container, padrão `4000` |
+| `PHX_CHECK_ORIGIN` | não | origens que podem abrir o WebSocket do LiveView, separadas por vírgula (`https://a.com,https://b.com`); por padrão vale o próprio host da requisição, então um domínio diferente do `PHX_HOST` também conecta |
+| `BRAINAGRAM_DEMO` | não | `true` transforma a instância num **playground público**: sem banco, diagramas num cache temporário em memória e um aviso em todas as telas (veja abaixo) |
 
 Para sair do banco embutido para um externo: faça o `pg_dump` dentro do
 container (`docker exec <container> sh -c 'PGPASSWORD=$(cat /app/data/.postgres-password) pg_dump -h 127.0.0.1 -U postgres brainagram'`),
@@ -397,11 +399,44 @@ A imagem tem `HEALTHCHECK` em `/health`, então um deploy cujas migrações
 falhem nunca recebe tráfego. Faça backup do volume `/app/data` (ou rode
 `pg_dump` dentro do container) com frequência.
 
+### Instância demo (playground)
+
+Uma demo pública é uma **segunda** aplicação no Coolify, do mesmo repositório,
+com `BRAINAGRAM_DEMO=true` (além de `SECRET_KEY_BASE` e `PHX_HOST`). Nesse
+modo:
+
+- não há banco: nem PostgreSQL embutido, nem migrações, nem volume;
+- os diagramas ficam num cache em memória compartilhado por todos os
+  visitantes; o que não muda há 24 horas é apagado, ficam no máximo 500
+  diagramas (os mais antigos saem primeiro), e tudo some quando o container
+  reinicia;
+- toda tela mostra um aviso de que é um playground com dados temporários.
+
+A sua instância normal (e quem faz self-host) não muda nada: sem a variável,
+tudo continua igual. Para a landing page apontar para a demo, defina a
+variável `DEMO_URL` do repositório (Settings → Secrets and variables →
+Actions → Variables) e rode de novo o workflow **Landing page**.
+
 > **Atenção:** ainda não há contas de usuário — todo diagrama é visível para
 > quem acessar a instância. No Coolify, ative a **HTTP Basic Authentication**
 > nas configurações da aplicação, ou mantenha-a numa rede privada. Contas e um
 > modo só no navegador estão especificados em
 > [`docs/specs/002-contas-e-modo-local.md`](docs/specs/002-contas-e-modo-local.md).
+
+## Roadmap
+
+Uma direção, não uma promessa. A ordem pode mudar conforme o que a comunidade
+pedir; sugira ou discuta nas [issues](https://github.com/LucasNasc/brainagram/issues). A
+[landing page](https://lucasnasc.github.io/brainagram/#roadmap) toca o roadmap como setas que andam até onde cada ideia
+já chegou.
+
+| Ideia | Estágio | O que significa |
+|---|---|---|
+| **Servidor MCP** | planejado | Agentes como Claude, Cursor e Copilot leem, criam e editam diagramas pelo Model Context Protocol, e devolvem um link pronto para dar play. |
+| **Integração com LLMs** | planejado | Descreva um fluxo em palavras, ou cole código, logs ou um trace, e receba um rascunho em `.brain` para revisar. A IA escreve o texto; você confere o que toca. |
+| **Bibliotecas e player embutível** | planejado | Um player para incorporar em documentação e sites, e bibliotecas para gerar, validar e renderizar `.brain` a partir do seu código e da CI. |
+| **Modo só no navegador e contas opcionais** | especificado | Usar sem servidor, com os diagramas guardados no navegador, e criar uma conta só para sincronizar entre aparelhos ([spec 002](docs/specs/002-contas-e-modo-local.md)). |
+| **Colaboração em tempo real e página pública** | em estudo | Editar a várias mãos e publicar um diagrama só para leitura, para incorporar ou apresentar. |
 
 ## Contribuindo
 

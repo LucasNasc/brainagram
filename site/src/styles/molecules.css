@@ -33,6 +33,11 @@
   color: var(--brand-text);
 }
 
+.lp-msg[data-state="waiting"] .lp-msg__label {
+  background: var(--brand-soft);
+  color: var(--brand-text);
+}
+
 .lp-msg[data-state="done"] .lp-msg__label {
   color: var(--text);
 }

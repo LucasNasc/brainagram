@@ -364,6 +364,8 @@ too; special characters in the password must be percent-encoded (`@` → `%40`).
 | `POOL_SIZE` | no | database connections, defaults to `10` |
 | `ECTO_IPV6` | no | `true` if the database host is IPv6-only |
 | `PORT` | no | HTTP port inside the container, defaults to `4000` |
+| `PHX_CHECK_ORIGIN` | no | origins allowed to open the LiveView WebSocket, comma-separated (`https://a.com,https://b.com`); by default the request's own host is accepted, so a domain different from `PHX_HOST` still connects |
+| `BRAINAGRAM_DEMO` | no | `true` turns the instance into a **public playground**: no database, diagrams in a temporary in-memory cache and a notice on every screen (see below) |
 
 Moving from the embedded database to an external one: `pg_dump` from the
 container (`docker exec <container> sh -c 'PGPASSWORD=$(cat /app/data/.postgres-password) pg_dump -h 127.0.0.1 -U postgres brainagram'`),
@@ -396,11 +398,43 @@ The image has a `HEALTHCHECK` on `/health`, so a deploy whose migrations fail
 never receives traffic. Back up the `/app/data` volume (or run `pg_dump`
 inside the container) regularly.
 
+### Demo instance (playground)
+
+A public demo is a **second** Coolify application from the same repository,
+with `BRAINAGRAM_DEMO=true` (plus `SECRET_KEY_BASE` and `PHX_HOST`). In that
+mode:
+
+- there is no database: no embedded PostgreSQL, no migrations, no volume;
+- diagrams live in an in-memory cache shared by every visitor; anything not
+  changed for 24 hours is erased, at most 500 diagrams are kept (oldest go
+  first), and everything is gone when the container restarts;
+- every screen shows a notice that this is a playground with temporary data.
+
+Your regular instance (and anyone self-hosting) is unaffected: without the
+variable, nothing changes. To point the landing page at the demo, set the
+repository variable `DEMO_URL` (Settings → Secrets and variables → Actions →
+Variables) and re-run the **Landing page** workflow.
+
 > **Heads-up:** there are no user accounts yet — every diagram is visible to
 > anyone who can reach the instance. On Coolify, enable **HTTP Basic
 > Authentication** in the application settings, or keep it on a private
 > network. Accounts and a browser-only mode are specified in
 > [`docs/specs/002-contas-e-modo-local.md`](docs/specs/002-contas-e-modo-local.md).
+
+## Roadmap
+
+A direction, not a promise. The order may change with what the community asks
+for; suggest or discuss in the [issues](https://github.com/LucasNasc/brainagram/issues). The
+[landing page](https://lucasnasc.github.io/brainagram/#roadmap) plays it as arrows that travel as far as each idea has
+come.
+
+| Idea | Stage | What it means |
+|---|---|---|
+| **MCP server** | planned | Agents such as Claude, Cursor and Copilot read, create and edit diagrams through the Model Context Protocol, and hand back a link ready to play. |
+| **LLM integration** | planned | Describe a flow in words, or paste code, logs or a trace, and get a `.brain` draft to review. The AI writes the text; you check what plays. |
+| **Libraries and an embeddable player** | planned | A player to embed in docs and websites, and libraries to generate, validate and render `.brain` from your code and your CI. |
+| **Browser-only mode and optional accounts** | specified | Use it without a server, with diagrams stored in the browser, and create an account only to sync between devices ([spec 002](docs/specs/002-contas-e-modo-local.md)). |
+| **Real-time collaboration and a public page** | exploring | Edit together and publish a read-only diagram, to embed or to present. |
 
 ## Contributing
 
