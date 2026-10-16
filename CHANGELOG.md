@@ -45,6 +45,8 @@ one of the sections *Added*, *Changed*, *Deprecated*, *Removed*, *Fixed* or
   READMEs link the examples and the landing page.
 - Landing page in `site/` (static, React + react-three-fiber, pt-BR and en):
   the page itself is a sequence diagram that plays as you scroll.
+  English by default, with a flagged language switch, and a roadmap section
+  (MCP server, LLM integration, libraries and an embeddable player).
 - **Presentation mode**: shared links (`/d/:slug`) open with just the diagram,
   the player and the steps; *Edit* or `P` switches to the editor
   (`?edit=1` opens it directly, as the management area does).

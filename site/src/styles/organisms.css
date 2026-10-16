@@ -183,6 +183,18 @@
   color: var(--brand-text);
 }
 
+.lp-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text);
+  font-weight: 500;
+}
+
+.lp-link:hover {
+  color: var(--brand-text);
+}
+
 .lp-pains {
   margin-top: 56px;
 }

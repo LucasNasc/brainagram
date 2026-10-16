@@ -6,7 +6,7 @@ import { Logo } from "../atoms/Logo";
 import { LaneHeader } from "../molecules/LaneHeader";
 import { LangSwitch } from "../molecules/LangSwitch";
 
-export const STEP_IDS = ["inicio", "dores", "como-funciona", "como-usar", "demo"] as const;
+export const STEP_IDS = ["inicio", "dores", "como-funciona", "como-usar", "roadmap", "demo"] as const;
 
 /** O topo da página: os participantes do diagrama, que são a navegação. */
 export function LaneNav() {

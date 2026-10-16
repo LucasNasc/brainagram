@@ -17,9 +17,10 @@ function initialLang(): Lang {
     const saved = window.localStorage.getItem(KEY);
     if (saved === "pt" || saved === "en") return saved;
   } catch {
-    // armazenamento bloqueado: segue pelo idioma do navegador
+    // armazenamento bloqueado: segue no padrão
   }
-  return navigator.language.toLowerCase().startsWith("pt") ? "pt" : "en";
+  // Inglês é o padrão; português só por escolha (botão, ?lang=pt ou visita anterior).
+  return "en";
 }
 
 export function I18nProvider({ children }: { children: ReactNode }) {

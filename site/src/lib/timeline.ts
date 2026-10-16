@@ -20,6 +20,8 @@ export interface Msg {
   y: number;
   /** Metade da faixa de rolagem em que esta seta toca. */
   win: number;
+  /** Uma seta do futuro: fica pendente, nunca toca. */
+  hold: boolean;
   state: MsgState;
 }
 
@@ -47,8 +49,8 @@ class Timeline {
   private introDone = false;
   private frame = 0;
 
-  addMessage(el: HTMLElement, from: number, to: number, kind: EdgeKind) {
-    this.msgs.push({ el, from, to, kind, y: 0, win: WINDOW, state: "pending" });
+  addMessage(el: HTMLElement, from: number, to: number, kind: EdgeKind, hold = false) {
+    this.msgs.push({ el, from, to, kind, y: 0, win: WINDOW, hold, state: "pending" });
     this.schedule();
     return () => {
       this.msgs = this.msgs.filter((m) => m.el !== el);
@@ -132,6 +134,7 @@ class Timeline {
 
   /** Progresso (0..1) de uma seta para uma dada linha de leitura. */
   progressOf(m: Msg, playhead: number): number {
+    if (m.hold) return 0;
     return clamp01((playhead - (m.y - m.win)) / (2 * m.win));
   }
 

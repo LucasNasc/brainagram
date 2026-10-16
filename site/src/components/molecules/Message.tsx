@@ -7,6 +7,8 @@ interface Props {
   to: number;
   kind?: EdgeKind;
   href?: string;
+  /** Seta do futuro: desenhada pendente, nunca toca. */
+  hold?: boolean;
   children: ReactNode;
 }
 
@@ -15,14 +17,14 @@ interface Props {
  * link quando tem `href`); a seta e o impulso são desenhados pelo WebGL na
  * altura deste elemento.
  */
-export function Message({ from, to, kind = "sync", href, children }: Props) {
+export function Message({ from, to, kind = "sync", href, hold = false, children }: Props) {
   const ref = useRef<HTMLDivElement>(null);
 
-  useEffect(() => timeline.addMessage(ref.current!, from, to, kind), [from, to, kind]);
+  useEffect(() => timeline.addMessage(ref.current!, from, to, kind, hold), [from, to, kind, hold]);
 
   const style = { "--from": `var(--lane-${from})`, "--to": `var(--lane-${to})` } as CSSProperties;
   return (
-    <div ref={ref} className="lp-msg" data-kind={kind} data-state="pending" style={style}>
+    <div ref={ref} className="lp-msg" data-kind={kind} data-state="pending" data-hold={hold ? "" : undefined} style={style}>
       {href ? (
         <a className="lp-msg__label" href={href} {...(/^https?:/.test(href) ? { rel: "noopener" } : {})}>
           {children}

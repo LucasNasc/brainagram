@@ -28,6 +28,12 @@
   --node-queue: #f0b230;
   --node-neutral: #a0a0ae;
 
+  --flag-br-green: #009c3b;
+  --flag-br-yellow: #ffdf00;
+  --flag-br-blue: #002776;
+  --flag-us-red: #b22234;
+  --flag-us-navy: #3c3b6e;
+
   --syn-keyword: #b3a8ff;
   --syn-string: #6ed7b0;
   --syn-arrow: #e394c2;

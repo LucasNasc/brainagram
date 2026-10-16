@@ -178,6 +178,9 @@ a.lp-msg__label:hover {
 }
 
 .lp-lang {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
   height: 36px;
   min-width: 44px;
   padding: 0 10px;
@@ -192,6 +195,12 @@ a.lp-msg__label:hover {
   transition:
     border-color var(--fast) var(--ease-out),
     color var(--fast) var(--ease-out);
+}
+
+.lp-flag {
+  flex: none;
+  border-radius: 2px;
+  box-shadow: 0 0 0 1px #ffffff26;
 }
 
 .lp-lang:hover {

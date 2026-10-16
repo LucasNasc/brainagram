@@ -6,6 +6,12 @@ export interface Pain {
   body: string;
 }
 
+export interface RoadmapEntry {
+  status: string;
+  title: string;
+  body: string;
+}
+
 export interface Feature {
   term: string;
   body: string;
@@ -22,7 +28,7 @@ export interface Copy {
   skip: string;
   navLabel: string;
   transportLabel: string;
-  stepNames: [string, string, string, string, string];
+  stepNames: string[];
   lanes: [string, string, string, string, string];
   langSwitch: { label: string; other: string; otherName: string };
   cta: { demo: string; demoRepo: string; install: string; github: string };
@@ -45,6 +51,7 @@ export interface Copy {
     steps: [UseStep, UseStep, UseStep];
     gifAlt: string;
   };
+  roadmap: { message: string; title: string; lede: string; discuss: string; items: RoadmapEntry[] };
   closing: { message: string; reply: string; title: string; body: string };
   footer: { license: string; docs: string; contribute: string };
   player: {
@@ -69,7 +76,7 @@ const pt: Copy = {
   skip: "Pular para o conteúdo",
   navLabel: "Seções da página",
   transportLabel: "Reprodução da página",
-  stepNames: ["Início", "As dores", "Como funciona", "Como usar", "Demo"],
+  stepNames: ["Início", "As dores", "Como funciona", "Como usar", "O que vem", "Demo"],
   lanes: ["Você", "As dores", "Como funciona", "Como usar", "Demo"],
   langSwitch: { label: "Idioma", other: "EN", otherName: "Read in English" },
   cta: {
@@ -157,6 +164,39 @@ const pt: Copy = {
     ],
     gifAlt: "Gravação do Brainagram tocando o diagrama de checkout, com o impulso percorrendo cada seta",
   },
+  roadmap: {
+    message: "e depois?",
+    title: "O que vem por aí.",
+    lede: "Uma direção, não uma promessa: estas setas ainda não tocaram. A ordem pode mudar conforme o que a comunidade pedir.",
+    discuss: "Sugerir ou discutir no GitHub",
+    items: [
+      {
+        status: "planejado",
+        title: "Servidor MCP",
+        body: "Agentes como Claude, Cursor e Copilot leem, criam e editam diagramas pelo Model Context Protocol, e devolvem um link pronto para dar play.",
+      },
+      {
+        status: "planejado",
+        title: "Integração com LLMs",
+        body: "Descreva um fluxo em palavras, ou cole código, logs ou um trace, e receba um rascunho em .brain para revisar. A IA escreve o texto; você confere o que toca.",
+      },
+      {
+        status: "planejado",
+        title: "Bibliotecas e player embutível",
+        body: "Um player para incorporar em documentação e sites, e bibliotecas para gerar, validar e renderizar .brain a partir do seu código e da CI.",
+      },
+      {
+        status: "especificado",
+        title: "Modo só no navegador e contas opcionais",
+        body: "Usar sem servidor, com os diagramas guardados no próprio navegador, e criar uma conta só para sincronizar entre aparelhos.",
+      },
+      {
+        status: "em estudo",
+        title: "Colaboração em tempo real e página pública",
+        body: "Editar a várias mãos e publicar um diagrama só para leitura, para incorporar ou apresentar.",
+      },
+    ],
+  },
   closing: {
     message: "dar play",
     reply: "sua vez",
@@ -190,7 +230,7 @@ const en: Copy = {
   skip: "Skip to content",
   navLabel: "Page sections",
   transportLabel: "Page playback",
-  stepNames: ["Start", "The pains", "How it works", "How to use", "Demo"],
+  stepNames: ["Start", "The pains", "How it works", "How to use", "What's next", "Demo"],
   lanes: ["You", "The pains", "How it works", "How to use", "Demo"],
   langSwitch: { label: "Language", other: "PT", otherName: "Ler em português" },
   cta: {
@@ -277,6 +317,39 @@ const en: Copy = {
       },
     ],
     gifAlt: "Recording of Brainagram playing the checkout diagram, with the impulse traveling along each arrow",
+  },
+  roadmap: {
+    message: "and then?",
+    title: "What's next.",
+    lede: "A direction, not a promise: these arrows haven't played yet. The order may change with what the community asks for.",
+    discuss: "Suggest or discuss on GitHub",
+    items: [
+      {
+        status: "planned",
+        title: "MCP server",
+        body: "Agents such as Claude, Cursor and Copilot read, create and edit diagrams through the Model Context Protocol, and hand back a link ready to play.",
+      },
+      {
+        status: "planned",
+        title: "LLM integration",
+        body: "Describe a flow in words, or paste code, logs or a trace, and get a .brain draft to review. The AI writes the text; you check what plays.",
+      },
+      {
+        status: "planned",
+        title: "Libraries and an embeddable player",
+        body: "A player to embed in docs and websites, and libraries to generate, validate and render .brain from your code and your CI.",
+      },
+      {
+        status: "specified",
+        title: "Browser-only mode and optional accounts",
+        body: "Use it without a server, with diagrams stored in the browser, and create an account only to sync between devices.",
+      },
+      {
+        status: "exploring",
+        title: "Real-time collaboration and a public page",
+        body: "Edit together and publish a read-only diagram, to embed or to present.",
+      },
+    ],
   },
   closing: {
     message: "press play",
