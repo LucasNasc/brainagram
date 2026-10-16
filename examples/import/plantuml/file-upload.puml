@@ -1,0 +1,23 @@
+@startuml
+title File upload
+actor User as user
+participant "Web App" as web
+participant "Upload API" as api
+database "Metadata DB" as db
+queue "Jobs" as jobs
+
+user -> web : choose a file
+web -> api : POST /uploads
+api -> db : INSERT upload
+api ->> jobs : ScanFile
+api --> web : 201 Created
+
+== Virus scan ==
+jobs -> api : scan result
+alt infected
+  api ->x web : file rejected
+else clean
+  api --> web : file ready
+end
+note right of jobs : runs in the background
+@enduml

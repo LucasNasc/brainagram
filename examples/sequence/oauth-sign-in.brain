@@ -1,0 +1,28 @@
+diagram sequence "Sign in with OAuth"
+
+actor       user "User"
+participant web  "Web App"
+external    idp  "Identity Provider"
+service     api  "API"
+database    db   "Users DB"
+
+step "Redirect to the provider" {
+  user -> web : click Sign in
+  web --> user : 302 to the provider
+  user -> idp : authorize the app
+}
+
+step "Exchange the code" {
+  idp --> web : callback with code
+  web -> idp : exchange code
+  idp --> web : id_token
+}
+
+step "Open the session" {
+  web -> api : POST /sessions
+  api -> db : find or create user
+  db --> api : user
+  api --> web : session cookie
+  web --> user : dashboard
+  note over web, api : the token never reaches the browser
+}

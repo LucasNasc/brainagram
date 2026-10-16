@@ -1,0 +1,31 @@
+diagram sequence "File upload"
+
+actor       user "User"
+participant web  "Web App"
+participant api  "Upload API"
+database    db   "Metadata DB"
+queue       jobs "Jobs"
+
+step "choose a file" {
+  user -> web : choose a file
+  web -> api : POST /uploads
+  api -> db : INSERT upload
+  api ->> jobs : ScanFile
+  api --> web : 201 Created
+}
+
+step "Virus scan" {
+  jobs -> api : scan result
+}
+
+step "infected" {
+  api -x web : file rejected
+}
+
+step "clean" {
+  api --> web : file ready
+}
+
+step "runs in the background" {
+  note right of jobs : runs in the background
+}

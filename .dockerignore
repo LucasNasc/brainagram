@@ -58,3 +58,4 @@ erl_crash.dump
 !.env.example
 /site/
 /.impeccable/
+/examples/

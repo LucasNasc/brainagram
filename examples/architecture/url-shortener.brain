@@ -1,0 +1,39 @@
+diagram architecture "URL shortener"
+
+actor user "Visitor"
+
+group "Edge" {
+  node cdn "CDN"
+}
+
+group "Services" {
+  service api      "Shortener API"
+  service redirect "Redirect Service"
+}
+
+group "Data" {
+  database db    "PostgreSQL"
+  database cache "Redis"
+}
+
+step "Create a short link" {
+  user -> cdn : POST /links
+  cdn -> api : forward
+  api -> db : INSERT link
+}
+
+step "Follow a short link" {
+  user -> cdn : GET /abc123
+  cdn -> redirect : cache miss
+  redirect -> cache : GET abc123
+  redirect -> db : SELECT when not cached
+}
+
+layout {
+  user at (181, 92)
+  cdn at (181, 288)
+  api at (78, 484)
+  redirect at (274, 484)
+  db at (95, 680)
+  cache at (291, 680)
+}

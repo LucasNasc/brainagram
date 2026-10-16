@@ -1,0 +1,44 @@
+diagram architecture "Event-driven orders"
+
+group "Storefront" {
+  service shop "Shop API"
+}
+
+group "Messaging" {
+  queue bus "Kafka"
+}
+
+group "Fulfillment" {
+  service  stock   "Inventory"
+  service  ship    "Shipping"
+  database stockdb "Inventory DB"
+}
+
+external mail "Email Provider"
+
+step "Order placed" {
+  shop ->> bus : OrderPlaced
+    payload: {"order_id": "ord_42", "items": [{"sku": "A-1", "qty": 2}]}
+}
+
+step "Reserve stock" {
+  bus -> stock : consume OrderPlaced
+  stock -> stockdb : UPDATE stock
+    payload: UPDATE stock SET reserved = reserved + 2 WHERE sku = 'A-1'
+  stock ->> bus : StockReserved
+}
+
+step "Ship and notify" {
+  bus -> ship : consume StockReserved
+  ship -> mail : send confirmation
+    payload: template=order_shipped order=ord_42
+}
+
+layout {
+  shop at (209, 92)
+  bus at (209, 288)
+  stock at (274, 484)
+  ship at (78, 484)
+  stockdb at (274, 680)
+  mail at (78, 876)
+}

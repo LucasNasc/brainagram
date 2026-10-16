@@ -1,0 +1,22 @@
+@startuml
+title Analytics pipeline
+actor "Analysts" as analysts
+
+package "Ingestion" {
+  [Collector] as collector
+  queue "Kafka" as kafka
+}
+
+package "Processing" {
+  [Stream Processor] as proc
+  database "ClickHouse" as ch
+}
+
+cloud "Object Storage" as s3
+
+collector --> kafka : events
+kafka --> proc : consume
+proc --> ch : insert
+proc ..> s3 : archive
+analysts --> ch : SQL queries
+@enduml

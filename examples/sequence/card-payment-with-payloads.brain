@@ -1,0 +1,36 @@
+diagram sequence "Card payment with a failing gateway"
+
+actor    shopper  "Shopper"
+service  checkout "Checkout API"
+external gateway  "Payment Gateway"
+queue    events   "Event Bus"
+database ledger   "Ledger"
+
+step "Charge the card" {
+  shopper -> checkout : POST /payments
+    payload """
+      {
+        "order_id": "ord_42",
+        "amount": 129.90,
+        "currency": "BRL"
+      }
+    """
+  checkout -> gateway : charge
+    payload: card_token=tok_visa amount=12990
+  gateway -x checkout : 504 timeout
+  note right of gateway : no answer in 10 seconds
+}
+
+step "Retry once" {
+  checkout -> gateway : charge again, same key
+    payload: Idempotency-Key: pay_ord_42
+  gateway --> checkout : 201 approved
+}
+
+step "Record and notify" {
+  checkout -> ledger : INSERT payment
+    payload: INSERT INTO payments (order_id, amount, status) VALUES ($1, $2, 'approved')
+  checkout ->> events : PaymentApproved
+    payload: {"order_id": "ord_42", "status": "approved"}
+  checkout --> shopper : 201 Created
+}

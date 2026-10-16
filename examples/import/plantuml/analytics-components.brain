@@ -1,0 +1,30 @@
+diagram architecture "Analytics pipeline"
+
+actor analysts "Analysts"
+
+group "Ingestion" {
+  service collector "Collector"
+  queue   kafka     "Kafka"
+}
+
+group "Processing" {
+  service  proc "Stream Processor"
+  database ch   "ClickHouse"
+}
+
+external s3 "Object Storage"
+
+collector -> kafka : events
+kafka -> proc : consume
+proc -> ch : insert
+proc ->> s3 : archive
+analysts -> ch : SQL queries
+
+layout {
+  analysts at (575, 484)
+  collector at (317, 92)
+  kafka at (317, 288)
+  proc at (308, 484)
+  ch at (325, 680)
+  s3 at (56, 680)
+}

@@ -10,7 +10,7 @@
 **Diagramas de software que contam uma história.**
 Escreva o fluxo em texto, dê play e veja as mensagens percorrerem as setas — passo a passo.
 
-[English](README.md) · **Português (Brasil)**
+**[Site](https://lucasnasc.github.io/brainagram/)** · [Exemplos](examples/README.pt-BR.md) · [English](README.md) · **Português (Brasil)**
 
 [![CI](https://github.com/LucasNasc/brainagram/actions/workflows/ci.yml/badge.svg)](https://github.com/LucasNasc/brainagram/actions/workflows/ci.yml)
 [![Versão](https://img.shields.io/badge/vers%C3%A3o-0.1.0-7c5cff.svg)](CHANGELOG.md)
@@ -218,7 +218,7 @@ step "Cliente confirma o pedido" {   # um passo da animação
 | `#` ou `//` | comentário (aspas são respeitadas) |
 
 Também valem apelidos em português, como `diagram arquitetura` e `dados:`.
-Mais exemplos em [`docs/examples/`](docs/examples).
+Mais exemplos, com e sem payload, em [`examples/`](examples/README.pt-BR.md).
 
 ## Importar e exportar
 
@@ -230,6 +230,10 @@ Mais exemplos em [`docs/examples/`](docs/examples).
 | PlantUML (sequência → sequência, componentes → arquitetura) | — | nos dois diálogos de importar |
 | SVG, PNG 2× | editor → *Exportar* | — |
 | GIF (HD 2× ou leve 1×) | editor → *Exportar* | — |
+
+Vem do Mermaid ou do PlantUML? Os diagramas que você já tem entram como estão,
+sem reescrever; [`examples/import/`](examples/import/) traz uma origem e o
+resultado convertido de cada formato.
 
 O que não converte na importação vira comentário no topo do código, nunca uma
 falha. Importar vários arquivos de uma vez mostra, por arquivo, o que entrou e o

@@ -40,6 +40,9 @@ one of the sections *Added*, *Changed*, *Deprecated*, *Removed*, *Fixed* or
   `true`, `verify`) and `DATABASE_SSL_CA_FILE`; `.env.example` and a
   `docker-compose.yml` document every variable.
 - Spec 002: browser-only mode and optional accounts (not implemented yet).
+- `examples/`: sequence and architecture diagrams with and without payloads,
+  plus Mermaid and PlantUML sources next to their converted `.brain`; the
+  READMEs link the examples and the landing page.
 - Landing page in `site/` (static, React + react-three-fiber, pt-BR and en):
   the page itself is a sequence diagram that plays as you scroll.
 - **Presentation mode**: shared links (`/d/:slug`) open with just the diagram,

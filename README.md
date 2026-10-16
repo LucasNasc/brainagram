@@ -10,7 +10,7 @@
 **Software diagrams that tell a story.**
 Write the flow as text, press play, and watch the messages travel along the arrows — step by step.
 
-**English** · [Português (Brasil)](README.pt-BR.md)
+**[Website](https://lucasnasc.github.io/brainagram/)** · [Examples](examples/) · **English** · [Português (Brasil)](README.pt-BR.md)
 
 [![CI](https://github.com/LucasNasc/brainagram/actions/workflows/ci.yml/badge.svg)](https://github.com/LucasNasc/brainagram/actions/workflows/ci.yml)
 [![Version](https://img.shields.io/badge/version-0.1.0-7c5cff.svg)](CHANGELOG.md)
@@ -216,7 +216,7 @@ step "Customer places the order" {   # a step of the animation
 | `#` or `//` | comment (quotes are respected) |
 
 Portuguese aliases are accepted too, e.g. `diagram arquitetura` and `dados:`.
-More examples live in [`docs/examples/`](docs/examples).
+More examples, with and without payloads, live in [`examples/`](examples/).
 
 ## Import and export
 
@@ -228,6 +228,10 @@ More examples live in [`docs/examples/`](docs/examples).
 | PlantUML (sequence → sequence, component → architecture) | — | both import dialogs |
 | SVG, PNG 2× | editor → *Export* | — |
 | GIF (HD 2× or light 1×) | editor → *Export* | — |
+
+Coming from Mermaid or PlantUML? Existing diagrams import as they are, no
+rewriting needed; [`examples/import/`](examples/import/) has a source and its
+converted result for each format.
 
 What doesn't convert on import becomes a comment at the top of the code, never a
 hard failure. Importing many files at once reports, per file, what went in and
