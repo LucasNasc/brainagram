@@ -85,6 +85,9 @@ one of the sections *Added*, *Changed*, *Deprecated*, *Removed*, *Fixed* or
 - "No connection" / "The server didn't respond" when the instance is reached
   on a domain other than `PHX_HOST`: the LiveView WebSocket now accepts the
   request's own host by default (`PHX_CHECK_ORIGIN` pins a list).
+- Behind an HTTPS proxy (Coolify's Caddy or Traefik) the LiveView connection was
+  refused with 403: the app now applies `X-Forwarded-Proto`, `-Port` and `-Host`
+  before the socket's origin check.
 - Menus support arrow keys; the Edit/Pan switch is a real radio group with a
   visible selection; the error badge is a button; untranslated toolbar labels.
 

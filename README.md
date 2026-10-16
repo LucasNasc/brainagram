@@ -14,7 +14,7 @@ Write the flow as text, press play, and watch the messages travel along the arro
 
 [![CI](https://github.com/LucasNasc/brainagram/actions/workflows/ci.yml/badge.svg)](https://github.com/LucasNasc/brainagram/actions/workflows/ci.yml)
 [![Version](https://img.shields.io/badge/version-0.1.0-7c5cff.svg)](CHANGELOG.md)
-[![Tests](https://img.shields.io/badge/tests-350%2B%20passing-2f9e4f.svg)](#development)
+[![Tests](https://img.shields.io/badge/tests-400%2B%20passing-2f9e4f.svg)](#development)
 [![License: MIT](https://img.shields.io/badge/license-MIT-7c5cff.svg)](LICENSE)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](CODE_OF_CONDUCT.md)
 <br>

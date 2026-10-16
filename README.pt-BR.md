@@ -14,7 +14,7 @@ Escreva o fluxo em texto, dê play e veja as mensagens percorrerem as setas — 
 
 [![CI](https://github.com/LucasNasc/brainagram/actions/workflows/ci.yml/badge.svg)](https://github.com/LucasNasc/brainagram/actions/workflows/ci.yml)
 [![Versão](https://img.shields.io/badge/vers%C3%A3o-0.1.0-7c5cff.svg)](CHANGELOG.md)
-[![Testes](https://img.shields.io/badge/testes-350%2B%20passando-2f9e4f.svg)](#desenvolvimento)
+[![Testes](https://img.shields.io/badge/testes-400%2B%20passando-2f9e4f.svg)](#desenvolvimento)
 [![Licença: MIT](https://img.shields.io/badge/licen%C3%A7a-MIT-7c5cff.svg)](LICENSE)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](CODE_OF_CONDUCT.pt-BR.md)
 <br>

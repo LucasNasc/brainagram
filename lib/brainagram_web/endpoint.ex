@@ -11,6 +11,11 @@ defmodule BrainagramWeb.Endpoint do
     same_site: "Lax"
   ]
 
+  # O proxy do Coolify termina o HTTPS: antes de tudo (inclusive do despacho
+  # dos sockets, que vem antes dos plugs), a conexão passa a ter o esquema, a
+  # porta e o host que o navegador usou. Veja BrainagramWeb.ProxyHeaders.
+  def call(conn, opts), do: super(BrainagramWeb.ProxyHeaders.rewrite(conn), opts)
+
   socket "/live", Phoenix.LiveView.Socket,
     websocket: [connect_info: [session: @session_options]],
     longpoll: [connect_info: [session: @session_options]]
