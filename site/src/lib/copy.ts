@@ -30,7 +30,7 @@ export interface Copy {
   transportLabel: string;
   stepNames: string[];
   lanes: [string, string, string, string, string];
-  langSwitch: { label: string; other: string; otherName: string };
+  langSwitch: { label: string; code: string; otherName: string };
   cta: { demo: string; demoRepo: string; install: string; github: string };
   hero: { message: string; messageRepo: string; title: string; lede: string; hint: string };
   pains: { title: string; items: Pain[] };
@@ -78,7 +78,7 @@ const pt: Copy = {
   transportLabel: "Reprodução da página",
   stepNames: ["Início", "As dores", "Como funciona", "Como usar", "O que vem", "Demo"],
   lanes: ["Você", "As dores", "Como funciona", "Como usar", "Demo"],
-  langSwitch: { label: "Idioma", other: "EN", otherName: "Read in English" },
+  langSwitch: { label: "Idioma", code: "PT-BR", otherName: "Idioma: português. Read in English" },
   cta: {
     demo: "Abrir a demo",
     demoRepo: "Ver a demo no GitHub",
@@ -232,7 +232,7 @@ const en: Copy = {
   transportLabel: "Page playback",
   stepNames: ["Start", "The pains", "How it works", "How to use", "What's next", "Demo"],
   lanes: ["You", "The pains", "How it works", "How to use", "Demo"],
-  langSwitch: { label: "Language", other: "PT", otherName: "Ler em português" },
+  langSwitch: { label: "Language", code: "EN", otherName: "Language: English. Ler em português" },
   cta: {
     demo: "Open the demo",
     demoRepo: "See the demo on GitHub",

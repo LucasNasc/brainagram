@@ -203,6 +203,15 @@ a.lp-msg__label:hover {
   box-shadow: 0 0 0 1px #ffffff26;
 }
 
+/* Na faixa intermediária os cinco participantes ocupam o topo: só a bandeira. */
+:root[data-mid] .lp-lang__code {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+
 .lp-lang:hover {
   border-color: var(--border-strong);
   color: var(--text);
