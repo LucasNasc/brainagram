@@ -1437,3 +1437,18 @@ msgstr "Zoom del diagramma"
 #, elixir-autogen, elixir-format
 msgid "não entendi esta linha: %{text}. Cada linha declara um nó (service api \"API\"), uma seta (a -> b : texto), um step, group, note ou payload."
 msgstr "non ho capito questa riga: %{text}. Ogni riga dichiara un nodo (service api \"API\"), una freccia (a -> b : testo), uno step, group, note o payload."
+
+#: lib/brainagram_web/components/layouts.ex
+#, elixir-autogen, elixir-format
+msgid "Instale o seu"
+msgstr "Installa la tua istanza"
+
+#: lib/brainagram_web/components/layouts.ex
+#, elixir-autogen, elixir-format
+msgid "Os diagramas ficam só em cache temporário, à vista de outros visitantes, e são apagados com o tempo. Não use dados sensíveis."
+msgstr "I diagrammi restano solo in una cache temporanea, visibili ad altri visitatori, e vengono cancellati nel tempo. Non usare dati sensibili."
+
+#: lib/brainagram_web/components/layouts.ex
+#, elixir-autogen, elixir-format
+msgid "Playground de demonstração."
+msgstr "Playground dimostrativo."

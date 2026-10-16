@@ -20,7 +20,24 @@ if System.get_env("PHX_SERVER") do
   config :brainagram, BrainagramWeb.Endpoint, server: true
 end
 
-if config_env() == :prod do
+# Modo demo (playground público): BRAINAGRAM_DEMO=true troca o banco por um
+# cache em memória (Brainagram.Infrastructure.Cache.Store) e mostra um aviso de
+# playground em todas as telas. Os diagramas valem para todos os visitantes e
+# somem com o tempo e a cada reinício. Para uso de verdade, deixe desligado.
+demo? =
+  System.get_env("BRAINAGRAM_DEMO", "false") |> String.downcase() |> then(&(&1 in ~w(true 1 yes)))
+
+if demo? do
+  config :brainagram, demo_mode: true
+
+  config :brainagram, :ports,
+    diagram_repository: Brainagram.Infrastructure.Cache.CacheDiagramRepository,
+    diagram_reader: Brainagram.Infrastructure.Cache.CacheDiagramReader,
+    project_repository: Brainagram.Infrastructure.Cache.CacheProjectRepository,
+    project_reader: Brainagram.Infrastructure.Cache.CacheProjectReader
+end
+
+if config_env() == :prod and not demo? do
   database_url =
     System.get_env("DATABASE_URL") ||
       raise """
@@ -66,7 +83,9 @@ if config_env() == :prod do
            pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
            socket_options: maybe_ipv6
          ] ++ database_ssl
+end
 
+if config_env() == :prod do
   # The secret key base is used to sign/encrypt cookies and other secrets.
   # A default value is used in config/dev.exs and config/test.exs but you
   # want to use a different value for prod and you most likely don't want
@@ -89,12 +108,25 @@ if config_env() == :prod do
   end
 
   host = System.get_env("PHX_HOST") || "example.com"
+
+  # Origens aceitas no WebSocket do LiveView. Sem PHX_CHECK_ORIGIN, vale o host
+  # da própria requisição (:conn): funciona atrás do proxy em qualquer domínio
+  # (inclusive o gerado pelo Coolify) sem aceitar páginas de outros sites. Um
+  # PHX_HOST diferente do domínio acessado não derruba mais a conexão. Para
+  # fixar: PHX_CHECK_ORIGIN=https://demo.exemplo.com,https://outro.exemplo.com
+  check_origin =
+    case System.get_env("PHX_CHECK_ORIGIN", "") |> String.trim() do
+      "" -> :conn
+      list -> list |> String.split(",", trim: true) |> Enum.map(&String.trim/1)
+    end
+
   port = String.to_integer(System.get_env("PORT") || "4000")
 
   config :brainagram, :dns_cluster_query, System.get_env("DNS_CLUSTER_QUERY")
 
   config :brainagram, BrainagramWeb.Endpoint,
     url: [host: host, port: 443, scheme: "https"],
+    check_origin: check_origin,
     http: [
       # Enable IPv6 and bind on all interfaces.
       # Set it to  {0, 0, 0, 0, 0, 0, 0, 1} for local network only access.

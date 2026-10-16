@@ -1450,3 +1450,18 @@ msgstr "Масштаб диаграммы"
 #, elixir-autogen, elixir-format
 msgid "não entendi esta linha: %{text}. Cada linha declara um nó (service api \"API\"), uma seta (a -> b : texto), um step, group, note ou payload."
 msgstr "не удалось разобрать строку: %{text}. Каждая строка объявляет узел (service api \"API\"), стрелку (a -> b : текст), step, group, note или payload."
+
+#: lib/brainagram_web/components/layouts.ex
+#, elixir-autogen, elixir-format
+msgid "Instale o seu"
+msgstr "Установите свою копию"
+
+#: lib/brainagram_web/components/layouts.ex
+#, elixir-autogen, elixir-format
+msgid "Os diagramas ficam só em cache temporário, à vista de outros visitantes, e são apagados com o tempo. Não use dados sensíveis."
+msgstr "Диаграммы хранятся только во временном кэше, видны другим посетителям и со временем удаляются. Не используйте конфиденциальные данные."
+
+#: lib/brainagram_web/components/layouts.ex
+#, elixir-autogen, elixir-format
+msgid "Playground de demonstração."
+msgstr "Демонстрационная песочница."

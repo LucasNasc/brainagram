@@ -393,3 +393,22 @@ label.ba-choice__opt { position: relative; }
 
 /* item de menu ocupado (gerando o GIF) */
 .ba-menu__item[aria-busy="true"] { opacity: .55; cursor: progress; }
+
+/* Modo demo: a faixa de aviso no topo; editor e painel ocupam o resto da tela. */
+.ba-demo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-1-5) var(--space-4);
+  border-bottom: 1px solid var(--border);
+  background: var(--warning-soft);
+  color: var(--text);
+  font-size: 12px;
+  line-height: 16px;
+}
+.ba-demo .ba-ico { flex: none; color: var(--warning); }
+.ba-demo p { flex: 1; min-width: 0; margin: 0; }
+.ba-demo a { flex: none; color: var(--text); font-weight: 600; text-underline-offset: 2px; }
+body:has(> .ba-demo) { display: flex; flex-direction: column; height: 100vh; height: 100dvh; }
+body:has(> .ba-demo) > [data-phx-main] { flex: 1; min-height: 0; }
+body:has(> .ba-demo) :is(.ba-editor, .ba-dash) { height: 100%; }

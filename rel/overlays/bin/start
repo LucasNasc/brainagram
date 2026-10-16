@@ -88,16 +88,24 @@ stop_embedded_postgres() {
   fi
 }
 
-if [ -z "${DATABASE_URL:-}" ]; then
-  start_embedded_postgres
-else
-  log "usando o banco externo de DATABASE_URL"
-fi
+case "${BRAINAGRAM_DEMO:-false}" in
+  true|TRUE|True|1|yes)
+    # Modo demo: sem banco nem migrações; os diagramas ficam no cache em memória.
+    log "modo demo: sem banco, diagramas em cache temporário"
+    ;;
+  *)
+    if [ -z "${DATABASE_URL:-}" ]; then
+      start_embedded_postgres
+    else
+      log "usando o banco externo de DATABASE_URL"
+    fi
 
-if ! "$BIN_DIR/migrate"; then
-  stop_embedded_postgres
-  exit 1
-fi
+    if ! "$BIN_DIR/migrate"; then
+      stop_embedded_postgres
+      exit 1
+    fi
+    ;;
+esac
 
 "$BIN_DIR/server" &
 server_pid=$!

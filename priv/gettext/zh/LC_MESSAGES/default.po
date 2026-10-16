@@ -1424,3 +1424,18 @@ msgstr "图表缩放"
 #, elixir-autogen, elixir-format
 msgid "não entendi esta linha: %{text}. Cada linha declara um nó (service api \"API\"), uma seta (a -> b : texto), um step, group, note ou payload."
 msgstr "无法理解这一行：%{text}。每一行应声明一个节点（service api \"API\"）、一条箭头（a -> b : 文本）、step、group、note 或 payload。"
+
+#: lib/brainagram_web/components/layouts.ex
+#, elixir-autogen, elixir-format
+msgid "Instale o seu"
+msgstr "安装你自己的实例"
+
+#: lib/brainagram_web/components/layouts.ex
+#, elixir-autogen, elixir-format
+msgid "Os diagramas ficam só em cache temporário, à vista de outros visitantes, e são apagados com o tempo. Não use dados sensíveis."
+msgstr "图表仅保存在临时缓存中，其他访问者可以看到，并会被定期清除。请勿使用敏感数据。"
+
+#: lib/brainagram_web/components/layouts.ex
+#, elixir-autogen, elixir-format
+msgid "Playground de demonstração."
+msgstr "演示试用环境。"

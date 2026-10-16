@@ -7,9 +7,15 @@ defmodule Brainagram.Runtime do
 
   @impl true
   def start(_type, _args) do
+    # No modo demo não há banco: o cache em memória faz o papel do Repo.
+    storage =
+      if Application.get_env(:brainagram, :demo_mode, false),
+        do: Brainagram.Infrastructure.Cache.Store,
+        else: Brainagram.Infrastructure.Persistence.Repo
+
     children = [
       BrainagramWeb.Telemetry,
-      Brainagram.Infrastructure.Persistence.Repo,
+      storage,
       {DNSCluster, query: Application.get_env(:brainagram, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: Brainagram.PubSub},
       # Start a worker by calling: Brainagram.Worker.start_link(arg)

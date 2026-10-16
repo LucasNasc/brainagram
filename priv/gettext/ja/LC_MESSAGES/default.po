@@ -1424,3 +1424,18 @@ msgstr "図のズーム"
 #, elixir-autogen, elixir-format
 msgid "não entendi esta linha: %{text}. Cada linha declara um nó (service api \"API\"), uma seta (a -> b : texto), um step, group, note ou payload."
 msgstr "この行を解釈できません: %{text}。各行ではノード（service api \"API\"）、矢印（a -> b : テキスト）、step、group、note、payload のいずれかを宣言します。"
+
+#: lib/brainagram_web/components/layouts.ex
+#, elixir-autogen, elixir-format
+msgid "Instale o seu"
+msgstr "自分の環境をインストール"
+
+#: lib/brainagram_web/components/layouts.ex
+#, elixir-autogen, elixir-format
+msgid "Os diagramas ficam só em cache temporário, à vista de outros visitantes, e são apagados com o tempo. Não use dados sensíveis."
+msgstr "図は一時的なキャッシュにのみ保存され、他の訪問者からも見え、時間がたつと削除されます。機密データは使わないでください。"
+
+#: lib/brainagram_web/components/layouts.ex
+#, elixir-autogen, elixir-format
+msgid "Playground de demonstração."
+msgstr "デモ用のお試し環境です。"

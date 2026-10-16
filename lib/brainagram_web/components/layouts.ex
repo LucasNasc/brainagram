@@ -11,6 +11,31 @@ defmodule BrainagramWeb.Layouts do
   # and other static content.
   embed_templates "layouts/*"
 
+  @repo_url "https://github.com/LucasNasc/brainagram"
+
+  @doc """
+  O aviso do modo demo (`BRAINAGRAM_DEMO=true`): o que se cria aqui fica só num
+  cache temporário, à vista de outros visitantes. Fora do modo demo, não
+  renderiza nada.
+  """
+  def demo_banner(assigns) do
+    assigns =
+      assign(assigns, demo?: Application.get_env(:brainagram, :demo_mode, false), repo: @repo_url)
+
+    ~H"""
+    <div :if={@demo?} id="demo-banner" class="ba-demo" role="note">
+      <.icon name="hero-information-circle" class="ba-ico--16" />
+      <p>
+        <strong>{gettext("Playground de demonstração.")}</strong>
+        {gettext(
+          "Os diagramas ficam só em cache temporário, à vista de outros visitantes, e são apagados com o tempo. Não use dados sensíveis."
+        )}
+      </p>
+      <a href={@repo} target="_blank" rel="noopener">{gettext("Instale o seu")}</a>
+    </div>
+    """
+  end
+
   @doc """
   Renders your app layout.
 
