@@ -14,11 +14,12 @@ Write the flow as text, press play, and watch the messages travel along the arro
 
 [![CI](https://github.com/LucasNasc/brainagram/actions/workflows/ci.yml/badge.svg)](https://github.com/LucasNasc/brainagram/actions/workflows/ci.yml)
 [![Version](https://img.shields.io/badge/version-0.1.0-7c5cff.svg)](CHANGELOG.md)
+[![GitHub release](https://img.shields.io/github/v/release/LucasNasc/brainagram?color=7c5cff)](https://github.com/LucasNasc/brainagram/releases)
 [![Tests](https://img.shields.io/badge/tests-400%2B%20passing-2f9e4f.svg)](#development)
 [![License: MIT](https://img.shields.io/badge/license-MIT-7c5cff.svg)](LICENSE)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](CODE_OF_CONDUCT.md)
 <br>
-![Elixir](https://img.shields.io/badge/Elixir-1.15%2B-4e2a8e.svg)
+![Elixir](https://img.shields.io/badge/Elixir-1.18%2B-4e2a8e.svg)
 ![Phoenix](https://img.shields.io/badge/Phoenix-1.8-f05423.svg)
 ![Phoenix LiveView](https://img.shields.io/badge/LiveView-1.2-f05423.svg)
 ![Languages](https://img.shields.io/badge/languages-7-0c9b8c.svg)
@@ -77,7 +78,7 @@ static image and say "and then…".
 
 ## Quick start
 
-**Requirements:** Elixir 1.15+ and Erlang/OTP 25+ (CI runs Elixir 1.18 / OTP 27 and 1.20 / OTP 29, the production image),
+**Requirements:** Elixir 1.18+ and Erlang/OTP 27+ (CI runs Elixir 1.18 / OTP 27 and 1.20 / OTP 29, the production image),
 and PostgreSQL (CI uses 16).
 
 ```bash

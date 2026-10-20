@@ -87,7 +87,7 @@ própria issue. PRs inacabados também são bem-vindos; abra-os como
 
 ## Ambiente de desenvolvimento
 
-**Requisitos:** Elixir 1.15+ e Erlang/OTP 25+ (o CI usa Elixir 1.18 / OTP 27 e 1.20 / OTP 29, a da imagem de produção) e
+**Requisitos:** Elixir 1.18+ e Erlang/OTP 27+ (o CI usa Elixir 1.18 / OTP 27 e 1.20 / OTP 29, a da imagem de produção) e
 PostgreSQL (o CI usa o 16).
 
 ```bash

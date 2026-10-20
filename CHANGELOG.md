@@ -10,6 +10,10 @@ one of the sections *Added*, *Changed*, *Deprecated*, *Removed*, *Fixed* or
 
 ## [Unreleased]
 
+## [0.1.0] - 2026-10-20
+
+First public release.
+
 ### Added
 
 - Text DSL for **sequence** and **architecture** diagrams, with steps, groups,
@@ -79,6 +83,8 @@ one of the sections *Added*, *Changed*, *Deprecated*, *Removed*, *Fixed* or
   shows how many participants are off-screen ("+2 →") and captions the current
   step over the canvas; the editor keeps the more compact view.
 - Nothing is highlighted before playback starts (one live signal).
+- The minimum supported Elixir is now 1.18 (with Erlang/OTP 27), the oldest
+  version CI tests.
 
 ### Fixed
 
@@ -96,4 +102,5 @@ one of the sections *Added*, *Changed*, *Deprecated*, *Removed*, *Fixed* or
 - Menus support arrow keys; the Edit/Pan switch is a real radio group with a
   visible selection; the error badge is a button; untranslated toolbar labels.
 
-[Unreleased]: https://github.com/LucasNasc/brainagram/commits/main
+[Unreleased]: https://github.com/LucasNasc/brainagram/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/LucasNasc/brainagram/releases/tag/v0.1.0

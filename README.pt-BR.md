@@ -14,11 +14,12 @@ Escreva o fluxo em texto, dê play e veja as mensagens percorrerem as setas — 
 
 [![CI](https://github.com/LucasNasc/brainagram/actions/workflows/ci.yml/badge.svg)](https://github.com/LucasNasc/brainagram/actions/workflows/ci.yml)
 [![Versão](https://img.shields.io/badge/vers%C3%A3o-0.1.0-7c5cff.svg)](CHANGELOG.md)
+[![Release no GitHub](https://img.shields.io/github/v/release/LucasNasc/brainagram?color=7c5cff&label=release)](https://github.com/LucasNasc/brainagram/releases)
 [![Testes](https://img.shields.io/badge/testes-400%2B%20passando-2f9e4f.svg)](#desenvolvimento)
 [![Licença: MIT](https://img.shields.io/badge/licen%C3%A7a-MIT-7c5cff.svg)](LICENSE)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](CODE_OF_CONDUCT.pt-BR.md)
 <br>
-![Elixir](https://img.shields.io/badge/Elixir-1.15%2B-4e2a8e.svg)
+![Elixir](https://img.shields.io/badge/Elixir-1.18%2B-4e2a8e.svg)
 ![Phoenix](https://img.shields.io/badge/Phoenix-1.8-f05423.svg)
 ![Phoenix LiveView](https://img.shields.io/badge/LiveView-1.2-f05423.svg)
 ![Idiomas](https://img.shields.io/badge/idiomas-7-0c9b8c.svg)
@@ -79,7 +80,7 @@ revisões de design — onde alguém apontaria para uma imagem parada e diria
 
 ## Começando
 
-**Requisitos:** Elixir 1.15+ e Erlang/OTP 25+ (o CI usa Elixir 1.18 / OTP 27 e 1.20 / OTP 29, a da imagem de produção) e
+**Requisitos:** Elixir 1.18+ e Erlang/OTP 27+ (o CI usa Elixir 1.18 / OTP 27 e 1.20 / OTP 29, a da imagem de produção) e
 PostgreSQL (o CI usa o 16).
 
 ```bash
