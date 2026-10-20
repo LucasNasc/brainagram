@@ -61,3 +61,7 @@ Thumbs.db
 /.mcp.json
 /.github/copilot-instructions.md
 /docs/design/
+
+# Specs drafted with agents that stay local (not published)
+/docs/specs/003-docker-hub-image.md
+/docs/specs/004-mcp-server.md
