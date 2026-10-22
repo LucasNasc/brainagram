@@ -14,8 +14,9 @@ one of the sections *Added*, *Changed*, *Deprecated*, *Removed*, *Fixed* or
 
 ### Added
 
-- **Embedding**: Export → Embed (iframe) gives a snippet, with a live preview
-  and options, to play a public diagram inside any web page. The embed page
+- **Embedding**: Export → Embed (iframe) gives a snippet and a plain link (for
+  tools such as Notion that only take a URL), with a live preview and options,
+  to play a public diagram inside any web page. The embed page
   (`/embed/:slug`) is a plain HTTP page with the app's player (no cookies, no
   WebSocket, cached), takes `theme`, `controls`, `autoplay`, `loop`, `step` and
   `lang`, and can be turned off or limited to some sites with

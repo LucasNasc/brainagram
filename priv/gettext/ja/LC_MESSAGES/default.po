@@ -1578,3 +1578,18 @@ msgstr "再生"
 #, elixir-autogen, elixir-format
 msgid "Tocar sozinho quando aparecer na tela"
 msgstr "画面に表示されたら自動で再生"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Copiar link"
+msgstr "リンクをコピー"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Link do diagrama incorporável"
+msgstr "埋め込み用の図のリンク"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Para ferramentas que pedem só a URL, como Notion e alguns wikis."
+msgstr "Notion や一部の wiki など、URL だけを求めるツール向け。"

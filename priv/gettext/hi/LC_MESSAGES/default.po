@@ -1591,3 +1591,18 @@ msgstr "चलाएं"
 #, elixir-autogen, elixir-format
 msgid "Tocar sozinho quando aparecer na tela"
 msgstr "स्क्रीन पर दिखते ही अपने आप चलाएं"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Copiar link"
+msgstr "लिंक कॉपी करें"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Link do diagrama incorporável"
+msgstr "एम्बेड करने योग्य डायग्राम का लिंक"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Para ferramentas que pedem só a URL, como Notion e alguns wikis."
+msgstr "उन टूल के लिए जो केवल URL मांगते हैं, जैसे Notion और कुछ विकी।"

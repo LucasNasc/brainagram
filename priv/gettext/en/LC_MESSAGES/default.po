@@ -1591,3 +1591,18 @@ msgstr "Play"
 #, elixir-autogen, elixir-format
 msgid "Tocar sozinho quando aparecer na tela"
 msgstr "Play on its own when it appears on screen"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Copiar link"
+msgstr "Copy link"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Link do diagrama incorporável"
+msgstr "Embeddable diagram link"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Para ferramentas que pedem só a URL, como Notion e alguns wikis."
+msgstr "For tools that only ask for the URL, such as Notion and some wikis."

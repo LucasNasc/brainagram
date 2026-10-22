@@ -32,6 +32,8 @@ defmodule BrainagramWeb.EditorEmbedTest do
     assert has_element?(view, ~s(#embed-preview[src="http://www.example.com/embed/#{slug}"]))
     assert has_element?(view, "#embed-snippet", "/embed/#{slug}")
     assert has_element?(view, "#embed-copy[phx-hook=CopyText]")
+    assert has_element?(view, ~s(#embed-link[value="http://www.example.com/embed/#{slug}"]))
+    assert has_element?(view, "#embed-copy-link[data-target=embed-link]")
   end
 
   test "as opções entram no endereço, sem repetir os padrões", %{conn: conn} do

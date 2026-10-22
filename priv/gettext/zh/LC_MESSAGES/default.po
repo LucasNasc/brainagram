@@ -1578,3 +1578,18 @@ msgstr "播放"
 #, elixir-autogen, elixir-format
 msgid "Tocar sozinho quando aparecer na tela"
 msgstr "出现在屏幕上时自动播放"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Copiar link"
+msgstr "复制链接"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Link do diagrama incorporável"
+msgstr "可嵌入图表的链接"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Para ferramentas que pedem só a URL, como Notion e alguns wikis."
+msgstr "适用于只需要 URL 的工具，例如 Notion 和一些 wiki。"

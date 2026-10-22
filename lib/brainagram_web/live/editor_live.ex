@@ -1194,6 +1194,30 @@ defmodule BrainagramWeb.EditorLive do
             />
           </.form>
           <div class="ba-field ba-embed-dialog__code">
+            <label class="ba-field__label" for="embed-link">{gettext("Link do diagrama incorporável")}</label>
+            <div class="ba-inputgroup">
+              <input
+                id="embed-link"
+                type="text"
+                class="ba-input ba-input--mono"
+                value={@src}
+                readonly
+              />
+              <.button
+                type="button"
+                id="embed-copy-link"
+                phx-hook="CopyText"
+                data-target="embed-link"
+                data-copied={gettext("Copiado")}
+              >
+                <.icon name="hero-link" /><span data-copy-label>{gettext("Copiar link")}</span>
+              </.button>
+            </div>
+            <p class="ba-hint-muted">
+              {gettext("Para ferramentas que pedem só a URL, como Notion e alguns wikis.")}
+            </p>
+          </div>
+          <div class="ba-field ba-embed-dialog__code">
             <label class="ba-field__label" for="embed-snippet">{gettext("Código para colar no site")}</label>
             <textarea
               id="embed-snippet"
