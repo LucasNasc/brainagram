@@ -10,6 +10,8 @@ one of the sections *Added*, *Changed*, *Deprecated*, *Removed*, *Fixed* or
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-10-22
+
 ### Added
 
 - **Embedding**: Export → Embed (iframe) gives a snippet, with a live preview
@@ -111,5 +113,6 @@ First public release.
 - Menus support arrow keys; the Edit/Pan switch is a real radio group with a
   visible selection; the error badge is a button; untranslated toolbar labels.
 
-[Unreleased]: https://github.com/LucasNasc/brainagram/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/LucasNasc/brainagram/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/LucasNasc/brainagram/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/LucasNasc/brainagram/releases/tag/v0.1.0
