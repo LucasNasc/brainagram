@@ -10,6 +10,15 @@ one of the sections *Added*, *Changed*, *Deprecated*, *Removed*, *Fixed* or
 
 ## [Unreleased]
 
+### Added
+
+- **Embedding**: Export → Embed (iframe) gives a snippet, with a live preview
+  and options, to play a public diagram inside any web page. The embed page
+  (`/embed/:slug`) is a plain HTTP page with the app's player (no cookies, no
+  WebSocket, cached), takes `theme`, `controls`, `autoplay`, `loop`, `step` and
+  `lang`, and can be turned off or limited to some sites with
+  `BRAINAGRAM_EMBED` and `BRAINAGRAM_EMBED_ORIGINS`.
+
 ## [0.1.0] - 2026-10-20
 
 First public release.

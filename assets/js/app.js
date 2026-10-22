@@ -28,6 +28,7 @@ import {DiagramCanvas} from "./hooks/diagram_canvas"
 import {SourceEditor} from "./hooks/source_editor"
 import {CommandPalette} from "./hooks/command_palette"
 import {ReadFileInto} from "./hooks/read_file_into"
+import {CopyText} from "./hooks/copy_text"
 import {installLocaleSwitch} from "./brainagram/locale"
 import {installDropdowns} from "./brainagram/dropdowns"
 
@@ -35,7 +36,7 @@ const csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute
 const liveSocket = new LiveSocket("/live", Socket, {
   longPollFallbackMs: 2500,
   params: {_csrf_token: csrfToken},
-  hooks: {...colocatedHooks, DiagramCanvas, SourceEditor, CommandPalette, ReadFileInto},
+  hooks: {...colocatedHooks, DiagramCanvas, SourceEditor, CommandPalette, ReadFileInto, CopyText},
 })
 
 // Bandeiras do topo: trocar de idioma recarrega a página (o código não salvo volta)

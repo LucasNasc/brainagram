@@ -36,6 +36,8 @@ defmodule BrainagramWeb.EditorLive do
   alias Brainagram.Domain.Diagramming.Events
   alias BrainagramWeb.ErrorMessages
 
+  @embed_defaults %{theme: "auto", controls: "full", autoplay: false, loop: false}
+
   @impl true
   def mount(_params, _session, socket) do
     {:ok, examples} = Bus.ask(ListExamples)
@@ -46,6 +48,7 @@ defmodule BrainagramWeb.EditorLive do
      |> assign(diagram: nil, examples: examples, errors: [], remote_change: false)
      |> assign(new_project: nil)
      |> assign(import_open: false, import_error: nil)
+     |> assign(embed_open: false, embed: @embed_defaults, base_url: nil)
      # `saved_source`: o texto como está salvo (ou como o diagrama novo nasceu);
      # o que difere dele é "alteração não salva".
      |> assign(presenting: false, keep_mode: false, saved_source: source)
@@ -53,7 +56,9 @@ defmodule BrainagramWeb.EditorLive do
   end
 
   @impl true
-  def handle_params(%{"slug" => slug} = params, _uri, socket) do
+  def handle_params(%{"slug" => slug} = params, uri, socket) do
+    socket = assign(socket, base_url: origin(uri))
+
     case Bus.ask(GetDiagramBySlug, %{slug: slug}) do
       {:ok, detail} ->
         socket =
@@ -81,9 +86,10 @@ defmodule BrainagramWeb.EditorLive do
   end
 
   # `/new?project=abc`: o diagrama novo, ao salvar, já nasce nesse projeto.
-  def handle_params(params, _uri, socket) do
+  def handle_params(params, uri, socket) do
     {:noreply,
      socket
+     |> assign(base_url: origin(uri))
      |> assign(new_project: blank_to_nil(params["project"]), presenting: false)
      |> push_scene()}
   end
@@ -155,6 +161,25 @@ defmodule BrainagramWeb.EditorLive do
 
   def handle_event("present:toggle", _params, socket),
     do: {:noreply, assign(socket, presenting: !socket.assigns.presenting)}
+
+  def handle_event("embed:open", _params, socket) do
+    {:noreply, assign(socket, embed_open: true)}
+  end
+
+  def handle_event("embed:close", _params, socket) do
+    {:noreply, assign(socket, embed_open: false)}
+  end
+
+  def handle_event("embed:options", %{"embed" => params}, socket) do
+    embed = %{
+      theme: pick(params["theme"], ~w(auto light dark), "auto"),
+      controls: pick(params["controls"], ~w(full minimal none), "full"),
+      autoplay: params["autoplay"] == "true",
+      loop: params["loop"] == "true"
+    }
+
+    {:noreply, assign(socket, embed: embed)}
+  end
 
   def handle_event("import:open", _params, socket) do
     {:noreply, assign(socket, import_open: true, import_error: nil)}
@@ -534,6 +559,7 @@ defmodule BrainagramWeb.EditorLive do
       </div>
 
       <.import_dialog :if={@import_open} error={@import_error} />
+      <.embed_dialog :if={@embed_open} diagram={@diagram} embed={@embed} base_url={@base_url} />
 
       <Layouts.flash_group flash={@flash} />
     </div>
@@ -776,6 +802,21 @@ defmodule BrainagramWeb.EditorLive do
           <span>
             {gettext("GIF leve")}
             <small>{gettext("Arquivo menor, para chats com limite de tamanho")}</small>
+          </span>
+        </button>
+        <div class="ba-menu__sep" role="separator"></div>
+        <div class="ba-menu__label">{gettext("Página web")}</div>
+        <button
+          type="button"
+          class="ba-menu__item"
+          role="menuitem"
+          id="export-embed"
+          phx-click="embed:open"
+        >
+          <.icon name="hero-code-bracket-square" />
+          <span>
+            {gettext("Incorporar (iframe)")}
+            <small>{gettext("O diagrama tocando dentro de outro site")}</small>
           </span>
         </button>
         <div class="ba-menu__sep" role="separator"></div>
@@ -1032,6 +1073,153 @@ defmodule BrainagramWeb.EditorLive do
       >
         <.icon name="hero-arrows-pointing-out" />
       </button>
+    </div>
+    """
+  end
+
+  attr :diagram, :any, required: true
+  attr :embed, :map, required: true
+  attr :base_url, :string, required: true
+
+  # Incorporar num site: só diagramas salvos e públicos. O código do iframe e a
+  # prévia usam o endereço desta própria página, então valem atrás de qualquer
+  # domínio ou proxy.
+  defp embed_dialog(assigns) do
+    assigns =
+      assign(assigns,
+        public?: assigns.diagram && assigns.diagram.visibility == "public",
+        src: assigns.diagram && embed_src(assigns.base_url, assigns.diagram.slug, assigns.embed)
+      )
+
+    ~H"""
+    <div class="ba-overlay" phx-window-keydown="embed:close" phx-key="Escape">
+      <div
+        class="ba-modal ba-modal--wide"
+        id="embed-dialog"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="embed-title"
+      >
+        <div class="ba-modal__head">
+          <h2 class="ba-modal__title" id="embed-title">{gettext("Incorporar em uma página")}</h2>
+          <button
+            type="button"
+            class="ba-btn ba-btn--icon ba-btn--ghost ba-btn--sm"
+            phx-click="embed:close"
+            aria-label={gettext("Fechar")}
+          >
+            <.icon name="hero-x-mark" />
+          </button>
+        </div>
+
+        <div :if={is_nil(@diagram)} class="ba-modal__body" id="embed-unsaved">
+          <p class="ba-import__hint">
+            {gettext("Salve o diagrama para poder incorporá-lo em outros sites.")}
+          </p>
+        </div>
+
+        <div :if={@diagram && not @public?} class="ba-modal__body" id="embed-private">
+          <p class="ba-import__hint">
+            {gettext(
+              "Só diagramas públicos podem ser incorporados: o iframe fica visível para quem abrir a página onde ele estiver."
+            )}
+          </p>
+          <div class="ba-modal__foot">
+            <span class="ba-spacer"></span>
+            <.button
+              type="button"
+              variant="primary"
+              id="embed-make-public"
+              phx-click="toggle-visibility"
+              data-confirm={
+                gettext("Tornar público? O diagrama passa a aparecer na galeria pública.")
+              }
+            >
+              <.icon name="hero-globe-alt" />{gettext("Tornar público")}
+            </.button>
+          </div>
+        </div>
+
+        <div :if={@public?} class="ba-modal__body ba-embed-dialog">
+          <iframe
+            id="embed-preview"
+            class="ba-embed-dialog__preview"
+            src={@src}
+            title={gettext("Prévia do diagrama incorporado")}
+            loading="lazy"
+          ></iframe>
+          <.form
+            for={to_form(stringify(@embed), as: :embed)}
+            id="embed-form"
+            class="ba-embed-dialog__options"
+            phx-change="embed:options"
+          >
+            <.input
+              type="select"
+              name="embed[theme]"
+              id="embed-theme"
+              label={gettext("Tema")}
+              value={@embed.theme}
+              options={[
+                {gettext("Automático (segue o sistema)"), "auto"},
+                {gettext("Claro"), "light"},
+                {gettext("Escuro"), "dark"}
+              ]}
+            />
+            <.input
+              type="select"
+              name="embed[controls]"
+              id="embed-controls"
+              label={gettext("Controles")}
+              value={@embed.controls}
+              options={[
+                {gettext("Completos (play, passos e barra de tempo)"), "full"},
+                {gettext("Mínimos (play e passos)"), "minimal"},
+                {gettext("Nenhum (só a animação)"), "none"}
+              ]}
+            />
+            <.input
+              type="checkbox"
+              name="embed[autoplay]"
+              id="embed-autoplay"
+              label={gettext("Tocar sozinho quando aparecer na tela")}
+              checked={@embed.autoplay}
+            />
+            <.input
+              type="checkbox"
+              name="embed[loop]"
+              id="embed-loop"
+              label={gettext("Repetir ao terminar")}
+              checked={@embed.loop}
+            />
+          </.form>
+          <div class="ba-field ba-embed-dialog__code">
+            <label class="ba-field__label" for="embed-snippet">{gettext("Código para colar no site")}</label>
+            <textarea
+              id="embed-snippet"
+              class="ba-input ba-input--area ba-input--mono"
+              readonly
+              rows="5"
+            >{embed_snippet(@src, @diagram.title)}</textarea>
+          </div>
+          <div class="ba-modal__foot">
+            <span class="ba-hint-muted">{gettext(
+              "Só diagramas públicos; tornar privado desliga o iframe."
+            )}</span>
+            <span class="ba-spacer"></span>
+            <.button
+              type="button"
+              variant="primary"
+              id="embed-copy"
+              phx-hook="CopyText"
+              data-target="embed-snippet"
+              data-copied={gettext("Copiado")}
+            >
+              <.icon name="hero-document-duplicate" /><span data-copy-label>{gettext("Copiar código")}</span>
+            </.button>
+          </div>
+        </div>
+      </div>
     </div>
     """
   end
@@ -1315,4 +1503,45 @@ defmodule BrainagramWeb.EditorLive do
   # Os exemplos vêm do catálogo com nome em português; o inglês mora em
   # `priv/gettext/en/LC_MESSAGES/examples.po`.
   defp example_name(name), do: Gettext.dgettext(BrainagramWeb.Gettext, "examples", name)
+
+  # ── incorporar (iframe) ─────────────────────────────────────────────────────
+
+  # A origem desta página (`https://dominio`), para o iframe apontar para o
+  # mesmo lugar que a pessoa está usando.
+  defp origin(uri) do
+    %URI{scheme: scheme, host: host, port: port} = URI.parse(uri)
+    default? = (scheme == "https" and port == 443) or (scheme == "http" and port == 80)
+    if default?, do: "#{scheme}://#{host}", else: "#{scheme}://#{host}:#{port}"
+  end
+
+  defp embed_src(base_url, slug, embed) do
+    query =
+      [
+        embed.theme != "auto" && {"theme", embed.theme},
+        embed.controls != "full" && {"controls", embed.controls},
+        embed.autoplay && {"autoplay", "1"},
+        embed.loop && {"loop", "1"}
+      ]
+      |> Enum.filter(& &1)
+      |> URI.encode_query()
+
+    "#{base_url}/embed/#{slug}" <> if(query == "", do: "", else: "?" <> query)
+  end
+
+  defp embed_snippet(src, title) do
+    title = Phoenix.HTML.html_escape("#{title} · Brainagram") |> Phoenix.HTML.safe_to_string()
+
+    """
+    <iframe src="#{src}"
+      title="#{title}"
+      width="100%" height="480"
+      style="border:0; max-width:960px"
+      loading="lazy" allow="fullscreen"
+      referrerpolicy="strict-origin-when-cross-origin"></iframe>\
+    """
+  end
+
+  defp pick(value, allowed, default), do: if(value in allowed, do: value, else: default)
+
+  defp stringify(map), do: Map.new(map, fn {k, v} -> {Atom.to_string(k), v} end)
 end

@@ -221,6 +221,38 @@ step "Cliente confirma o pedido" {   # um passo da animação
 Também valem apelidos em português, como `diagram arquitetura` e `dados:`.
 Mais exemplos, com e sem payload, em [`examples/`](examples/README.pt-BR.md).
 
+## Incorporar em uma página web
+
+Qualquer diagrama **público** pode tocar dentro de outro site (documentação,
+blog, wiki): no editor, **Exportar → Incorporar (iframe)** mostra uma prévia ao
+vivo, algumas opções e o código para copiar:
+
+```html
+<iframe src="https://SEU-DOMINIO/embed/abc123"
+  title="Checkout · Brainagram"
+  width="100%" height="480"
+  style="border:0; max-width:960px"
+  loading="lazy" allow="fullscreen"
+  referrerpolicy="strict-origin-when-cross-origin"></iframe>
+```
+
+A página do embed (`/embed/:slug`) é uma página HTTP simples com o mesmo
+player do app: funciona em qualquer iframe, sem cookie nem WebSocket, e fica em
+cache por um minuto. As opções vão na URL:
+
+| Parâmetro | Valores | Padrão |
+|---|---|---|
+| `theme` | `auto`, `light`, `dark` | `auto` (segue o sistema de quem assiste) |
+| `controls` | `full`, `minimal`, `none` | `full` |
+| `autoplay` | `1` | desligado; só toca quando o iframe aparece na tela, nunca com movimento reduzido |
+| `loop` | `1` | desligado |
+| `step` | número do passo | `1` |
+| `lang` | `pt-BR`, `en`, `zh`, `ru`, `it`, `ja`, `hi` | o do navegador de quem assiste |
+
+Tornar o diagrama privado desliga os embeds dele (aparece "Este diagrama não
+está disponível"). `BRAINAGRAM_EMBED=false` desliga o recurso na instância
+inteira, e `BRAINAGRAM_EMBED_ORIGINS` limita quais sites podem embutir.
+
 ## Importar e exportar
 
 | Formato | Exportar | Importar |
@@ -367,6 +399,8 @@ caracteres especiais na senha vão codificados (`@` → `%40`).
 | `ECTO_IPV6` | não | `true` se o host do banco só tem IPv6 |
 | `PORT` | não | porta HTTP dentro do container, padrão `4000` |
 | `PHX_CHECK_ORIGIN` | não | origens que podem abrir o WebSocket do LiveView, separadas por vírgula (`https://a.com,https://b.com`); por padrão vale o próprio host da requisição, então um domínio diferente do `PHX_HOST` também conecta |
+| `BRAINAGRAM_EMBED` | não | `false` desliga o `/embed/*` (embutir diagramas em outros sites) na instância inteira |
+| `BRAINAGRAM_EMBED_ORIGINS` | não | sites que podem embutir diagramas, separados por vírgula (`https://docs.exemplo.com`); por padrão, qualquer site |
 | `BRAINAGRAM_DEMO` | não | `true` transforma a instância num **playground público**: sem banco, diagramas num cache temporário em memória e um aviso em todas as telas (veja abaixo) |
 
 Para sair do banco embutido para um externo: faça o `pg_dump` dentro do

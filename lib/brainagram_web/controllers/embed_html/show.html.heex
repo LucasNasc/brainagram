@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang={@html_lang} data-theme={theme_attr(@opts.theme)}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="robots" content="noindex" />
+    <title>{@detail.title} · Brainagram</title>
+    <link rel="icon" type="image/svg+xml" href={~p"/images/favicon.svg"} />
+    <link
+      rel="preload"
+      href={~p"/fonts/Geist-Variable.woff2"}
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="stylesheet" href={~p"/assets/css/embed.css"} />
+    <script defer type="text/javascript" src={~p"/assets/js/embed.js"}>
+    </script>
+  </head>
+  <body
+    class="ba-embed"
+    data-controls={@opts.controls}
+    data-autoplay={to_string(@opts.autoplay)}
+    data-loop={to_string(@opts.loop)}
+    data-step={@opts.step}
+  >
+    <main
+      id="embed-stage"
+      class="ba-embed__stage bg-stage"
+      aria-label={gettext("Diagrama: %{title}", title: @detail.title)}
+    >
+    </main>
+
+    <div
+      :if={@opts.controls != "none"}
+      id="embed-bar"
+      class="ba-embed__bar"
+      data-controls={@opts.controls}
+      role="group"
+      aria-label={gettext("Reprodução do diagrama")}
+    >
+      <button
+        type="button"
+        class="ba-embed__btn"
+        data-embed="prev"
+        aria-label={gettext("Passo anterior")}
+        title={gettext("Passo anterior")}
+      >
+        <.icon name="hero-backward" class="ba-ico--16" />
+      </button>
+      <button
+        type="button"
+        class="ba-embed__btn ba-embed__btn--play"
+        data-embed="play"
+        aria-pressed="false"
+        aria-label={gettext("Tocar")}
+        title={gettext("Tocar")}
+        data-label-play={gettext("Tocar")}
+        data-label-pause={gettext("Pausar")}
+      >
+        <.icon name="hero-play-mini" class="ba-embed__icon-play" />
+        <.icon name="hero-pause-mini" class="ba-embed__icon-pause" />
+      </button>
+      <button
+        type="button"
+        class="ba-embed__btn"
+        data-embed="next"
+        aria-label={gettext("Próximo passo")}
+        title={gettext("Próximo passo")}
+      >
+        <.icon name="hero-forward" class="ba-ico--16" />
+      </button>
+      <input
+        :if={@opts.controls == "full"}
+        type="range"
+        class="ba-embed__scrub"
+        data-embed="scrub"
+        min="0"
+        max="1000"
+        step="1"
+        value="0"
+        aria-label={gettext("Posição no diagrama")}
+      />
+      <p
+        :if={@opts.controls == "full"}
+        class="ba-embed__caption"
+        data-embed="caption"
+        aria-live="polite"
+      >
+      </p>
+      <.embed_brand url={@presentation_url} />
+    </div>
+
+    <.embed_brand :if={@opts.controls == "none"} url={@presentation_url} floating />
+
+    <ol class="ba-sr">
+      <li :for={step <- @detail.scene.steps}>{step.label}</li>
+    </ol>
+
+    <script type="application/json" id="bg-scene">
+      <%= Phoenix.HTML.raw(@scene_json) %>
+    </script>
+  </body>
+</html>

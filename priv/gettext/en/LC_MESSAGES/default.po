@@ -123,6 +123,7 @@ msgid "Cancelar"
 msgstr "Cancel"
 
 #: lib/brainagram_web/components/layouts.ex
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Claro"
 msgstr "Light"
@@ -236,6 +237,7 @@ msgstr[0] "Syntax error on line %{line}: %{message} (and 1 more)"
 msgstr[1] "Syntax error on line %{line}: %{message} (and %{count} more)"
 
 #: lib/brainagram_web/components/layouts.ex
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Escuro"
 msgstr "Dark"
@@ -583,6 +585,7 @@ msgid "Só abre quem tem o link. Clique para tornar público."
 msgstr "Only people with the link can open it. Click to make it public."
 
 #: lib/brainagram_web/components/layouts.ex
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Tema"
 msgstr "Theme"
@@ -1107,6 +1110,7 @@ msgid "Tornar privado"
 msgstr "Make private"
 
 #: lib/brainagram_web/live/dashboard_live.ex
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Tornar público"
 msgstr "Make public"
@@ -1452,3 +1456,138 @@ msgstr "Diagrams live only in a temporary cache, visible to other visitors, and 
 #, elixir-autogen, elixir-format
 msgid "Playground de demonstração."
 msgstr "Demo playground."
+
+#: lib/brainagram_web/controllers/embed_html.ex
+#, elixir-autogen, elixir-format
+msgid "Abrir no Brainagram"
+msgstr "Open in Brainagram"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Automático (segue o sistema)"
+msgstr "Automatic (follows the system)"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Completos (play, passos e barra de tempo)"
+msgstr "Full (play, steps and timeline)"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Controles"
+msgstr "Controls"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Copiado"
+msgstr "Copied"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Copiar código"
+msgstr "Copy code"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Código para colar no site"
+msgstr "Code to paste into your site"
+
+#: lib/brainagram_web/controllers/embed_html/show.html.heex
+#, elixir-autogen, elixir-format
+msgid "Diagrama: %{title}"
+msgstr "Diagram: %{title}"
+
+#: lib/brainagram_web/controllers/embed_html/unavailable.html.heex
+#, elixir-autogen, elixir-format
+msgid "Este diagrama não está disponível."
+msgstr "This diagram isn't available."
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Incorporar (iframe)"
+msgstr "Embed (iframe)"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Incorporar em uma página"
+msgstr "Embed in a web page"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Mínimos (play e passos)"
+msgstr "Minimal (play and steps)"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Nenhum (só a animação)"
+msgstr "None (animation only)"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "O diagrama tocando dentro de outro site"
+msgstr "The diagram playing inside another site"
+
+#: lib/brainagram_web/controllers/embed_html/show.html.heex
+#, elixir-autogen, elixir-format
+msgid "Passo anterior"
+msgstr "Previous step"
+
+#: lib/brainagram_web/controllers/embed_html/show.html.heex
+#, elixir-autogen, elixir-format
+msgid "Pausar"
+msgstr "Pause"
+
+#: lib/brainagram_web/controllers/embed_html/show.html.heex
+#, elixir-autogen, elixir-format
+msgid "Posição no diagrama"
+msgstr "Position in the diagram"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Prévia do diagrama incorporado"
+msgstr "Preview of the embedded diagram"
+
+#: lib/brainagram_web/controllers/embed_html/show.html.heex
+#, elixir-autogen, elixir-format
+msgid "Próximo passo"
+msgstr "Next step"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Página web"
+msgstr "Web page"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Repetir ao terminar"
+msgstr "Repeat when it ends"
+
+#: lib/brainagram_web/controllers/embed_html/show.html.heex
+#, elixir-autogen, elixir-format
+msgid "Reprodução do diagrama"
+msgstr "Diagram playback"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Salve o diagrama para poder incorporá-lo em outros sites."
+msgstr "Save the diagram to embed it in other sites."
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Só diagramas públicos podem ser incorporados: o iframe fica visível para quem abrir a página onde ele estiver."
+msgstr "Only public diagrams can be embedded: the iframe is visible to anyone who opens the page it's on."
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Só diagramas públicos; tornar privado desliga o iframe."
+msgstr "Public diagrams only; making it private turns the iframe off."
+
+#: lib/brainagram_web/controllers/embed_html/show.html.heex
+#, elixir-autogen, elixir-format
+msgid "Tocar"
+msgstr "Play"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Tocar sozinho quando aparecer na tela"
+msgstr "Play on its own when it appears on screen"

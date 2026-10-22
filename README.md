@@ -219,6 +219,38 @@ step "Customer places the order" {   # a step of the animation
 Portuguese aliases are accepted too, e.g. `diagram arquitetura` and `dados:`.
 More examples, with and without payloads, live in [`examples/`](examples/).
 
+## Embedding in a web page
+
+Any **public** diagram can play inside another site (docs, a blog, a wiki):
+in the editor, **Export → Embed (iframe)** shows a live preview, a few options
+and the snippet to copy:
+
+```html
+<iframe src="https://YOUR-DOMAIN/embed/abc123"
+  title="Checkout · Brainagram"
+  width="100%" height="480"
+  style="border:0; max-width:960px"
+  loading="lazy" allow="fullscreen"
+  referrerpolicy="strict-origin-when-cross-origin"></iframe>
+```
+
+The embed page (`/embed/:slug`) is a plain HTTP page with the same player as
+the app, so it works in any iframe, with no cookies or WebSocket, and is cached
+for a minute. Options go in the URL:
+
+| Parameter | Values | Default |
+|---|---|---|
+| `theme` | `auto`, `light`, `dark` | `auto` (follows the viewer's system) |
+| `controls` | `full`, `minimal`, `none` | `full` |
+| `autoplay` | `1` | off; plays only when the frame is on screen, never with reduced motion |
+| `loop` | `1` | off |
+| `step` | step number | `1` |
+| `lang` | `pt-BR`, `en`, `zh`, `ru`, `it`, `ja`, `hi` | the viewer's browser |
+
+Making a diagram private turns its embeds off (they show "This diagram isn't
+available"). `BRAINAGRAM_EMBED=false` turns embedding off for the whole
+instance, and `BRAINAGRAM_EMBED_ORIGINS` limits which sites may embed.
+
 ## Import and export
 
 | Format | Export | Import |
@@ -366,6 +398,8 @@ too; special characters in the password must be percent-encoded (`@` → `%40`).
 | `ECTO_IPV6` | no | `true` if the database host is IPv6-only |
 | `PORT` | no | HTTP port inside the container, defaults to `4000` |
 | `PHX_CHECK_ORIGIN` | no | origins allowed to open the LiveView WebSocket, comma-separated (`https://a.com,https://b.com`); by default the request's own host is accepted, so a domain different from `PHX_HOST` still connects |
+| `BRAINAGRAM_EMBED` | no | `false` turns off `/embed/*` (embedding diagrams in other sites) for the whole instance |
+| `BRAINAGRAM_EMBED_ORIGINS` | no | sites allowed to embed diagrams, comma-separated (`https://docs.example.com`); by default any site |
 | `BRAINAGRAM_DEMO` | no | `true` turns the instance into a **public playground**: no database, diagrams in a temporary in-memory cache and a notice on every screen (see below) |
 
 Moving from the embedded database to an external one: `pg_dump` from the

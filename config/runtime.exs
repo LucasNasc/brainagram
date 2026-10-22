@@ -37,6 +37,21 @@ if demo? do
     project_reader: Brainagram.Infrastructure.Cache.CacheProjectReader
 end
 
+# Diagramas embutidos em outros sites por <iframe> (/embed/:slug). Só os
+# públicos aparecem. BRAINAGRAM_EMBED=false desliga para a instância inteira;
+# BRAINAGRAM_EMBED_ORIGINS restringe quais sites podem embutir (separados por
+# vírgula; sem ela, qualquer site).
+config :brainagram, :embed,
+  enabled:
+    System.get_env("BRAINAGRAM_EMBED", "true")
+    |> String.downcase()
+    |> then(&(&1 not in ~w(false 0 no off))),
+  origins:
+    System.get_env("BRAINAGRAM_EMBED_ORIGINS", "")
+    |> String.split(",", trim: true)
+    |> Enum.map(&String.trim/1)
+    |> Enum.reject(&(&1 == ""))
+
 if config_env() == :prod and not demo? do
   database_url =
     System.get_env("DATABASE_URL") ||
