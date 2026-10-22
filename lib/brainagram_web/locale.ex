@@ -76,6 +76,15 @@ defmodule BrainagramWeb.Locale do
     {:cont, Phoenix.Component.assign(socket, :locale, locale)}
   end
 
+  @doc """
+  O idioma de quem não tem sessão (o player embutido em outro site): o que a
+  URL pede (`?lang=`), senão o do navegador, senão inglês.
+  """
+  @spec for_request(Plug.Conn.t(), String.t() | nil) :: locale()
+  def for_request(conn, explicit) do
+    normalize(explicit) || from_header(conn) || "en"
+  end
+
   # ── privados ──────────────────────────────────────────────────────────────
 
   @doc false

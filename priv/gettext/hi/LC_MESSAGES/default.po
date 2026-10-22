@@ -123,6 +123,7 @@ msgid "Cancelar"
 msgstr "रद्द करें"
 
 #: lib/brainagram_web/components/layouts.ex
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Claro"
 msgstr "लाइट"
@@ -236,6 +237,7 @@ msgstr[0] "पंक्ति %{line} पर सिंटैक्स त्र�
 msgstr[1] "पंक्ति %{line} पर सिंटैक्स त्रुटि: %{message} (और %{count})"
 
 #: lib/brainagram_web/components/layouts.ex
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Escuro"
 msgstr "डार्क"
@@ -583,6 +585,7 @@ msgid "Só abre quem tem o link. Clique para tornar público."
 msgstr "सिर्फ़ लिंक वाले लोग इसे खोल सकते हैं। सार्वजनिक बनाने के लिए क्लिक करें।"
 
 #: lib/brainagram_web/components/layouts.ex
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Tema"
 msgstr "थीम"
@@ -1107,6 +1110,7 @@ msgid "Tornar privado"
 msgstr "निजी बनाएँ"
 
 #: lib/brainagram_web/live/dashboard_live.ex
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Tornar público"
 msgstr "सार्वजनिक बनाएँ"
@@ -1452,3 +1456,153 @@ msgstr "डायग्राम केवल अस्थायी कैश �
 #, elixir-autogen, elixir-format
 msgid "Playground de demonstração."
 msgstr "डेमो प्लेग्राउंड।"
+
+#: lib/brainagram_web/controllers/embed_html.ex
+#, elixir-autogen, elixir-format
+msgid "Abrir no Brainagram"
+msgstr "Brainagram में खोलें"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Automático (segue o sistema)"
+msgstr "स्वचालित (सिस्टम के अनुसार)"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Completos (play, passos e barra de tempo)"
+msgstr "पूर्ण (प्ले, चरण और टाइमलाइन)"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Controles"
+msgstr "नियंत्रण"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Copiado"
+msgstr "कॉपी हो गया"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Copiar código"
+msgstr "कोड कॉपी करें"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Código para colar no site"
+msgstr "साइट में चिपकाने के लिए कोड"
+
+#: lib/brainagram_web/controllers/embed_html/show.html.heex
+#, elixir-autogen, elixir-format
+msgid "Diagrama: %{title}"
+msgstr "डायग्राम: %{title}"
+
+#: lib/brainagram_web/controllers/embed_html/unavailable.html.heex
+#, elixir-autogen, elixir-format
+msgid "Este diagrama não está disponível."
+msgstr "यह डायग्राम उपलब्ध नहीं है।"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Incorporar (iframe)"
+msgstr "एम्बेड (iframe)"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Incorporar em uma página"
+msgstr "वेब पेज में एम्बेड करें"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Mínimos (play e passos)"
+msgstr "न्यूनतम (प्ले और चरण)"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Nenhum (só a animação)"
+msgstr "कोई नहीं (केवल एनिमेशन)"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "O diagrama tocando dentro de outro site"
+msgstr "किसी दूसरी साइट के अंदर चलता डायग्राम"
+
+#: lib/brainagram_web/controllers/embed_html/show.html.heex
+#, elixir-autogen, elixir-format
+msgid "Passo anterior"
+msgstr "पिछला चरण"
+
+#: lib/brainagram_web/controllers/embed_html/show.html.heex
+#, elixir-autogen, elixir-format
+msgid "Pausar"
+msgstr "रोकें"
+
+#: lib/brainagram_web/controllers/embed_html/show.html.heex
+#, elixir-autogen, elixir-format
+msgid "Posição no diagrama"
+msgstr "डायग्राम में स्थिति"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Prévia do diagrama incorporado"
+msgstr "एम्बेड किए गए डायग्राम का पूर्वावलोकन"
+
+#: lib/brainagram_web/controllers/embed_html/show.html.heex
+#, elixir-autogen, elixir-format
+msgid "Próximo passo"
+msgstr "अगला चरण"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Página web"
+msgstr "वेब पेज"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Repetir ao terminar"
+msgstr "खत्म होने पर दोहराएं"
+
+#: lib/brainagram_web/controllers/embed_html/show.html.heex
+#, elixir-autogen, elixir-format
+msgid "Reprodução do diagrama"
+msgstr "डायग्राम प्लेबैक"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Salve o diagrama para poder incorporá-lo em outros sites."
+msgstr "दूसरी साइटों में एम्बेड करने के लिए डायग्राम सहेजें।"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Só diagramas públicos podem ser incorporados: o iframe fica visível para quem abrir a página onde ele estiver."
+msgstr "केवल सार्वजनिक डायग्राम ही एम्बेड किए जा सकते हैं: iframe उस पेज को खोलने वाले हर व्यक्ति को दिखता है।"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Só diagramas públicos; tornar privado desliga o iframe."
+msgstr "केवल सार्वजनिक डायग्राम; निजी करने पर iframe बंद हो जाता है।"
+
+#: lib/brainagram_web/controllers/embed_html/show.html.heex
+#, elixir-autogen, elixir-format
+msgid "Tocar"
+msgstr "चलाएं"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Tocar sozinho quando aparecer na tela"
+msgstr "स्क्रीन पर दिखते ही अपने आप चलाएं"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Copiar link"
+msgstr "लिंक कॉपी करें"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Link do diagrama incorporável"
+msgstr "एम्बेड करने योग्य डायग्राम का लिंक"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Para ferramentas que pedem só a URL, como Notion e alguns wikis."
+msgstr "उन टूल के लिए जो केवल URL मांगते हैं, जैसे Notion और कुछ विकी।"

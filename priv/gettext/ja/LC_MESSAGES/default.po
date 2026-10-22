@@ -120,6 +120,7 @@ msgid "Cancelar"
 msgstr "キャンセル"
 
 #: lib/brainagram_web/components/layouts.ex
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Claro"
 msgstr "ライト"
@@ -232,6 +233,7 @@ msgid_plural "Erro de sintaxe na linha %{line}: %{message} (e mais %{count})"
 msgstr[0] "%{line} 行目に構文エラー: %{message}（他 %{count} 件）"
 
 #: lib/brainagram_web/components/layouts.ex
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Escuro"
 msgstr "ダーク"
@@ -577,6 +579,7 @@ msgid "Só abre quem tem o link. Clique para tornar público."
 msgstr "リンクを知っている人だけが開けます。クリックで公開します。"
 
 #: lib/brainagram_web/components/layouts.ex
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Tema"
 msgstr "テーマ"
@@ -1100,6 +1103,7 @@ msgid "Tornar privado"
 msgstr "非公開にする"
 
 #: lib/brainagram_web/live/dashboard_live.ex
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Tornar público"
 msgstr "公開する"
@@ -1439,3 +1443,153 @@ msgstr "図は一時的なキャッシュにのみ保存され、他の訪問者
 #, elixir-autogen, elixir-format
 msgid "Playground de demonstração."
 msgstr "デモ用のお試し環境です。"
+
+#: lib/brainagram_web/controllers/embed_html.ex
+#, elixir-autogen, elixir-format
+msgid "Abrir no Brainagram"
+msgstr "Brainagram で開く"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Automático (segue o sistema)"
+msgstr "自動（システムに合わせる）"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Completos (play, passos e barra de tempo)"
+msgstr "フル（再生・ステップ・タイムライン）"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Controles"
+msgstr "コントロール"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Copiado"
+msgstr "コピーしました"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Copiar código"
+msgstr "コードをコピー"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Código para colar no site"
+msgstr "サイトに貼り付けるコード"
+
+#: lib/brainagram_web/controllers/embed_html/show.html.heex
+#, elixir-autogen, elixir-format
+msgid "Diagrama: %{title}"
+msgstr "図：%{title}"
+
+#: lib/brainagram_web/controllers/embed_html/unavailable.html.heex
+#, elixir-autogen, elixir-format
+msgid "Este diagrama não está disponível."
+msgstr "この図は表示できません。"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Incorporar (iframe)"
+msgstr "埋め込み（iframe）"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Incorporar em uma página"
+msgstr "Web ページに埋め込む"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Mínimos (play e passos)"
+msgstr "最小（再生とステップ）"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Nenhum (só a animação)"
+msgstr "なし（アニメーションのみ）"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "O diagrama tocando dentro de outro site"
+msgstr "他のサイト内で再生される図"
+
+#: lib/brainagram_web/controllers/embed_html/show.html.heex
+#, elixir-autogen, elixir-format
+msgid "Passo anterior"
+msgstr "前のステップ"
+
+#: lib/brainagram_web/controllers/embed_html/show.html.heex
+#, elixir-autogen, elixir-format
+msgid "Pausar"
+msgstr "一時停止"
+
+#: lib/brainagram_web/controllers/embed_html/show.html.heex
+#, elixir-autogen, elixir-format
+msgid "Posição no diagrama"
+msgstr "図の中の位置"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Prévia do diagrama incorporado"
+msgstr "埋め込んだ図のプレビュー"
+
+#: lib/brainagram_web/controllers/embed_html/show.html.heex
+#, elixir-autogen, elixir-format
+msgid "Próximo passo"
+msgstr "次のステップ"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Página web"
+msgstr "Web ページ"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Repetir ao terminar"
+msgstr "終わったら繰り返す"
+
+#: lib/brainagram_web/controllers/embed_html/show.html.heex
+#, elixir-autogen, elixir-format
+msgid "Reprodução do diagrama"
+msgstr "図の再生"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Salve o diagrama para poder incorporá-lo em outros sites."
+msgstr "他のサイトに埋め込むには、図を保存してください。"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Só diagramas públicos podem ser incorporados: o iframe fica visível para quem abrir a página onde ele estiver."
+msgstr "埋め込めるのは公開された図だけです。iframe は、それを含むページを開いた人全員に表示されます。"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Só diagramas públicos; tornar privado desliga o iframe."
+msgstr "公開された図のみ。非公開にすると iframe は表示されなくなります。"
+
+#: lib/brainagram_web/controllers/embed_html/show.html.heex
+#, elixir-autogen, elixir-format
+msgid "Tocar"
+msgstr "再生"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Tocar sozinho quando aparecer na tela"
+msgstr "画面に表示されたら自動で再生"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Copiar link"
+msgstr "リンクをコピー"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Link do diagrama incorporável"
+msgstr "埋め込み用の図のリンク"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Para ferramentas que pedem só a URL, como Notion e alguns wikis."
+msgstr "Notion や一部の wiki など、URL だけを求めるツール向け。"

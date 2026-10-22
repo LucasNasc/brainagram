@@ -123,6 +123,7 @@ msgid "Cancelar"
 msgstr "Annulla"
 
 #: lib/brainagram_web/components/layouts.ex
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Claro"
 msgstr "Chiaro"
@@ -236,6 +237,7 @@ msgstr[0] "Errore di sintassi alla riga %{line}: %{message} (e 1 altro)"
 msgstr[1] "Errore di sintassi alla riga %{line}: %{message} (e altri %{count})"
 
 #: lib/brainagram_web/components/layouts.ex
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Escuro"
 msgstr "Scuro"
@@ -583,6 +585,7 @@ msgid "Só abre quem tem o link. Clique para tornar público."
 msgstr "Solo chi ha il link può aprirlo. Fai clic per renderlo pubblico."
 
 #: lib/brainagram_web/components/layouts.ex
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Tema"
 msgstr "Tema"
@@ -1107,6 +1110,7 @@ msgid "Tornar privado"
 msgstr "Rendi privato"
 
 #: lib/brainagram_web/live/dashboard_live.ex
+#: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
 msgid "Tornar público"
 msgstr "Rendi pubblico"
@@ -1452,3 +1456,153 @@ msgstr "I diagrammi restano solo in una cache temporanea, visibili ad altri visi
 #, elixir-autogen, elixir-format
 msgid "Playground de demonstração."
 msgstr "Playground dimostrativo."
+
+#: lib/brainagram_web/controllers/embed_html.ex
+#, elixir-autogen, elixir-format
+msgid "Abrir no Brainagram"
+msgstr "Apri in Brainagram"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Automático (segue o sistema)"
+msgstr "Automatico (segue il sistema)"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Completos (play, passos e barra de tempo)"
+msgstr "Completi (play, passi e barra del tempo)"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Controles"
+msgstr "Controlli"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Copiado"
+msgstr "Copiato"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Copiar código"
+msgstr "Copia il codice"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Código para colar no site"
+msgstr "Codice da incollare nel sito"
+
+#: lib/brainagram_web/controllers/embed_html/show.html.heex
+#, elixir-autogen, elixir-format
+msgid "Diagrama: %{title}"
+msgstr "Diagramma: %{title}"
+
+#: lib/brainagram_web/controllers/embed_html/unavailable.html.heex
+#, elixir-autogen, elixir-format
+msgid "Este diagrama não está disponível."
+msgstr "Questo diagramma non è disponibile."
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Incorporar (iframe)"
+msgstr "Incorpora (iframe)"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Incorporar em uma página"
+msgstr "Incorpora in una pagina web"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Mínimos (play e passos)"
+msgstr "Minimi (play e passi)"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Nenhum (só a animação)"
+msgstr "Nessuno (solo l'animazione)"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "O diagrama tocando dentro de outro site"
+msgstr "Il diagramma che si riproduce in un altro sito"
+
+#: lib/brainagram_web/controllers/embed_html/show.html.heex
+#, elixir-autogen, elixir-format
+msgid "Passo anterior"
+msgstr "Passo precedente"
+
+#: lib/brainagram_web/controllers/embed_html/show.html.heex
+#, elixir-autogen, elixir-format
+msgid "Pausar"
+msgstr "Pausa"
+
+#: lib/brainagram_web/controllers/embed_html/show.html.heex
+#, elixir-autogen, elixir-format
+msgid "Posição no diagrama"
+msgstr "Posizione nel diagramma"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Prévia do diagrama incorporado"
+msgstr "Anteprima del diagramma incorporato"
+
+#: lib/brainagram_web/controllers/embed_html/show.html.heex
+#, elixir-autogen, elixir-format
+msgid "Próximo passo"
+msgstr "Passo successivo"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Página web"
+msgstr "Pagina web"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Repetir ao terminar"
+msgstr "Ripeti alla fine"
+
+#: lib/brainagram_web/controllers/embed_html/show.html.heex
+#, elixir-autogen, elixir-format
+msgid "Reprodução do diagrama"
+msgstr "Riproduzione del diagramma"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Salve o diagrama para poder incorporá-lo em outros sites."
+msgstr "Salva il diagramma per poterlo incorporare in altri siti."
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Só diagramas públicos podem ser incorporados: o iframe fica visível para quem abrir a página onde ele estiver."
+msgstr "Solo i diagrammi pubblici possono essere incorporati: l'iframe è visibile a chiunque apra la pagina in cui si trova."
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Só diagramas públicos; tornar privado desliga o iframe."
+msgstr "Solo diagrammi pubblici; renderlo privato disattiva l'iframe."
+
+#: lib/brainagram_web/controllers/embed_html/show.html.heex
+#, elixir-autogen, elixir-format
+msgid "Tocar"
+msgstr "Riproduci"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Tocar sozinho quando aparecer na tela"
+msgstr "Riproduci da solo quando appare sullo schermo"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Copiar link"
+msgstr "Copia link"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Link do diagrama incorporável"
+msgstr "Link del diagramma incorporabile"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Para ferramentas que pedem só a URL, como Notion e alguns wikis."
+msgstr "Per gli strumenti che chiedono solo l'URL, come Notion e alcuni wiki."

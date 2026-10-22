@@ -1,0 +1,146 @@
+/* Brainagram — o player embutível (/embed/:slug). Os mesmos tokens, a mesma
+   base e o mesmo canvas do app; só o que é próprio do iframe fica aqui. */
+
+@import "./tokens.css";
+@import "./base.css";
+@import "./components.css";
+@import "./diagram.css";
+
+html,
+body {
+  height: 100%;
+}
+
+.ba-embed {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  overflow: hidden;
+  background: var(--bg-canvas);
+  color: var(--text);
+  font: 400 13px/1.4 var(--font-sans);
+}
+
+.ba-embed__stage {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+}
+
+.ba-embed__bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 44px;
+  padding: var(--space-1-5) var(--space-3) var(--space-1-5) var(--space-2);
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.ba-embed__btn {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-full);
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition:
+    background-color var(--dur-fast) var(--ease-ui),
+    color var(--dur-fast) var(--ease-ui);
+}
+
+.ba-embed__btn:hover {
+  background: var(--surface-2);
+  color: var(--text);
+}
+
+.ba-embed__btn--play {
+  width: 36px;
+  height: 36px;
+  background: var(--brand);
+  color: var(--on-brand);
+}
+
+.ba-embed__btn--play:hover {
+  background: var(--brand-hover);
+  color: var(--on-brand);
+}
+
+.ba-embed__btn--play .ba-embed__icon-pause,
+.ba-embed__btn--play[aria-pressed="true"] .ba-embed__icon-play {
+  display: none;
+}
+
+.ba-embed__btn--play[aria-pressed="true"] .ba-embed__icon-pause {
+  display: block;
+}
+
+.ba-embed__scrub {
+  flex: 1;
+  min-width: 60px;
+  accent-color: var(--brand);
+  cursor: pointer;
+}
+
+.ba-embed__caption {
+  flex: 0 1 40%;
+  margin: 0;
+  overflow: hidden;
+  color: var(--text-muted);
+  font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+.ba-embed__brand {
+  display: inline-flex;
+  flex: none;
+  margin-left: auto;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  background: var(--surface);
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: var(--shadow-sm);
+  transition: color var(--dur-fast) var(--ease-ui);
+}
+
+.ba-embed__brand:hover {
+  color: var(--text);
+}
+
+.ba-embed__brand--floating {
+  position: absolute;
+  top: var(--space-2);
+  right: var(--space-2);
+}
+
+@media (max-width: 420px) {
+  .ba-embed__brand-text,
+  .ba-embed__caption {
+    display: none;
+  }
+}
+
+.ba-embed__empty {
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: var(--space-2);
+  height: 100%;
+  margin: 0;
+  color: var(--text-muted);
+  text-align: center;
+}
