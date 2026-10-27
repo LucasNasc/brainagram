@@ -13,7 +13,7 @@ Escreva o fluxo em texto, dê play e veja as mensagens percorrerem as setas — 
 **[Site](https://lucasnasc.github.io/brainagram/)** · [Exemplos](examples/README.pt-BR.md) · [English](README.md) · **Português (Brasil)**
 
 [![CI](https://github.com/LucasNasc/brainagram/actions/workflows/ci.yml/badge.svg)](https://github.com/LucasNasc/brainagram/actions/workflows/ci.yml)
-[![Versão](https://img.shields.io/badge/vers%C3%A3o-0.2.0-7c5cff.svg)](CHANGELOG.md)
+[![Versão](https://img.shields.io/badge/vers%C3%A3o-0.3.0-7c5cff.svg)](CHANGELOG.md)
 [![Release no GitHub](https://img.shields.io/github/v/release/LucasNasc/brainagram?color=7c5cff&label=release)](https://github.com/LucasNasc/brainagram/releases)
 [![Testes](https://img.shields.io/badge/testes-450%2B%20passando-2f9e4f.svg)](#desenvolvimento)
 [![Licença: MIT](https://img.shields.io/badge/licen%C3%A7a-MIT-7c5cff.svg)](LICENSE)

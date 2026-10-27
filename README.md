@@ -13,7 +13,7 @@ Write the flow as text, press play, and watch the messages travel along the arro
 **[Website](https://lucasnasc.github.io/brainagram/)** · [Examples](examples/) · **English** · [Português (Brasil)](README.pt-BR.md)
 
 [![CI](https://github.com/LucasNasc/brainagram/actions/workflows/ci.yml/badge.svg)](https://github.com/LucasNasc/brainagram/actions/workflows/ci.yml)
-[![Version](https://img.shields.io/badge/version-0.2.0-7c5cff.svg)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-0.3.0-7c5cff.svg)](CHANGELOG.md)
 [![GitHub release](https://img.shields.io/github/v/release/LucasNasc/brainagram?color=7c5cff)](https://github.com/LucasNasc/brainagram/releases)
 [![Tests](https://img.shields.io/badge/tests-450%2B%20passing-2f9e4f.svg)](#development)
 [![License: MIT](https://img.shields.io/badge/license-MIT-7c5cff.svg)](LICENSE)
