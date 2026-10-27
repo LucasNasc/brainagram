@@ -15,6 +15,19 @@ defmodule BrainagramWeb.Router do
     plug :accepts, ["json"]
   end
 
+  # O player embutido em outros sites: sem sessão, sem cookie, sem LiveView,
+  # com cabeçalhos próprios que liberam só esta rota para iframes.
+  pipeline :embed do
+    plug :accepts, ["html"]
+    plug BrainagramWeb.EmbedHeaders
+  end
+
+  scope "/embed", BrainagramWeb do
+    pipe_through :embed
+
+    get "/:slug", EmbedController, :show
+  end
+
   scope "/", BrainagramWeb do
     pipe_through :browser
 

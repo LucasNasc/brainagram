@@ -54,6 +54,18 @@ one of the sections *Added*, *Changed*, *Deprecated*, *Removed*, *Fixed* or
   step stays inside the steps list. The open quick reference now scrolls
   inside the code panel instead of pushing it down.
 
+## [0.2.0] - 2026-10-22
+
+### Added
+
+- **Embedding**: Export → Embed (iframe) gives a snippet and a plain link (for
+  tools such as Notion that only take a URL), with a live preview and options,
+  to play a public diagram inside any web page. The embed page
+  (`/embed/:slug`) is a plain HTTP page with the app's player (no cookies, no
+  WebSocket, cached), takes `theme`, `controls`, `autoplay`, `loop`, `step` and
+  `lang`, and can be turned off or limited to some sites with
+  `BRAINAGRAM_EMBED` and `BRAINAGRAM_EMBED_ORIGINS`.
+
 ## [0.1.0] - 2026-10-20
 
 First public release.
@@ -146,5 +158,6 @@ First public release.
 - Menus support arrow keys; the Edit/Pan switch is a real radio group with a
   visible selection; the error badge is a button; untranslated toolbar labels.
 
-[Unreleased]: https://github.com/LucasNasc/brainagram/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/LucasNasc/brainagram/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/LucasNasc/brainagram/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/LucasNasc/brainagram/releases/tag/v0.1.0
