@@ -24,6 +24,7 @@ function staticCommands() {
     { id: "mode", group: t("Canvas"), label: t("Alternar entre editar e mover a tela"), icon: "hand-raised", keys: ["E"], run: (h) => h.command({ action: h.editing() ? "mode-view" : "mode-edit" }) },
     { id: "format", group: t("Código"), label: t("Formatar código"), icon: "sparkles", keys: ["Shift", "Alt", "F"], run: (h) => h.command({ action: "format" }) },
     { id: "next-error", group: t("Código"), label: t("Ir para o próximo erro"), icon: "exclamation-triangle", keys: ["F8"], run: (h) => h.command({ action: "next-error" }) },
+    { id: "switch-direction", group: t("Código"), label: t("Alternar direção da arquitetura (vertical ↔ horizontal)"), icon: "arrows-right-left", run: (h) => h.edit("switch_direction") },
     { id: "switch-kind", group: t("Código"), label: t("Alternar tipo do diagrama (sequência ↔ arquitetura)"), icon: "arrows-right-left", run: (h) => h.edit("switch_kind") },
     { id: "undo", group: t("Código"), label: t("Desfazer"), icon: "arrow-uturn-left", keys: [MOD, "Z"], run: (h) => h.command({ action: "undo" }) },
     { id: "redo", group: t("Código"), label: t("Refazer"), icon: "arrow-uturn-right", keys: [MOD, "Shift", "Z"], run: (h) => h.command({ action: "redo" }) },

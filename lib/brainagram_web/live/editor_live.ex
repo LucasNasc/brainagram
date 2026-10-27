@@ -425,6 +425,14 @@ defmodule BrainagramWeb.EditorLive do
   defp notice(socket, "clear_layout", _meta),
     do: put_flash(socket, :info, gettext("Posições soltas: layout automático de novo."))
 
+  defp notice(socket, "switch_direction", %{unpinned: true}),
+    do:
+      put_flash(
+        socket,
+        :info,
+        gettext("Direção trocada. As posições fixadas foram soltas — Ctrl+Z desfaz.")
+      )
+
   defp notice(socket, "untangle", %{improved: false}),
     do: put_flash(socket, :info, gettext("As setas já estão organizadas — nada a mudar."))
 
@@ -512,6 +520,13 @@ defmodule BrainagramWeb.EditorLive do
             </div>
             <.canvas_tools scene={@scene} />
             <div id="canvas-overlay" phx-update="ignore" class="ba-overlay-layer"></div>
+            <%!-- as operações que reorganizam o diagrama inteiro esperam o
+                 servidor: a marca cobre o canvas até a cena nova chegar --%>
+            <.loader
+              id="canvas-busy"
+              class="ba-loader--overlay"
+              label={gettext("Reorganizando o diagrama…")}
+            />
           </div>
 
           <.transport />
@@ -708,7 +723,9 @@ defmodule BrainagramWeb.EditorLive do
             class="ba-topbar__hide-sm"
             aria-label={gettext("Duplicar")}
           >
-            <.icon name="hero-document-duplicate" /><span class="ba-btn__label">{gettext("Duplicar")}</span>
+            <.icon name="hero-document-duplicate" /><.busy_mark /><span class="ba-btn__label">{gettext(
+              "Duplicar"
+            )}</span>
           </.button>
 
           <.button
@@ -718,7 +735,9 @@ defmodule BrainagramWeb.EditorLive do
             aria-label={gettext("Salvar (Ctrl+S)")}
             title={gettext("Salvar (Ctrl+S)")}
           >
-            <.icon name="hero-cloud-arrow-up" /><span class="ba-btn__label">{gettext("Salvar")}</span>
+            <.icon name="hero-cloud-arrow-up" /><.busy_mark /><span class="ba-btn__label">{gettext(
+              "Salvar"
+            )}</span>
           </.button>
         <% end %>
 
@@ -901,12 +920,14 @@ defmodule BrainagramWeb.EditorLive do
         <code>database queue</code><span>{gettext("banco de dados, fila")}</span>
         <code>external system</code><span>{gettext("sistema externo, sistema")}</span>
         <code>node boundary</code><span>{gettext("nó de implantação, fronteira")}</span>
+        <code>decision</code><span>{gettext("losango com a pergunta; rotule as saídas: sim / não")}</span>
         <code>a -&gt; b</code><span>{gettext("chamada síncrona")}</span>
         <code>a --&gt; b</code><span>{gettext("retorno")}</span>
         <code>a -&gt;&gt; b</code><span>{gettext("assíncrona")}</span>
         <code>a -x b</code><span>{gettext("falha / timeout")}</span>
         <code>step "…" &#123;&#125;</code><span>{gettext("um passo da animação")}</span>
         <code>group "…" &#123;&#125;</code><span>{gettext("agrupamento")}</span>
+        <code>direction horizontal</code><span>{gettext("arquitetura da esquerda para a direita")}</span>
         <code>note over a, b :</code><span>{gettext("nota")}</span>
         <code>payload: {"{…}"}</code><span>{gettext("o que a mensagem carrega (logo abaixo dela)")}</span>
         <code>payload \"""</code><span>{gettext("payload em várias linhas, até outro \"\"\"")}</span>
@@ -978,12 +999,30 @@ defmodule BrainagramWeb.EditorLive do
           type="button"
           class="ba-btn ba-btn--sm"
           id="untangle-layout"
-          phx-click="canvas_op"
-          phx-value-op="untangle"
-          data-busy="spin"
+          phx-click={JS.push("canvas_op", value: %{op: "untangle"}, loading: "#canvas-busy")}
           title={gettext("Reorganiza os componentes para as setas não se cruzarem (Ctrl+Z desfaz)")}
         >
           <.icon name="hero-sparkles" />{gettext("Organizar setas")}
+        </button>
+        <button
+          :if={@scene.kind == :architecture}
+          type="button"
+          class="ba-btn ba-btn--sm"
+          id="switch-direction"
+          phx-click={JS.push("canvas_op", value: %{op: "switch_direction"}, loading: "#canvas-busy")}
+          title={
+            if(@scene.direction == :horizontal,
+              do: gettext("Deixa o layout de cima para baixo"),
+              else: gettext("Deixa o layout da esquerda para a direita")
+            )
+          }
+        >
+          <%!-- o botão mostra a direção para a qual ele leva --%>
+          <%= if @scene.direction == :horizontal do %>
+            <.icon name="hero-arrows-up-down" />{gettext("Vertical")}
+          <% else %>
+            <.icon name="hero-arrows-right-left" />{gettext("Horizontal")}
+          <% end %>
         </button>
         <button
           type="button"
@@ -1067,7 +1106,7 @@ defmodule BrainagramWeb.EditorLive do
         <div class="ba-modal__body">
           <p class="ba-import__hint">
             {gettext(
-              "Cole ou escolha um arquivo: um .brain exportado do Brainagram, um sequenceDiagram do Mermaid, ou um diagrama de sequência ou de componentes do PlantUML (este vira arquitetura). O que não converter vira comentário no topo do código."
+              "Cole ou escolha um arquivo: um .brain exportado do Brainagram, um sequenceDiagram ou flowchart do Mermaid, ou um diagrama de sequência ou de componentes do PlantUML (flowchart e componentes viram arquitetura). O que não converter vira comentário no topo do código."
             )}
           </p>
           <div class="ba-field">
@@ -1123,9 +1162,10 @@ defmodule BrainagramWeb.EditorLive do
           <span class="ba-spacer"></span>
           <.button type="button" phx-click="import:close">{gettext("Cancelar")}</.button>
           <.button type="submit" variant="primary" id="import-submit">
-            <.icon name="hero-arrow-down-tray" />{gettext("Importar")}
+            <.icon name="hero-arrow-down-tray" /><.busy_mark />{gettext("Importar")}
           </.button>
         </div>
+        <.loader class="ba-loader--overlay" label={gettext("Importando o diagrama…")} />
       </.form>
     </div>
     """

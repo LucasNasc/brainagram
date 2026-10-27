@@ -8,6 +8,8 @@ const EXPORT_VARS = [
   "--surface-3",
   "--text",
   "--text-muted",
+  "--edge-label",
+  "--edge-label-bg",
   "--border",
   "--border-strong",
   "--brand",

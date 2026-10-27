@@ -24,6 +24,10 @@ defmodule Brainagram.Domain.Diagramming.Dsl.Parser do
         db at (420, 680)
       }
 
+  Num diagrama de arquitetura, `direction horizontal` (ou `LR`) deita o
+  layout: as camadas correm da esquerda para a direita. `direction vertical`
+  (ou `TB`) é o padrão.
+
   Setas suportadas:
 
     * `->`  chamada síncrona
@@ -40,12 +44,13 @@ defmodule Brainagram.Domain.Diagramming.Dsl.Parser do
   alias Brainagram.Domain.Diagramming.Dsl.Step
   alias Brainagram.Shared.Text
 
-  @node_kinds ~w(actor participant database queue service component external system node boundary)
+  @node_kinds ~w(actor participant database queue service component external system node boundary decision)
 
   @re_diagram ~r/^diagram\s+(?<kind>[a-z]+)(?:\s+"(?<title>[^"]*)")?$/i
   @re_step ~r/^step\s+"(?<label>[^"]*)"\s*\{$/i
   @re_group ~r/^group\s+"(?<label>[^"]*)"\s*\{$/i
   @re_layout ~r/^layout\s*\{$/i
+  @re_direction ~r/^direction\s+(?<value>[A-Za-z\-]+)$/i
   @re_pin ~r/^(?<id>[A-Za-z_][\w\-.]*)\s+at\s*(?<coords>\(\s*(?<x>-?\d+)\s*,\s*(?<y>-?\d+)\s*\))$/
   @re_node ~r/^(?<kind>#{Enum.join(@node_kinds, "|")})\s+(?<id>[A-Za-z_][\w\-.]*)(?:\s+(?:as\s+)?"(?<label>[^"]*)")?(?:\s+kind:\s*(?<kind2>[a-z]+))?$/i
   @re_note ~r/^note\s+(?<placement>over|left of|right of)\s+(?<targets>[A-Za-z_][\w\-.]*(?:\s*,\s*[A-Za-z_][\w\-.]*)*)\s*:\s*(?<text>.*)$/i
@@ -113,6 +118,8 @@ defmodule Brainagram.Domain.Diagramming.Dsl.Parser do
     %{
       kind: :sequence,
       title: nil,
+      direction: :vertical,
+      direction_span: nil,
       header_span: nil,
       header_spans: %{},
       nodes: [],
@@ -189,6 +196,9 @@ defmodule Brainagram.Domain.Diagramming.Dsl.Parser do
 
       m = match(@re_layout, text, at) ->
         open_layout(state, m, at)
+
+      m = match(@re_direction, text, at) ->
+        put_direction(state, m, at)
 
       m = match(@re_node, text, at) ->
         put_node(state, m, at)
@@ -270,6 +280,26 @@ defmodule Brainagram.Domain.Diagramming.Dsl.Parser do
 
       other ->
         error(state, at.line, :unknown_kind, %{kind: other})
+    end
+  end
+
+  @directions %{
+    "horizontal" => :horizontal,
+    "lr" => :horizontal,
+    "rl" => :horizontal,
+    "vertical" => :vertical,
+    "tb" => :vertical,
+    "td" => :vertical,
+    "bt" => :vertical
+  }
+
+  # A última `direction` vence, como redeclarar um nó.
+  defp put_direction(state, m, at) do
+    value = m.caps["value"]
+
+    case Map.fetch(@directions, String.downcase(value)) do
+      {:ok, direction} -> %{state | direction: direction, direction_span: m.span}
+      :error -> error(state, at.line, :unknown_direction, %{direction: value})
     end
   end
 
@@ -578,6 +608,8 @@ defmodule Brainagram.Domain.Diagramming.Dsl.Parser do
     ast = %Ast{
       kind: state.kind,
       title: state.title,
+      direction: state.direction,
+      direction_span: state.direction_span,
       nodes: state.nodes,
       groups: state.groups,
       steps: state.steps,
@@ -648,6 +680,7 @@ defmodule Brainagram.Domain.Diagramming.Dsl.Parser do
     pin_outside_layout: "posição fora de um bloco `layout { }`: %{text}",
     unknown_line: "não entendi esta linha: %{text}",
     unknown_kind: "tipo de diagrama desconhecido: %{kind} (use sequence ou architecture)",
+    unknown_direction: "direção desconhecida: %{direction} (use horizontal ou vertical)",
     invalid_layout_line: "dentro de `layout` só cabem linhas `id at (x, y)`: %{text}",
     nested_block: "blocos aninhados não são suportados (feche o bloco anterior com `}`)",
     duplicate_layout: "só pode haver um bloco `layout` por diagrama",

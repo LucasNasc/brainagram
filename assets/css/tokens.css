@@ -28,6 +28,9 @@
   --edge-async: #0c8577;
   --edge-fail: #cc3a31;
   --edge-pending: #898993;
+  /* legenda das setas: texto e o "chip" atrás dele, que separa o texto das linhas */
+  --edge-label: #4a4a54;
+  --edge-label-bg: #fbfbf9;
   --edge-active: var(--brand);
   --node-stroke: var(--border-strong);
   --node-actor: #0068a3;
@@ -181,6 +184,8 @@
     --edge-async: #3ccbb6;
     --edge-fail: #ff6a5f;
     --edge-pending: #666674;
+    --edge-label: #e4e4ec;
+    --edge-label-bg: #24242b;
     --node-actor: #4fa8e8;
     --node-actor-soft: #152636;
     --node-service: #8ccdf2;
@@ -240,6 +245,8 @@
   --edge-async: #3ccbb6;
   --edge-fail: #ff6a5f;
   --edge-pending: #666674;
+  --edge-label: #e4e4ec;
+  --edge-label-bg: #24242b;
   --node-actor: #4fa8e8;
   --node-actor-soft: #152636;
   --node-service: #8ccdf2;

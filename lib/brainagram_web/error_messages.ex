@@ -108,6 +108,9 @@ defmodule BrainagramWeb.ErrorMessages do
       :unknown_kind ->
         gettext("tipo de diagrama desconhecido: %{kind} (use sequence ou architecture)", b)
 
+      :unknown_direction ->
+        gettext("direção desconhecida: %{direction} (use horizontal ou vertical)", b)
+
       :invalid_layout_line ->
         gettext("dentro de `layout` só cabem linhas `id at (x, y)`: %{text}", b)
 

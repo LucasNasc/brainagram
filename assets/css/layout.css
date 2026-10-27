@@ -20,7 +20,10 @@
 .ba-editor__kind { position: absolute; top: var(--space-3); left: var(--space-3); z-index: var(--z-canvas-ui); }
 .ba-editor__zoom { position: absolute; right: var(--space-3); bottom: var(--space-3); z-index: var(--z-canvas-ui); }
 .ba-editor__steps { width: var(--size-panel-steps); border-left: 1px solid var(--border); }
-.ba-editor__steps .ba-steps { flex: 1; min-height: 0; overflow: auto; }
+/* `position: relative` prende os `.ba-sr` (absolutos) de cada passo dentro da
+   rolagem; sem ele, numa lista longa, eles saíam da tela e a página inteira
+   ganhava uma rolagem vazia embaixo */
+.ba-editor__steps .ba-steps { position: relative; flex: 1; min-height: 0; overflow: auto; }
 .ba-editor__stepnow { font-size: 12px; line-height: 16px; color: var(--text-muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
 .ba-topbar__kind { flex: none; }
@@ -240,6 +243,12 @@ label.ba-choice__opt { position: relative; }
 .ba-cheat summary::-webkit-details-marker { display: none; }
 .ba-cheat[open] summary .ba-ico { transform: rotate(180deg); }
 .ba-cheat .ba-ref { margin-top: var(--space-2); }
+/* aberta, a referência divide o painel com o código e rola por dentro: num
+   código longo ou numa janela baixa ela não pode empurrar a página para baixo */
+.ba-cheat { flex: none; }
+.ba-cheat[open] { max-height: 45%; overflow-y: auto; }
+.ba-cheat[open] summary { position: sticky; top: calc(-1 * var(--space-2)); background: var(--surface); }
+.ba-editor__code { overflow: hidden; }
 
 /* ---------- Aviso em faixa ---------- */
 .ba-banner { display: flex; align-items: center; gap: var(--space-2); padding: var(--space-2) var(--space-3) var(--space-2) var(--space-4); font-size: 12px; line-height: 16px; }

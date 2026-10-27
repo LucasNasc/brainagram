@@ -42,8 +42,14 @@
   stroke-width: 1;
   transition: stroke var(--dur-base) var(--ease-ui), stroke-width var(--dur-base) var(--ease-ui);
 }
-.bg-node.is-actor .bg-node-box,
-.bg-node.is-queue .bg-node-box { rx: 999px; }
+.bg-node.is-actor .bg-node-box { rx: 999px; }
+/* a fila é um cilindro deitado (path): a face da tampa direita segue a caixa */
+.bg-node-cap {
+  fill: none;
+  stroke: var(--node-stroke);
+  stroke-width: 1;
+  transition: stroke var(--dur-base) var(--ease-ui), stroke-width var(--dur-base) var(--ease-ui);
+}
 .bg-node.is-external .bg-node-box { stroke-dasharray: 5 4; }
 .bg-node.is-boundary .bg-node-box { stroke-dasharray: 2 3; fill: var(--group-bg); }
 
@@ -61,7 +67,8 @@
   stroke-linejoin: round;
 }
 
-.bg-node.is-active .bg-node-box { stroke: var(--brand); stroke-width: 2; }
+.bg-node.is-active .bg-node-box,
+.bg-node.is-active .bg-node-cap { stroke: var(--brand); stroke-width: 2; }
 .bg-node.is-hot .bg-node-box { animation: bg-pulse var(--dur-pulse) var(--ease-pulso); }
 
 @keyframes bg-pulse {
@@ -132,14 +139,16 @@
 
 .bg-edge:hover .bg-edge-line { stroke-width: 2.5; }
 
+/* a legenda é lida antes da seta tocar: contraste alto desde o começo, num
+   chip com borda fina que a separa das linhas e do pontilhado do canvas */
 .bg-edge-label {
-  fill: var(--text-muted);
+  fill: var(--edge-label);
   font-size: 12px;
   font-weight: 500;
 }
 .bg-edge.is-done .bg-edge-label { fill: var(--text); }
 .bg-edge.is-active .bg-edge-label { fill: var(--brand-text); font-weight: 600; }
-.bg-edge-label-bg { fill: var(--bg-canvas); }
+.bg-edge-label-bg { fill: var(--edge-label-bg); stroke: var(--border); stroke-width: 1; }
 .bg-edge.is-active .bg-edge-label-bg { fill: var(--brand-soft); }
 
 /* ── payload ─────────────────────────────────────────────────────────────
@@ -261,7 +270,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   .bg-node.is-hot .bg-node-box { animation: none; }
-  .bg-edge, .bg-node, .bg-note, .bg-band-strip, .bg-node-box, .bg-payload-full, .bg-payload-chevron { transition: none; }
+  .bg-edge, .bg-node, .bg-note, .bg-band-strip, .bg-node-box, .bg-node-cap, .bg-payload-full, .bg-payload-chevron { transition: none; }
 }
 
 /* ── modo de edição (spec 001) ──────────────────────────────────────────── */
@@ -272,10 +281,13 @@
 .bg-canvas.is-connecting,
 .bg-canvas.is-connecting .bg-node { cursor: crosshair; }
 .bg-node.is-dragging { cursor: grabbing; opacity: .92; }
-.bg-node.is-dragging .bg-node-box { stroke: var(--brand); stroke-width: 2; }
+.bg-node.is-dragging .bg-node-box,
+.bg-node.is-dragging .bg-node-cap { stroke: var(--brand); stroke-width: 2; }
 
-.bg-node.is-selected .bg-node-box { stroke: var(--focus-ring); stroke-width: 2.5; }
+.bg-node.is-selected .bg-node-box,
+.bg-node.is-selected .bg-node-cap { stroke: var(--focus-ring); stroke-width: 2.5; }
 .bg-node.is-target .bg-node-box { stroke: var(--brand); stroke-width: 2; stroke-dasharray: 4 3; }
+.bg-node.is-target .bg-node-cap { stroke: var(--brand); stroke-width: 2; }
 .bg-edge.is-selected .bg-edge-line { stroke: var(--brand); stroke-width: 2.5; stroke-opacity: 1; opacity: 1; }
 .bg-edge.is-selected .bg-edge-track { stroke: var(--brand); }
 .bg-group.is-drop-target .bg-group-box { stroke: var(--brand); stroke-dasharray: none; fill: var(--brand-soft); }

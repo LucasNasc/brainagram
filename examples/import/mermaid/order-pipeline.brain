@@ -1,0 +1,30 @@
+diagram architecture "Order pipeline"
+direction horizontal
+
+external Shop "Web shop"
+external PSP  "Payment provider"
+
+group "Order platform" {
+  service API      "orders-api · HTTP :8080"
+  service Worker   "fulfilment-worker"
+  service Notifier "notifier"
+}
+
+queue    Orders "order events"
+queue    Failed "failed payments"
+database DB     "orders DB"
+database Blob   "invoices · object storage"
+external Mail   "Email service"
+
+Shop -> API : POST /orders
+API -> DB : insert order
+API -> PSP : charge card
+PSP ->> API : webhook: paid
+API -> Orders : publish order.paid
+Orders -> Worker : consume
+Worker -> Blob : store invoice PDF
+Worker -> DB : mark as shipped
+PSP -x Failed : card declined
+Failed -> Notifier : consume
+Worker ->> Notifier : order shipped
+Notifier -> Mail : send email

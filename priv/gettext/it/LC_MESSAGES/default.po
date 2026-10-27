@@ -1253,8 +1253,8 @@ msgstr "Brainagram (.brain)"
 
 #: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
-msgid "Cole ou escolha um arquivo: um .brain exportado do Brainagram, um sequenceDiagram do Mermaid, ou um diagrama de sequência ou de componentes do PlantUML (este vira arquitetura). O que não converter vira comentário no topo do código."
-msgstr "Incolla o scegli un file: un .brain esportato da Brainagram, un sequenceDiagram di Mermaid, o un diagramma di sequenza o di componenti di PlantUML (quest'ultimo diventa architettura). Ciò che non si converte diventa un commento in cima al codice."
+msgid "Cole ou escolha um arquivo: um .brain exportado do Brainagram, um sequenceDiagram ou flowchart do Mermaid, ou um diagrama de sequência ou de componentes do PlantUML (flowchart e componentes viram arquitetura). O que não converter vira comentário no topo do código."
+msgstr "Incolla o scegli un file: un .brain esportato da Brainagram, un sequenceDiagram o flowchart di Mermaid, o un diagramma di sequenza o di componenti di PlantUML (flowchart e componenti diventano architettura). Ciò che non si converte diventa un commento in cima al codice."
 
 #: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
@@ -1452,3 +1452,55 @@ msgstr "I diagrammi restano solo in una cache temporanea, visibili ad altri visi
 #, elixir-autogen, elixir-format
 msgid "Playground de demonstração."
 msgstr "Playground dimostrativo."
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Direção trocada. As posições fixadas foram soltas — Ctrl+Z desfaz."
+msgstr "Direzione cambiata. Le posizioni fissate sono state liberate — Ctrl+Z annulla."
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Horizontal"
+msgstr "Orizzontale"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "arquitetura da esquerda para a direita"
+msgstr "architettura da sinistra a destra"
+
+#: lib/brainagram_web/error_messages.ex
+#, elixir-autogen, elixir-format
+msgid "direção desconhecida: %{direction} (use horizontal ou vertical)"
+msgstr "direzione sconosciuta: %{direction} (usa horizontal o vertical)"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Deixa o layout da esquerda para a direita"
+msgstr "Dispone il diagramma da sinistra a destra"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Deixa o layout de cima para baixo"
+msgstr "Dispone il diagramma dall'alto in basso"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Vertical"
+msgstr "Verticale"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "losango com a pergunta; rotule as saídas: sim / não"
+msgstr "rombo con la domanda; etichetta le uscite: sì / no"
+
+#: lib/brainagram_web/live/editor_live.ex
+msgid "Importando o diagrama…"
+msgstr "Importazione del diagramma…"
+
+#: lib/brainagram_web/live/dashboard_live.ex
+msgid "Importando os diagramas…"
+msgstr "Importazione dei diagrammi…"
+
+#: lib/brainagram_web/live/editor_live.ex
+msgid "Reorganizando o diagrama…"
+msgstr "Riorganizzazione del diagramma…"

@@ -15,7 +15,8 @@ defmodule Brainagram.Domain.Diagramming.Import.PlantUmlComponent do
     * setas `->`, `-->`, `..>` (pontilhada = assíncrona), `-x`, invertidas
       (`<--`), com cor ou estilo (`-[#blue]->`, `-[dashed]->`), com direção
       (`-down->`, `-r->`) e com rótulo depois de `:`;
-    * `title`; `\\n` nos nomes vira espaço.
+    * `title`; `\\n` nos nomes vira espaço;
+    * `left to right direction` deita o diagrama (`direction horizontal`).
 
   O tipo do nó vem da palavra-chave; para os genéricos (`[X]`, `component`,
   `rectangle`, `node`), o nome ajuda: "Redis", "Postgres", "Cache" viram
@@ -24,7 +25,7 @@ defmodule Brainagram.Domain.Diagramming.Import.PlantUmlComponent do
   Ficam de fora, com aviso no topo do arquivo: notas (a arquitetura não
   desenha notas — o texto delas vai no aviso, nada se perde), setas para um
   grupo inteiro e linhas não reconhecidas. Aparência (`skinparam`, `!theme`,
-  `hide`, `left to right direction`…) é ignorada sem aviso.
+  `hide`…) é ignorada sem aviso.
   """
 
   alias Brainagram.Domain.Diagramming.Import.Builder
@@ -86,15 +87,6 @@ defmodule Brainagram.Domain.Diagramming.Import.PlantUmlComponent do
 
   @silent ~r/^(skinparam|!|hide|show|scale|header|footer|legend|endlegend|left to right|top to bottom|allowmixing|caption|newpage|\}\s*$)/i
 
-  @label_kinds [
-    {~r/\b(redis|cache|memcache|postgres|postgresql|mysql|mariadb|mongo|mongodb|dynamo|dynamodb|sqlite|oracle|database|banco|db|s3|bucket|elastic|elasticsearch|opensearch)\b/i,
-     :database},
-    {~r/\b(queue|fila|kafka|rabbit|rabbitmq|sqs|sns|pubsub|pub\/sub|nats|broker|topic|t[óo]pico)\b/i,
-     :queue},
-    {~r/\b(client|clients|cliente|clientes|user|users|usu[áa]rio|usu[áa]rios|consumer|consumers|consumidor|consumidores|browser|navegador)\b/i,
-     :actor}
-  ]
-
   @doc """
   É um diagrama de componentes? Colchetes (`[API]`), contêiner com `{` ou
   palavra-chave que só existe fora da sequência — e nenhuma que só existe nela.
@@ -152,6 +144,9 @@ defmodule Brainagram.Domain.Diagramming.Import.PlantUmlComponent do
 
       text =~ ~r/^\}\s*$/ ->
         close(st)
+
+      String.downcase(text) == "left to right direction" ->
+        %{st | b: Builder.direction(b, :horizontal)}
 
       caps = Regex.named_captures(@re_note_inline, text) ->
         %{st | b: note_warning(b, n, caps["target"], [caps["text"]])}
@@ -252,9 +247,7 @@ defmodule Brainagram.Domain.Diagramming.Import.PlantUmlComponent do
 
   defp display(label), do: key(label)
 
-  defp refine(kind, label) when kind in @generic do
-    Enum.find_value(@label_kinds, kind, fn {re, k} -> if label =~ re, do: k end)
-  end
+  defp refine(kind, label) when kind in @generic, do: Builder.guess_kind(label, kind)
 
   defp refine(kind, _label), do: kind
 

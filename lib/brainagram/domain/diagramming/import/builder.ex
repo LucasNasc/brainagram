@@ -25,6 +25,7 @@ defmodule Brainagram.Domain.Diagramming.Import.Builder do
 
   defstruct kind: :sequence,
             title: nil,
+            direction: :vertical,
             order: [],
             names: %{},
             nodes: %{},
@@ -40,12 +41,36 @@ defmodule Brainagram.Domain.Diagramming.Import.Builder do
 
   @type t :: %__MODULE__{}
 
+  @label_kinds [
+    {~r/\b(redis|cache|memcache|postgres|postgresql|mysql|mariadb|mongo|mongodb|dynamo|dynamodb|sqlite|oracle|database|banco|db|s3|bucket|elastic|elasticsearch|opensearch)\b/i,
+     :database},
+    {~r/\b(queue|fila|kafka|rabbit|rabbitmq|sqs|sns|pubsub|pub\/sub|nats|broker|topic|t[óo]pico)\b/i,
+     :queue},
+    {~r/\b(client|clients|cliente|clientes|user|users|usu[áa]rio|usu[áa]rios|consumer|consumers|consumidor|consumidores|browser|navegador)\b/i,
+     :actor}
+  ]
+
+  @doc """
+  O tipo que o nome sugere, para nós genéricos: "Redis", "Postgres", "S3"
+  viram `database`; "Fila", "Kafka", "SQS" viram `queue`; "Clientes" vira
+  `actor`. Sem pista, `default`.
+  """
+  @spec guess_kind(String.t(), atom()) :: atom()
+  def guess_kind(label, default) do
+    Enum.find_value(@label_kinds, default, fn {re, k} -> if label =~ re, do: k end)
+  end
+
   @spec new() :: t()
   def new, do: %__MODULE__{}
 
   @doc "Tipo do diagrama gerado: `:sequence` (padrão) ou `:architecture`."
   @spec kind(t(), :sequence | :architecture) :: t()
   def kind(b, kind) when kind in [:sequence, :architecture], do: %{b | kind: kind}
+
+  @doc "Sentido do layout de arquitetura: `:vertical` (padrão) ou `:horizontal`."
+  @spec direction(t(), :vertical | :horizontal) :: t()
+  def direction(b, direction) when direction in [:vertical, :horizontal],
+    do: %{b | direction: direction}
 
   @spec title(t(), String.t()) :: t()
   def title(b, text), do: %{b | title: clean(text)}
@@ -204,7 +229,14 @@ defmodule Brainagram.Domain.Diagramming.Import.Builder do
         end)
       end
 
-    %Ast{kind: b.kind, title: b.title, nodes: nodes, groups: groups, steps: steps}
+    %Ast{
+      kind: b.kind,
+      title: b.title,
+      direction: b.direction,
+      nodes: nodes,
+      groups: groups,
+      steps: steps
+    }
   end
 
   defp run_label([%Edge{label: label} | _]) when is_binary(label), do: label

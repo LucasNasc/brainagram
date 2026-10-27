@@ -11,6 +11,7 @@ defmodule Brainagram.Domain.Diagramming.Dsl.Printer do
   A forma canônica:
 
       diagram architecture "Plataforma"
+      direction horizontal
 
       service  api "API"
       database pg  "PostgreSQL"
@@ -45,8 +46,14 @@ defmodule Brainagram.Domain.Diagramming.Dsl.Printer do
 
   # ── cabeçalho ─────────────────────────────────────────────────────────────
 
-  defp header(%Ast{kind: kind, title: nil}), do: ["diagram #{kind}"]
-  defp header(%Ast{kind: kind, title: title}), do: ["diagram #{kind} #{quote_text(title)}"]
+  # `direction vertical` é o padrão e não é impresso.
+  defp header(%Ast{} = ast), do: [diagram_line(ast) | direction_line(ast)]
+
+  defp diagram_line(%Ast{kind: kind, title: nil}), do: "diagram #{kind}"
+  defp diagram_line(%Ast{kind: kind, title: title}), do: "diagram #{kind} #{quote_text(title)}"
+
+  defp direction_line(%Ast{direction: :horizontal}), do: ["direction horizontal"]
+  defp direction_line(_ast), do: []
 
   # ── nós e grupos ──────────────────────────────────────────────────────────
 

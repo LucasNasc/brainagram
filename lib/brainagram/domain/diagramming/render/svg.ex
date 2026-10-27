@@ -17,6 +17,7 @@ defmodule Brainagram.Domain.Diagramming.Render.Svg do
     canvas: "#fbfbf9",
     surface: "#ffffff",
     surface3: "#e7e7e1",
+    border: "#e3e3de",
     text: "#16161b",
     muted: "#5f5f69",
     stroke: "#84848e",
@@ -79,6 +80,7 @@ defmodule Brainagram.Domain.Diagramming.Render.Svg do
     .bg-lifeline{stroke:#{c.pending};stroke-width:1;stroke-dasharray:2 4;stroke-linecap:round}
     .bg-activation{fill:#{c.surface3};stroke:#{c.stroke};stroke-width:1}
     .bg-node-box{fill:#{c.surface};stroke:#{c.stroke};stroke-width:1}
+    .bg-node-cap{fill:none;stroke:#{c.stroke};stroke-width:1}
     .is-external .bg-node-box{stroke-dasharray:5 4}
     .is-boundary .bg-node-box{stroke-dasharray:2 3;fill:#{c.group_bg}}
     .bg-node-label{fill:#{c.text};font-size:14px;font-weight:600;letter-spacing:-.01em}
@@ -89,7 +91,7 @@ defmodule Brainagram.Domain.Diagramming.Render.Svg do
     .is-async .bg-edge-track{stroke-dasharray:.01 4.5;stroke-linecap:round;stroke-width:2}
     .is-return .bg-edge-line,.is-async .bg-edge-line,.is-fail .bg-edge-line{stroke-opacity:0}
     .bg-edge-label{fill:#{c.text};font-size:12px;font-weight:500}
-    .bg-edge-label-bg{fill:#{c.canvas}}
+    .bg-edge-label-bg{fill:#{c.canvas};stroke:#{c.border};stroke-width:1}
     .bg-note-box{fill:#{c.note_bg};stroke:#{c.note_border};stroke-width:1}
     .bg-payload-chip-box{fill:#{c.surface};stroke-opacity:.55;stroke-width:1;stroke-linejoin:round}
     .bg-payload-chip-text{fill:#{c.muted};font-family:ui-monospace,"JetBrains Mono",SFMono-Regular,Menlo,Consolas,monospace;font-size:11px;white-space:pre}
@@ -155,12 +157,40 @@ defmodule Brainagram.Domain.Diagramming.Render.Svg do
   defp nodes(scene) do
     for n <- scene.nodes do
       kind = n.kind
-      rx = if kind in [:actor, :queue], do: div(n.h, 2), else: 12
 
-      ~s[<g class="bg-node is-#{kind}"><rect class="bg-node-box" x="#{n.x}" y="#{n.y}" width="#{n.w}" height="#{n.h}" rx="#{rx}"/>] <>
-        glyph(kind, n.x + 20, n.y + n.h / 2) <>
-        ~s[<text class="bg-node-label" x="#{n.x + 36}" y="#{n.y + n.h / 2 + 5}">#{esc(n.label)}</text></g>]
+      # o losango leva a pergunta centralizada, sem glifo (renderer.js)
+      if kind == :decision do
+        ~s[<g class="bg-node is-decision">#{box(n)}] <>
+          ~s[<text class="bg-node-label" x="#{n.x + n.w / 2}" y="#{n.y + n.h / 2 + 5}" text-anchor="middle">#{esc(n.label)}</text></g>]
+      else
+        ~s[<g class="bg-node is-#{kind}">#{box(n)}] <>
+          glyph(kind, n.x + 20, n.y + n.h / 2) <>
+          ~s[<text class="bg-node-label" x="#{n.x + 36}" y="#{n.y + n.h / 2 + 5}">#{esc(n.label)}</text></g>]
+      end
     end
+  end
+
+  # A fila é um cilindro deitado, como `queueShape` no renderer.js.
+  defp box(%{kind: :queue, x: x, y: y, w: w, h: h}) do
+    r = Scene.queue_cap()
+    ry = h / 2
+
+    ~s[<path class="bg-node-box" d="M #{x + r} #{y} L #{x + w - r} #{y} A #{r} #{ry} 0 0 1 #{x + w - r} #{y + h} ] <>
+      ~s[L #{x + r} #{y + h} A #{r} #{ry} 0 0 1 #{x + r} #{y} Z"/>] <>
+      ~s[<path class="bg-node-cap" d="M #{x + w - r} #{y} A #{r} #{ry} 0 0 0 #{x + w - r} #{y + h}"/>]
+  end
+
+  defp box(%{kind: :decision, x: x, y: y, w: w, h: h}) do
+    cx = x + w / 2
+    cy = y + h / 2
+
+    ~s[<path class="bg-node-box" d="M #{cx} #{y} L #{x + w} #{cy} L #{cx} #{y + h} L #{x} #{cy} Z"/>]
+  end
+
+  defp box(n) do
+    rx = if n.kind == :actor, do: div(n.h, 2), else: 12
+
+    ~s[<rect class="bg-node-box" x="#{n.x}" y="#{n.y}" width="#{n.w}" height="#{n.h}" rx="#{rx}"/>]
   end
 
   # Os mesmos glifos de renderer.js, na cor do tipo.

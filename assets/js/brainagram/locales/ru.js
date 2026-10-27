@@ -14,6 +14,7 @@ export default {
   "Alternar entre editar e mover a tela": "Переключить редактирование и перемещение холста",
   "Formatar código": "Форматировать код",
   "Ir para o próximo erro": "Перейти к следующей ошибке",
+  "Alternar direção da arquitetura (vertical ↔ horizontal)": "Сменить направление архитектуры (вертикально ↔ горизонтально)",
   "Alternar tipo do diagrama (sequência ↔ arquitetura)": "Сменить тип диаграммы (последовательность ↔ архитектура)",
   "Desfazer": "Отменить",
   "Refazer": "Повторить",

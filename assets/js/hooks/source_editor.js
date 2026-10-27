@@ -14,7 +14,7 @@ const LIMIT = 100;
 const TYPING_PAUSE = 450;
 const LINE_H = 20;
 
-const KINDS = ["actor", "participant", "service", "component", "database", "queue", "external", "system", "node", "boundary"];
+const KINDS = ["actor", "participant", "service", "component", "database", "queue", "external", "system", "node", "boundary", "decision"];
 const KIND_HINT = {
   actor: "quem inicia",
   participant: "participante genérico",
@@ -26,6 +26,7 @@ const KIND_HINT = {
   system: "sistema",
   node: "nó de implantação",
   boundary: "fronteira",
+  decision: "decisão (losango com a pergunta)",
 };
 const KEYWORDS = [
   ["step", 'step "…" {', "um passo da animação"],

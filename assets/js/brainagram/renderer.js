@@ -211,6 +211,29 @@ function drawActivations(layer, scene) {
   }
 }
 
+// A fila é um cilindro deitado: tampa arredondada nas duas pontas e, na da
+// direita, a face de frente (`cap`). Mesmo raio de `Scene.queue_cap/0`.
+const QUEUE_CAP = 12;
+
+export function queueShape({ x, y, w, h }) {
+  const r = QUEUE_CAP;
+  const ry = h / 2;
+  return {
+    body:
+      `M ${x + r} ${y} L ${x + w - r} ${y} A ${r} ${ry} 0 0 1 ${x + w - r} ${y + h} ` +
+      `L ${x + r} ${y + h} A ${r} ${ry} 0 0 1 ${x + r} ${y} Z`,
+    cap: `M ${x + w - r} ${y} A ${r} ${ry} 0 0 0 ${x + w - r} ${y + h}`,
+  };
+}
+
+// Losango inscrito na caixa: as pontas tocam o meio de cada lado, que é onde
+// as setas chegam (o servidor prende as portas ali).
+export function decisionShape({ x, y, w, h }) {
+  const cx = x + w / 2;
+  const cy = y + h / 2;
+  return `M ${cx} ${y} L ${x + w} ${cy} L ${cx} ${y + h} L ${x} ${cy} Z`;
+}
+
 function drawNodes(layer, scene, index) {
   // Sequência: fundo e filete dos cabeçalhos, visíveis só quando eles ficam
   // fixos no topo ao rolar (`.is-stuck`) — as linhas não passam por baixo.
@@ -224,7 +247,21 @@ function drawNodes(layer, scene, index) {
   for (const node of scene.nodes) {
     const g = el("g", { class: `bg-node is-${node.kind}${node.pinned ? " is-pinned" : ""}`, "data-node": node.id }, layer);
 
-    el("rect", { x: node.x, y: node.y, width: node.w, height: node.h, rx: 12, class: "bg-node-box" }, g);
+    if (node.kind === "decision") {
+      // losango com a pergunta no meio, sem glifo: a forma já diz o que é
+      el("path", { d: decisionShape(node), class: "bg-node-box" }, g);
+      text(node.label, { x: node.x + node.w / 2, y: node.y + node.h / 2 + 5, class: "bg-node-label", "text-anchor": "middle" }, g);
+      index.nodes.set(node.id, g);
+      continue;
+    }
+
+    if (node.kind === "queue") {
+      const shape = queueShape(node);
+      el("path", { d: shape.body, class: "bg-node-box" }, g);
+      el("path", { d: shape.cap, class: "bg-node-cap" }, g);
+    } else {
+      el("rect", { x: node.x, y: node.y, width: node.w, height: node.h, rx: 12, class: "bg-node-box" }, g);
+    }
     glyph(node.kind, node.x + 20, node.y + node.h / 2, g);
     text(node.label, { x: node.x + 36, y: node.y + node.h / 2 + 5, class: "bg-node-label" }, g);
 

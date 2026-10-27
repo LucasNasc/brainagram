@@ -396,6 +396,39 @@ defmodule Brainagram.Domain.Diagramming.Authoring do
   end
 
   @doc """
+  Deita ou levanta um diagrama de arquitetura. Para deitar, a linha
+  `direction horizontal` entra logo abaixo do cabeçalho; para levantar, ela sai
+  (vertical é o padrão). As posições fixadas valiam para a outra orientação,
+  então o bloco `layout` sai junto — `meta.unpinned` diz se havia um.
+  """
+  @spec switch_direction(String.t()) :: result()
+  def switch_direction(source) do
+    edit(source, fn
+      %Ast{kind: :architecture} = ast ->
+        unpinned = not is_nil(ast.layout_span)
+        cleared = if unpinned, do: Hints.clear(source), else: source
+        {:ok, cleared_ast} = Parser.parse(cleared)
+
+        {:ok, set_direction(cleared, cleared_ast), %{unpinned: unpinned}}
+
+      _ast ->
+        {:error, :not_architecture}
+    end)
+  end
+
+  defp set_direction(source, %Ast{direction: :horizontal, direction_span: %Span{} = span}),
+    do: Editor.remove_line(source, span)
+
+  defp set_direction(source, %Ast{direction: :vertical, direction_span: %Span{} = span}),
+    do: Editor.replace(source, span, "direction horizontal")
+
+  defp set_direction(source, %Ast{span: %Span{} = header}),
+    do: Editor.insert_line(source, header, "direction horizontal")
+
+  defp set_direction(source, _ast),
+    do: "direction horizontal" <> Editor.newline(source) <> source
+
+  @doc """
   Reorganiza os componentes de um diagrama de arquitetura para desembaraçar
   as setas (`Layout.Untangle`) e grava a arrumação no bloco `layout`.
   `meta` traz as métricas de antes e depois e `improved`: sem melhora
@@ -415,7 +448,7 @@ defmodule Brainagram.Domain.Diagramming.Authoring do
 
   @operations ~w(rename_node relabel_edge change_arrow remove_node remove_edge add_node connect
                  pin unpin clear_layout untangle move_to_group drop move_step format switch_kind
-                 rename_title set_payload)
+                 switch_direction rename_title set_payload)
 
   @doc "Nomes aceitos por `run/3` — o vocabulário que o canvas e a paleta usam."
   @spec operations() :: [String.t()]
@@ -489,6 +522,9 @@ defmodule Brainagram.Domain.Diagramming.Authoring do
 
       "switch_kind" ->
         switch_kind(source)
+
+      "switch_direction" ->
+        switch_direction(source)
 
       "rename_title" ->
         rename_title(source, p.("title") || "")

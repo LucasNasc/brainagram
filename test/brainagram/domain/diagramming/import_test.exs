@@ -235,8 +235,8 @@ defmodule Brainagram.Domain.Diagramming.ImportTest do
       assert source =~ "Loja -> SMS : envia"
     end
 
-    test "o que não é diagrama de sequência não importa" do
-      assert {:error, :nothing_to_import} = Import.convert("flowchart LR\n A --> B", :mermaid)
+    test "tipos de diagrama sem conversão não importam" do
+      assert {:error, :nothing_to_import} = Import.convert("classDiagram\n A <|-- B", :mermaid)
     end
   end
 

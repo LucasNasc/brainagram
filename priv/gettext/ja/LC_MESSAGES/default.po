@@ -1241,8 +1241,8 @@ msgstr "Brainagram (.brain)"
 
 #: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
-msgid "Cole ou escolha um arquivo: um .brain exportado do Brainagram, um sequenceDiagram do Mermaid, ou um diagrama de sequência ou de componentes do PlantUML (este vira arquitetura). O que não converter vira comentário no topo do código."
-msgstr "テキストを貼り付けるか、ファイルを選択してください: Brainagram からエクスポートした .brain、Mermaid の sequenceDiagram、または PlantUML のシーケンス図かコンポーネント図（後者はアーキテクチャ図になります）。変換できない部分はコード先頭のコメントになります。"
+msgid "Cole ou escolha um arquivo: um .brain exportado do Brainagram, um sequenceDiagram ou flowchart do Mermaid, ou um diagrama de sequência ou de componentes do PlantUML (flowchart e componentes viram arquitetura). O que não converter vira comentário no topo do código."
+msgstr "テキストを貼り付けるか、ファイルを選択してください: Brainagram からエクスポートした .brain、Mermaid の sequenceDiagram または flowchart、または PlantUML のシーケンス図かコンポーネント図（flowchart とコンポーネント図はアーキテクチャ図になります）。変換できない部分はコード先頭のコメントになります。"
 
 #: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
@@ -1439,3 +1439,55 @@ msgstr "図は一時的なキャッシュにのみ保存され、他の訪問者
 #, elixir-autogen, elixir-format
 msgid "Playground de demonstração."
 msgstr "デモ用のお試し環境です。"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Direção trocada. As posições fixadas foram soltas — Ctrl+Z desfaz."
+msgstr "向きを切り替えました。固定した位置は解除されました — Ctrl+Z で元に戻せます。"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Horizontal"
+msgstr "横向き"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "arquitetura da esquerda para a direita"
+msgstr "アーキテクチャを左から右へ"
+
+#: lib/brainagram_web/error_messages.ex
+#, elixir-autogen, elixir-format
+msgid "direção desconhecida: %{direction} (use horizontal ou vertical)"
+msgstr "不明な向き: %{direction}（horizontal または vertical を使ってください）"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Deixa o layout da esquerda para a direita"
+msgstr "レイアウトを左から右にします"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Deixa o layout de cima para baixo"
+msgstr "レイアウトを上から下にします"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Vertical"
+msgstr "縦向き"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "losango com a pergunta; rotule as saídas: sim / não"
+msgstr "質問を入れたひし形。出口にラベルを付けます：はい / いいえ"
+
+#: lib/brainagram_web/live/editor_live.ex
+msgid "Importando o diagrama…"
+msgstr "図をインポートしています…"
+
+#: lib/brainagram_web/live/dashboard_live.ex
+msgid "Importando os diagramas…"
+msgstr "図をインポートしています…"
+
+#: lib/brainagram_web/live/editor_live.ex
+msgid "Reorganizando o diagrama…"
+msgstr "図を並べ替えています…"

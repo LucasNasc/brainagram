@@ -14,6 +14,7 @@ export default {
   "Alternar entre editar e mover a tela": "編集と画面移動を切り替え",
   "Formatar código": "コードを整形",
   "Ir para o próximo erro": "次のエラーへ移動",
+  "Alternar direção da arquitetura (vertical ↔ horizontal)": "アーキテクチャの向きを切り替え（縦 ↔ 横）",
   "Alternar tipo do diagrama (sequência ↔ arquitetura)": "図の種類を切り替え（シーケンス ↔ アーキテクチャ）",
   "Desfazer": "元に戻す",
   "Refazer": "やり直す",

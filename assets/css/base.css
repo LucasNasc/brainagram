@@ -63,8 +63,6 @@ code, kbd, pre { font-family: var(--font-mono); }
 
 /* Estado de carregamento do LiveView em botões. */
 .phx-click-loading.ba-btn, .phx-submit-loading .ba-btn[type="submit"] { opacity: .7; cursor: progress; }
-/* botão cuja ação demora um pouco (ex.: Organizar setas): o ícone gira enquanto espera */
-.phx-click-loading.ba-btn[data-busy="spin"] > svg:first-of-type { animation: ba-spin 900ms linear infinite; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

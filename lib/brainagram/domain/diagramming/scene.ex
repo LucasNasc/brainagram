@@ -10,11 +10,15 @@ defmodule Brainagram.Domain.Diagramming.Scene do
   Para o modo de edição, cada nó leva também `group` (rótulo do grupo, ou
   `nil`) e `pinned` (se está no bloco `layout`), e a cena diz se o bloco
   existe (`has_layout`) — o que habilita o botão "Reorganizar".
+
+  `direction` é o sentido do layout de arquitetura (`:vertical` ou
+  `:horizontal`); a sequência é sempre `:vertical`.
   """
 
   @derive Jason.Encoder
   defstruct kind: :sequence,
             title: nil,
+            direction: :vertical,
             width: 0,
             height: 0,
             nodes: [],
@@ -26,6 +30,32 @@ defmodule Brainagram.Domain.Diagramming.Scene do
             has_layout: false
 
   @type t :: %__MODULE__{}
+
+  @doc """
+  Raio horizontal das tampas do cilindro deitado que desenha uma fila. A caixa
+  da fila é `2 * queue_cap()` mais larga para o rótulo não encostar na tampa;
+  `renderer.js` usa o mesmo valor.
+  """
+  @spec queue_cap() :: pos_integer()
+  def queue_cap, do: 12
+
+  @doc """
+  Altura do losango de um nó `decision` (as caixas têm 68): o texto fica na
+  faixa do meio, e um losango achatado demais não parece pergunta.
+  """
+  @spec decision_h() :: pos_integer()
+  def decision_h, do: 88
+
+  @doc """
+  Largura do losango para o rótulo caber dentro dele. Uma linha de texto de
+  altura ~20 no meio de um losango de altura `h` cabe se
+  `texto / largura + 20 / h <= 1`; a folga extra afasta o texto das pontas.
+  """
+  @spec decision_width(String.t(), number(), number()) :: pos_integer()
+  def decision_width(label, size, min) do
+    text = text_width(label, size)
+    round(max(min, text / (1 - 20 / decision_h()) + 36))
+  end
 
   @doc "Estimativa de largura de texto (evita medir no DOM para manter o layout puro)."
   @spec text_width(String.t() | nil, number()) :: float()

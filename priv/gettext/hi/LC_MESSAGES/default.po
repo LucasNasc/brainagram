@@ -1253,8 +1253,8 @@ msgstr "Brainagram (.brain)"
 
 #: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
-msgid "Cole ou escolha um arquivo: um .brain exportado do Brainagram, um sequenceDiagram do Mermaid, ou um diagrama de sequência ou de componentes do PlantUML (este vira arquitetura). O que não converter vira comentário no topo do código."
-msgstr "टेक्स्ट पेस्ट करें या फ़ाइल चुनें: Brainagram से एक्सपोर्ट की गई .brain फ़ाइल, Mermaid का sequenceDiagram, या PlantUML का सीक्वेंस या कंपोनेंट डायग्राम (कंपोनेंट डायग्राम आर्किटेक्चर बन जाता है)। जो कन्वर्ट नहीं होता, वह कोड के शीर्ष पर टिप्पणी बन जाता है।"
+msgid "Cole ou escolha um arquivo: um .brain exportado do Brainagram, um sequenceDiagram ou flowchart do Mermaid, ou um diagrama de sequência ou de componentes do PlantUML (flowchart e componentes viram arquitetura). O que não converter vira comentário no topo do código."
+msgstr "टेक्स्ट पेस्ट करें या फ़ाइल चुनें: Brainagram से एक्सपोर्ट की गई .brain फ़ाइल, Mermaid का sequenceDiagram या flowchart, या PlantUML का सीक्वेंस या कंपोनेंट डायग्राम (flowchart और कंपोनेंट डायग्राम आर्किटेक्चर बन जाते हैं)। जो कन्वर्ट नहीं होता, वह कोड के शीर्ष पर टिप्पणी बन जाता है।"
 
 #: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
@@ -1452,3 +1452,55 @@ msgstr "डायग्राम केवल अस्थायी कैश �
 #, elixir-autogen, elixir-format
 msgid "Playground de demonstração."
 msgstr "डेमो प्लेग्राउंड।"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Direção trocada. As posições fixadas foram soltas — Ctrl+Z desfaz."
+msgstr "दिशा बदल दी गई। तय की गई स्थितियाँ छोड़ दी गईं — Ctrl+Z पूर्ववत करता है।"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Horizontal"
+msgstr "क्षैतिज"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "arquitetura da esquerda para a direita"
+msgstr "आर्किटेक्चर बाएँ से दाएँ"
+
+#: lib/brainagram_web/error_messages.ex
+#, elixir-autogen, elixir-format
+msgid "direção desconhecida: %{direction} (use horizontal ou vertical)"
+msgstr "अज्ञात दिशा: %{direction} (horizontal या vertical इस्तेमाल करें)"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Deixa o layout da esquerda para a direita"
+msgstr "लेआउट को बाएँ से दाएँ करता है"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Deixa o layout de cima para baixo"
+msgstr "लेआउट को ऊपर से नीचे करता है"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Vertical"
+msgstr "लंबवत"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "losango com a pergunta; rotule as saídas: sim / não"
+msgstr "प्रश्न वाला हीरा आकार; निकास पर लेबल लगाएँ: हाँ / नहीं"
+
+#: lib/brainagram_web/live/editor_live.ex
+msgid "Importando o diagrama…"
+msgstr "डायग्राम इम्पोर्ट हो रहा है…"
+
+#: lib/brainagram_web/live/dashboard_live.ex
+msgid "Importando os diagramas…"
+msgstr "डायग्राम इम्पोर्ट हो रहे हैं…"
+
+#: lib/brainagram_web/live/editor_live.ex
+msgid "Reorganizando o diagrama…"
+msgstr "डायग्राम दोबारा व्यवस्थित हो रहा है…"

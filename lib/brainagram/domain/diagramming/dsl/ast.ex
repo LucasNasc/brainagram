@@ -13,12 +13,17 @@ defmodule Brainagram.Domain.Diagramming.Dsl.Ast do
 
   O bloco `layout { id at (x, y) }` vira `pins`: posições fixadas à mão, que o
   layout automático respeita.
+
+  `direction` é o sentido do layout de arquitetura: `:vertical` (camadas de
+  cima para baixo, o padrão) ou `:horizontal` (da esquerda para a direita),
+  escrito como `direction horizontal`. `direction_span` é a linha inteira.
   """
 
   alias Brainagram.Domain.Diagramming.Dsl.Span
 
   defstruct kind: :sequence,
             title: nil,
+            direction: :vertical,
             nodes: [],
             groups: [],
             steps: [],
@@ -26,11 +31,13 @@ defmodule Brainagram.Domain.Diagramming.Dsl.Ast do
             span: nil,
             spans: %{},
             layout_span: nil,
-            layout_end_span: nil
+            layout_end_span: nil,
+            direction_span: nil
 
   @type t :: %__MODULE__{
           kind: :sequence | :architecture,
           title: String.t() | nil,
+          direction: :vertical | :horizontal,
           nodes: [Brainagram.Domain.Diagramming.Dsl.Node.t()],
           groups: [Brainagram.Domain.Diagramming.Dsl.Group.t()],
           steps: [Brainagram.Domain.Diagramming.Dsl.Step.t()],
@@ -38,7 +45,8 @@ defmodule Brainagram.Domain.Diagramming.Dsl.Ast do
           span: Span.t() | nil,
           spans: %{optional(atom()) => Span.t() | nil},
           layout_span: Span.t() | nil,
-          layout_end_span: Span.t() | nil
+          layout_end_span: Span.t() | nil,
+          direction_span: Span.t() | nil
         }
 end
 

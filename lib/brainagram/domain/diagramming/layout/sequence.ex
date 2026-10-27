@@ -108,7 +108,17 @@ defmodule Brainagram.Domain.Diagramming.Layout.Sequence do
       ast.nodes
       |> Enum.with_index()
       |> Enum.map(fn {node, i} ->
-        w = max(@min_lane_w, Scene.text_width(node.label, @node_label_size) + 44)
+        # a fila é um cilindro deitado: as tampas pedem espaço
+        cap = if node.kind == :queue, do: Scene.queue_cap() * 2, else: 0
+        text = Scene.text_width(node.label, @node_label_size)
+
+        # o losango da decisão é baixo aqui (o cabeçalho): o texto precisa de
+        # mais largura para caber na faixa do meio
+        w =
+          if node.kind == :decision,
+            do: max(@min_lane_w, text / (1 - 20 / @header_h) + 36),
+            else: max(@min_lane_w, text + 44 + cap)
+
         %{index: i, id: node.id, label: node.label, kind: node.kind, group: node.group, w: w}
       end)
 

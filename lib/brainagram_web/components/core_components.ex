@@ -402,6 +402,79 @@ defmodule BrainagramWeb.CoreComponents do
     """
   end
 
+  # O caminho que o impulso percorre no "b": desce a haste e dá a volta na
+  # barriga, como quem escreve a letra.
+  @walk_path "M9 6 V21 A7.5 7.5 0 0 1 24 21 A7.5 7.5 0 0 1 9 21"
+
+  @doc """
+  Espera por uma resposta do servidor: o "b" da marca com o impulso (o
+  círculo da logo) caminhando pela letra, e o que está acontecendo em texto.
+
+  Fica escondido até o elemento em volta entrar em carregamento: dentro de um
+  formulário com `phx-submit-loading`, ou ele mesmo recebendo
+  `phx-click-loading` (`JS.push(…, loading: "#id")`). A classe
+  `ba-loader--overlay` cobre o pai (que precisa de `position: relative`).
+  Com movimento reduzido, o círculo fica parado e só o texto anuncia.
+  """
+  attr :id, :string, default: nil
+  attr :label, :string, required: true
+  attr :size, :integer, default: 40
+  attr :class, :any, default: nil
+
+  def loader(assigns) do
+    assigns = assign(assigns, :walk, @walk_path)
+
+    ~H"""
+    <div id={@id} class={["ba-loader", @class]} role="status">
+      <svg class="ba-loader__mark" width={@size} height={@size} viewBox="0 0 32 32" aria-hidden="true">
+        <circle class="ink" cx="9" cy="6" r="3.5" />
+        <path class="ink-s" d="M9 9.5V21" stroke-width="3" stroke-linecap="round" />
+        <circle class="ink-s" cx="16.5" cy="21" r="7.5" stroke-width="3" />
+        <circle class="imp ba-loader__still" cx="21.8" cy="15.7" r="3.4" />
+        <circle class="imp ba-loader__walker" r="3.4">
+          <animateMotion dur="1.8s" repeatCount="indefinite" path={@walk} />
+          <animate
+            attributeName="opacity"
+            dur="1.8s"
+            repeatCount="indefinite"
+            keyTimes="0;0.08;0.9;1"
+            values="0;1;1;0"
+          />
+        </circle>
+      </svg>
+      <span class="ba-loader__label">{@label}</span>
+    </div>
+    """
+  end
+
+  @doc """
+  A mesma animação em 16 px, para dentro de um botão: aparece no lugar do
+  primeiro ícone enquanto o botão espera (`phx-click-loading`, ou o submit de
+  um formulário com `phx-submit-loading`). O texto do botão continua dizendo
+  o que ele faz; a espera é anunciada pelo `aria-busy` do LiveView.
+  """
+  attr :class, :any, default: nil
+
+  def busy_mark(assigns) do
+    assigns = assign(assigns, :walk, @walk_path)
+
+    ~H"""
+    <svg
+      class={["ba-busy-mark", @class]}
+      width="16"
+      height="16"
+      viewBox="0 0 32 32"
+      aria-hidden="true"
+    >
+      <path class="ink-s" d="M9 6 V21" stroke-width="3" stroke-linecap="round" />
+      <circle class="ink-s" cx="16.5" cy="21" r="7.5" stroke-width="3" />
+      <circle class="imp" r="4">
+        <animateMotion dur="1.4s" repeatCount="indefinite" path={@walk} />
+      </circle>
+    </svg>
+    """
+  end
+
   # Heroicons: lidos de deps/heroicons em tempo de compilação e embutidos como
   # SVG inline. Sufixos: nenhum = outline 24, -solid = solid 24, -mini = solid
   # 20, -micro = solid 16.

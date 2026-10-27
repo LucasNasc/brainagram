@@ -13,7 +13,8 @@ defmodule Brainagram.Domain.Diagramming.Layout do
 
   @doc """
   Compila a AST em cena. As posições fixadas no bloco `layout` entram como
-  `Hints`; sem o bloco, tudo é automático.
+  `Hints`; sem o bloco, tudo é automático. `direction` só vale para
+  arquitetura: o eixo do tempo da sequência é sempre vertical.
   """
   @spec build(Ast.t()) :: Scene.t()
   def build(%Ast{} = ast) do

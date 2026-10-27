@@ -14,6 +14,7 @@ export default {
   "Alternar entre editar e mover a tela": "संपादन और स्क्रीन खिसकाने के बीच बदलें",
   "Formatar código": "कोड फ़ॉर्मैट करें",
   "Ir para o próximo erro": "अगली त्रुटि पर जाएँ",
+  "Alternar direção da arquitetura (vertical ↔ horizontal)": "आर्किटेक्चर की दिशा बदलें (लंबवत ↔ क्षैतिज)",
   "Alternar tipo do diagrama (sequência ↔ arquitetura)": "डायग्राम प्रकार बदलें (सीक्वेंस ↔ आर्किटेक्चर)",
   "Desfazer": "पूर्ववत करें",
   "Refazer": "फिर से करें",

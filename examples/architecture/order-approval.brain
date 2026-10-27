@@ -1,0 +1,22 @@
+diagram architecture "Order approval"
+direction horizontal
+
+# A decision flow: each `decision` is a diamond with the question inside,
+# and its arrows are labelled with the answers.
+
+actor    customer "Customer"
+service  api      "Orders API"
+decision stock    "In stock?"
+decision amount   "Over $1,000?"
+queue    review   "Manual review"
+service  billing  "Billing"
+external email    "Email service"
+
+customer -> api : place order
+api -> stock : check items
+stock -> amount : yes
+stock -x email : no
+amount -> review : yes
+amount -> billing : no
+review ->> billing : approved
+billing ->> email : receipt

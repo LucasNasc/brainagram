@@ -105,6 +105,14 @@ defmodule Brainagram.Domain.Diagramming.Import.PlantUmlComponentTest do
     assert arrows[{"api", "db"}] == :async
   end
 
+  test "left to right direction deita o diagrama" do
+    {ast, source, []} =
+      convert!("@startuml\nleft to right direction\n[API] --> [Banco]\n@enduml")
+
+    assert ast.direction == :horizontal
+    assert source =~ "direction horizontal"
+  end
+
   test "seta para um grupo inteiro vira aviso" do
     {_ast, _source, warnings} =
       convert!("""

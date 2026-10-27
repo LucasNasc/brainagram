@@ -1047,7 +1047,7 @@ defmodule BrainagramWeb.DashboardLive do
           <span class="ba-spacer"></span>
           <.button type="button" phx-click="dialog:close">{gettext("Cancelar")}</.button>
           <.button type="submit" variant="primary" id="new-diagram-submit">
-            <.icon name="hero-arrow-right" />{gettext("Criar e abrir")}
+            <.icon name="hero-arrow-right" /><.busy_mark />{gettext("Criar e abrir")}
           </.button>
         </div>
       </.form>
@@ -1174,7 +1174,7 @@ defmodule BrainagramWeb.DashboardLive do
             id="import-submit"
             disabled={@upload.entries == []}
           >
-            <.icon name="hero-arrow-up-tray" />
+            <.icon name="hero-arrow-up-tray" /><.busy_mark />
             {ngettext(
               "Importar 1 arquivo",
               "Importar %{count} arquivos",
@@ -1182,6 +1182,7 @@ defmodule BrainagramWeb.DashboardLive do
             )}
           </.button>
         </div>
+        <.loader class="ba-loader--overlay" label={gettext("Importando os diagramas…")} />
       </.form>
     </.modal>
     """

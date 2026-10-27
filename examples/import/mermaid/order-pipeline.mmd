@@ -1,0 +1,36 @@
+---
+title: Order pipeline
+---
+flowchart LR
+    Shop["Web shop"]
+    PSP["Payment provider"]
+
+    subgraph core [Order platform]
+        API["orders-api<br/>HTTP :8080"]
+        Worker["fulfilment-worker"]
+        Notifier["notifier"]
+    end
+
+    Orders[["order events"]]
+    Failed[["failed payments"]]
+    DB[("orders DB")]
+    Blob[("invoices<br/>object storage")]
+    Mail["Email service"]
+
+    Shop -->|"POST /orders"| API
+    API -->|"insert order"| DB
+    API -->|"charge card"| PSP
+    PSP -.->|"webhook: paid"| API
+    API -->|"publish order.paid"| Orders
+    Orders -->|"consume"| Worker
+    Worker -->|"store invoice PDF"| Blob
+    Worker -->|"mark as shipped"| DB
+    PSP --x|"card declined"| Failed
+    Failed -->|"consume"| Notifier
+    Worker -.->|"order shipped"| Notifier
+    Notifier -->|"send email"| Mail
+
+    classDef queue fill:#fff4d6,stroke:#c28f00
+    classDef ext fill:#eeeeee,stroke:#777777
+    class Orders,Failed queue
+    class Shop,PSP,Mail ext

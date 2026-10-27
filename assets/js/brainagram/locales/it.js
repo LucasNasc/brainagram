@@ -14,6 +14,7 @@ export default {
   "Alternar entre editar e mover a tela": "Alterna tra modifica e spostamento della vista",
   "Formatar código": "Formatta codice",
   "Ir para o próximo erro": "Vai all'errore successivo",
+  "Alternar direção da arquitetura (vertical ↔ horizontal)": "Cambia direzione dell'architettura (verticale ↔ orizzontale)",
   "Alternar tipo do diagrama (sequência ↔ arquitetura)": "Cambia tipo di diagramma (sequenza ↔ architettura)",
   "Desfazer": "Annulla",
   "Refazer": "Ripeti",

@@ -47,6 +47,15 @@ defmodule Brainagram.Domain.Diagramming.Layout.Architecture do
   supõem as faixas do automático) e passam pelo `Router`, que desvia de
   caixas em qualquer geometria. É também o que desenha a arrumação gravada
   por "Organizar setas" (`Untangle`).
+
+  ## Deitado (`direction horizontal`)
+
+  O pipeline é um só. No horizontal ele roda num plano transposto, com largura
+  e altura das caixas trocadas: as camadas que desceriam passam a andar para a
+  direita, e as faixas de grupo, que seriam colunas, viram linhas. No fim, as
+  caixas são transpostas de volta e todas as setas passam pelo `Router`,
+  preferindo sair pelas laterais. As posições fixadas estão no plano real e
+  são transpostas na entrada.
   """
 
   alias Brainagram.Domain.Diagramming.Dsl.{Ast, Edge}
@@ -77,9 +86,14 @@ defmodule Brainagram.Domain.Diagramming.Layout.Architecture do
   end
 
   def build(%Ast{} = ast, %Hints{pinned: pinned}) do
+    horizontal? = ast.direction == :horizontal
+    # o plano em que o pipeline roda: o real ou, deitado, o transposto
+    plane_pins =
+      if horizontal?, do: Map.new(pinned, fn {id, {x, y}} -> {id, {y, x}} end), else: pinned
+
     edges = all_edges(ast)
-    sizes = sizes(ast.nodes)
-    pinned_layers = Map.new(pinned, fn {id, {_x, y}} -> {id, layer_of_y(y)} end)
+    sizes = sizes(ast.nodes, horizontal?)
+    pinned_layers = Map.new(plane_pins, fn {id, {_x, y}} -> {id, layer_of_y(y)} end)
     layers = layers(ast.nodes, edges, pinned_layers)
     free = Enum.reject(ast.nodes, &Map.has_key?(pinned, &1.id))
 
@@ -92,15 +106,32 @@ defmodule Brainagram.Domain.Diagramming.Layout.Architecture do
     geometry = place(by_layer, sizes, band_of, band_index, chains, length(band_order))
 
     boxes =
-      geometry.boxes |> Map.merge(pinned_boxes(pinned, sizes, layers)) |> avoid_pinned(pinned)
+      geometry.boxes
+      |> Map.merge(pinned_boxes(plane_pins, sizes, layers))
+      |> avoid_pinned(plane_pins)
 
-    lanes = corridors(chains, geometry, boxes)
+    {boxes, laid_edges} =
+      if horizontal? do
+        boxes = Map.new(boxes, fn {id, box} -> {id, transpose(box)} end)
 
-    laid_edges =
-      edges
-      |> Enum.map(&route(&1, boxes, lanes, layers))
-      |> reroute_around(boxes, ast, pinned)
-      |> spread_labels()
+        laid =
+          edges
+          |> Enum.map(&route(&1, boxes, %{}, layers))
+          |> reroute_around(boxes, ast, :horizontal)
+
+        {boxes, laid}
+      else
+        lanes = corridors(chains, geometry, boxes)
+
+        laid =
+          edges
+          |> Enum.map(&route(&1, boxes, lanes, layers))
+          |> reroute_around(boxes, ast, if(reroute?(ast, pinned), do: :vertical))
+
+        {boxes, laid}
+      end
+
+    laid_edges = spread_labels(laid_edges)
 
     {edge_right, edge_bottom} = edge_extent(laid_edges)
 
@@ -121,7 +152,8 @@ defmodule Brainagram.Domain.Diagramming.Layout.Architecture do
     %Scene{
       kind: :architecture,
       title: ast.title,
-      width: round(max(geometry.width, right)),
+      direction: ast.direction,
+      width: round(if(horizontal?, do: right, else: max(geometry.width, right))),
       height: round(height + @margin),
       nodes: boxes |> Map.values() |> Enum.sort_by(&{&1.layer, &1.x}) |> Enum.map(&public/1),
       groups: groups(ast, boxes),
@@ -371,18 +403,31 @@ defmodule Brainagram.Domain.Diagramming.Layout.Architecture do
 
   # ── posicionamento ────────────────────────────────────────────────────────
 
-  defp sizes(nodes) do
+  # Deitado, largura e altura trocam: o pipeline enxerga a caixa já girada.
+  defp sizes(nodes, horizontal?) do
     Map.new(nodes, fn n ->
-      {n.id,
-       %{
-         w: max(@min_node_w, Scene.text_width(n.label, @node_label_size) + 52),
-         h: @node_h,
-         label: n.label,
-         kind: n.kind,
-         group: n.group
-       }}
+      {w, h} = box_size(n)
+      {w, h} = if horizontal?, do: {h, w}, else: {w, h}
+      {n.id, %{w: w, h: h, label: n.label, kind: n.kind, group: n.group}}
     end)
   end
+
+  # O losango leva a pergunta no meio: só cabe a faixa central, então ele é
+  # mais largo que o texto e mais alto que as caixas.
+  defp box_size(%{kind: :decision} = n) do
+    {Scene.decision_width(n.label, @node_label_size, @min_node_w), Scene.decision_h()}
+  end
+
+  defp box_size(n) do
+    w = round(max(@min_node_w, Scene.text_width(n.label, @node_label_size) + 52) + extra_w(n))
+    {w, @node_h}
+  end
+
+  # A fila é um cilindro deitado: a tampa da direita come parte da caixa.
+  defp extra_w(%{kind: :queue}), do: Scene.queue_cap() * 2
+  defp extra_w(_node), do: 0
+
+  defp transpose(box), do: %{box | x: box.y, y: box.x, w: box.h, h: box.w, cx: box.cy, cy: box.cx}
 
   defp place(by_layer, sizes, band_of, band_index, chains, band_count) do
     band = fn id -> Map.get(band_index, Map.get(band_of, id), 0) end
@@ -409,17 +454,19 @@ defmodule Brainagram.Domain.Diagramming.Layout.Architecture do
 
     gutter_x = Map.put(gutter_x, band_count, cursor)
     width = cursor + Map.fetch!(gutter_widths, band_count) + @margin
+    {layer_y, layer_h} = layer_rows(by_layer, sizes)
 
     boxes =
       runs
       |> Enum.flat_map(fn {layer, b, chunk} ->
         span = run_width(chunk, sizes)
         start = Map.fetch!(band_x, b) + (Map.get(band_widths, b, span) - span) / 2
-        y = @top + layer * (@node_h + @layer_gap)
 
         chunk
         |> Enum.reduce({[], start}, fn id, {acc, x} ->
           s = sizes[id]
+          # caixas mais baixas que a camada ficam centradas nela
+          y = layer_y.(layer) + div(layer_h.(layer) - s.h, 2)
 
           box = %{
             id: id,
@@ -463,6 +510,26 @@ defmodule Brainagram.Domain.Diagramming.Layout.Architecture do
 
       {g, width}
     end
+  end
+
+  # A espessura de cada camada é a da caixa mais alta dela. Em pé são todas
+  # `@node_h` e o `y` da camada é `@top + camada * (@node_h + @layer_gap)`;
+  # deitado, a "altura" é a largura do rótulo e cada coluna tem a sua.
+  defp layer_rows(by_layer, sizes) do
+    heights =
+      Map.new(by_layer, fn {layer, ids} ->
+        {layer, ids |> Enum.map(&sizes[&1].h) |> Enum.max(fn -> @node_h end)}
+      end)
+
+    height = fn layer -> Map.get(heights, layer, @node_h) end
+    last = by_layer |> Map.keys() |> Enum.max(fn -> 0 end)
+
+    tops =
+      Enum.reduce(0..last//1, %{0 => @top}, fn layer, acc ->
+        Map.put(acc, layer + 1, acc[layer] + height.(layer) + @layer_gap)
+      end)
+
+    {fn layer -> Map.get(tops, layer, @top + layer * (@node_h + @layer_gap)) end, height}
   end
 
   defp layer_of_y(y), do: max(0, round((y - @top) / (@node_h + @layer_gap)))
@@ -720,12 +787,19 @@ defmodule Brainagram.Domain.Diagramming.Layout.Architecture do
   # Com alguma posição fixada, os corredores deixam de valer: eles supõem as
   # faixas do automático, e uma caixa arrastada pode estar bem no meio de um.
   # Aí as rotas vêm do `Router`, que desvia de qualquer geometria.
-  defp reroute_around(edges, _boxes, _ast, pinned) when map_size(pinned) == 0, do: edges
+  # Em pé, o `Router` assume quando há posição fixada (os corredores supõem as
+  # faixas do automático) ou losango (as respostas saem por pontas diferentes,
+  # e os corredores só sabem sair pela base).
+  defp reroute?(ast, pinned),
+    do: map_size(pinned) > 0 or Enum.any?(ast.nodes, &(&1.kind == :decision))
 
-  defp reroute_around(edges, boxes, ast, _pinned) do
+  # Deitado, as rotas vêm sempre do `Router`: os corredores são do plano em pé.
+  defp reroute_around(edges, _boxes, _ast, nil), do: edges
+
+  defp reroute_around(edges, boxes, ast, prefer) do
     groups = groups(ast, boxes)
     group_of = Map.new(boxes, fn {id, box} -> {id, box.group} end)
-    routed = Router.route(boxes, edges, groups, group_of)
+    routed = Router.route(boxes, edges, groups, group_of, prefer: prefer)
 
     Enum.map(edges, fn edge ->
       case routed[edge.id] do
@@ -791,6 +865,7 @@ defmodule Brainagram.Domain.Diagramming.Layout.Architecture do
     x =
       case edge.label_anchor do
         "middle" -> edge.label_x - w / 2
+        "end" -> edge.label_x - w * 1.0
         _ -> edge.label_x * 1.0
       end
 

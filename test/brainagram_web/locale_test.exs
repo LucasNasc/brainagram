@@ -85,7 +85,8 @@ defmodule BrainagramWeb.LocaleTest do
       view |> element("form[phx-change=edit]") |> render_change(%{"source" => tangled})
 
       view |> element("#untangle-layout") |> render_click()
-      assert render(view) =~ "Arrows tidied: 9 → 3 crossings"
+      # os números dependem da geometria; o que se testa aqui é o plural traduzido
+      assert render(view) =~ ~r/Arrows tidied: \d+ → \d+ crossings/
     end
 
     test "erro de sintaxe traduzido na barra de erros", %{view: view} do

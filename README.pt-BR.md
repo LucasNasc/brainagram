@@ -15,7 +15,7 @@ Escreva o fluxo em texto, dê play e veja as mensagens percorrerem as setas — 
 [![CI](https://github.com/LucasNasc/brainagram/actions/workflows/ci.yml/badge.svg)](https://github.com/LucasNasc/brainagram/actions/workflows/ci.yml)
 [![Versão](https://img.shields.io/badge/vers%C3%A3o-0.1.0-7c5cff.svg)](CHANGELOG.md)
 [![Release no GitHub](https://img.shields.io/github/v/release/LucasNasc/brainagram?color=7c5cff&label=release)](https://github.com/LucasNasc/brainagram/releases)
-[![Testes](https://img.shields.io/badge/testes-400%2B%20passando-2f9e4f.svg)](#desenvolvimento)
+[![Testes](https://img.shields.io/badge/testes-450%2B%20passando-2f9e4f.svg)](#desenvolvimento)
 [![Licença: MIT](https://img.shields.io/badge/licen%C3%A7a-MIT-7c5cff.svg)](LICENSE)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](CODE_OF_CONDUCT.pt-BR.md)
 <br>
@@ -62,8 +62,9 @@ revisões de design — onde alguém apontaria para uma imagem parada e diria
   aberto com um clique.
 - **Organizar setas.** Um clique reorganiza um diagrama de arquitetura para
   minimizar cruzamentos — de 8 para 1 no exemplo abaixo.
-- **Importa** `sequenceDiagram` do Mermaid, diagramas de sequência e de
-  componentes do PlantUML, arquivos `.brain` e pacotes do Brainagram.
+- **Importa** `sequenceDiagram` e `flowchart` do Mermaid, diagramas de
+  sequência e de componentes do PlantUML, arquivos `.brain` e pacotes do
+  Brainagram.
 - **Exporta** SVG, PNG (2×), GIF animado (HD ou leve), `.brain` e pacotes
   `.json` de projetos inteiros.
 - **Projetos.** Uma área de gestão para separar os diagramas em projetos com
@@ -204,7 +205,9 @@ step "Cliente confirma o pedido" {   # um passo da animação
 | `a -x b` | falha / timeout |
 
 **Tipos de nó:** `actor`, `participant`, `service`, `component`, `database`,
-`queue`, `external`, `system`, `node`, `boundary`.
+`queue` (desenhada como cilindro deitado), `external`, `system`, `node`,
+`boundary`, `decision` (um losango com a pergunta dentro; rotule as setas com
+as respostas, por exemplo `estoque -> cobranca : sim`).
 
 **Blocos e linhas**
 
@@ -216,6 +219,7 @@ step "Cliente confirma o pedido" {   # um passo da animação
 | `payload: …` (logo abaixo de uma mensagem) | o que a mensagem carrega; várias linhas se somam |
 | `payload """ … """` | payload de várias linhas — texto cru, `#` e `//` são conteúdo aqui |
 | `layout { api at (420, 680) }` | posições fixadas ao arrastar (o canvas escreve por você) |
+| `direction horizontal` | arquitetura da esquerda para a direita em vez de cima para baixo (o botão **Horizontal** escreve por você) |
 | `#` ou `//` | comentário (aspas são respeitadas) |
 
 Também valem apelidos em português, como `diagram arquitetura` e `dados:`.
@@ -227,7 +231,7 @@ Mais exemplos, com e sem payload, em [`examples/`](examples/README.pt-BR.md).
 |---|---|---|
 | `.brain` (um diagrama, o texto da DSL) | editor → *Exportar → Arquivo .brain*; card → *Baixar .brain* | área de gestão → *Importar*; editor → *Abrir → Importar* |
 | Pacote `.json` (diagramas + projetos) | área de gestão → *Exportar* (o projeto aberto, *Sem projeto* ou tudo) | área de gestão → *Importar* (os projetos são recriados; um de mesmo nome é reaproveitado) |
-| `sequenceDiagram` do Mermaid | — | nos dois diálogos de importar |
+| Mermaid (`sequenceDiagram` → sequência, `flowchart` / `graph` → arquitetura) | — | nos dois diálogos de importar |
 | PlantUML (sequência → sequência, componentes → arquitetura) | — | nos dois diálogos de importar |
 | SVG, PNG 2× | editor → *Exportar* | — |
 | GIF (HD 2× ou leve 1×) | editor → *Exportar* | — |

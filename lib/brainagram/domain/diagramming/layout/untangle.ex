@@ -29,6 +29,10 @@ defmodule Brainagram.Domain.Diagramming.Layout.Untangle do
   o desenho atual. Sem melhora, o texto não muda.
 
   O resultado é determinístico: o mesmo texto sempre dá a mesma arrumação.
+
+  Num diagrama deitado (`direction horizontal`), a busca roda no plano
+  transposto, o mesmo do `Layout.Architecture`: as caixas do automático são
+  giradas na entrada e as posições, giradas de volta antes de ir para o texto.
   """
 
   alias Brainagram.Domain.Diagramming.Dsl.{Ast, Edge, Parser}
@@ -117,7 +121,9 @@ defmodule Brainagram.Domain.Diagramming.Layout.Untangle do
 
   defp context(ast) do
     # o automático puro (sem fixações) dá as camadas e a ordem de partida
+    horizontal? = ast.direction == :horizontal
     auto = Layout.build(%{ast | pins: []})
+    auto = if horizontal?, do: %{auto | nodes: Enum.map(auto.nodes, &transpose/1)}, else: auto
 
     ys = auto.nodes |> Enum.map(& &1.y) |> Enum.uniq() |> Enum.sort()
     layer_of_y = ys |> Enum.with_index() |> Map.new()
@@ -137,6 +143,7 @@ defmodule Brainagram.Domain.Diagramming.Layout.Untangle do
       end)
 
     %{
+      horizontal?: horizontal?,
       auto: auto,
       sizes: Map.new(auto.nodes, &{&1.id, %{w: &1.w, h: &1.h}}),
       group_of: Map.new(auto.nodes, &{&1.id, &1.group}),
@@ -541,7 +548,12 @@ defmodule Brainagram.Domain.Diagramming.Layout.Untangle do
 
   # Grava a arrumação como fixações e mede o que o editor vai mostrar.
   defp render(source, ctx, arrangement) do
-    edited = write_pins(source, boxes(ctx, arrangement))
+    boxes = boxes(ctx, arrangement)
+
+    boxes =
+      if ctx.horizontal?, do: Map.new(boxes, fn {id, b} -> {id, transpose(b)} end), else: boxes
+
+    edited = write_pins(source, boxes)
 
     with {:ok, ast} <- parse(edited) do
       metrics = ast |> Layout.build() |> Quality.measure()
@@ -563,6 +575,8 @@ defmodule Brainagram.Domain.Diagramming.Layout.Untangle do
       Hints.pin(acc, node.id, {round(b.x), round(b.y)})
     end)
   end
+
+  defp transpose(box), do: %{box | x: box.y, y: box.x, w: box.h, h: box.w}
 
   defp parse(source) do
     case Parser.parse(source) do

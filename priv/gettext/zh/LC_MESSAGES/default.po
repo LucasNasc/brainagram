@@ -1241,8 +1241,8 @@ msgstr "Brainagram (.brain)"
 
 #: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
-msgid "Cole ou escolha um arquivo: um .brain exportado do Brainagram, um sequenceDiagram do Mermaid, ou um diagrama de sequência ou de componentes do PlantUML (este vira arquitetura). O que não converter vira comentário no topo do código."
-msgstr "粘贴内容或选择文件：从 Brainagram 导出的 .brain、Mermaid 的 sequenceDiagram，或 PlantUML 的时序图或组件图（组件图会转为架构图）。无法转换的内容会变成代码顶部的注释。"
+msgid "Cole ou escolha um arquivo: um .brain exportado do Brainagram, um sequenceDiagram ou flowchart do Mermaid, ou um diagrama de sequência ou de componentes do PlantUML (flowchart e componentes viram arquitetura). O que não converter vira comentário no topo do código."
+msgstr "粘贴内容或选择文件：从 Brainagram 导出的 .brain、Mermaid 的 sequenceDiagram 或 flowchart，或 PlantUML 的时序图或组件图（flowchart 和组件图会转为架构图）。无法转换的内容会变成代码顶部的注释。"
 
 #: lib/brainagram_web/live/editor_live.ex
 #, elixir-autogen, elixir-format
@@ -1439,3 +1439,55 @@ msgstr "图表仅保存在临时缓存中，其他访问者可以看到，并会
 #, elixir-autogen, elixir-format
 msgid "Playground de demonstração."
 msgstr "演示试用环境。"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Direção trocada. As posições fixadas foram soltas — Ctrl+Z desfaz."
+msgstr "方向已切换。固定的位置已释放 — Ctrl+Z 撤销。"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Horizontal"
+msgstr "横向"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "arquitetura da esquerda para a direita"
+msgstr "架构图从左到右"
+
+#: lib/brainagram_web/error_messages.ex
+#, elixir-autogen, elixir-format
+msgid "direção desconhecida: %{direction} (use horizontal ou vertical)"
+msgstr "未知方向：%{direction}（请使用 horizontal 或 vertical）"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Deixa o layout da esquerda para a direita"
+msgstr "将布局改为从左到右"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Deixa o layout de cima para baixo"
+msgstr "将布局改为从上到下"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "Vertical"
+msgstr "纵向"
+
+#: lib/brainagram_web/live/editor_live.ex
+#, elixir-autogen, elixir-format
+msgid "losango com a pergunta; rotule as saídas: sim / não"
+msgstr "菱形，里面写问题；给出口加标签：是 / 否"
+
+#: lib/brainagram_web/live/editor_live.ex
+msgid "Importando o diagrama…"
+msgstr "正在导入图表…"
+
+#: lib/brainagram_web/live/dashboard_live.ex
+msgid "Importando os diagramas…"
+msgstr "正在导入图表…"
+
+#: lib/brainagram_web/live/editor_live.ex
+msgid "Reorganizando o diagrama…"
+msgstr "正在重新排列图表…"

@@ -23,6 +23,7 @@ lado com o estado final, gerado pelo `mix brainagram.render`.
 | Arquivo | O que mostra |
 |---|---|
 | [`architecture/url-shortener.brain`](architecture/url-shortener.brain) | **Sem payload.** Grupos (borda, serviços, dados) e dois fluxos: criar e seguir um link curto. |
+| [`architecture/order-approval.brain`](architecture/order-approval.brain) | **Fluxo de decisão.** Losangos `decision` com a pergunta dentro, setas `yes` / `no` saindo por pontas diferentes, da esquerda para a direita (`direction horizontal`). |
 | [`architecture/event-driven-orders.brain`](architecture/event-driven-orders.brain) | **Com payload.** Eventos assíncronos (`->>`) passando pelo Kafka, com o corpo do evento, um UPDATE em SQL e um pedido de e-mail. |
 
 <p>
@@ -41,6 +42,7 @@ desconhecida.
 | Origem | Vira | Resultado convertido |
 |---|---|---|
 | [`import/mermaid/password-reset.mmd`](import/mermaid/password-reset.mmd) (Mermaid `sequenceDiagram`) | sequência | [`password-reset.brain`](import/mermaid/password-reset.brain) |
+| [`import/mermaid/order-pipeline.mmd`](import/mermaid/order-pipeline.mmd) (Mermaid `flowchart`) | arquitetura | [`order-pipeline.brain`](import/mermaid/order-pipeline.brain) |
 | [`import/plantuml/file-upload.puml`](import/plantuml/file-upload.puml) (sequência do PlantUML) | sequência | [`file-upload.brain`](import/plantuml/file-upload.brain) |
 | [`import/plantuml/analytics-components.puml`](import/plantuml/analytics-components.puml) (componentes do PlantUML) | arquitetura | [`analytics-components.brain`](import/plantuml/analytics-components.brain) |
 
@@ -51,6 +53,13 @@ O que converte:
   `alt`/`else`/`opt`/`loop`/`critical`/`break` como passos. `par`, `rect` e
   setas bidirecionais ficam registrados no comentário; as mensagens são
   mantidas.
+- **Mermaid `flowchart` / `graph`:** vira arquitetura. Todas as formas de nó
+  convertem; o cilindro (`[( )]`) é banco, e os outros tipos vêm do nome da
+  classe (`classDef queue …`, `class X ext`, `X:::store`) ou do rótulo ("fila",
+  "Redis", "clientes"…). `subgraph` vira grupo, `-.->` seta assíncrona, `--x`
+  falha, e cadeias (`A --> B --> C`) e leques (`A & B --> C`) viram uma seta
+  cada. Ligações sem ponta, de mão dupla e para um subgraph ficam registradas
+  no comentário.
 - **Sequência do PlantUML:** `participant`, `actor`, `database`, `queue` e os
   outros tipos de participante, `box` como grupo, `->`, `-->`, `->>`, `->x`,
   setas invertidas, notas, `title`, `== seção ==` e

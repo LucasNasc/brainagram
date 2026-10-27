@@ -14,6 +14,7 @@ export default {
   "Alternar entre editar e mover a tela": "Toggle between editing and panning",
   "Formatar código": "Format code",
   "Ir para o próximo erro": "Go to next error",
+  "Alternar direção da arquitetura (vertical ↔ horizontal)": "Switch architecture direction (vertical ↔ horizontal)",
   "Alternar tipo do diagrama (sequência ↔ arquitetura)": "Switch diagram type (sequence ↔ architecture)",
   "Desfazer": "Undo",
   "Refazer": "Redo",

@@ -1,6 +1,7 @@
 defmodule Brainagram.Domain.Diagramming.Import.Mermaid do
   @moduledoc """
-  `sequenceDiagram` do Mermaid → DSL do Brainagram.
+  `sequenceDiagram` do Mermaid → DSL do Brainagram. `flowchart` e `graph` vão
+  para `Import.MermaidFlowchart`, que gera arquitetura.
 
   Cobertura (spec 001, §9): participantes e atores (com `as` e com o tipo
   `@{ "type": "database" }`), `box` como grupo, mensagens síncronas (`->>`,
@@ -14,7 +15,7 @@ defmodule Brainagram.Domain.Diagramming.Import.Mermaid do
   — só a semântica do bloco.
   """
 
-  alias Brainagram.Domain.Diagramming.Import.Builder
+  alias Brainagram.Domain.Diagramming.Import.{Builder, MermaidFlowchart}
 
   @kind_types %{
     "actor" => :actor,
@@ -50,15 +51,22 @@ defmodule Brainagram.Domain.Diagramming.Import.Mermaid do
     {front, rest} = front_matter(lines)
 
     case Enum.drop_while(rest, fn {line, _} -> line == "" or String.starts_with?(line, "%%") end) do
-      [{header, _} | body] ->
-        if header =~ ~r/^sequenceDiagram\b/i do
-          front
-          |> Enum.reduce(Builder.new(), &front_line/2)
-          |> then(fn b -> Enum.reduce(body, {b, []}, &line/2) end)
-          |> elem(0)
-          |> Builder.finish("Mermaid")
-        else
-          {:error, :nothing_to_import}
+      [{header, hn} | body] ->
+        cond do
+          header =~ ~r/^sequenceDiagram\b/i ->
+            front
+            |> Enum.reduce(Builder.new(), &front_line/2)
+            |> then(fn b -> Enum.reduce(body, {b, []}, &line/2) end)
+            |> elem(0)
+            |> Builder.finish("Mermaid")
+
+          header =~ ~r/^(?:flowchart(?:-elk)?|graph)\b/i ->
+            front
+            |> Enum.reduce(Builder.new(), &front_line/2)
+            |> MermaidFlowchart.convert({header, hn}, body)
+
+          true ->
+            {:error, :nothing_to_import}
         end
 
       [] ->

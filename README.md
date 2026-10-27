@@ -15,7 +15,7 @@ Write the flow as text, press play, and watch the messages travel along the arro
 [![CI](https://github.com/LucasNasc/brainagram/actions/workflows/ci.yml/badge.svg)](https://github.com/LucasNasc/brainagram/actions/workflows/ci.yml)
 [![Version](https://img.shields.io/badge/version-0.1.0-7c5cff.svg)](CHANGELOG.md)
 [![GitHub release](https://img.shields.io/github/v/release/LucasNasc/brainagram?color=7c5cff)](https://github.com/LucasNasc/brainagram/releases)
-[![Tests](https://img.shields.io/badge/tests-400%2B%20passing-2f9e4f.svg)](#development)
+[![Tests](https://img.shields.io/badge/tests-450%2B%20passing-2f9e4f.svg)](#development)
 [![License: MIT](https://img.shields.io/badge/license-MIT-7c5cff.svg)](LICENSE)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](CODE_OF_CONDUCT.md)
 <br>
@@ -60,8 +60,8 @@ static image and say "and then…".
   can be pinned open with a click.
 - **Tidy arrows.** One click rearranges an architecture diagram to minimize
   crossings — e.g. 8 → 1 crossing on the example below.
-- **Import** Mermaid `sequenceDiagram`, PlantUML sequence and component diagrams,
-  `.brain` files and Brainagram bundles.
+- **Import** Mermaid `sequenceDiagram` and `flowchart`, PlantUML sequence and
+  component diagrams, `.brain` files and Brainagram bundles.
 - **Export** SVG, PNG (2×), animated GIF (HD or light), `.brain` files and
   `.json` bundles of whole projects.
 - **Projects.** A management area to organize diagrams into colored projects,
@@ -202,7 +202,9 @@ step "Customer places the order" {   # a step of the animation
 | `a -x b` | failure / timeout |
 
 **Node kinds:** `actor`, `participant`, `service`, `component`, `database`,
-`queue`, `external`, `system`, `node`, `boundary`.
+`queue` (drawn as a horizontal cylinder), `external`, `system`, `node`,
+`boundary`, `decision` (a diamond with the question inside; label its arrows
+with the answers, e.g. `stock -> billing : yes`).
 
 **Blocks and lines**
 
@@ -214,6 +216,7 @@ step "Customer places the order" {   # a step of the animation
 | `payload: …` (right below a message) | what the message carries; several lines add up |
 | `payload """ … """` | multi-line payload — raw text, `#` and `//` are content here |
 | `layout { api at (420, 680) }` | positions pinned by dragging (written for you by the canvas) |
+| `direction horizontal` | architecture laid out left to right instead of top to bottom (the **Horizontal** button writes it) |
 | `#` or `//` | comment (quotes are respected) |
 
 Portuguese aliases are accepted too, e.g. `diagram arquitetura` and `dados:`.
@@ -225,7 +228,7 @@ More examples, with and without payloads, live in [`examples/`](examples/).
 |---|---|---|
 | `.brain` (one diagram, the DSL text) | editor → *Export → .brain file*; card → *Download .brain* | management area → *Import*; editor → *Open → Import* |
 | `.json` bundle (diagrams + their projects) | management area → *Export* (the open project, *No project* or everything) | management area → *Import* (projects are recreated; one with the same name is reused) |
-| Mermaid `sequenceDiagram` | — | both import dialogs |
+| Mermaid (`sequenceDiagram` → sequence, `flowchart` / `graph` → architecture) | — | both import dialogs |
 | PlantUML (sequence → sequence, component → architecture) | — | both import dialogs |
 | SVG, PNG 2× | editor → *Export* | — |
 | GIF (HD 2× or light 1×) | editor → *Export* | — |

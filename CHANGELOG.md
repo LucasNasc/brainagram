@@ -10,6 +10,50 @@ one of the sections *Added*, *Changed*, *Deprecated*, *Removed*, *Fixed* or
 
 ## [Unreleased]
 
+### Added
+
+- **Mermaid flowcharts import as architecture diagrams**: `flowchart` and
+  `graph` files (any direction) now import, with every node shape, `subgraph`
+  as a group, dotted links as async arrows, `--x` as failures, chains and
+  `&` fan-outs, and arrow labels. Node kinds come from the class name
+  (`classDef queue`, `class X ext`), the cylinder shape or the label. Links
+  without a head, two-way links and links to a subgraph are reported in the
+  comment at the top.
+- **Horizontal architecture layout**: `direction horizontal` (or `LR`) lays
+  an architecture diagram out left to right. The **Horizontal** button in the
+  canvas toolbar and the command palette switch it; Mermaid `flowchart LR` and
+  PlantUML `left to right direction` import that way. "Organize arrows" keeps
+  the direction.
+- **Decision nodes**: `decision q "In stock?"` draws a diamond with the
+  question inside, for decision flows. Arrows enter and leave through its
+  tips, and when two answers (`yes` / `no`) would leave through the same tip,
+  the second one takes a side tip, as in a flowchart. Mermaid `{question}` and
+  `@{ shape: diamond }` import as `decision`.
+- **Loading feedback with the brand mark**: while importing, saving,
+  duplicating, creating a diagram or rearranging the canvas ("Organize
+  arrows", the direction toggle), the impulse of the Brainagram logo walks
+  along the "b", over the dialog or the canvas with a sentence saying what is
+  happening, or in place of the button icon. It shows after 250 ms, so quick
+  answers do not flash, and stays still with reduced motion.
+
+### Changed
+
+- **Queues are drawn as a horizontal cylinder** in the canvas and in every
+  export, so they stand apart from services and databases.
+- **Arrow labels are easier to read, above all in the dark theme**: brighter
+  text from the start of the animation, on a chip with a thin border that
+  separates it from the lines and the dotted canvas.
+
+### Fixed
+
+- An arrow label no longer lands on top of a box when arrows are routed around
+  boxes (dragged nodes, "Organize arrows", horizontal layout): it moves to the
+  other side of the segment or to another segment.
+- A diagram with many steps no longer gives the editor page a long, empty
+  dark scroll area below the screen: the hidden screen-reader text of each
+  step stays inside the steps list. The open quick reference now scrolls
+  inside the code panel instead of pushing it down.
+
 ## [0.1.0] - 2026-10-20
 
 First public release.

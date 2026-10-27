@@ -14,6 +14,7 @@ export default {
   "Alternar entre editar e mover a tela": "在编辑与平移之间切换",
   "Formatar código": "格式化代码",
   "Ir para o próximo erro": "跳转到下一个错误",
+  "Alternar direção da arquitetura (vertical ↔ horizontal)": "切换架构图方向（纵向 ↔ 横向）",
   "Alternar tipo do diagrama (sequência ↔ arquitetura)": "切换图表类型（时序图 ↔ 架构图）",
   "Desfazer": "撤销",
   "Refazer": "重做",

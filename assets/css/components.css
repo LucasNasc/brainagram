@@ -120,7 +120,7 @@ a.ba-btn { text-decoration: none; }
 
 /* ---------- Modal ---------- */
 .ba-scrim { background: var(--scrim); display: grid; place-items: center; padding: var(--space-6); }
-.ba-modal { width: min(480px, 100%); background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); }
+.ba-modal { position: relative; width: min(480px, 100%); background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); }
 .ba-modal__head { display: flex; align-items: center; gap: var(--space-3); padding: var(--space-4) var(--space-5) var(--space-2); }
 .ba-modal__title { flex: 1; margin: 0; font: 600 17px/24px var(--font-sans); letter-spacing: -.01em; }
 .ba-modal__body { padding: var(--space-2) var(--space-5) var(--space-5); display: flex; flex-direction: column; gap: var(--space-5); }
@@ -258,6 +258,37 @@ a.ba-btn { text-decoration: none; }
 /* ---------- Referência rápida ---------- */
 .ba-ref { display: grid; grid-template-columns: auto 1fr; gap: 4px var(--space-3); font: 400 12px/18px var(--font-sans); color: var(--text-muted); }
 .ba-ref code { font: 500 12px/18px var(--font-mono); color: var(--text); }
+
+/* ---------- Carregando: o impulso caminhando pelo "b" da marca ----------
+   `.ba-loader` só aparece quando o pai entra em carregamento (submit de um
+   formulário ou `phx-click-loading` nele mesmo), e com um atraso curto: uma
+   resposta rápida não pisca nada na tela. */
+.ba-loader { display: none; flex-direction: column; align-items: center; justify-content: center; gap: var(--space-3); }
+.ba-loader .ink { fill: var(--text); }
+.ba-loader .ink-s { stroke: var(--text); fill: none; opacity: .9; }
+.ba-loader .imp { fill: var(--brand); }
+.ba-loader__still { display: none; }
+.ba-loader__label { font: 500 13px/18px var(--font-sans); color: var(--text-muted); }
+.phx-submit-loading .ba-loader,
+.ba-loader.phx-click-loading { display: flex; animation: ba-loader-in var(--dur-base) var(--ease-ui) 250ms backwards; }
+.ba-loader--overlay { position: absolute; inset: 0; z-index: var(--z-canvas-ui); background: color-mix(in srgb, var(--surface) 86%, transparent); border-radius: inherit; }
+@keyframes ba-loader-in { from { opacity: 0; } }
+
+.ba-busy-mark { display: none; flex: none; }
+.ba-busy-mark .ink-s { stroke: currentColor; fill: none; }
+.ba-busy-mark .imp { fill: var(--brand); }
+.ba-btn--primary .ba-busy-mark .imp { fill: currentColor; }
+/* esperando: o "b" entra no lugar do ícone do botão */
+.phx-click-loading.ba-btn .ba-busy-mark,
+.phx-submit-loading .ba-btn[type="submit"] .ba-busy-mark { display: inline-block; }
+.phx-click-loading.ba-btn:has(.ba-busy-mark) > .ba-ico,
+.phx-submit-loading .ba-btn[type="submit"]:has(.ba-busy-mark) > .ba-ico { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .ba-loader__walker, .ba-busy-mark .imp { display: none; }
+  .ba-loader__still { display: inline; }
+  .phx-submit-loading .ba-loader, .ba-loader.phx-click-loading { animation: none; }
+}
 
 /* ---------- Template card ---------- */
 .ba-tpl { display: flex; flex-direction: column; border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--surface); overflow: hidden; cursor: pointer; text-align: left; padding: 0; transition: border-color var(--dur-base) var(--ease-ui), box-shadow var(--dur-base) var(--ease-ui), transform var(--dur-base) var(--ease-ui); }

@@ -40,12 +40,21 @@ defmodule Brainagram.Domain.Diagramming.Layout.Router do
   Roteia `edges` (`%{id, from, to}`) entre as caixas `boxes` (`%{id => box}`),
   evitando também os chips de título dos `groups`. Devolve `%{id => geometria}`
   com `path`, `x1`, `y1`, `x2`, `y2`, `label_x`, `label_y` e `label_anchor`.
+
+  `prefer: :horizontal` (o layout deitado) faz a seta sair pela lateral sempre
+  que as caixas não se sobrepõem na horizontal; o padrão, `:vertical`, prefere
+  a base e o topo.
   """
-  @spec route(%{String.t() => box()}, [map()], [map()], %{String.t() => String.t() | nil}) ::
-          %{String.t() => map()}
-  def route(boxes, edges, groups \\ [], group_of \\ %{}) do
+  @spec route(
+          %{String.t() => box()},
+          [map()],
+          [map()],
+          %{String.t() => String.t() | nil},
+          keyword()
+        ) :: %{String.t() => map()}
+  def route(boxes, edges, groups \\ [], group_of \\ %{}, opts \\ []) do
     routable = Enum.filter(edges, &((&1.from != &1.to and boxes[&1.from]) && boxes[&1.to]))
-    ports = ports(routable, boxes)
+    ports = ports(routable, boxes, Keyword.get(opts, :prefer, :vertical))
 
     solid = Enum.map(Map.values(boxes), &inflate(&1, @clearance))
     obstacles = solid ++ Enum.map(groups, &chip_obstacle/1)
@@ -67,7 +76,8 @@ defmodule Brainagram.Domain.Diagramming.Layout.Router do
         end
 
       full = simplify([p.from_port | points] ++ [p.to_port])
-      {Map.put(acc, edge.id, geometry(full)), mark(used, grid, full)}
+      label = Map.get(edge, :label)
+      {Map.put(acc, edge.id, geometry(full, label, boxes)), mark(used, grid, full)}
     end)
     |> elem(0)
   end
@@ -76,23 +86,12 @@ defmodule Brainagram.Domain.Diagramming.Layout.Router do
 
   # Lado de saída e de entrada pela posição relativa das caixas: para baixo sai
   # pela base e entra pelo topo; para cima, o contrário; na mesma altura, pelas
-  # laterais.
-  defp ports(edges, boxes) do
+  # laterais. Deitado, a ordem das perguntas se inverte.
+  defp ports(edges, boxes, prefer) do
     sides =
-      Map.new(edges, fn e ->
-        a = boxes[e.from]
-        b = boxes[e.to]
-
-        {out_side, in_side} =
-          cond do
-            b.y >= a.y + a.h -> {:bottom, :top}
-            b.y + b.h <= a.y -> {:top, :bottom}
-            b.x >= a.x + a.w / 2 -> {:right, :left}
-            true -> {:left, :right}
-          end
-
-        {e.id, {out_side, in_side}}
-      end)
+      edges
+      |> Map.new(fn e -> {e.id, sides(boxes[e.from], boxes[e.to], prefer)} end)
+      |> spread_decision_exits(edges, boxes)
 
     # Cada lado de cada caixa: as setas dali, ordenadas pela outra ponta.
     slots =
@@ -143,6 +142,12 @@ defmodule Brainagram.Domain.Diagramming.Layout.Router do
   # Porta sozinha no seu lado não precisa ficar no meio: alinha com a outra
   # ponta, e a seta sai reta em vez de dar um degrau de poucos pixels. Com as
   # duas sozinhas, as duas vão para o ponto comum mais perto do meio.
+  # Lados perpendiculares (a saída lateral de um losango) não têm eixo comum
+  # para alinhar: cada ponta fica na sua porta.
+  defp snap({a, _box_a, side_a, _n_a}, {b, _box_b, side_b, _n_b})
+       when side_a in [:top, :bottom] != side_b in [:top, :bottom],
+       do: {a, b}
+
   defp snap({a, box_a, side_a, n_a}, {b, box_b, side_b, n_b}) do
     axis = if side_a in [:top, :bottom], do: 0, else: 1
     {lo_a, hi_a} = side_range(box_a, side_a)
@@ -172,6 +177,11 @@ defmodule Brainagram.Domain.Diagramming.Layout.Router do
     end
   end
 
+  defp side_range(%{kind: :decision} = box, side) do
+    {x, y} = tip(box, side)
+    if side in [:top, :bottom], do: {x, x}, else: {y, y}
+  end
+
   defp side_range(box, side) when side in [:top, :bottom], do: {box.x + 14, box.x + box.w - 14}
   defp side_range(box, _side), do: {box.y + 10, box.y + box.h - 10}
 
@@ -181,6 +191,10 @@ defmodule Brainagram.Domain.Diagramming.Layout.Router do
   defp along(_side, box), do: box.y + box.h / 2
 
   # Pontos distribuídos no lado, sem encostar nos cantos arredondados.
+  # O losango só encosta na caixa no meio de cada lado: toda seta entra e sai
+  # pela ponta.
+  defp port_point(%{kind: :decision} = box, side, _i, _n), do: tip(box, side)
+
   defp port_point(box, side, i, n) do
     t = (i + 1) / (n + 1)
 
@@ -191,6 +205,11 @@ defmodule Brainagram.Domain.Diagramming.Layout.Router do
       :right -> {r(box.x + box.w), r(box.y + 10 + (box.h - 20) * t)}
     end
   end
+
+  defp tip(box, :top), do: {r(box.x + box.w / 2), r(box.y)}
+  defp tip(box, :bottom), do: {r(box.x + box.w / 2), r(box.y + box.h)}
+  defp tip(box, :left), do: {r(box.x), r(box.y + box.h / 2)}
+  defp tip(box, :right), do: {r(box.x + box.w), r(box.y + box.h / 2)}
 
   defp stub({x, y}, :top), do: {x, y - @stub}
   defp stub({x, y}, :bottom), do: {x, y + @stub}
@@ -419,12 +438,83 @@ defmodule Brainagram.Domain.Diagramming.Layout.Router do
     |> Enum.map(&inflate(&1, -4))
   end
 
+  # Um losango tem uma ponta por lado. Quando duas respostas (sim / não)
+  # sairiam pela mesma ponta, a que vai mais reto fica nela e as outras vão
+  # para as pontas de lado, conforme a posição do destino, como num fluxograma.
+  defp spread_decision_exits(sides, edges, boxes) do
+    edges
+    |> Enum.filter(&match?(%{kind: :decision}, boxes[&1.from]))
+    |> Enum.group_by(&{&1.from, elem(sides[&1.id], 0)})
+    |> Enum.reduce(sides, fn
+      {_key, [_single]}, acc ->
+        acc
+
+      {{from, side}, group}, acc ->
+        a = boxes[from]
+        [_straight | others] = Enum.sort_by(group, &{off_axis(a, boxes[&1.to], side), &1.id})
+
+        others
+        |> Enum.with_index()
+        |> Enum.reduce(acc, fn {e, i}, acc2 ->
+          {_out, in_side} = acc2[e.id]
+          Map.put(acc2, e.id, {side_exit(a, boxes[e.to], side, i), in_side})
+        end)
+    end)
+  end
+
+  # Quanto o destino foge do eixo da ponta: o mais alinhado fica com ela.
+  defp off_axis(a, b, side) when side in [:left, :right],
+    do: abs(b.y + b.h / 2 - (a.y + a.h / 2))
+
+  defp off_axis(a, b, _side), do: abs(b.x + b.w / 2 - (a.x + a.w / 2))
+
+  # Ponta lateral para o destino; empatado, alterna para não somar duas setas.
+  defp side_exit(a, b, side, i) when side in [:left, :right] do
+    dy = b.y + b.h / 2 - (a.y + a.h / 2)
+
+    cond do
+      dy < 0 -> :top
+      dy > 0 -> :bottom
+      rem(i, 2) == 0 -> :top
+      true -> :bottom
+    end
+  end
+
+  defp side_exit(a, b, _side, i) do
+    dx = b.x + b.w / 2 - (a.x + a.w / 2)
+
+    cond do
+      dx < 0 -> :left
+      dx > 0 -> :right
+      rem(i, 2) == 0 -> :right
+      true -> :left
+    end
+  end
+
+  defp sides(a, b, :horizontal) do
+    cond do
+      b.x >= a.x + a.w -> {:right, :left}
+      b.x + b.w <= a.x -> {:left, :right}
+      b.y >= a.y + a.h / 2 -> {:bottom, :top}
+      true -> {:top, :bottom}
+    end
+  end
+
+  defp sides(a, b, _vertical) do
+    cond do
+      b.y >= a.y + a.h -> {:bottom, :top}
+      b.y + b.h <= a.y -> {:top, :bottom}
+      b.x >= a.x + a.w / 2 -> {:right, :left}
+      true -> {:left, :right}
+    end
+  end
+
   # ── saída ─────────────────────────────────────────────────────────────────
 
-  defp geometry(points) do
+  defp geometry(points, label, boxes) do
     {x1, y1} = hd(points)
     {x2, y2} = List.last(points)
-    {lx, ly, anchor} = label_spot(points)
+    {lx, ly, anchor} = label_spot(points, label, Map.values(boxes))
 
     %{
       path: rounded(points),
@@ -438,15 +528,43 @@ defmodule Brainagram.Domain.Diagramming.Layout.Router do
     }
   end
 
-  # O rótulo vai no meio do trecho mais longo: é onde há mais espaço livre.
-  defp label_spot(points) do
-    {{ax, ay}, {bx, by}} =
-      points |> Enum.zip(tl(points)) |> Enum.max_by(fn {a, b} -> dist(a, b) end)
+  # O rótulo vai no meio do trecho mais longo, que é onde costuma haver espaço.
+  # Se ali ele cobriria uma caixa, tenta o outro lado do trecho e depois os
+  # trechos mais curtos; sem lugar livre, fica no mais longo.
+  defp label_spot(points, label, boxes) do
+    candidates =
+      points
+      |> Enum.zip(tl(points))
+      |> Enum.sort_by(fn {a, b} -> -dist(a, b) end)
+      |> Enum.flat_map(fn {{ax, ay}, {bx, by}} ->
+        if ay == by,
+          do: [{r((ax + bx) / 2), ay, "middle"}],
+          else: [{ax + 8, r((ay + by) / 2), "start"}, {ax - 8, r((ay + by) / 2), "end"}]
+      end)
 
-    if ay == by,
-      do: {r((ax + bx) / 2), ay, "middle"},
-      else: {ax + 8, r((ay + by) / 2), "start"}
+    case label do
+      nil -> hd(candidates)
+      text -> Enum.find(candidates, hd(candidates), &(not covers_box?(&1, text, boxes)))
+    end
   end
+
+  # A mesma caixa de fundo que o renderer desenha atrás do rótulo.
+  defp covers_box?({x, y, anchor}, text, boxes) do
+    w = Scene.text_width(text, 12) + 12
+
+    left =
+      case anchor do
+        "middle" -> x - w / 2
+        "end" -> x - w + 6
+        _ -> x - 6
+      end
+
+    tag = %{x: left, y: y - 13, w: w, h: 18}
+    Enum.any?(boxes, &overlap?(tag, &1))
+  end
+
+  defp overlap?(a, b),
+    do: a.x < b.x + b.w and b.x < a.x + a.w and a.y < b.y + b.h and b.y < a.y + a.h
 
   # Tira pontos repetidos e colineares: sobram só as quinas.
   defp simplify(points) do

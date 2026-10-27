@@ -47,6 +47,16 @@ defmodule Brainagram.Domain.Diagramming.Layout.RouterTest do
     assert geometry.x1 == geometry.x2
   end
 
+  test "prefer: :horizontal sai pela lateral; o padrão sai pela base" do
+    boxes = Map.new([box("a", 0, 0), box("b", 400, 200)])
+    edges = [%{id: "e1", from: "a", to: "b"}]
+
+    assert %{"e1" => %{x1: 156, x2: 400}} =
+             Router.route(boxes, edges, [], %{}, prefer: :horizontal)
+
+    assert %{"e1" => %{y1: 68, y2: 200}} = Router.route(boxes, edges)
+  end
+
   test "várias setas no mesmo lado entram por portas diferentes, na ordem das origens" do
     boxes = Map.new([box("a", 0, 0), box("b", 300, 0), box("alvo", 150, 300)])
     edges = [%{id: "e1", from: "a", to: "alvo"}, %{id: "e2", from: "b", to: "alvo"}]
