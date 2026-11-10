@@ -58,8 +58,7 @@ defmodule Brainagram.Domain.Diagramming.Dsl.Parser do
   @re_payload_line ~r/^(?:payload|dados)\s*:\s*(?<text>.*)$/i
   @re_payload_open ~r/^(?:payload|dados)\s*"""$/i
   @fence ~s(""")
-  @re_edge ~r/^(?<from>[A-Za-z_][\w\-.]*)\s*(?<arrow>->>|-->|->|-x)\s*(?<to>[A-Za-z_][\w\-.]*)\s*(?::\s*(?<label>.*))?$/
-
+  @re_edge ~r/^(?<from>[A-Za-z_][\w\-.]*?)\s*(?<arrow>->>|-->|->|-x)\s*(?<to>[A-Za-z_][\w\-.]*)\s*(?::\s*(?<label>.*))?$/
   @type error :: ParseError.t()
 
   @doc "Tipos de nó aceitos pela DSL, na ordem em que aparecem na documentação."
