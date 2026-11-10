@@ -67,6 +67,23 @@ defmodule Brainagram.Domain.Diagramming.Dsl.ParserTest do
       assert {:ok, ast} = Parser.parse(src)
       assert Enum.map(ast.steps, &{&1.index, &1.label}) == [{0, "Contexto inicial"}, {1, "Real"}]
     end
+
+    test "seta colada no id não vira parte dele (a-->b)" do
+      assert {:ok, ast} = Parser.parse("a-->b")
+      assert Enum.map(ast.nodes, & &1.id) == ["a", "b"]
+
+      assert [%Edge{from: "a", to: "b", arrow: :return}] =
+               ast.steps |> Enum.flat_map(& &1.items)
+    end
+
+    test "ids com hífen seguem intactos com seta colada" do
+      assert {:ok, ast} = Parser.parse("api-gateway-->db : ok")
+      assert Enum.map(ast.nodes, & &1.id) == ["api-gateway", "db"]
+
+      assert [%Edge{from: "api-gateway", to: "db", arrow: :return, label: "ok"}] =
+               ast.steps |> Enum.flat_map(& &1.items)
+    end
+
   end
 
   describe "blocos" do
